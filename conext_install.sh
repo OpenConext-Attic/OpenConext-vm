@@ -393,7 +393,7 @@ sed -i "s/dev.surfconext.nl/openconext.local/g" /etc/shibboleth/shibboleth2.xml
 
 cp ~/repos/main/tomcat/conf/catalina.properties /usr/share/tomcat6/conf
 cp ~/repos/main/tomcat/conf/log4j.xml /usr/share/tomcat6/conf
-cp ~/repos/main/tomcat/conf/tomcat-env.sh /usr/share/tomcat6/conf
+#cp ~/repos/main/tomcat/conf/tomcat-env.sh /usr/share/tomcat6/conf
 cp ~/repos/main/tomcat/conf/server.xml.dev /usr/share/tomcat6/conf/server.xml
 
 sed -i "s/dev.surfconext.nl/openconext.local/g" /usr/share/tomcat6/conf/server.xml
@@ -402,8 +402,8 @@ cd /usr/share/tomcat6/conf
 mkdir -p classpath_properties
 mkdir -p classpath_properties/keys
 
-service shibd start
 chkconfig shibd on
+service shibd start
 
 ###################
 # Install Grouper #
