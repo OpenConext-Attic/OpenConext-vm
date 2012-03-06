@@ -414,6 +414,7 @@ chkconfig shibd on
 ####################
 # Browser Settings #
 ####################
-echo "browser.startup.homepage=https://serviceregistry.openconext.local" > /usr/lib64/firefox-3.6/browserconfig.properties
+echo 'pref("browser.startup.homepage", "data:text/plain,browser.startup.homepage=https://serviceregistry.openconext.local");' > /usr/lib64/firefox/defaults/preferences/localprefs.js
+
 
 
