@@ -1,0 +1,86 @@
+Index: pom.xml
+===================================================================
+--- pom.xml	(revision 776)
++++ pom.xml	(working copy)
+@@ -9,7 +9,7 @@
+   <properties>
+     <commons-codec.version>1.4</commons-codec.version>
+     <easymock.version>2.5.2</easymock.version>
+-    <json-simle.version>1.1</json-simle.version>
++    <json-simple.version>1.1</json-simple.version>
+     <oauth.version>20090825</oauth.version>
+     <orgjson.version>20080701</orgjson.version>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+@@ -17,18 +17,6 @@
+   <scm>
+     <connection>scm:svn:https://svn.surfnet.nl/svn/coin-os/vendor/opensocial-java-client/tags/opensocial-java-client-1.16.0-coin</connection>
+   </scm>
+-  <distributionManagement>
+-    <repository>
+-      <id>coin-repo</id>
+-      <name>coin-repo</name>
+-      <url>dav:http://bamboo-dev.coin.surfnetlabs.nl</url>
+-    </repository>
+-    <snapshotRepository>
+-      <id>coin-repo</id>
+-      <name>coin-repo</name>
+-      <url>dav:http://bamboo-dev.coin.surfnetlabs.nl</url>
+-    </snapshotRepository>
+-  </distributionManagement>
+   <repositories>
+     <repository>
+       <snapshots>
+@@ -37,28 +25,11 @@
+       <releases>
+         <enabled>true</enabled>
+       </releases>
+-      <id>coin-repo</id>
+-      <name>COIN Repository</name>
+-      <url>http://bamboo-dev.coin.surfnetlabs.nl</url>
+-    </repository>
+-    <repository>
+-      <snapshots>
+-        <enabled>false</enabled>
+-      </snapshots>
+-      <releases>
+-        <enabled>true</enabled>
+-      </releases>
+       <id>oauth-maven-repo</id>
+       <name>OAuth Maven repository</name>
+       <url>http://oauth.googlecode.com/svn/code/maven</url>
+       <layout>default</layout>
+     </repository>
+-    <repository>
+-      <id>maven2-repository.dev.java.net</id>
+-      <name>Java.net Repository for Maven</name>
+-      <url>http://download.java.net/maven/2</url>
+-      <layout>default</layout>
+-    </repository>
+   </repositories>
+ 
+   <build>
+@@ -120,13 +91,13 @@
+       <version>${commons-codec.version}</version>
+     </dependency>
+     <dependency>
+-      <groupId>com.google.code</groupId>
++      <groupId>com.googlecode.json-simple</groupId>
+       <artifactId>json-simple</artifactId>
+-      <version>${json-simle.version}</version>
++      <version>${json-simple.version}</version>
+     </dependency>
+     <dependency>
+-      <groupId>net.oauth</groupId>
+-      <artifactId>oauth-core</artifactId>
++      <groupId>net.oauth.core</groupId>
++      <artifactId>oauth</artifactId>
+       <version>${oauth.version}</version>
+     </dependency>
+     <dependency>
+@@ -142,4 +113,4 @@
+     </dependency>
+ 
+   </dependencies>
+-</project>
+\ No newline at end of file
++</project>

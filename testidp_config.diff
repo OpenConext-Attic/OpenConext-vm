@@ -1,0 +1,66 @@
+diff -urN simplesamlphp-1.8.2/config/authsources.php testidp/config/authsources.php
+--- simplesamlphp-1.8.2/config/authsources.php	2012-01-10 14:34:42.000000000 +0100
++++ testidp/config/authsources.php	2012-01-31 07:53:48.662066932 +0100
+@@ -49,19 +49,21 @@
+ 	),
+ 	*/
+ 
+-	/*
++	
+ 	'example-userpass' => array(
+ 		'exampleauth:UserPass',
+ 		'student:studentpass' => array(
+-			'uid' => array('test'),
+-			'eduPersonAffiliation' => array('member', 'student'),
++			'urn:mace:dir:attribute-def:uid' => array('test'),
++			'urn:mace:dir:attribute-def:eduPersonAffiliation' => array('member', 'student'),
++                        'urn:mace:terena.org:attribute-def:schacHomeOrganization' => array ('student.openconext.local'),
+ 		),
+ 		'employee:employeepass' => array(
+-			'uid' => array('employee'),
+-			'eduPersonAffiliation' => array('member', 'employee'),
++			'urn:mace:dir:attribute-def:uid' => array('employee'),
++			'urn:mace:dir:attribute-def:eduPersonAffiliation' => array('member', 'employee'),
++			'urn:mace:terena.org:attribute-def:schacHomeOrganization' => array ('employee.openconext.local'),
+ 		),
+ 	),
+-	*/
++
+ 
+ 	/*
+ 	// This authentication source serves as an example of integration with an
+diff -urN simplesamlphp-1.8.2/config/config.php testidp/config/config.php
+--- simplesamlphp-1.8.2/config/config.php	2012-01-10 14:34:42.000000000 +0100
++++ testidp/config/config.php	2012-01-30 19:12:15.471145074 +0100
+@@ -57,7 +57,7 @@
+ 	 * This password will give access to the installation page of simpleSAMLphp with
+ 	 * metadata listing and diagnostics pages.
+ 	 */
+-	'auth.adminpassword'		=> '123',
++	'auth.adminpassword'		=> 'admin',
+ 	'admin.protectindexpage'	=> false,
+ 	'admin.protectmetadata'		=> false,
+ 
+@@ -138,7 +138,7 @@
+ 	 * one of the functionalities below, but in some cases you could run multiple functionalities.
+ 	 * In example when you are setting up a federation bridge.
+ 	 */
+-	'enable.saml20-idp'		=> false,
++	'enable.saml20-idp'		=> true,
+ 	'enable.shib13-idp'		=> false,
+ 	'enable.adfs-idp'		=> false,
+ 	'enable.wsfed-sp'		=> false,
+diff -urN simplesamlphp-1.8.2/metadata/saml20-sp-remote.php testidp/metadata/saml20-sp-remote.php
+--- simplesamlphp-1.8.2/metadata/saml20-sp-remote.php	2012-01-10 14:34:42.000000000 +0100
++++ testidp/metadata/saml20-sp-remote.php	2012-01-30 20:07:23.752128915 +0100
+@@ -25,3 +25,10 @@
+ 	'simplesaml.nameidattribute' => 'uid',
+ 	'simplesaml.attributes' => FALSE,
+ );
++
++$metadata['https://engine.openconext.local/authentication/sp/metadata'] = array(
++        'AssertionConsumerService' => 'https://engine.openconext.local/authentication/sp/consume-assertion',
++        'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent',
++        'simplesaml.nameidattribute' => 'urn:mace:dir:attribute-def:uid',
++);
++
