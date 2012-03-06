@@ -32,7 +32,7 @@ yum -y install tomcat6 httpd php-cli php php-mysql php-curl svn telnet \
 	mod_ssl mysql-server openldap-servers php-ldap php-xml wget \
 	firefox mysql-connector-java memcached openldap-clients \
 	php-pecl-memcache nss-tools java-1.6.0-openjdk-devel gcc \
-	kernel-devel
+	kernel-devel git
 
 # install non-CentOS packages
 yum -y install shibboleth
