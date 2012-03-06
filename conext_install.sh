@@ -16,6 +16,10 @@ alias cp='cp'
 alias mv='mv'
 alias rm='rm'
 
+# Define versions of projects
+COIN_TESTSP_VERSION=2.1.0-SNAPSHOT
+
+
 # disable SELINUX (requires reboot!)
 sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/g' /etc/selinux/config
 
@@ -340,15 +344,14 @@ mvn clean install
 
 # install coin-test
 cd ~/repos/
-svn co https://svn.surfnet.nl/svn/coin-gui/coin-test/tags/coin-test-1.3.2/
-cd coin-test-1.3.2
-patch -p0 < ${CURDIR}/coin-test_fix_osclient_version.patch
+svn co https://svn.surfnet.nl/svn/coin-gui/coin-test/trunk/ coin-test
+cd coin-test
 mvn clean install
 
 # get and configure TestSP
 cd ~/repos/
-svn co https://svn.surfnet.nl/svn/coin-gui/coin-testsp/tags/coin-testsp-parent-1.16.0/ coin-testsp-parent-1.16.0
-cd coin-testsp-parent-1.16.0
+svn co https://svn.surfnet.nl/svn/coin-gui/coin-testsp/trunk/ coin-testsp-parent
+cd coin-testsp-parent
 mvn clean install
 
 # deploy TestSP
@@ -356,14 +359,15 @@ service tomcat6 stop
 
 # FIXME: change the configuration to point to openconext.local
 cd ~/repos/
-tar -xzf coin-testsp-parent-1.16.0/coin-testsp-dist/target/coin-testsp-dist-1.16.0-bin.tar.gz
+tar -xzf coin-testsp-parent/coin-testsp-dist/target/coin-testsp-dist-${COIN_TESTSP_VERSION}-bin.tar.gz
+
 cd /usr/share/tomcat6
 mkdir wars
 mkdir -p /usr/share/tomcat6/conf/classpath_properties/
-cp ~/repos/coin-testsp-dist-1.16.0/tomcat/conf/classpath_properties/coin-testsp.properties.dev /usr/share/tomcat6/conf/classpath_properties/coin-testsp.properties
+cp ~/repos/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/conf/classpath_properties/coin-testsp.properties.dev /usr/share/tomcat6/conf/classpath_properties/coin-testsp.properties
 mkdir -p /usr/share/tomcat6/conf/Catalina/testsp.openconext.local/
-cp ~/repos/coin-testsp-dist-1.16.0/tomcat/conf/context/testsp.xml /usr/share/tomcat6/conf/Catalina/testsp.openconext.local/testsp.xml
-cp ~/repos/coin-testsp-dist-1.16.0/tomcat/webapps/coin-testsp-war-1.16.0.war /usr/share/tomcat6/wars
+cp ~/repos/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/conf/context/testsp.xml /usr/share/tomcat6/conf/Catalina/testsp.openconext.local/testsp.xml
+cp ~/repos/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/webapps/coin-testsp-war-${COIN_TESTSP_VERSION}.war /usr/share/tomcat6/wars
 
 service tomcat6 start
 
