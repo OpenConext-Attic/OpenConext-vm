@@ -357,6 +357,10 @@ mvn clean install
 # deploy TestSP
 service tomcat6 stop
 
+# symlink tomcat
+rm /opt/tomcat
+ln -s /usr/share/tomcat6 /opt/tomcat
+
 # FIXME: change the configuration to point to openconext.local
 cd ~/repos/
 tar -xzf coin-testsp-parent/coin-testsp-dist/target/coin-testsp-dist-${COIN_TESTSP_VERSION}-bin.tar.gz
