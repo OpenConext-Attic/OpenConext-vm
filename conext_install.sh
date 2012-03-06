@@ -328,9 +328,8 @@ cd ${CURDIR}
 # install opensocial-java-client
 # FIXME: we should probably take the trunk version instead of tagged version
 cd ~/repos/
-svn co https://svn.surfnet.nl/svn/coin-os/vendor/opensocial-java-client/tags/opensocial-java-client-1.16.0-coin/
-cd opensocial-java-client-1.16.0-coin/
-patch -p0 < ${CURDIR}/opensocial-java-client_fix_pom.patch
+svn co https://svn.surfnet.nl/svn/coin-os/vendor/opensocial-java-client/trunk/ opensocial-java-client
+cd opensocial-java-client/
 mvn clean install
 
 # install json-taglib
