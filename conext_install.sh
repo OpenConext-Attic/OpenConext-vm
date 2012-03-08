@@ -79,6 +79,12 @@ then
 	echo "127.5.0.13 testidp.openconext.local" >> /etc/hosts
 fi
 
+####################
+# Browser Settings #
+####################
+echo 'pref("browser.startup.homepage", "data:text/plain,browser.startup.homepage=https://serviceregistry.openconext.local");' > /usr/lib64/firefox/defaults/preferences/localprefs.js
+
+
 # Remove earlier installation files
 rm -rf /etc/surfconext/
 rm -rf /opt/www/
@@ -311,6 +317,10 @@ sed -i "s/portal.surfconext.nl/portal.openconext.local/g" /etc/surfconext/manage
 sed -i "s/engine.surfconext.nl/engine.openconext.local/g" /etc/surfconext/manage.ini
 service httpd restart
 
+########
+# JAVA #
+########
+
 #################
 # Install Maven #
 #################
@@ -325,34 +335,66 @@ PATH=$PATH:/opt/maven/bin
 export PATH
 cd ${CURDIR}
 
-##################
-# Install TestSP #
-##################
+# coin-master
+cd ~/repos/
+svn co https://svn.surfnet.nl/svn/coin-os/coin-master/trunk/ coin-master
+cd coin-master
+mvn clean install || exit
 
-# install opensocial-java-client
-# FIXME: we should probably take the trunk version instead of tagged version
+# opensocial-java-client
 cd ~/repos/
 svn co https://svn.surfnet.nl/svn/coin-os/vendor/opensocial-java-client/trunk/ opensocial-java-client
-cd opensocial-java-client/
-mvn clean install
+cd opensocial-java-client
+mvn clean install || exit
 
-# install json-taglib
-cd ~/repos/
-svn checkout https://json-taglib.svn.sourceforge.net/svnroot/json-taglib/tags/0.4.1 json-taglib-0.4.1
-cd json-taglib-0.4.1
-mvn clean install
-
-# install coin-test
+# coin-test
 cd ~/repos/
 svn co https://svn.surfnet.nl/svn/coin-gui/coin-test/trunk/ coin-test
 cd coin-test
-mvn clean install
+mvn clean install || exit
 
-# get and configure TestSP
+# coin-opensocial
 cd ~/repos/
-svn co https://svn.surfnet.nl/svn/coin-gui/coin-testsp/trunk/ coin-testsp-parent
-cd coin-testsp-parent
-mvn clean install
+svn co https://svn.surfnet.nl/svn/coin-gui/coin-opensocial/trunk/ coin-opensocial
+cd coin-opensocial
+mvn clean install || exit
+
+# coin-shared
+cd ~/repos/
+svn co https://svn.surfnet.nl/svn/coin-gui/coin-shared/trunk/ coin-shared
+cd coin-shared
+mvn clean install || exit
+
+# coin-testsp
+cd ~/repos/
+svn co https://svn.surfnet.nl/svn/coin-gui/coin-testsp/trunk/ coin-testsp
+cd coin-testsp
+mvn clean install || exit
+
+# coin-shindig
+cd ~/repos/
+svn co https://svn.surfnet.nl/svn/coin-os/coin-shindig/trunk/ coin-shindig
+cd coin-shindig
+mvn clean install || exit
+
+# coin-portal
+cd ~/repos/
+svn co https://svn.surfnet.nl/svn/coin-gui/coin-portal/trunk/ coin-portal
+cd coin-portal
+mvn clean install || exit
+
+# coin-teams
+cd ~/repos/
+svn co https://svn.surfnet.nl/svn/coin-gui/coin-teams/trunk/ coin-teams
+cd coin-teams
+mvn clean install || exit
+
+########
+# EXIT #
+########
+
+echo "All Java stuff compiled!"
+exit
 
 # deploy TestSP
 service tomcat6 stop
@@ -404,25 +446,3 @@ mkdir -p classpath_properties/keys
 
 chkconfig shibd on
 service shibd start
-
-###################
-# Install Grouper #
-###################
-
-# ...
-
-
-###################
-# Install Shindig #
-###################
-
-# ...
-
-
-####################
-# Browser Settings #
-####################
-echo 'pref("browser.startup.homepage", "data:text/plain,browser.startup.homepage=https://serviceregistry.openconext.local");' > /usr/lib64/firefox/defaults/preferences/localprefs.js
-
-
-
