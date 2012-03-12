@@ -38,14 +38,17 @@ yum -y install tomcat6 httpd php-cli php php-mysql php-curl svn telnet \
 	php-pecl-memcache nss-tools gcc kernel-devel git \
 	java-1.6.0-openjdk-devel
 
-# We need Sun's Java for now unfortunately due to OpenJDK bugs
+# We need Sun's Java for now unfortunately due to OpenJDK bug(s)
 # See http://bugs.openjdk.java.net/show_bug.cgi?id=100167
 wget -N http://download.oracle.com/otn-pub/java/jdk/6u31-b04/jdk-6u31-linux-x64-rpm.bin
 sh jdk-6u31-linux-x64-rpm.bin -noregister
-JAVA_HOME=/usr/java/latest
-export JAVA_HOME
-PATH=/usr/java/latest/bin:$PATH
-export PATH
+
+# set Oracle Java as default
+cd /etc/alternatives
+rm java
+ln -s /usr/java/latest/bin/java
+rm javac
+ln -s /usr/java/latest/bin/javac
 
 # install non-CentOS packages
 yum -y install shibboleth
