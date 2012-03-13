@@ -36,7 +36,7 @@ yum -y install tomcat6 httpd php-cli php php-mysql php-curl svn telnet \
 	mod_ssl mysql-server openldap-servers php-ldap php-xml wget \
 	firefox mysql-connector-java memcached openldap-clients \
 	php-pecl-memcache nss-tools gcc kernel-devel git \
-	java-1.6.0-openjdk-devel
+	java-1.6.0-openjdk-devel ant php-devel nano openssh-server
 
 # We need Sun's Java for now unfortunately due to OpenJDK bug(s)
 # See http://bugs.openjdk.java.net/show_bug.cgi?id=100167
@@ -61,9 +61,14 @@ rm -rf /var/lib/mysql
 sed -i 's/short_open_tag = Off/short_open_tag = On/g' /etc/php.ini
 
 # Start some services and configure them to automatically start on system boot 
-chkconfig httpd on && service httpd start
-chkconfig mysqld on && service mysqld start
-chkconfig memcached on && service memcached start
+chkconfig httpd on && service httpd restart
+chkconfig mysqld on && service mysqld restart
+chkconfig memcached on && service memcached restart
+chkconfig sshd on && service sshd restart
+
+# Disable firewall
+chkconfig iptables off && service iptables stop
+chkconfig ip6tables off && service ip6tables stop
 
 # configure MySQL (WARNING: this is insecure!)
 mysqladmin -u root password 'c0n3xt'
