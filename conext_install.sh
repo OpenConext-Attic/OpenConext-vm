@@ -352,7 +352,13 @@ PATH=$PATH:/opt/maven/bin
 export PATH
 cd ${CURDIR}
 
-# coin-master
+# OpenConext-parent
+cd ~/repos/
+git clone git://github.com/OpenConext/OpenConext-parent.git
+cd OpenConext-parent
+mvn clean install || exit
+
+# coin-master (still needed?)
 cd ~/repos/
 svn co https://svn.surfnet.nl/svn/coin-os/coin-master/trunk/ coin-master
 cd coin-master
@@ -400,10 +406,10 @@ svn co https://svn.surfnet.nl/svn/coin-gui/coin-portal/trunk/ coin-portal
 cd coin-portal
 mvn clean install || exit
 
-# coin-teams
+# OpenConext-teams
 cd ~/repos/
-svn co https://svn.surfnet.nl/svn/coin-gui/coin-teams/trunk/ coin-teams
-cd coin-teams
+git clone git://github.com/OpenConext/OpenConext-teams.git 
+cd OpenConext-teams
 mvn clean install || exit
 
 ########
