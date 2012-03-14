@@ -358,12 +358,6 @@ git clone git://github.com/OpenConext/OpenConext-parent.git
 cd OpenConext-parent
 mvn clean install || exit
 
-# coin-master (still needed?)
-cd ~/repos/
-svn co https://svn.surfnet.nl/svn/coin-os/coin-master/trunk/ coin-master
-cd coin-master
-mvn clean install || exit
-
 # opensocial-java-client
 cd ~/repos/
 svn co https://svn.surfnet.nl/svn/coin-os/vendor/opensocial-java-client/trunk/ opensocial-java-client
@@ -418,6 +412,11 @@ mvn clean install || exit
 
 echo "All Java stuff compiled!"
 exit
+
+
+
+
+
 
 # deploy TestSP
 service tomcat6 stop
