@@ -106,7 +106,7 @@ echo 'pref("browser.startup.homepage", "data:text/plain,browser.startup.homepage
 # Remove earlier installation files
 rm -rf /etc/surfconext/
 rm -rf /opt/www/
-rm -rf ~/repos
+rm -rf /opt/openconext_code/
 rm -rf /var/log/surfconext/
 
 mkdir -p /var/log/surfconext
@@ -114,8 +114,8 @@ chmod o+w /var/log/surfconext
 touch /var/log/surfconext/engineblock.log
 chmod o+w /var/log/surfconext/engineblock.log
 
-mkdir ~/repos
-cd ~/repos
+mkdir /opt/openconext_code/
+cd /opt/openconext_code/
 # Get COIN stuff
 svn co https://svn.surfnet.nl/svn/coin-os/coin-infra/trunk/coin-infra-dist/src/main/
 
@@ -227,7 +227,7 @@ echo "encryption.key.private = \"${PEM}\"" >> /etc/surfconext/engineblock.ini
 service slapd stop
 rm -rf /var/lib/ldap/*
 service slapd start
-cd ~/repos 
+cd /opt/openconext_code/ 
 svn co https://svn.surfnet.nl/svn/coin-os/vendor/grouper/1.6.3/src/main/resources/
 cp resources/ldap/eduperson-200412.ldif /etc/openldap/schema/
 cp resources/ldap/nleduperson.schema /etc/openldap/schema/
@@ -353,55 +353,55 @@ export PATH
 cd ${CURDIR}
 
 # OpenConext-parent
-cd ~/repos/
+cd /opt/openconext_code/
 git clone git://github.com/OpenConext/OpenConext-parent.git
 cd OpenConext-parent
 mvn clean install || exit
 
 # opensocial-java-client
-cd ~/repos/
+cd /opt/openconext_code/
 svn co https://svn.surfnet.nl/svn/coin-os/vendor/opensocial-java-client/trunk/ opensocial-java-client
 cd opensocial-java-client
 mvn clean install || exit
 
 # coin-test
-cd ~/repos/
+cd /opt/openconext_code/
 svn co https://svn.surfnet.nl/svn/coin-gui/coin-test/trunk/ coin-test
 cd coin-test
 mvn clean install || exit
 
 # coin-opensocial
-cd ~/repos/
+cd /opt/openconext_code/
 svn co https://svn.surfnet.nl/svn/coin-gui/coin-opensocial/trunk/ coin-opensocial
 cd coin-opensocial
 mvn clean install || exit
 
 # coin-shared
-cd ~/repos/
+cd /opt/openconext_code/
 svn co https://svn.surfnet.nl/svn/coin-gui/coin-shared/trunk/ coin-shared
 cd coin-shared
 mvn clean install || exit
 
 # coin-testsp
-cd ~/repos/
+cd /opt/openconext_code/
 svn co https://svn.surfnet.nl/svn/coin-gui/coin-testsp/trunk/ coin-testsp
 cd coin-testsp
 mvn clean install || exit
 
 # coin-shindig
-cd ~/repos/
+cd /opt/openconext_code/
 svn co https://svn.surfnet.nl/svn/coin-os/coin-shindig/trunk/ coin-shindig
 cd coin-shindig
 mvn clean install || exit
 
 # coin-portal
-cd ~/repos/
+cd /opt/openconext_code/
 svn co https://svn.surfnet.nl/svn/coin-gui/coin-portal/trunk/ coin-portal
 cd coin-portal
 mvn clean install || exit
 
 # OpenConext-teams
-cd ~/repos/
+cd /opt/openconext_code/
 git clone git://github.com/OpenConext/OpenConext-teams.git 
 cd OpenConext-teams
 mvn clean install || exit
@@ -426,39 +426,39 @@ rm /opt/tomcat
 ln -s /usr/share/tomcat6 /opt/tomcat
 
 # FIXME: change the configuration to point to openconext.local
-cd ~/repos/
+cd /opt/openconext_code/
 tar -xzf coin-testsp-parent/coin-testsp-dist/target/coin-testsp-dist-${COIN_TESTSP_VERSION}-bin.tar.gz
 
 cd /usr/share/tomcat6
 mkdir wars
 mkdir -p /usr/share/tomcat6/conf/classpath_properties/
-cp ~/repos/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/conf/classpath_properties/coin-testsp.properties.dev /usr/share/tomcat6/conf/classpath_properties/coin-testsp.properties
+cp /opt/openconext_code/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/conf/classpath_properties/coin-testsp.properties.dev /usr/share/tomcat6/conf/classpath_properties/coin-testsp.properties
 mkdir -p /usr/share/tomcat6/conf/Catalina/testsp.openconext.local/
-cp ~/repos/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/conf/context/testsp.xml /usr/share/tomcat6/conf/Catalina/testsp.openconext.local/testsp.xml
-cp ~/repos/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/webapps/coin-testsp-war-${COIN_TESTSP_VERSION}.war /usr/share/tomcat6/wars
+cp /opt/openconext_code/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/conf/context/testsp.xml /usr/share/tomcat6/conf/Catalina/testsp.openconext.local/testsp.xml
+cp /opt/openconext_code/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/webapps/coin-testsp-war-${COIN_TESTSP_VERSION}.war /usr/share/tomcat6/wars
 
 service tomcat6 start
 
 # configure Shibboleth
 
 
-cp ~/repos/main/shibboleth/accessError.html /etc/shibboleth
-cp ~/repos/main/shibboleth/attribute-map.xml /etc/shibboleth
-cp ~/repos/main/shibboleth/attribute-policy.xml /etc/shibboleth
-cp ~/repos/main/shibboleth/globalLogout.html /etc/shibboleth
-cp ~/repos/main/shibboleth/localLogout.html /etc/shibboleth
-cp ~/repos/main/shibboleth/metadataError.html /etc/shibboleth
-cp ~/repos/main/shibboleth/partialLogout.html /etc/shibboleth
-cp ~/repos/main/shibboleth/sessionError.html /etc/shibboleth
-cp ~/repos/main/shibboleth/sslError.html /etc/shibboleth
-cp ~/repos/main/shibboleth/shibboleth2.xml.dev /etc/shibboleth/shibboleth2.xml
+cp /opt/openconext_code/main/shibboleth/accessError.html /etc/shibboleth
+cp /opt/openconext_code/main/shibboleth/attribute-map.xml /etc/shibboleth
+cp /opt/openconext_code/main/shibboleth/attribute-policy.xml /etc/shibboleth
+cp /opt/openconext_code/main/shibboleth/globalLogout.html /etc/shibboleth
+cp /opt/openconext_code/main/shibboleth/localLogout.html /etc/shibboleth
+cp /opt/openconext_code/main/shibboleth/metadataError.html /etc/shibboleth
+cp /opt/openconext_code/main/shibboleth/partialLogout.html /etc/shibboleth
+cp /opt/openconext_code/main/shibboleth/sessionError.html /etc/shibboleth
+cp /opt/openconext_code/main/shibboleth/sslError.html /etc/shibboleth
+cp /opt/openconext_code/main/shibboleth/shibboleth2.xml.dev /etc/shibboleth/shibboleth2.xml
 
 sed -i "s/dev.surfconext.nl/openconext.local/g" /etc/shibboleth/shibboleth2.xml
 
-cp ~/repos/main/tomcat/conf/catalina.properties /usr/share/tomcat6/conf
-cp ~/repos/main/tomcat/conf/log4j.xml /usr/share/tomcat6/conf
-#cp ~/repos/main/tomcat/conf/tomcat-env.sh /usr/share/tomcat6/conf
-cp ~/repos/main/tomcat/conf/server.xml.dev /usr/share/tomcat6/conf/server.xml
+cp /opt/openconext_code/main/tomcat/conf/catalina.properties /usr/share/tomcat6/conf
+cp /opt/openconext_code/main/tomcat/conf/log4j.xml /usr/share/tomcat6/conf
+#cp /opt/openconext_code/main/tomcat/conf/tomcat-env.sh /usr/share/tomcat6/conf
+cp /opt/openconext_code/main/tomcat/conf/server.xml.dev /usr/share/tomcat6/conf/server.xml
 
 sed -i "s/dev.surfconext.nl/openconext.local/g" /usr/share/tomcat6/conf/server.xml
 
