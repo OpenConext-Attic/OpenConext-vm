@@ -117,7 +117,7 @@ chmod o+w /var/log/surfconext/engineblock.log
 mkdir ~/repos
 cd ~/repos
 # Get COIN stuff
-svn co https://svn.surfnet.nl/svn/coin-os/coin-infra/trunk/coin-infra-dist/src/main/ > /dev/null
+svn co https://svn.surfnet.nl/svn/coin-os/coin-infra/trunk/coin-infra-dist/src/main/
 
 # Apache Configuration
 # PHP
@@ -157,14 +157,14 @@ service httpd restart
 ##########################
 mkdir -p /opt/www/static
 cd /opt/www/static
-svn co https://svn.surfnet.nl/svn/coin-eb/static/trunk .  > /dev/null
+svn co https://svn.surfnet.nl/svn/coin-eb/static/trunk .
 
 #######################
 # Install EngineBlock #
 #######################
 mkdir -p /opt/www/engineblock
 cd /opt/www/engineblock
-svn co https://svn.surfnet.nl/svn/coin-eb/engineblock/trunk/ . > /dev/null
+svn co https://svn.surfnet.nl/svn/coin-eb/engineblock/trunk/ .
 echo "create database engineblock default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
 
 #############################################
@@ -228,7 +228,7 @@ service slapd stop
 rm -rf /var/lib/ldap/*
 service slapd start
 cd ~/repos 
-svn co https://svn.surfnet.nl/svn/coin-os/vendor/grouper/1.6.3/src/main/resources/  > /dev/null
+svn co https://svn.surfnet.nl/svn/coin-os/vendor/grouper/1.6.3/src/main/resources/
 cp resources/ldap/eduperson-200412.ldif /etc/openldap/schema/
 cp resources/ldap/nleduperson.schema /etc/openldap/schema/
 cp resources/ldap/collab.schema /etc/openldap/schema/
@@ -264,7 +264,7 @@ cd bin && ./migrate && ./migrate && ./migrate && cd ..
 echo "create database serviceregistry default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
 mkdir -p /opt/www/serviceregistry
 cd /opt/www/serviceregistry
-svn co https://svn.surfnet.nl/svn/coin-eb/serviceregistry/trunk/ . > /dev/null
+svn co https://svn.surfnet.nl/svn/coin-eb/serviceregistry/trunk/ .
 mkdir -p /etc/surfconext
 cp -r docs/etc/* /etc/surfconext/
 touch modules/janus/enable
@@ -296,7 +296,7 @@ echo 'attributeManipulator.file.location = "../attribute-manipulations"' >> /etc
 ######################
 mkdir -p /opt/www/testidp
 cd /opt/www/testidp
-svn checkout http://simplesamlphp.googlecode.com/svn/branches/simplesamlphp-1.8 . > /dev/null
+svn checkout http://simplesamlphp.googlecode.com/svn/branches/simplesamlphp-1.8 .
 cp -ar config-templates/* config/
 cp -ar metadata-templates/* metadata/
 touch modules/exampleauth/enable
