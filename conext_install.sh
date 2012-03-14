@@ -18,6 +18,7 @@ alias rm='rm'
 
 # Define versions of projects
 COIN_TESTSP_VERSION=2.1.0-SNAPSHOT
+MVN_VERSION=3.0.4
 
 
 # disable SELINUX (requires reboot!)
@@ -342,7 +343,6 @@ service httpd restart
 # Install Maven #
 #################
 
-MVN_VERSION=3.0.4
 mkdir -p /opt
 cd /opt
 wget http://apache.cs.uu.nl/dist//maven/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz
