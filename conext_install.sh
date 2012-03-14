@@ -411,6 +411,12 @@ git clone git://github.com/OpenConext/OpenConext-teams.git
 cd OpenConext-teams
 mvn clean install || exit
 
+# coin-api
+#cd /opt/openconext_code/
+#svn co https://svn.surfnet.nl/svn/coin-os/coin-api/trunk/ coin-api
+#cd coin-api
+#mvn clean install || exit
+
 ########
 # EXIT #
 ########
