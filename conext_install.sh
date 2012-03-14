@@ -20,9 +20,14 @@ alias rm='rm'
 COIN_TESTSP_VERSION=2.1.0-SNAPSHOT
 MVN_VERSION=3.0.4
 
-
-# disable SELINUX (requires reboot!)
-sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/g' /etc/selinux/config
+# Check SELinux
+sestatus | grep "SELinux status" | grep "enabled" > /dev/null
+if [ $? -eq 0 ]
+then
+	sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/g' /etc/selinux/config
+        echo "SELinux was enabled. We disabled it for you now, PLEASE REBOOT and run this script again!"
+	exit 1
+fi
 
 # Add Shibboleth repository (Java Service Provider)
 cd /etc/yum.repos.d/
