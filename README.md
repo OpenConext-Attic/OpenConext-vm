@@ -6,7 +6,7 @@ fully functional OpenConext instance.
 
 # Installation
 
-    $ git clone https://USER@github.com/SURFconext/SURFConext-vm.git
-    $ cd SURFconext-vm
+    $ git clone git://github.com/OpenConext/OpenConext-vm.git
+    $ cd OpenConext-vm
     $ sudo ./conext_install.sh
 
