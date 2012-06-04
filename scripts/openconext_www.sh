@@ -1,0 +1,1 @@
+ln -s /opt/www /vagrant/www
