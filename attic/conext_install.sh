@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # Install OpenConext from scratch on a CentOS/RHEL 6.x system
 #
@@ -366,6 +367,8 @@ service httpd restart
 # Install Maven #
 #################
 
+MVN_VERSION=3.0.4
+
 mkdir -p /opt
 cd /opt
 wget http://apache.cs.uu.nl/dist//maven/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz
@@ -463,8 +466,8 @@ mkdir wars
 mkdir -p /usr/share/tomcat6/conf/classpath_properties/
 cp /opt/openconext_code/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/conf/classpath_properties/coin-testsp.properties.dev /usr/share/tomcat6/conf/classpath_properties/coin-testsp.properties
 mkdir -p /usr/share/tomcat6/conf/Catalina/testsp.openconext.local/
-cp /opt/openconext_code/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/conf/context/testsp.xml /usr/share/tomcat6/conf/Catalina/testsp.openconext.local/testsp.xml
-cp /opt/openconext_code/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/webapps/coin-testsp-war-${COIN_TESTSP_VERSION}.war /usr/share/tomcat6/wars
+cp /opt/openconext_code/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/conf/context/testsp.xml                              /usr/share/tomcat6/conf/Catalina/testsp.openconext.local/testsp.xml
+cp /opt/openconext_code/coin-testsp-dist-${COIN_TESTSP_VERSION}/tomcat/webapps/coin-testsp-war-${COIN_TESTSP_VERSION}.war   /usr/share/tomcat6/wars
 
 service tomcat6 start
 

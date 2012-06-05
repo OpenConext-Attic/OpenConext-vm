@@ -43,6 +43,7 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :path => "scripts/php_install.sh"
   config.vm.provision :shell, :path => "scripts/openldap_install.sh"
   config.vm.provision :shell, :path => "scripts/memcached_install.sh"
+  config.vm.provision :shell, :path => "scripts/maven_install.sh"
 
   config.vm.provision :shell, :path => "scripts/hosts_install.sh"
   config.vm.provision :shell, :path => "scripts/firewall_disable.sh"
@@ -52,11 +53,12 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :path => "scripts/openconext_configuration.sh"
 
   config.vm.provision :shell, :path => "scripts/openconext_static.sh"
-  config.vm.provision :shell, :path => "scripts/openconext_engine.sh"
+  config.vm.provision :shell, :path => "scripts/openconext_engine_install.sh"
+  config.vm.provision :shell, :path => "scripts/openconext_serviceregistry_install.sh"
 
   config.vm.provision :shell, :path => "scripts/openconext_ldap.sh"
 
-  #config.vm.provision :shell, :path => "scripts/openconext_infra_httpd.sh"
+  config.vm.provision :shell, :path => "scripts/openconext_infra_httpd.sh"
 
 
   #config.vm.provision :chef_solo do |chef|

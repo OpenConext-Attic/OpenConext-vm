@@ -10,6 +10,7 @@ then
 	echo "127.5.0.3  grouper.demo.openconext.org" >> /etc/hosts
 	echo "127.5.0.4  serviceregistry.demo.openconext.org" >> /etc/hosts
 	echo "127.5.0.5  engine.demo.openconext.org" >> /etc/hosts
+	echo "127.5.0.5  profile.demo.openconext.org" >> /etc/hosts
 	echo "127.5.0.6  manage.demo.openconext.org" >> /etc/hosts
 	echo "127.5.0.7  guestidp.demo.openconext.org" >> /etc/hosts
 	echo "127.5.0.8  portal.demo.openconext.org" >> /etc/hosts

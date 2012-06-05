@@ -17,7 +17,7 @@ These are the source files to build an OpenConext Virtual Machine.
 Verify that Vagrant and VeeWee are setup correctly with the following commands (should not return an error):
 
     $ vagrant -v
-    $ vagrant basebox list
+    $ vagrant basebox templates
 
 Then build a basebox (one time):
 

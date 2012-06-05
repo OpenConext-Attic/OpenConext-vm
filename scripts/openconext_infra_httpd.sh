@@ -1,12 +1,12 @@
 #!/bin/sh
 cd /tmp &&
-svn co https://svn.surfnet.nl/svn/coin-os/coin-infra/trunk/coin-infra-dist/src/main/ infra
+svn export -q https://svn.surfnet.nl/svn/coin-os/coin-infra/trunk/coin-infra-dist/src/main/ infra
 
 # Apache Configuration
-rm -vf /etc/httpd/conf.d/* &&
-cp -vf infra/httpd/conf.d/php/demo/* /etc/httpd/conf.d/ &&
-cp -vf main/httpd/conf.d/java/demo/* /etc/httpd/conf.d/ &&
-rm -rvf infra &&
+rm -f /etc/httpd/conf.d/* &&
+cp -f infra/httpd/conf.d/php/demo/*  /etc/httpd/conf.d/ &&
+cp -f infra/httpd/conf.d/java/demo/* /etc/httpd/conf.d/ &&
+rm -rf infra &&
 
 cd - &&
 
@@ -17,11 +17,11 @@ cd - &&
 # The certificates were generated using the XCA tool, the DB file is included
 # as well as "openconext.xdb".
 
-rm -rvf /etc/httpd/keys &&
+rm -rf /etc/httpd/keys &&
 mkdir -p /etc/httpd/keys/ &&
-cp certs/star.demo.openconext.local.key /etc/httpd/keys/ &&
-cp certs/star.demo.openconext.local.pem /etc/httpd/keys/ &&
+cp /vagrant/certs/star.demo.openconext.org.key /etc/httpd/keys/ &&
+cp /vagrant/certs/star.demo.openconext.org.pem /etc/httpd/keys/ &&
 
-cp certs/openconext.pem /etc/httpd/keys/star.openconext.local_cabundle.pem &&
+cp /vagrant/certs/openconext.pem /etc/httpd/keys/star.demo.openconext.org_cabundle.pem &&
 
 service httpd restart

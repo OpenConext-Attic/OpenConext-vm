@@ -22,9 +22,13 @@ if [ ! -f /etc/surfconext/engineblock.ini ];
 then
     cd /opt/www/engineblock &&
     cp docs/example.engineblock.ini /etc/surfconext/engineblock.ini
-    sed -i 's/^\[ENV : base\]/\[production : base\]/g' /etc/surfconext/engineblock.ini
+    sed -i 's/^\[ENV : base\]/\[demo : base\]/g' /etc/surfconext/engineblock.ini
     sed -i 's/database.master1.user     = ""/database.master1.user     = "root"/g' /etc/surfconext/engineblock.ini
     sed -i 's/database.master1.password = ""/database.master1.password = "c0n3xt"/g' /etc/surfconext/engineblock.ini
+
+    sed -i 's/auth.simplesamlphp.idp.entityId   = ""/auth.simplesamlphp.idp.entityId   = "https:\/\/engine.demo.openconext.org\/authentication\/idp\/metadata"/g' /etc/surfconext/engineblock.ini
+    sed -i 's/auth.simplesamlphp.idp.location   = ""/auth.simplesamlphp.idp.location   = "https:\/\/engine.demo.openconext.org\/authentication\/idp\/single-sign-on"/g' /etc/surfconext/engineblock.ini
+
     # we really need Mail writerName otherwise the migrate script below b0rks...
     echo '' >> /etc/surfconext/engineblock.ini
     echo '; logs' >> /etc/surfconext/engineblock.ini
@@ -42,15 +46,15 @@ then
     echo 'logs.mail.writerParams.from.name  = "SURFconext EngineBlock"' >> /etc/surfconext/engineblock.ini
 
     # configure LDAP
-    sed -i 's/ldap.host               = ""/ldap.host               = "ldap.openconext.local"/g' /etc/surfconext/engineblock.ini
+    sed -i 's/ldap.host               = ""/ldap.host               = "ldap.demo.openconext.org"/g' /etc/surfconext/engineblock.ini
     sed -i 's/ldap.password           = ""/ldap.password           = "jf7RH4Hj20De"/g' /etc/surfconext/engineblock.ini
     echo 'ldap.useSsl = false' >> /etc/surfconext/engineblock.ini
 
     echo 'phpSettings.display_errors = true' >> /etc/surfconext/engineblock.ini
-    sed -i 's/serviceregistry.example.com/serviceregistry.openconext.local/g' /etc/surfconext/engineblock.ini
+    sed -i 's/serviceregistry.example.com/serviceregistry.demo.openconext.org/g' /etc/surfconext/engineblock.ini
     sed -i 's/ksD76Fh2Sj3e3/engineblock/g' /etc/surfconext/engineblock.ini
-    sed -i 's/cookie.lang.domain = "dev.surfconext.nl"/cookie.lang.domain = "openconext.local"/g' /etc/surfconext/engineblock.ini
-    sed -i 's/static.host         = "static.dev.surfconext.nl"/static.host         = "static.openconext.local"/g' /etc/surfconext/engineblock.ini
+    sed -i 's/cookie.lang.domain = "dev.surfconext.nl"/cookie.lang.domain = "demo.openconext.org"/g' /etc/surfconext/engineblock.ini
+    sed -i 's/static.host         = "static.dev.surfconext.nl"/static.host         = "static.demo.openconext.org"/g' /etc/surfconext/engineblock.ini
 
     # Edit the profile.sh file to set correct environment variable
     echo 'export ENGINEBLOCK_ENV="production"' > /etc/profile.d/openconext.sh
@@ -67,6 +71,8 @@ then
     echo "" >> /etc/surfconext/engineblock.ini &&
     echo "encryption.key.public = \"${CRT}\"" >> /etc/surfconext/engineblock.ini &&
     echo "encryption.key.private = \"${PEM}\"" >> /etc/surfconext/engineblock.ini &&
-    rm example.org.crt example.org.pem
+    echo "auth.simplesamlphp.idp.cert       = \"${CRT}\"" >> /etc/surfconext/engineblock.ini
+    cp example.org.crt /etc/surfconext/engineblock.crt &&
+    rm example.org.crt example.org.pem &&
     cd -
 fi
