@@ -1,3 +1,4 @@
 iso
 *.box
 .vagrant
+atlassian-ide-plugin.xml
