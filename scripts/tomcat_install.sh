@@ -1,1 +1,1 @@
-yum -y install tomcat6
+yum -y -q install tomcat6

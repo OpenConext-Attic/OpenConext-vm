@@ -1,10 +1,11 @@
-cd /vagrant/www/ &&
+cd /tmp &&
 svn co https://svn.surfnet.nl/svn/coin-os/coin-infra/trunk/coin-infra-dist/src/main/ infra
 
 # Apache Configuration
 rm -vf /etc/httpd/conf.d/* &&
 cp -vf infra/httpd/conf.d/php/demo/* /etc/httpd/conf.d/ &&
 cp -vf main/httpd/conf.d/java/demo/* /etc/httpd/conf.d/ &&
+rm -rvf infra &&
 
 cd - &&
 

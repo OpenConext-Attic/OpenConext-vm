@@ -13,10 +13,5 @@ These are the source files to build an OpenConext Virtual Machine.
 
     $ git clone git://github.com/OpenConext/OpenConext-vm.git
     $ cd OpenConext-vm
-    $ sudo echo hosts >> /etc/hosts
-    $ vagrant basebox build demo.openconext.org
-    $ vagrant basebox export demo.openconext.org
-    $ vagrant box add 'demo.openconext.org' 'demo.openconext.org.box'
-    $ vagrant init 'demo.openconext.org'
-    $ vagrant up
-
+    $ sudo echo host/hosts >> /etc/hosts
+    $ ./osx_install.sh

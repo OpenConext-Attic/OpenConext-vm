@@ -1,4 +1,4 @@
-yum -y install mysql mysql-server mysql-connector-java
+yum -y -q install mysql mysql-server mysql-connector-java
 
 service mysqld restart
 chkconfig mysqld on

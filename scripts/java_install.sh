@@ -1,7 +1,13 @@
 # We need Sun's Java for now unfortunately due to OpenJDK bug(s)
 # See http://bugs.openjdk.java.net/show_bug.cgi?id=100167
+# Note Oracle doesn't allow you to wget java anymore:
+# http://stackoverflow.com/questions/10268583/cant-install-java-jdk-on-linux-through-wget-is-there-a-workaround
+# to get Java from the Oracle website we'd need to emulate an entire browser
+# which is too much work, so we just get it from another source
+# even though this is a risk as we can't be sure it's not been tampered with
+# TODO: checksum checking
 
-yum -q list jdk | grep 'installed'
+yum -q list jdk
 if [ $? -ne 0 ]
 then
     cd /root &&

@@ -1,5 +1,5 @@
 # install required packages
-yum -y install svn \
+yum -y -q install svn \
     git \
     telnet \
 	wget \
@@ -8,6 +8,6 @@ yum -y install svn \
 	kernel-devel \
 	ant \
 	nano \
-	mlocate
+	mlocate &&
 
 updatedb &

@@ -29,25 +29,43 @@ then
 	exit 1
 fi
 
+# update the CentOS/RHEL system
+yum -y update
+
+# install required packages
+yum -y install \
+    tomcat6 \
+    httpd \
+    php php-cli php-mysql php-curl php-ldap php-xml php-pecl-memcache php-devel \
+    svn \
+    telnet \
+	mod_ssl \
+	mysql-server \
+	openldap-servers \
+	wget \
+	firefox \
+	mysql-connector-java \
+	memcached \
+	openldap-clients \
+	nss-tools \
+	gcc \
+	kernel-devel \
+	git \
+	java-1.6.0-openjdk-devel \
+	ant \
+	nano \
+	wget \
+	openssh-server
+
 # Add Shibboleth repository (Java Service Provider)
 cd /etc/yum.repos.d/
 wget http://download.opensuse.org/repositories/security://shibboleth/RHEL_6/security:shibboleth.repo
 cd $CURDIR
 
-# update the CentOS/RHEL system
-yum -y update
-
-# install required packages
-yum -y install tomcat6 httpd php-cli php php-mysql php-curl svn telnet \
-	mod_ssl mysql-server openldap-servers php-ldap php-xml wget \
-	firefox mysql-connector-java memcached openldap-clients \
-	php-pecl-memcache nss-tools gcc kernel-devel git \
-	java-1.6.0-openjdk-devel ant php-devel nano openssh-server
-
 # We need Sun's Java for now unfortunately due to OpenJDK bug(s)
 # See http://bugs.openjdk.java.net/show_bug.cgi?id=100167
-wget -N http://download.oracle.com/otn-pub/java/jdk/6u31-b04/jdk-6u31-linux-x64-rpm.bin
-sh jdk-6u31-linux-x64-rpm.bin -noregister
+wget -N http://download.oracle.com/otn-pub/java/jdk/6u31-b04/jdk-6u31-linux-x64-rpm.bin /root/jdk-6u31-linux-x64-rpm.bin
+sh /root/jdk-6u31-linux-x64-rpm.bin -noregister
 
 # set Oracle Java as default
 cd /etc/alternatives
@@ -67,13 +85,13 @@ rm -rf /var/lib/mysql
 sed -i 's/short_open_tag = Off/short_open_tag = On/g' /etc/php.ini
 
 # Start some services and configure them to automatically start on system boot 
-chkconfig httpd on && service httpd restart
-chkconfig mysqld on && service mysqld restart
+chkconfig httpd     on && service httpd restart
+chkconfig mysqld    on && service mysqld restart
 chkconfig memcached on && service memcached restart
-chkconfig sshd on && service sshd restart
+chkconfig sshd      on && service sshd restart
 
 # Disable firewall
-chkconfig iptables off && service iptables stop
+chkconfig iptables  off && service iptables stop
 chkconfig ip6tables off && service ip6tables stop
 
 # configure MySQL (WARNING: this is insecure!)

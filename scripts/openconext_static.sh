@@ -1,8 +1,11 @@
 ##########################
 # Install Static content #
 ##########################
-mkdir -p /opt/www/ &&
-cd /opt/www/ &&
-git clone git://github.com/OpenConext/OpenConext-static.git
-ln -s OpenConext-static static
-cd -
+
+if [ ! -h /opt/www/static ];
+then
+    cd /opt/www &&
+    git clone git://github.com/OpenConext/OpenConext-static.git
+    ln -sf OpenConext-static static
+    cd -
+fi

@@ -1,1 +1,1 @@
-ln -s /opt/www /vagrant/www
+mkdir -p /opt/www
