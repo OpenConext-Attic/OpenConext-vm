@@ -1,3 +1,4 @@
+#!/bin/sh
 # Remove earlier installation files
 rm -rf /var/log/surfconext/
 

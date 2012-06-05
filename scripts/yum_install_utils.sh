@@ -1,3 +1,4 @@
+#!/bin/sh
 # install required packages
 yum -y -q install svn \
     git \

@@ -1,3 +1,4 @@
+#!/bin/sh
 # We need Sun's Java for now unfortunately due to OpenJDK bug(s)
 # See http://bugs.openjdk.java.net/show_bug.cgi?id=100167
 # Note Oracle doesn't allow you to wget java anymore:

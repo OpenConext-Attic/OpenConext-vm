@@ -1,3 +1,4 @@
+#!/bin/sh
 vagrant basebox build -f demo.openconext.org &&
 vagrant basebox export demo.openconext.org &&
 

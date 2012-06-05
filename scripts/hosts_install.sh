@@ -1,3 +1,4 @@
+#!/bin/sh
 # configure some OpenConext DNS entries on this machine
 grep openconext /etc/hosts > /dev/null
 if [ $? -eq 1 ]

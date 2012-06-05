@@ -1,3 +1,4 @@
+#!/bin/sh
 yum -y -q install mysql mysql-server mysql-connector-java
 
 service mysqld restart

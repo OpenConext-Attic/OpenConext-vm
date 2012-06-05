@@ -1,3 +1,4 @@
+#!/bin/sh
 # update the CentOS/RHEL system
 yum -y -q update
 

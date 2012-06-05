@@ -1,3 +1,4 @@
+#!/bin/sh
 # Add Shibboleth repository (Java SAML Service Provider)
 
 yum -q list shibboleth > /dev/null

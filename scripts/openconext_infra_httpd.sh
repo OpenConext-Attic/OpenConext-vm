@@ -1,3 +1,4 @@
+#!/bin/sh
 cd /tmp &&
 svn co https://svn.surfnet.nl/svn/coin-os/coin-infra/trunk/coin-infra-dist/src/main/ infra
 

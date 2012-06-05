@@ -1,3 +1,4 @@
+#!/bin/sh
 # Check SELinux
 sestatus | grep "SELinux status" | grep "enabled" > /dev/null
 if [ $? -eq 0 ]
