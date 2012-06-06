@@ -51,6 +51,7 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :path => "scripts/openconext_www.sh"
   config.vm.provision :shell, :path => "scripts/openconext_logging.sh"
   config.vm.provision :shell, :path => "scripts/openconext_configuration.sh"
+  config.vm.provision :shell, :path => "scripts/samba_install.sh"
 
   config.vm.provision :shell, :path => "scripts/openconext_static.sh"
   config.vm.provision :shell, :path => "scripts/openconext_engine_install.sh"

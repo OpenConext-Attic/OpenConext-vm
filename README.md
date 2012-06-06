@@ -33,3 +33,12 @@ Then instantiate the box:
 
 Finally copy host/hosts to your [hosts file](http://en.wikipedia.org/wiki/Hosts_%28file%29)
 and point your browser to <https://profile.demo.openconext.local>.
+
+# Usage
+
+You can now use the following OpenConext components:
+* [OpenConext Profile](https://profile.demo.openconext.org)
+
+If you want to make modifications to the components a Samba share is available at:
+
+//openconext:openconext@demo.openconext.org/www
