@@ -19,9 +19,6 @@ cd - &&
 
 rm -rf /etc/httpd/keys &&
 mkdir -p /etc/httpd/keys/ &&
-cp /vagrant/certs/star.demo.openconext.org.key /etc/httpd/keys/ &&
-cp /vagrant/certs/star.demo.openconext.org.pem /etc/httpd/keys/ &&
-
-cp /vagrant/certs/openconext.pem /etc/httpd/keys/star.demo.openconext.org_cabundle.pem &&
+cp /vagrant/certs/* /etc/httpd/keys/ &&
 
 service httpd restart
