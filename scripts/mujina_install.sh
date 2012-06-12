@@ -17,7 +17,7 @@ then
     MUJINA_SP_WAR=`basename /usr/share/tomcat6/wars/mujina-sp-*.war`
     MUJINA_IDP_WAR=`basename /usr/share/tomcat6/wars/mujina-idp-*.war`
     
-    rm -rvf /tmp/Mujina
+    rm -rf /tmp/Mujina
     
     mkdir -p /usr/share/tomcat6/conf/Catalina/mujina-sp.demo.openconext.org
     echo "<Context path=\"/\" docBase=\"/usr/share/tomcat6/wars/$MUJINA_SP_WAR\"/>" > \
