@@ -15,7 +15,10 @@ then
 fi
 
 mkdir -p /usr/share/tomcat6/wars
+
+cp -f /vagrant/configs/tomcat6/conf/catalina.properties /usr/share/tomcat6/conf/catalina.properties
 cp -f /vagrant/configs/tomcat6/conf/server.xml /usr/share/tomcat6/conf/server.xml
+
 mkdir -p /usr/share/tomcat6/conf/classpath_properties
 cp /vagrant/configs/tomcat6/conf/classpath_properties/*.properties /usr/share/tomcat6/conf/classpath_properties/
 

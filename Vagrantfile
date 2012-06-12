@@ -57,6 +57,7 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :path => "scripts/openconext_static.sh"
   config.vm.provision :shell, :path => "scripts/openconext_engine_install.sh"
   config.vm.provision :shell, :path => "scripts/openconext_serviceregistry_install.sh"
+
   config.vm.provision :shell, :path => "scripts/openconext_manage_install.sh"
 
   config.vm.provision :shell, :path => "scripts/chown_www.sh"
@@ -64,7 +65,8 @@ Vagrant::Config.run do |config|
   # config.vm.provision :shell, :path => "scripts/openconext_ldap.sh"
 
   config.vm.provision :shell, :path => "scripts/openconext_infra_httpd.sh"
-
+  
+  config.vm.provision :shell, :path => "scripts/openconext_teams.sh"
 
   #config.vm.provision :chef_solo do |chef|
   #  chef.cookbooks_path = "cookbooks"
