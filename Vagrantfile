@@ -32,7 +32,7 @@ Vagrant::Config.run do |config|
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
 
   config.vm.provision :shell, :path => "scripts/selinux_disable.sh"
-  config.vm.provision :shell, :path => "scripts/yum_update.sh"
+  # config.vm.provision :shell, :path => "scripts/yum_update.sh" // non-determinic
   config.vm.provision :shell, :path => "scripts/yum_install_utils.sh"
 
   config.vm.provision :shell, :path => "scripts/java_install.sh"
@@ -61,7 +61,7 @@ Vagrant::Config.run do |config|
 
   config.vm.provision :shell, :path => "scripts/chown_www.sh"
 
-  config.vm.provision :shell, :path => "scripts/openconext_ldap.sh"
+  # config.vm.provision :shell, :path => "scripts/openconext_ldap.sh"
 
   config.vm.provision :shell, :path => "scripts/openconext_infra_httpd.sh"
 
