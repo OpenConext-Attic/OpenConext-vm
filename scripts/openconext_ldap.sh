@@ -32,5 +32,5 @@ then
     # Updating schema some more...
     ldapmodify -x -D cn=admin,cn=config -w c0n3xt -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif &&
     ldapmodify -x -D cn=admin,cn=config -w c0n3xt -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif &&
-    ldapadd -x -D cn=admin,dc=surfconext,dc=nl -w c0n3xt -f /opt/www/engineblock/ldap/changes/versAccount.ldif
+    ldapadd -x -D cn=admin,dc=config -w c0n3xt -f /opt/www/engineblock/ldap/changes/versAccount.ldif
 fi
