@@ -22,43 +22,9 @@ if [ ! -f /etc/surfconext/engineblock.ini ];
 then
     cd /opt/www/engineblock &&
     cp docs/example.engineblock.ini /etc/surfconext/engineblock.ini
-    sed -i 's/^\[ENV : base\]/\[demo : base\]/g' /etc/surfconext/engineblock.ini
-    sed -i 's/database.master1.user     = ""/database.master1.user     = "root"/g' /etc/surfconext/engineblock.ini
-    sed -i 's/database.master1.password = ""/database.master1.password = "c0n3xt"/g' /etc/surfconext/engineblock.ini
-
-    sed -i 's/auth.simplesamlphp.idp.entityId   = ""/auth.simplesamlphp.idp.entityId   = "https:\/\/engine.demo.openconext.org\/authentication\/idp\/metadata"/g' /etc/surfconext/engineblock.ini
-    sed -i 's/auth.simplesamlphp.idp.location   = ""/auth.simplesamlphp.idp.location   = "https:\/\/engine.demo.openconext.org\/authentication\/idp\/single-sign-on"/g' /etc/surfconext/engineblock.ini
-
-    # we really need Mail writerName otherwise the migrate script below b0rks...
-    echo '' >> /etc/surfconext/engineblock.ini
-    echo '; logs' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.writerName = "Mail"' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.writerNamespace = "EngineBlock_Log_Writer"' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.filterName = "Priority"' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.filterParams.priority = 3 ; Errors' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.writerParams.filterValues[] = "encryption.key.private"' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.writerParams.filterValues[] = "ldap.password"' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.writerParams.filterValues[] = "serviceRegistry.user_secret"' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.writerParams.filterValues[] = "database.master1.password"' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.writerParams.filterValues[] = "grouper.password"' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.writerParams.filterValues[] = "hz.auth.consumerSecret"' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.writerParams.from.email = "noreply@surfnet.nl"' >> /etc/surfconext/engineblock.ini
-    echo 'logs.mail.writerParams.from.name  = "SURFconext EngineBlock"' >> /etc/surfconext/engineblock.ini
-
-    # configure LDAP
-    sed -i 's/ldap.host               = ""/ldap.host               = "ldap.demo.openconext.org"/g' /etc/surfconext/engineblock.ini
-    sed -i 's/ldap.password           = ""/ldap.password           = "jf7RH4Hj20De"/g' /etc/surfconext/engineblock.ini
-    echo 'ldap.useSsl = false' >> /etc/surfconext/engineblock.ini
-
-    echo 'phpSettings.display_errors = true' >> /etc/surfconext/engineblock.ini
-    sed -i 's/serviceregistry.example.com/serviceregistry.demo.openconext.org/g' /etc/surfconext/engineblock.ini
-    sed -i 's/ksD76Fh2Sj3e3/engineblock/g' /etc/surfconext/engineblock.ini
-    sed -i 's/cookie.lang.domain = "dev.surfconext.nl"/cookie.lang.domain = "demo.openconext.org"/g' /etc/surfconext/engineblock.ini
-    sed -i 's/static.host         = "static.dev.surfconext.nl"/static.host         = "static.demo.openconext.org"/g' /etc/surfconext/engineblock.ini
 
     # Edit the profile.sh file to set correct environment variable
-    echo 'export ENGINEBLOCK_ENV="production"' > /etc/profile.d/openconext.sh
-    echo 'export PATH=$PATH:/opt/maven/bin' >> /etc/profile.d/openconext.sh
+    echo 'export ENGINEBLOCK_ENV="demo"' > /etc/profile.d/openconext.sh
 
     chmod +x /etc/profile.d/openconext.sh
     source /etc/profile.d/openconext.sh

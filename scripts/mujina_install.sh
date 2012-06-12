@@ -11,7 +11,7 @@ then
     mkdir -p /usr/share/tomcat6/wars
     cp /tmp/Mujina/mujina-sp/target/*.war  /usr/share/tomcat6/wars
     cp /tmp/Mujina/mujina-idp/target/*.war /usr/share/tomcat6/wars
-    rm -rvf /tmp/Mujina
+    rm -rf /tmp/Mujina
     #mkdir -p /usr/share/tomcat6/shared/lib/
     #ln -s /usr/share/java/mysql-connector-java.jar /usr/share/tomcat6/shared/lib/mysql-connector-java.jar
 
