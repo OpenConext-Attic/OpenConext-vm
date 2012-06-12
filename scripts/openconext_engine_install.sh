@@ -18,11 +18,8 @@ fi
 # Modify the EngineBlock configuration file #
 #############################################
 
-if [ ! -f /etc/surfconext/engineblock.ini ];
+if [ ! -f /etc/surfconext/engineblock.crt ];
 then
-    cd /opt/www/engineblock &&
-    cp docs/example.engineblock.ini /etc/surfconext/engineblock.ini
-
     # Edit the profile.sh file to set correct environment variable
     echo 'export ENGINEBLOCK_ENV="demo"' > /etc/profile.d/openconext.sh
 
