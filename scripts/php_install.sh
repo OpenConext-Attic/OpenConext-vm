@@ -14,3 +14,4 @@ yum -y -q install php \
 
 # Enable PHP short open tag for non-conforming PHP code
 sed -i 's/short_open_tag = Off/short_open_tag = On/g' /etc/php.ini
+sed -i 's/display_errors = Off/display_errors = On/g' /etc/php.ini
