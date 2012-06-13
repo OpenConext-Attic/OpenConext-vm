@@ -56,13 +56,11 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :path => "scripts/mujina_install.sh"
   config.vm.provision :shell, :path => "scripts/openconext_static.sh"
   config.vm.provision :shell, :path => "scripts/openconext_engine_install.sh"
+  config.vm.provision :shell, :path => "scripts/openconext_ldap.sh"
   config.vm.provision :shell, :path => "scripts/openconext_serviceregistry_install.sh"
-
   config.vm.provision :shell, :path => "scripts/openconext_manage_install.sh"
 
   config.vm.provision :shell, :path => "scripts/chown_www.sh"
-
-  # config.vm.provision :shell, :path => "scripts/openconext_ldap.sh"
 
   config.vm.provision :shell, :path => "scripts/openconext_infra_httpd.sh"
   
