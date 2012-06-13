@@ -10,6 +10,8 @@ then
     ln -sf OpenConext-engineblock engineblock &&
     cd -
 
+    cp -Rf /vagrant/configs/attribute-manipulations /opt/www
+
     # Create database
     echo "create database engineblock default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
 fi
