@@ -8,6 +8,6 @@ then
 
     echo "create database manage default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
 
-    CRT=`cat /etc/surfconext/engineblock.crt` &&
-    echo "auth.simplesamlphp.idp.cert = \"${CRT}\"" >> /etc/surfconext/manage.ini
+    CRT_NO_HEADERS=`sed '1d;$d' /etc/surfconext/engineblock.crt` &&
+    echo "auth.simplesamlphp.idp.cert = \"${CRT_NO_HEADERS}\"" >> /etc/surfconext/manage.ini
 fi
