@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--Use of this metadata is subject to the Terms of Use at http://www.edugain.org/policy/metadata-tou_1_0.txt--><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui" validUntil="2012-06-15T12:34:47Z" entityID="https://engine.demo.openconext.org/authentication/idp/metadata" ID="CORTO716e3dd2c71aa5462104d1219c8183e5095051fa"><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><ds:Reference URI="#CORTO716e3dd2c71aa5462104d1219c8183e5095051fa"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>SKsFP9sFrbYg7HY0Kbns1xIUWKo=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>WOrn1y/+Howyb+MTQc84qJPBctVt99AuR27GfMTsr8UUJwWtn4TfR8MfF+RSPrdgJAVb0uw8UyUOiqcWyusCOfrOwlA3HH5QN1LzCkHwgbuliCmxPZoWg9isZ49VZVdSLhpPKzzobLYfPwPG9afvbDlrEEfwKzUwJF5WXN4WkPruzMCw2z2rC19+OHAQf154x+MFyKTZxpCWMfpjSszYjzPORry8s2aUeay4/uIAbgfSrMvSEmQK5HC0+trU0asJTJdjNvLSsVJ6/Rf9H6y7yrKt/LM3TtrNetYxS8rNW3BRcchJbK/hrZ86xfGORVYs75Hhw0auwBPDZjn4qR4hpg==</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIDYzCCAkugAwIBAgIJAJ1mmCC75otpMA0GCSqGSIb3DQEBBQUAMEgxFDASBgNV
+BAMMC0VuZ2luZUJsb2NrMREwDwYDVQQLDAhTZXJ2aWNlczEQMA4GA1UECgwHU1VS
+Rm5ldDELMAkGA1UEBhMCTkwwHhcNMTIwNjE0MDgxNTA3WhcNMjIwNjE0MDgxNTA3
+WjBIMRQwEgYDVQQDDAtFbmdpbmVCbG9jazERMA8GA1UECwwIU2VydmljZXMxEDAO
+BgNVBAoMB1NVUkZuZXQxCzAJBgNVBAYTAk5MMIIBIjANBgkqhkiG9w0BAQEFAAOC
+AQ8AMIIBCgKCAQEA0dFDFMrsKp2hgoI2/rMaGMXygSTWIUh1/fQ8TuTFTaNZOub8
+3s7afdwTSFdvujHF6NLC+4XrYgJNGsXZ+iuY1xYvZgzoU+ZqfgMgr8aJGlra0sFL
+J87xujyww2Dbo9gValT4MO04hVvHVLjTaB3HCZ7OBmVl2GwC5yy66noJc64XNEW0
+nFJkYZIb09k2E/RSh1KRhW82gxJ2Mji7NpWxY1M2F3uJiqFvVFBrt8rObNGU6T94
+ZawlI73YV06kUwqnaGIq9WKqlZuCj+dDRHa1Fu6Zur3VuAVxLAJzkJ/2pON2t1hM
+1BXxlHfCsep9PlZipsZ46mbA6TueqndC/MESwwIDAQABo1AwTjAdBgNVHQ4EFgQU
+mJqrsTq3Y+cLogkkHggCMnmKpb8wHwYDVR0jBBgwFoAUmJqrsTq3Y+cLogkkHggC
+MnmKpb8wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEATM1BlX59Qmwk
+boNYYvObpAAoBQSIKxHazlrIfnd+4jYP6FD8NeRisSTEDxRGoXxVjbVBmapWK3yi
+XE9ZRubO8m+t3aNQtkCDYgL87VCejeC7tzYytLmKVKYgyiskxvsdWhtW1m5FJLd/
+4JtdkS/bZspGnd0C2CjPuc4BFhFdUq2RR3a7CvuXFOYLLb16b+hesc4KODT/tA5h
+DHoSfr99z+SiM4EFbxnOllgnep2HPTvsJ6xMbD3bqQOrRZQxXJw0BmfrSS3x55Yg
++d5XwmGRLPyXUZ+5PgOuwMrFMy/CfHbWpCMDzGIVaiYNGBO2MZ7BzpERv0cWT5W0
+uPmhW0YcUw==
+</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature><md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:KeyDescriptor xmlns:ds="http://www.w3.org/2000/09/xmldsig#" use="signing"><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIDYzCCAkugAwIBAgIJAJ1mmCC75otpMA0GCSqGSIb3DQEBBQUAMEgxFDASBgNV
+BAMMC0VuZ2luZUJsb2NrMREwDwYDVQQLDAhTZXJ2aWNlczEQMA4GA1UECgwHU1VS
+Rm5ldDELMAkGA1UEBhMCTkwwHhcNMTIwNjE0MDgxNTA3WhcNMjIwNjE0MDgxNTA3
+WjBIMRQwEgYDVQQDDAtFbmdpbmVCbG9jazERMA8GA1UECwwIU2VydmljZXMxEDAO
+BgNVBAoMB1NVUkZuZXQxCzAJBgNVBAYTAk5MMIIBIjANBgkqhkiG9w0BAQEFAAOC
+AQ8AMIIBCgKCAQEA0dFDFMrsKp2hgoI2/rMaGMXygSTWIUh1/fQ8TuTFTaNZOub8
+3s7afdwTSFdvujHF6NLC+4XrYgJNGsXZ+iuY1xYvZgzoU+ZqfgMgr8aJGlra0sFL
+J87xujyww2Dbo9gValT4MO04hVvHVLjTaB3HCZ7OBmVl2GwC5yy66noJc64XNEW0
+nFJkYZIb09k2E/RSh1KRhW82gxJ2Mji7NpWxY1M2F3uJiqFvVFBrt8rObNGU6T94
+ZawlI73YV06kUwqnaGIq9WKqlZuCj+dDRHa1Fu6Zur3VuAVxLAJzkJ/2pON2t1hM
+1BXxlHfCsep9PlZipsZ46mbA6TueqndC/MESwwIDAQABo1AwTjAdBgNVHQ4EFgQU
+mJqrsTq3Y+cLogkkHggCMnmKpb8wHwYDVR0jBBgwFoAUmJqrsTq3Y+cLogkkHggC
+MnmKpb8wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEATM1BlX59Qmwk
+boNYYvObpAAoBQSIKxHazlrIfnd+4jYP6FD8NeRisSTEDxRGoXxVjbVBmapWK3yi
+XE9ZRubO8m+t3aNQtkCDYgL87VCejeC7tzYytLmKVKYgyiskxvsdWhtW1m5FJLd/
+4JtdkS/bZspGnd0C2CjPuc4BFhFdUq2RR3a7CvuXFOYLLb16b+hesc4KODT/tA5h
+DHoSfr99z+SiM4EFbxnOllgnep2HPTvsJ6xMbD3bqQOrRZQxXJw0BmfrSS3x55Yg
++d5XwmGRLPyXUZ+5PgOuwMrFMy/CfHbWpCMDzGIVaiYNGBO2MZ7BzpERv0cWT5W0
+uPmhW0YcUw==
+</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:KeyDescriptor xmlns:ds="http://www.w3.org/2000/09/xmldsig#" use="encryption"><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIDYzCCAkugAwIBAgIJAJ1mmCC75otpMA0GCSqGSIb3DQEBBQUAMEgxFDASBgNV
+BAMMC0VuZ2luZUJsb2NrMREwDwYDVQQLDAhTZXJ2aWNlczEQMA4GA1UECgwHU1VS
+Rm5ldDELMAkGA1UEBhMCTkwwHhcNMTIwNjE0MDgxNTA3WhcNMjIwNjE0MDgxNTA3
+WjBIMRQwEgYDVQQDDAtFbmdpbmVCbG9jazERMA8GA1UECwwIU2VydmljZXMxEDAO
+BgNVBAoMB1NVUkZuZXQxCzAJBgNVBAYTAk5MMIIBIjANBgkqhkiG9w0BAQEFAAOC
+AQ8AMIIBCgKCAQEA0dFDFMrsKp2hgoI2/rMaGMXygSTWIUh1/fQ8TuTFTaNZOub8
+3s7afdwTSFdvujHF6NLC+4XrYgJNGsXZ+iuY1xYvZgzoU+ZqfgMgr8aJGlra0sFL
+J87xujyww2Dbo9gValT4MO04hVvHVLjTaB3HCZ7OBmVl2GwC5yy66noJc64XNEW0
+nFJkYZIb09k2E/RSh1KRhW82gxJ2Mji7NpWxY1M2F3uJiqFvVFBrt8rObNGU6T94
+ZawlI73YV06kUwqnaGIq9WKqlZuCj+dDRHa1Fu6Zur3VuAVxLAJzkJ/2pON2t1hM
+1BXxlHfCsep9PlZipsZ46mbA6TueqndC/MESwwIDAQABo1AwTjAdBgNVHQ4EFgQU
+mJqrsTq3Y+cLogkkHggCMnmKpb8wHwYDVR0jBBgwFoAUmJqrsTq3Y+cLogkkHggC
+MnmKpb8wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEATM1BlX59Qmwk
+boNYYvObpAAoBQSIKxHazlrIfnd+4jYP6FD8NeRisSTEDxRGoXxVjbVBmapWK3yi
+XE9ZRubO8m+t3aNQtkCDYgL87VCejeC7tzYytLmKVKYgyiskxvsdWhtW1m5FJLd/
+4JtdkS/bZspGnd0C2CjPuc4BFhFdUq2RR3a7CvuXFOYLLb16b+hesc4KODT/tA5h
+DHoSfr99z+SiM4EFbxnOllgnep2HPTvsJ6xMbD3bqQOrRZQxXJw0BmfrSS3x55Yg
++d5XwmGRLPyXUZ+5PgOuwMrFMy/CfHbWpCMDzGIVaiYNGBO2MZ7BzpERv0cWT5W0
+uPmhW0YcUw==
+</ds:X509Certificate></ds:X509Data></ds:KeyInfo><md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat><md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat><md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://engine.demo.openconext.org/authentication/idp/single-sign-on"/></md:IDPSSODescriptor><md:ContactPerson contactType="technical"><md:EmailAddress>support@openconext.org</md:EmailAddress></md:ContactPerson><md:ContactPerson contactType="support"><md:EmailAddress>support@openconext.org</md:EmailAddress></md:ContactPerson><md:ContactPerson contactType="administrative"><md:EmailAddress>support@openconext.org</md:EmailAddress></md:ContactPerson></md:EntityDescriptor>

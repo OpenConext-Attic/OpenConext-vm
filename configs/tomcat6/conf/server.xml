@@ -60,6 +60,8 @@
             <Host name="mujina-idp.demo.openconext.org" appBase="webapps/mujina-idp.demo.openconext.org"/>
 
             <Host name="mujina-sp.demo.openconext.org" appBase="webapps/mujina-sp.demo.openconext.org"/>
+            
+            <Host name="teams.demo.openconext.org" appBase="webapps/teams.demo.openconext.org"/>
 
         </Engine>
     </Service>

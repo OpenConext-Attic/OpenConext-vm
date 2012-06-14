@@ -65,6 +65,8 @@ Vagrant::Config.run do |config|
 
   config.vm.provision :shell, :path => "scripts/openconext_infra_httpd.sh"
   
+  config.vm.provision :shell, :path => "scripts/grouper.sh"
+  
   config.vm.provision :shell, :path => "scripts/openconext_teams.sh"
 
   #config.vm.provision :chef_solo do |chef|
