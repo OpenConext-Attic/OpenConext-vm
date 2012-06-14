@@ -32,9 +32,10 @@ Vagrant::Config.run do |config|
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
 
   config.vm.provision :shell, :path => "scripts/selinux_disable.sh"
-  # config.vm.provision :shell, :path => "scripts/yum_update.sh" // non-determinic
   config.vm.provision :shell, :path => "scripts/yum_install_utils.sh"
 
+  config.vm.provision :shell, :path => "scripts/maven_settings.sh"
+  
   config.vm.provision :shell, :path => "scripts/java_install.sh"
   config.vm.provision :shell, :path => "scripts/tomcat_install.sh"
   config.vm.provision :shell, :path => "scripts/mysql_install.sh"
