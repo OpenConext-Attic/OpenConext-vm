@@ -1,0 +1,1 @@
+Add .crt files here for all IdPs that the ServiceRegistry should be able to connect to
