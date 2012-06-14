@@ -13,6 +13,10 @@ These are the source files to build an OpenConext Virtual Machine.
 
     $ git clone git://github.com/OpenConext/OpenConext-vm.git
     $ cd OpenConext-vm
+    
+Because we don't have a public maven repo, you need to copy the private surfnet settings.xml file to OpenConext-vm:
+
+    $ cp /somewhere/settings.xml .
 
 Verify that Vagrant and VeeWee are setup correctly with the following commands (should not return an error):
 
