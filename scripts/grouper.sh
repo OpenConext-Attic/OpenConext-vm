@@ -9,11 +9,17 @@ then
 	mkdir -p /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org
 	mkdir -p /usr/share/tomcat6/webapps/grouper.demo.openconext.org
 	chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/grouper.demo.openconext.org
+	
+	GROUPER_WS_WAR=`basename /usr/share/tomcat6/wars/grouper-ws-*.war`
+	GROUPER_WAR=`basename /usr/share/tomcat6/wars/grouper-*.war`
 
-	echo '<Context path="/grouper-ws" docBase="/opt/tomcat/wars/grouper-ws-1.6.3.war" debug="1"></Context>' > \
+	echo "<Context path=\"/grouper-ws\" docBase=\"/opt/tomcat/wars/$GROUPER_WS_WAR\" debug=\"1\"></Context>" > \
 	  /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org/grouper-ws.xml
-	echo '<Context path="/grouper" docBase="/opt/tomcat/wars/grouper-1.6.3.war" debug="1"></Context>' > \
+	echo "<Context path=\"/grouper\" docBase=\"/opt/tomcat/wars/$GROUPER_WAR\" debug=\"1\"></Context>" > \
 	  /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org/grouper.xml
-	  
+	
+	rm -rf /tmp/grouper-dist-1.8.1-bin.tar.gz
+	rm -rf /tmp/tomcat
+	
 	service tomcat6 restart
 fi

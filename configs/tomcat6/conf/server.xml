@@ -39,14 +39,11 @@
         <Connector port="8080" protocol="HTTP/1.1"
                    connectionTimeout="20000"
                    redirectPort="8443" />
-        <!-- Define an AJP 1.3 Connector on port 8009 -->
+                   
         <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
 
         <Engine name="Catalina" defaultHost="localhost">
-            <!-- This Realm uses the UserDatabase configured in the global JNDI
-     resources under the key "UserDatabase".  Any edits
-     that are performed against this UserDatabase are immediately
-     available for use by the Realm.  -->
+
             <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
                    resourceName="UserDatabase"/>
 
@@ -62,6 +59,8 @@
             <Host name="mujina-sp.demo.openconext.org" appBase="webapps/mujina-sp.demo.openconext.org"/>
             
             <Host name="teams.demo.openconext.org" appBase="webapps/teams.demo.openconext.org"/>
+            
+            <Host name="grouper.demo.openconext.org" appBase="webapps/grouper.demo.openconext.org"/>
 
         </Engine>
     </Service>
