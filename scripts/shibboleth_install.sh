@@ -12,4 +12,8 @@ then
     yum -y -q install shibboleth
 
     rm -vf /etc/yum.repos.d/security\:shibboleth.repo
+    
+    cp -f /vagrant/configs/shibboleth/* /etc/shibboleth/
+    
+    service shibd start
 fi
