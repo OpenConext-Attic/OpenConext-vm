@@ -19,8 +19,8 @@ then
     rm -rf /tmp/OpenConext-teams
     
     mkdir -p /usr/share/tomcat6/conf/Catalina/teams.demo.openconext.org
-    echo "<Context path=\"/\" docBase=\"/usr/share/tomcat6/wars/$TEAMS_WAR\"/>" > \
-        /usr/share/tomcat6/conf/Catalina/teams.demo.openconext.org/ROOT.xml
+    echo "<Context path=\"/teams\" docBase=\"/usr/share/tomcat6/wars/$TEAMS_WAR\"/>" > \
+        /usr/share/tomcat6/conf/Catalina/teams.demo.openconext.org/teams.xml
 
     mkdir -p /usr/share/tomcat6/webapps/teams.demo.openconext.org
     chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/

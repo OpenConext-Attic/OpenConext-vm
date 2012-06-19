@@ -15,5 +15,5 @@ then
     
     cp -f /vagrant/configs/shibboleth/* /etc/shibboleth/
     
-    service shibd start
+    service shibd restart
 fi

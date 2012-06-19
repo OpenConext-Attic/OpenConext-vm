@@ -373,7 +373,7 @@
                                   isDefault="true"
                                   id="Login"
                                   relayState="cookie"
-                                  entityID="https://engine.demo.openconext.org/authentication/idp/metadata/vo:managementvo">
+                                  entityID="https://engine.demo.openconext.org/authentication/idp/metadata">
 
                     <SessionInitiator type="SAML2"
                                       NameIDFormat="urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified"
@@ -386,8 +386,8 @@
             <MetadataProvider type="Chaining">
                 <!-- Engineblock Management VO metadata -->
                 <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata/vo:managementvo"
-                                  backingFilePath="/etc/shibboleth/engineblock-vo-managementvo-metadata-saml2-grouper.xml"
+                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata"
+                                  backingFilePath="/etc/shibboleth/engineblock-metadata-saml2-grouper.xml"
                                   reloadInterval="7200">
                 </MetadataProvider>
             </MetadataProvider>
