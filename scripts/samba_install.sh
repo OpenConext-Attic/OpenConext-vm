@@ -24,5 +24,6 @@ SMB
 
     chown -Rf openconext /opt/www
 
+    chkconfig smb on &&
     service smb restart
 fi
