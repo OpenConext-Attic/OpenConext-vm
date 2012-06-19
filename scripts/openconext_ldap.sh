@@ -5,6 +5,7 @@ then
     # Remove existing schemas and entries
     service slapd stop &&
     rm -rf /var/lib/ldap/* &&
+    chkconfig slapd on &&
     service slapd start &&
 
     # Install schemas and configuration
