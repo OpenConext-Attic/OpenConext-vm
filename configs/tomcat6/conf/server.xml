@@ -60,6 +60,8 @@
             
             <Host name="teams.demo.openconext.org" appBase="webapps/teams.demo.openconext.org"/>
             
+            <Host name="api.demo.openconext.org" appBase="webapps/api.demo.openconext.org"/>
+            
             <Host name="grouper.demo.openconext.org" appBase="webapps/grouper.demo.openconext.org"/>
 
         </Engine>

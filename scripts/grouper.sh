@@ -4,6 +4,8 @@ then
 	cd /tmp
 	cp /vagrant/grouper-dist-1.8.1-bin.tar.gz .
 	tar xvfz grouper-dist-1.8.1-bin.tar.gz
+	rm -f /usr/share/tomcat6/wars/grouper-ws-*.war
+	rm -f /usr/share/tomcat6/wars/grouper-*.war	
 	cp -f tomcat/webapps/*.war /usr/share/tomcat6/wars
 
 	mkdir -p /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org
