@@ -33,8 +33,6 @@ Vagrant::Config.run do |config|
 
   config.vm.provision :shell, :path => "scripts/selinux_disable.sh"
   config.vm.provision :shell, :path => "scripts/yum_install_utils.sh"
-
-  config.vm.provision :shell, :path => "scripts/maven_settings.sh"
   
   config.vm.provision :shell, :path => "scripts/java_install.sh"
   config.vm.provision :shell, :path => "scripts/tomcat_install.sh"
@@ -60,6 +58,7 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :path => "scripts/openconext_ldap.sh"
   config.vm.provision :shell, :path => "scripts/openconext_serviceregistry_install.sh"
   config.vm.provision :shell, :path => "scripts/openconext_manage_install.sh"
+  config.vm.provision :shell, :path => "scripts/openconext_api.sh"
 
   config.vm.provision :shell, :path => "scripts/chown_www.sh"
 

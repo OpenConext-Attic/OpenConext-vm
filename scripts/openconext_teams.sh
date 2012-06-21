@@ -2,13 +2,11 @@
 
 if [ ! -d /usr/share/tomcat6/webapps/teams.demo.openconext.org ];
 then
-    mysql -u root --password=c0n3xt teams < /vagrant/data/teams.sql
-
     cd /tmp
     git clone git://github.com/OpenConext/OpenConext-teams.git
     cd -
     cd /tmp/OpenConext-teams
-    git checkout coin-teams-parent-2.7.0
+    # git checkout coin-teams-parent-2.7.0
     mvn -q clean install -DskipTests    
     cd -
     

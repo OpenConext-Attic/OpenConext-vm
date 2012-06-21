@@ -8,3 +8,8 @@ chkconfig mysqld on
 
 mysqladmin -u root password 'c0n3xt' 2>/dev/null
 echo "grant all privileges on *.* to 'root'@'%' identified by 'c0n3xt';" | mysql -u root --password=c0n3xt mysql
+
+for file in data/*.sql
+do
+	cat $file | mysql -u root --password=c0n3xt mysql
+done
