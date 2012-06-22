@@ -17,16 +17,17 @@ The OpenConext Virtual Machines scripts uses [Vagrant](http://vagrantup.com/) an
 
 To use Ruby and use local gemsets we first need to install [RVM](https://rvm.io//rvm/install/) using:
 
-    curl https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash -s stable
+    $ curl https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash -s stable
 
-Now we can install the latests Ruby version:
+Make sure to restart your terminal, or session in order to add the directory of the
+`rvm` command to your PATH. Now we can install the latests Ruby version:
 
-    rvm install 1.9.3
-    rvm --default use 1.9.3
+    $ rvm install 1.9.3
+    $ rvm --default use 1.9.3
 
 Verify the correct installation by typing:
 
-    ruby -v
+    $ ruby -v
 
 You should see:
 
