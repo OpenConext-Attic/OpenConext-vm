@@ -1,0 +1,5 @@
+rvm use ruby-1.9.3@openconext-vm --create
+
+alias veewee="bundle exec veewee"
+alias vagrant="bundle exec vagrant"
+alias irb="bundle exec irb"

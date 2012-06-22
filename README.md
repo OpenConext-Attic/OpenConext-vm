@@ -5,18 +5,35 @@ These are the source files to build an OpenConext Virtual Machine.
 # Requirements (in order)
 
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-* [Vagrant](http://vagrantup.com/)
-* [VeeWee](https://github.com/jedi4ever/veewee)
 * Patience (a full build, depending on your network connection, should take about 4 hours)
 
 # Installation
 
+First install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) if you have not done already. The OpenConext Virtual Machines scripts uses [Vagrant](http://vagrantup.com/) and [VeeWee](https://github.com/jedi4ever/veewee) for building up the VM. You don't have to install these dependencies as we use [Bundler](http://gembundler.com/) to install gems in the local gemset (to avoid polluting your global applications and/ or gemset).
+
     $ git clone git://github.com/OpenConext/OpenConext-vm.git
     $ cd OpenConext-vm
     
-Because we don't have a public maven repo, you need to copy the private surfnet settings.xml file to OpenConext-vm:
+Now you are prompted to accept the OpenConext .rvmrc file:
 
-    $ cp /somewhere/settings.xml .
+    RVM has encountered a new or modified .rvmrc file in the current directory =
+    This is a shell script and therefore may contain any shell commands.       =
+
+    Examine the contents of this file carefully to be sure the contents are    =
+    safe before trusting it! ( Choose v[iew] below to view the contents )      =
+
+    Do you wish to trust this .rvmrc file? (/path/OpenConext-vm/.rvmrc)
+    y[es], n[o], v[iew], c[ancel]>
+
+Accept the .rmvrc file by typing **y**
+
+Now install bundler as local gem:
+
+    $ gem install bundler
+
+And use the gems defined in the Gemfile to install vagrant and veewee:
+
+    $ bundle install
 
 Verify that Vagrant and VeeWee are setup correctly with the following commands (should not return an error):
 
