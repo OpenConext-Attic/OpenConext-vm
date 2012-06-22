@@ -2,10 +2,11 @@
 
 These are the source files to build an OpenConext Virtual Machine.
 
-# Requirements (in order)
+# Requirements for building the OpenConext VM (in order)
 
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-* []
+* [RVM](https://rvm.io/)
+* [Ruby](http://www.ruby-lang.org/en/)
 * Patience (a full build, depending on your network connection, should take about 4 hours)
 
 # Installation
