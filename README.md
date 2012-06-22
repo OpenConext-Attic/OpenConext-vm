@@ -11,7 +11,9 @@ These are the source files to build an OpenConext Virtual Machine.
 
 # Installation
 
-First install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) if you have not done already. The OpenConext Virtual Machines scripts uses [Vagrant](http://vagrantup.com/) and [VeeWee](https://github.com/jedi4ever/veewee) for building up the VM. You don't have to install these dependencies as we use [Bundler](http://gembundler.com/) to install gems in the local gemset (to avoid polluting your global applications and/ or gemset).
+First install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) if you have not done already. 
+
+The OpenConext Virtual Machines scripts uses [Vagrant](http://vagrantup.com/) and [VeeWee](https://github.com/jedi4ever/veewee) for building up the VM. You don't have to install these dependencies as we use [Bundler](http://gembundler.com/) to install gems in the local gemset (to avoid polluting your global applications and/ or gemset).
 
 To use Ruby and use local gemsets we first need to install [RVM](https://rvm.io//rvm/install/) using:
 
