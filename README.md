@@ -18,13 +18,27 @@ The OpenConext Virtual Machines scripts uses [Vagrant](http://vagrantup.com/) an
 
 To use Ruby and use local gemsets we first need to install [RVM](https://rvm.io//rvm/install/) using:
 
-    $ curl https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | sudo bash -s stable
+    $ curl https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash -s stable
 
 Make sure to restart your terminal, or session in order to add the directory of the
-`rvm` command to your PATH. Now we can install the latests Ruby version:
+`rvm` command to your PATH. 
 
-    $ sudo rvm install 1.9.3
-    $ sudo rvm --default use 1.9.3
+Due to an incompatibility with the default openssl installation on mac-os it might be necessary to (re)compile ruby with a different openssl. See for more information:
+
+    http://blog.55minutes.com/2012/01/fixing-a-segmentation-fault-in-ruby-193/
+
+Now we can install the latests Ruby version (*NOTE* if you are on mac-os you will have to use the second command) : 
+
+    $ rvm install 1.9.3 --with-openssl-dir=/opt/local --with-iconv-dir=/opt/local
+
+Or
+
+    $ rvm install 1.9.3 --with-openssl-dir=/opt/local --with-iconv-dir=/opt/local
+
+
+And set the 1.9.3 version to the default (not strictly necessary)
+
+    $ rvm --default use 1.9.3
 
 Please note that RVM uses bash profile to load itself in your shell.
 Thus, RVM doesn't load when you use another shell or don't login to your shell.
@@ -75,6 +89,10 @@ Then build a basebox (one time):
     $ vagrant basebox export demo.openconext.org &&
     $ vagrant box remove demo.openconext.org
     $ vagrant box add demo.openconext.org demo.openconext.org.box
+
+The third command is necessary to clean up previous boxes. If this is the first time you can ignore the following:
+
+    $ Box 'demo.openconext.org' could not be found
 
 Then instantiate the box:
 
