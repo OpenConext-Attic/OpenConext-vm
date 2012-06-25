@@ -1,6 +1,8 @@
 #!/bin/sh
 if [ ! -d /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org ]
 then
+	service tomcat6 stop
+
 	cd /tmp
 	wget https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/2.8.0/grouper-dist-2.8.0-bin.tar.gz
 	tar xvfz grouper-dist-2.8.0-bin.tar.gz
@@ -20,8 +22,8 @@ then
 	echo "<Context path=\"/grouper\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WAR\" debug=\"1\"></Context>" > \
 	  /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org/grouper.xml
 	
-	rm -rf /tmp/grouper-dist-1.8.1-bin.tar.gz
+	rm -rf /tmp/grouper-dist-2.8.0-bin.tar.gz
 	rm -rf /tmp/tomcat
 	
-	service tomcat6 restart
+	service tomcat6 start
 fi

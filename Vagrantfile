@@ -57,14 +57,14 @@ Vagrant::Config.run do |config|
 
   config.vm.provision :shell, :path => "scripts/chown_www.sh"
 
+  config.vm.provision :shell, :path => "scripts/shibboleth_install.sh"
+
   config.vm.provision :shell, :path => "scripts/openconext_infra_httpd.sh"
   
   config.vm.provision :shell, :path => "scripts/grouper.sh"
   
   config.vm.provision :shell, :path => "scripts/openconext_teams.sh"
   
-  config.vm.provision :shell, :path => "scripts/shibboleth_install.sh"
-
   #config.vm.provision :chef_solo do |chef|
   #  chef.cookbooks_path = "cookbooks"
   #  chef.add_recipe "selinux::disabled"
