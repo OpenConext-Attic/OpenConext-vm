@@ -2,8 +2,8 @@
 if [ ! -d /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org ]
 then
 	cd /tmp
-	cp /vagrant/grouper-dist-1.8.1-bin.tar.gz .
-	tar xvfz grouper-dist-1.8.1-bin.tar.gz
+	wget https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/2.8.0/grouper-dist-2.8.0-bin.tar.gz
+	tar xvfz grouper-dist-2.8.0-bin.tar.gz
 	rm -f /usr/share/tomcat6/wars/grouper-ws-*.war
 	rm -f /usr/share/tomcat6/wars/grouper-*.war	
 	cp -f tomcat/webapps/*.war /usr/share/tomcat6/wars

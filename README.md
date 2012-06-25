@@ -4,26 +4,31 @@ These are the source files to build an OpenConext Virtual Machine.
 
 # Requirements for building the OpenConext VM (in order)
 
-* [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* The **latest** version of [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 * [RVM](https://rvm.io/)
 * [Ruby](http://www.ruby-lang.org/en/)
 * Patience (a full build, depending on your network connection, should take about 4 hours)
 
 # Installation
 
-First install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) if you have not done already. 
+First install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) if you have not done already.
+Make sure you use the latest version. 
 
 The OpenConext Virtual Machines scripts uses [Vagrant](http://vagrantup.com/) and [VeeWee](https://github.com/jedi4ever/veewee) for building up the VM. You don't have to install these dependencies as we use [Bundler](http://gembundler.com/) to install gems in the local gemset (to avoid polluting your global applications and/ or gemset).
 
 To use Ruby and use local gemsets we first need to install [RVM](https://rvm.io//rvm/install/) using:
 
-    $ curl https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash -s stable
+    $ curl https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | sudo bash -s stable
 
 Make sure to restart your terminal, or session in order to add the directory of the
 `rvm` command to your PATH. Now we can install the latests Ruby version:
 
-    $ rvm install 1.9.3
-    $ rvm --default use 1.9.3
+    $ sudo rvm install 1.9.3
+    $ sudo rvm --default use 1.9.3
+
+Please note that RVM uses bash profile to load itself in your shell.
+Thus, RVM doesn't load when you use another shell or don't login to your shell.
+In gnome-terminal on Ubuntu you can enable login by: Edit > Profile preferences > Run command as a login shell.
 
 Verify the correct installation by typing:
 
