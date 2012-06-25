@@ -331,28 +331,6 @@
             </MetadataProvider>
         </ApplicationOverride>
 
-        <!-- Rave is installed on dev only -->
-        <ApplicationOverride id="rave-shindig" entityID="https://rave-shindig.demo.openconext.org/shibboleth">
-            <MetadataProvider type="Chaining">
-                <!-- Engineblock IDP metadata -->
-                <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata?sp-entity-id=https://rave-shindig.demo.openconext.org/shibboleth"
-                                  backingFilePath="/etc/shibboleth/engineblock-metadata-saml2-rave-shindig.xml"
-                                  reloadInterval="7200">
-                </MetadataProvider>
-            </MetadataProvider>
-        </ApplicationOverride>
-        <ApplicationOverride id="rave-portal" entityID="https://rave.demo.openconext.org/shibboleth">
-            <MetadataProvider type="Chaining">
-                <!-- Engineblock IDP metadata -->
-                <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata?sp-entity-id=https://rave.demo.openconext.org/shibboleth"
-                                  backingFilePath="/etc/shibboleth/engineblock-metadata-saml2-rave-portal.xml"
-                                  reloadInterval="7200">
-                </MetadataProvider>
-            </MetadataProvider>
-        </ApplicationOverride>
-
         <!-- Because Grouper lives in a seperate path, we need to configure more then host-only entityID's -->
         <ApplicationOverride id="grouper" entityID="https://grouper.demo.openconext.org/grouper/shibboleth">
             <Sessions lifetime="28800"
