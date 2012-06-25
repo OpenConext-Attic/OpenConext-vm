@@ -29,7 +29,7 @@ Due to an incompatibility with the default openssl installation on mac-os it mig
 
 Now we can install the latests Ruby version (*NOTE* if you are on mac-os you will have to use the second command) : 
 
-    $ rvm install 1.9.3 --with-openssl-dir=/opt/local --with-iconv-dir=/opt/local
+    $ rvm install 1.9.3 
 
 Or
 
