@@ -53,4 +53,50 @@ sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
 
 dd if=/dev/zero of=/tmp/clean || rm /tmp/clean
 
+# Installing Java
+yum -q list jdk
+if [ $? -ne 0 ]
+then
+    cd /root
+    yum -y install java-1.6.0-openjdk-devel
+    echo "Downloading http://files.sumix.com/java/j2se_1.6.0_32/jdk-6u32-linux-x64-rpm.bin..."
+    yum -y install wget
+    wget -N -nv http://files.sumix.com/java/j2se_1.6.0_32/jdk-6u32-linux-x64-rpm.bin
+    sh jdk-6u32-linux-x64-rpm.bin -noregister
+    rm -vf jdk-6u32-linux-x64-rpm.bin
+    rm -vf jdk*.rpm
+    rm -vf sun-javadb*.rpm
+    cd /etc/alternatives
+    rm -vf java
+    ln -s /usr/java/latest/bin/java
+    rm -vf javac
+    ln -s /usr/java/latest/bin/javac
+    cd -
+fi
+
+# Yum utils
+
+yum -y -q install svn \
+    git \
+    telnet \
+	wget \
+	nss-tools \
+	gcc \
+	kernel-devel \
+	ant \
+	nano \
+	mlocate
+
+updatedb
+
+# Disable SE linux
+
+sestatus | grep "SELinux status" | grep "enabled" > /dev/null
+if [ $? -eq 0 ]
+then
+	sed -i 's/^SELINUX=enforcing$/SELINUX=disabled/g' /etc/selinux/config
+        echo "SELinux was enabled. We disabled it for you now, PLEASE REBOOT and run this script again!"
+	exit 1
+fi
+
 exit

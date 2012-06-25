@@ -30,15 +30,10 @@ Vagrant::Config.run do |config|
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
-
-  config.vm.provision :shell, :path => "scripts/selinux_disable.sh"
-  config.vm.provision :shell, :path => "scripts/yum_install_utils.sh"
   
-  config.vm.provision :shell, :path => "scripts/java_install.sh"
   config.vm.provision :shell, :path => "scripts/tomcat_install.sh"
   config.vm.provision :shell, :path => "scripts/mysql_install.sh"
   config.vm.provision :shell, :path => "scripts/httpd_install.sh"
-  config.vm.provision :shell, :path => "scripts/shibboleth_install.sh"
   config.vm.provision :shell, :path => "scripts/php_install.sh"
   config.vm.provision :shell, :path => "scripts/openldap_install.sh"
   config.vm.provision :shell, :path => "scripts/memcached_install.sh"
@@ -67,6 +62,8 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :path => "scripts/grouper.sh"
   
   config.vm.provision :shell, :path => "scripts/openconext_teams.sh"
+  
+  config.vm.provision :shell, :path => "scripts/shibboleth_install.sh"
 
   #config.vm.provision :chef_solo do |chef|
   #  chef.cookbooks_path = "cookbooks"
