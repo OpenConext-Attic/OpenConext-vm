@@ -10,6 +10,9 @@ then
 
     # install non-CentOS packages
     yum -y -q install shibboleth
+    
+    # start shibboleth in runlevel 5
+    chkconfig --level 5 shibd on
 
     rm -vf /etc/yum.repos.d/security\:shibboleth.repo
     

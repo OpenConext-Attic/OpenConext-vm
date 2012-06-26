@@ -18,6 +18,7 @@ mkdir -p /usr/share/tomcat6/wars
 
 cp -f /vagrant/configs/tomcat6/conf/catalina.properties /usr/share/tomcat6/conf/catalina.properties
 cp -f /vagrant/configs/tomcat6/conf/server.xml /usr/share/tomcat6/conf/server.xml
+cp -f /vagrant/configs/tomcat6/conf/tomcat6.conf /usr/share/tomcat6/conf/tomcat6.conf
 cp -f /vagrant/configs/tomcat6/conf/tomcat-users.xml /usr/share/tomcat6/conf/tomcat-users.xml
 
 mkdir -p /usr/share/tomcat6/conf/classpath_properties

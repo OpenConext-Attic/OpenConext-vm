@@ -22,4 +22,5 @@ then
 	echo "127.5.0.14 mujina-sp.demo.openconext.org" >> /etc/hosts
 	echo "127.5.0.15 mujina-idp.demo.openconext.org" >> /etc/hosts
 	echo "127.5.0.16 teams.demo.openconext.org" >> /etc/hosts
+	echo "127.5.0.17 api.demo.openconext.org" >> /etc/hosts
 fi
