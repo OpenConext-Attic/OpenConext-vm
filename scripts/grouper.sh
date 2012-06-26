@@ -4,7 +4,7 @@ then
 	service tomcat6 stop
 
 	cd /tmp
-	wget https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/2.8.0/grouper-dist-2.8.0-bin.tar.gz
+	wget -nv https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/2.8.0/grouper-dist-2.8.0-bin.tar.gz
 	tar xvfz grouper-dist-2.8.0-bin.tar.gz
 	rm -f /usr/share/tomcat6/wars/grouper-ws-*.war
 	rm -f /usr/share/tomcat6/wars/grouper-*.war	
