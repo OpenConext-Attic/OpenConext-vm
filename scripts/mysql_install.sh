@@ -11,6 +11,6 @@ echo "grant all privileges on *.* to 'root'@'%' identified by 'c0n3xt';" | mysql
 
 for file in /vagrant/data/*.sql
 do
-	echo "Insering $file"
+	echo "Inserting $file"
 	cat $file | mysql -u root --password=c0n3xt mysql
 done
