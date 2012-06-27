@@ -12,3 +12,4 @@ mkdir -p /etc/httpd/keys/ &&
 cp /vagrant/certs/*.* /etc/httpd/keys/ &&
 
 service httpd restart
+service shibd restart
