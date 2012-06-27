@@ -23,6 +23,8 @@ then
     echo "<Context path=\"/v1\" docBase=\"/usr/share/tomcat6/wars/$API_WAR\"/>" > \
         /usr/share/tomcat6/conf/Catalina/api.demo.openconext.org/v1.xml
 
+    echo "create database api default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
+
     mkdir -p /usr/share/tomcat6/webapps/api.demo.openconext.org
     chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
     

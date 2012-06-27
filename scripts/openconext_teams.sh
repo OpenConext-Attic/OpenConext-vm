@@ -21,9 +21,13 @@ then
     mkdir -p /usr/share/tomcat6/conf/Catalina/teams.demo.openconext.org
     echo "<Context path=\"/teams\" docBase=\"/usr/share/tomcat6/wars/$TEAMS_WAR\"/>" > \
         /usr/share/tomcat6/conf/Catalina/teams.demo.openconext.org/teams.xml
-
+    
+    echo "create database teams default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
+	mysql -u root --password=c0n3xt teams < /vagrant/data/teams.sql
+      
     mkdir -p /usr/share/tomcat6/webapps/teams.demo.openconext.org
     chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
 
     service tomcat6 start
+    
 fi

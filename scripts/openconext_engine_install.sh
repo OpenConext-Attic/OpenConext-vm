@@ -14,6 +14,7 @@ then
 
     # Create database
     echo "create database engineblock default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
+    mysql -u root --password=c0n3xt engineblock < /vagrant/data/engineblock.sql
 fi
 
 #############################################
