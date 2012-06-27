@@ -100,13 +100,43 @@ Then instantiate the box:
     $ vagrant up
 
 Finally copy host/hosts to your [hosts file](http://en.wikipedia.org/wiki/Hosts_%28file%29)
-and point your browser to <https://profile.demo.openconext.local>.
+and point your browser to <https://profile.demo.openconext.org>.
 
-# Usage
+If you want to avoid having to add the ssl exceptions in your browser you can import the Certificate Authority certificate:
+
+    OpenConext-vm/certs/openconext.pem 
+
+into your browser.
+
+To login in on the several Service Providers you can choose OpenConext Mujina IdP from the WAYF and login with admin, secret.
+
+# Platform usage
 
 You can now use the following OpenConext components:
+
 * [OpenConext Profile](https://profile.demo.openconext.org)
+* [OpenConext Manage](https://manage.demo.openconext.org)
+* [OpenConext ServiceRegistry](https://serviceregistry.demo.openconext.org)
+* [OpenConext Teams](https://teams.demo.openconext.org)
+* [OpenConext Api](https://api.demo.openconext.org/v1/test)
+* [OpenConext Mujina-SP](https://mujina-sp.demo.openconext.org)
 
 If you want to make modifications to the components a Samba share is available at:
 
-//openconext:openconext@demo.openconext.org/www
+    smb://172.18.5.2/www
+    username: openconext
+    password: openconext
+    
+If you want to query or update the database, you can connect to it either from the prompt:
+
+    $ vagrant ssh
+    $ mysql -u root -p
+    Enter password: c0n3xt
+
+Or use the host DNS entry demo.openconext.org and default port 3306.
+    
+# VM usage
+
+We use [Vagrant](http://vagrantup.com/) to manage the VM sp please refer to the [their documentation](http://vagrantup.com/v1/docs/commands.html) for an quick overview of the available commands, or type
+
+    $ vagrant     
