@@ -85,8 +85,8 @@ Verify that Vagrant and VeeWee are setup correctly with the following commands (
 
 Then build a basebox (one time):
 
-    $ vagrant basebox build -f demo.openconext.org &&
-    $ vagrant basebox export demo.openconext.org &&
+    $ vagrant basebox build -f demo.openconext.org 
+    $ vagrant basebox export demo.openconext.org
     $ vagrant box remove demo.openconext.org
     $ vagrant box add demo.openconext.org demo.openconext.org.box
 
