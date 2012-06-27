@@ -23,5 +23,3 @@ cp -f /vagrant/configs/tomcat6/conf/tomcat-users.xml /usr/share/tomcat6/conf/tom
 
 mkdir -p /usr/share/tomcat6/conf/classpath_properties
 cp -f /vagrant/configs/tomcat6/conf/classpath_properties/* /usr/share/tomcat6/conf/classpath_properties/
-
-service tomcat6 restart

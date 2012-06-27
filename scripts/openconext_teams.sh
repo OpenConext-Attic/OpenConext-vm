@@ -2,8 +2,6 @@
 
 if [ ! -d /usr/share/tomcat6/webapps/teams.demo.openconext.org ];
 then
-	service tomcat6 stop
-
     cd /tmp
     git clone git://github.com/OpenConext/OpenConext-teams.git
     cd -
@@ -27,7 +25,4 @@ then
       
     mkdir -p /usr/share/tomcat6/webapps/teams.demo.openconext.org
     chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
-
-    service tomcat6 start
-    
 fi
