@@ -3,11 +3,16 @@
 # Install ServiceRegistry #
 ###########################
 
+source /vagrant/scripts/versions.sh
+
 if [ ! -h /opt/www/serviceregistry ];
 then
     cd /opt/www/
     git clone git://github.com/OpenConext/OpenConext-serviceregistry.git
     ln -s OpenConext-serviceregistry serviceregistry
+    cd -
+    cd /opt/www/serviceregistry
+    git checkout ${SERVICEREGISTRY_VERSION}
     cd -
 
     echo "create database serviceregistry default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt

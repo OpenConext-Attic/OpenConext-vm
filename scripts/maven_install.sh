@@ -1,5 +1,6 @@
 #!/bin/sh
-MVN_VERSION=3.0.4
+
+source /vagrant/scripts/versions.sh
 
 mvn -v > /dev/null
 if [ $? -ne 0 ]

@@ -1,12 +1,14 @@
 #!/bin/sh
 
+source /vagrant/scripts/versions.sh
+
 if [ ! -d /usr/share/tomcat6/webapps/api.demo.openconext.org ];
 then
     cd /tmp    
     git clone git://github.com/OpenConext/OpenConext-api.git
     cd -
     cd /tmp/OpenConext-api
-    # git checkout xxx
+    git checkout ${API_VERSION}
     mvn -q clean install -DskipTests    
     cd -
     

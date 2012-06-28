@@ -1,12 +1,14 @@
 #!/bin/sh
 
+source /vagrant/scripts/versions.sh
+
 if [ ! -d /usr/share/tomcat6/webapps/teams.demo.openconext.org ];
 then
     cd /tmp
     git clone git://github.com/OpenConext/OpenConext-teams.git
     cd -
     cd /tmp/OpenConext-teams
-    # git checkout coin-teams-parent-2.7.0
+    git checkout ${TEAMS_VERSION}
     mvn -q clean install -DskipTests    
     cd -
     

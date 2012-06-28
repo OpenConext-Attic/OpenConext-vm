@@ -1,11 +1,14 @@
 #!/bin/sh
 
+source /vagrant/scripts/versions.sh
+
 if [ ! -d /usr/share/tomcat6/webapps/mujina-sp.demo.openconext.org ];
 then
     cd /tmp
     git clone git://github.com/OpenConext/Mujina.git
     cd -
     cd /tmp/Mujina
+    git checkout ${MUJINA_VERSION}
     mvn -q clean install -DskipTests
     cd -
 

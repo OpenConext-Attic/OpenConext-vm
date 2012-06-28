@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source versions.sh
+source /vagrant/scripts/versions.sh
 
 #######################
 # Install EngineBlock #
@@ -10,8 +10,10 @@ then
     mkdir -p /opt/www/ &&
     cd /opt/www/ &&
     git clone git://github.com/OpenConext/OpenConext-engineblock.git
-    git checkout $ENGINEBLOCK_VERSION
-    ln -sf OpenConext-engineblock engineblock &&
+    ln -sf OpenConext-engineblock engineblock &&    
+    cd -
+    cd /opt/www/engineblock
+    git checkout ${ENGINEBLOCK_VERSION}
     cd -
 
     cp -Rf /vagrant/configs/attribute-manipulations /opt/www
