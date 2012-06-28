@@ -66,20 +66,5 @@ Vagrant::Config.run do |config|
   config.vm.provision :shell, :path => "scripts/openconext_teams.sh"
   
   config.vm.provision :shell, :path => "scripts/certificates.sh"
-  
-  #config.vm.provision :chef_solo do |chef|
-  #  chef.cookbooks_path = "cookbooks"
-  #  chef.add_recipe "selinux::disabled"
-  #  chef.add_recipe "java::oracle"
-  #  chef.add_recipe "mysql"
-  #  chef.add_recipe "mysql::server"
-  #
-  #  chef.json = {
-  #     "mysql" => {
-  #       "server_root_password"   => "conext",
-  #       "server_repl_password"   => "conext",
-  #       "server_debian_password" => "conext"
-  #     }
-  #   }
-  #end
+ 
 end

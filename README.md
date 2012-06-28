@@ -4,17 +4,20 @@ These are the source files to build an OpenConext Virtual Machine.
 
 # Requirements for building the OpenConext VM (in order)
 
+Do not start installing 
+
 * The **latest** version of [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 * [RVM](https://rvm.io/)
-* [Ruby](http://www.ruby-lang.org/en/)
-* Patience (a full build, depending on your network connection, should take about 4 hours)
+* [Git](http://http://git-scm.com/)
+* Patience (a full build, depending on your network connection, should take about 1 hour)
 
 # Installation
 
 First install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) if you have not done already.
 Make sure you use the latest version. 
 
-The OpenConext Virtual Machines scripts uses [Vagrant](http://vagrantup.com/) and [VeeWee](https://github.com/jedi4ever/veewee) for building up the VM. You don't have to install these dependencies as we use [Bundler](http://gembundler.com/) to install gems in the local gemset (to avoid polluting your global applications and/ or gemset).
+The OpenConext Virtual Machines scripts uses [Ruby](http://www.ruby-lang.org/en/), [Vagrant](http://vagrantup.com/) and [VeeWee](https://github.com/jedi4ever/veewee) for building up the VM. 
+You don't have to install these dependencies as we use [Bundler](http://gembundler.com/) to install gems in the local gemset (to avoid polluting your global applications and/ or gemset).
 
 To use Ruby and use local gemsets we first need to install [RVM](https://rvm.io//rvm/install/) using:
 
@@ -86,6 +89,9 @@ Verify that Vagrant and VeeWee are setup correctly with the following commands (
 Then build a basebox (one time):
 
     $ vagrant basebox build -f demo.openconext.org 
+    
+Make sure you answer **Yes** and not **Y** when asked to download the box file. Please let all the commands run untill your prompt is back (e.g. don't go start typing in the pop-ups of the VM)
+    
     $ vagrant basebox export demo.openconext.org
     $ vagrant box remove demo.openconext.org
     $ vagrant box add demo.openconext.org demo.openconext.org.box
