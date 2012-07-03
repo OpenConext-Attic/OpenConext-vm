@@ -145,4 +145,34 @@ Or use the host DNS entry demo.openconext.org and default port 3306.
 
 We use [Vagrant](http://vagrantup.com/) to manage the VM sp please refer to the [their documentation](http://vagrantup.com/v1/docs/commands.html) for an quick overview of the available commands, or type
 
-    $ vagrant     
+    $ vagrant
+    
+# SSH & SCP
+
+To connect to the VM with ssh or copy files with scp you can inspect the ssh settings with:
+
+    $ vagrant ssh-config
+    
+which will print the ssh configuration used with **vagrant ssh**:
+
+    Host default
+    HostName 127.0.0.1
+    User vagrant
+    Port 2222
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no
+    PasswordAuthentication no
+    IdentityFile /Users/user/.vagrant.d/insecure_private_key
+    IdentitiesOnly yes
+	
+You can (as an alternative to ssh vagrant) use this information to ssh or scp (mind to replace the key file with the path of the vagrant ssh-config setting):
+
+    ssh -i /Users/user/.vagrant.d/insecure_private_key vagrant@localhost -p 2222
+    scp -P 2222 -i /Users/user/.vagrant.d/insecure_private_key some_local_file vagrant@localhost:
+
+If you add the output of vagrant ssh-config to your ~/.ssh/config file you can ease the copying of files or connecting to the VM:
+
+    ssh default
+    scp some-local-file default:
+
+As an alternative you change the samba share configured in OpenConext-vm/scripts/samba_install.sh.
