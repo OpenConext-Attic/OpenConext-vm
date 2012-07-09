@@ -12,7 +12,15 @@ then
 
 	cp -f tomcat/webapps/*.war /usr/share/tomcat6/wars
 
-  ## TODO: extract properties-file from tarball, copy to classpath-props
+  # Here we use the .dev versions. There is no .vm version and they would be the same anyway.
+	cp -f tomcat/conf/classpath_properties/*.dev /usr/share/tomcat6/conf/classpath_properties/
+	cp -f tomcat/conf/classpath_properties/grouper.properties /usr/share/tomcat6/conf/classpath_properties/
+	cp -f tomcat/conf/classpath_properties/log4j.properties /usr/share/tomcat6/conf/classpath_properties/
+	# strip off the .dev extension
+	for i in /usr/share/tomcat6/conf/classpath_properties/*.dev
+	do
+		mv $i `dirname $i`/`basename $i .dev`
+	done
 
 	mkdir -p /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org
 	mkdir -p /usr/share/tomcat6/webapps/grouper.demo.openconext.org
