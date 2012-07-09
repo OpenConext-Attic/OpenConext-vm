@@ -6,10 +6,13 @@ if [ ! -d /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org ]
 then
 	cd /tmp
 	wget -nv https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/${GROUPER_VERSION}/grouper-dist-${GROUPER_VERSION}-bin.tar.gz
-	tar xvfz grouper-dist-*-bin.tar.gz
+	tar zxf grouper-dist-*-bin.tar.gz
 	rm -f /usr/share/tomcat6/wars/grouper-ws-*.war
-	rm -f /usr/share/tomcat6/wars/grouper-*.war	
+	rm -f /usr/share/tomcat6/wars/grouper-*.war
+
 	cp -f tomcat/webapps/*.war /usr/share/tomcat6/wars
+
+  ## TODO: extract properties-file from tarball, copy to classpath-props
 
 	mkdir -p /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org
 	mkdir -p /usr/share/tomcat6/webapps/grouper.demo.openconext.org
