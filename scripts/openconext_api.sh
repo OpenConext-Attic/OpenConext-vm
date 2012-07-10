@@ -20,7 +20,7 @@ then
 
 		cp /tmp/OpenConext-api/coin-api-dist/target/coin-api-dist*/tomcat/conf/classpath_properties/*.vm /usr/share/tomcat6/conf/classpath_properties/
 		# strip off the .vm extension
-		for i in /usr/share/tomcat6/conf/classpath_properties/*.vm
+		for i in $(ls /usr/share/tomcat6/conf/classpath_properties/*.vm)
 		do
 			mv $i `dirname $i`/`basename $i .vm`
 		done

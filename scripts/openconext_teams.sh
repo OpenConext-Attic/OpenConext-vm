@@ -11,16 +11,16 @@ then
     mvn -q clean install -DskipTests    
 
 		# extract deployable artifact
-		tar -zxf coin-api-dist/target/*-bin.tar.gz -C coin-api-dist/target
+		tar -zxf coin-teams-dist/target/*-bin.tar.gz -C coin-teams-dist/target
 		
 		# remove old deployed war
     rm /usr/share/tomcat6/wars/coin-teams-war-*.war 2> /dev/null        
 		# copy new war to Tomcat
     cp /tmp/OpenConext-teams/coin-teams-dist/target/coin-teams-dist*/tomcat/webapps/*.war /usr/share/tomcat6/wars
     
-		cp /tmp/OpenConext-api/coin-teams-dist/target/coin-teams-dist*/tomcat/conf/classpath_properties/*.vm /usr/share/tomcat6/conf/classpath_properties/
+		cp /tmp/OpenConext-teams/coin-teams-dist/target/coin-teams-dist*/tomcat/conf/classpath_properties/*.vm /usr/share/tomcat6/conf/classpath_properties/
 		# strip off the .vm extension
-		for i in /usr/share/tomcat6/conf/classpath_properties/*.vm
+		for i in $(ls /usr/share/tomcat6/conf/classpath_properties/*.vm)
 		do
 			mv $i `dirname $i`/`basename $i .vm`
 		done

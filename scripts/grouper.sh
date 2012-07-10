@@ -17,7 +17,7 @@ then
 	cp -f tomcat/conf/classpath_properties/grouper.properties /usr/share/tomcat6/conf/classpath_properties/
 	cp -f tomcat/conf/classpath_properties/log4j.properties /usr/share/tomcat6/conf/classpath_properties/
 	# strip off the .dev extension
-	for i in /usr/share/tomcat6/conf/classpath_properties/*.dev
+	for i in $(ls /usr/share/tomcat6/conf/classpath_properties/*.dev)
 	do
 		mv $i `dirname $i`/`basename $i .dev`
 	done
