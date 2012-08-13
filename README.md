@@ -11,7 +11,9 @@ Do not start installing
 * [Git](http://http://git-scm.com/)
 * Patience (a full build, depending on your network connection, should take about 1 hour)
 
-Requirements on Debian/Ubuntu
+# Requirements on Debian/Ubuntu
+Install Virtualbox, see: https://www.virtualbox.org/wiki/Linux_Downloads
+Install required packages:
 
     $ sudo apt-get install git libssl-dev libopenssl-ruby zlib zlib1g-dev
 
