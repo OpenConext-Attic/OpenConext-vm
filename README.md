@@ -13,7 +13,7 @@ Do not start installing
 
 Requirements on Debian/Ubuntu
 
-* sudo apt-get install git libssl-dev libopenssl-ruby zlib zlib1g-dev
+    $ sudo apt-get install git libssl-dev libopenssl-ruby zlib zlib1g-dev
 
 # Installation
 
