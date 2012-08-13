@@ -77,7 +77,10 @@ Now install bundler as local gem:
 
     $ gem install bundler
 
-And use the gems defined in the Gemfile to install vagrant and veewee:
+If this results in a zlib error, install zlib with the command:
+    $ rvm pkg install zlib
+
+Next use the gems defined in the Gemfile to install vagrant and veewee:
 
     $ bundle install
 
