@@ -80,9 +80,9 @@ Now install bundler as local gem:
 If this results in a zlib error, install zlib with the command:
     
     $ rvm pkg install zlib
-    $ sudo apt-get install zlib1g-dev 
     $ rvm reinstall 1.9.3
 
+You may also need to install zlib1g-dev at your OS
 
 Next use the gems defined in the Gemfile to install vagrant and veewee:
 
