@@ -8,6 +8,7 @@ then
     git clone git://github.com/OpenConext/Mujina.git
     cd /tmp/Mujina
     git checkout ${MUJINA_VERSION}
+    git checkout xsw-dev
     mvn -q clean install -DskipTests
 
 
