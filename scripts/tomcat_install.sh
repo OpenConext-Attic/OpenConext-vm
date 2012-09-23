@@ -5,7 +5,7 @@ yum -y -q install tomcat6
 if [ ! -d /usr/share/tomcat6/conf/classpath_properties ];
 then
 	mkdir -p /usr/share/tomcat6/conf/classpath_properties
-    cp /vagrant/configs/tomcat6/conf/classpath_properties/*.properties /usr/share/tomcat6/conf/classpath_properties/
+    cp /vagrant/configs/tomcat6/conf/classpath_properties/* /usr/share/tomcat6/conf/classpath_properties/
 fi
 
 if [ ! -f /usr/share/java/mysql-connector-java.jar ];
