@@ -250,7 +250,7 @@ CREATE TABLE `group_provider_option` (
 
 LOCK TABLES `group_provider_option` WRITE;
 /*!40000 ALTER TABLE `group_provider_option` DISABLE KEYS */;
-INSERT INTO `group_provider_option` VALUES (1,'host','grouper.demo.openconext.org'),(1,'password','engineblock'),(1,'path','/grouper-ws/servicesRest'),(1,'protocol','https'),(1,'timeout','10'),(1,'user','engine'),(1,'version','v1_6_000');
+INSERT INTO `group_provider_option` VALUES (1,'host','grouper.demo.openconext.org'),(1,'password','KJ75DFeg32a'),(1,'path','/grouper-ws/servicesRest'),(1,'protocol','https'),(1,'timeout','10'),(1,'user','engine'),(1,'version','v1_6_000');
 /*!40000 ALTER TABLE `group_provider_option` ENABLE KEYS */;
 UNLOCK TABLES;
 
