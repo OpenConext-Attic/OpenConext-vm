@@ -9,4 +9,3 @@ grouper-dist-1.8.1-bin.tar.gz
 .project
 .classpath
 certs/OpenConextCA
-Gemfile.lock
