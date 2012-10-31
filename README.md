@@ -155,3 +155,25 @@ If you add the output of vagrant ssh-config to your ~/.ssh/config file you can e
     scp some-local-file default:
 
 As an alternative you change the samba share configured in OpenConext-vm/scripts/samba_install.sh.
+
+
+# Using rbenv instead of RVM
+(todo: move this part)
+
+on Linux, make sure libxslt-dev and libxml2-dev are installed
+
+    git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+    git clone -- git://github.com/carsomyr/rbenv-bundler.git ~/.rbenv/plugins/bundler
+
+Add the rbenv-config to your shell profile
+
+    PATH=$PATH:~/.rbenv/bin
+    eval "$(rbenv init -)"
+
+Install Ruby
+
+    rbenv install 1.9.3-p194
+
+Go to OpenConext-vm clone, install required gems using bundler.
+
+    bundle install
