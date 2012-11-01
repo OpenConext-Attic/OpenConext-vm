@@ -1,6 +1,6 @@
 #!/bin/sh
 
-yum list installed | grep samba
+yum list installed | grep samba > /dev/null
 if [ $? -ne 0 ]
 then
     yum -y -q install samba

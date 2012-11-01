@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source /vagrant/scripts/versions.sh
-
 if [ ! -d /usr/share/tomcat6/conf/Catalina/grouper.demo.openconext.org ]
 then
 	cd /tmp

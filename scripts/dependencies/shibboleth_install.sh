@@ -2,21 +2,23 @@
 # Add Shibboleth repository (Java SAML Service Provider)
 
 yum -q list shibboleth > /dev/null
-if [ $? -ne 0 ]
+if rpm -qi shibboleth > /dev/null
 then
-    cd /etc/yum.repos.d/
-    wget http://download.opensuse.org/repositories/security://shibboleth/RHEL_6/security:shibboleth.repo
-    cd -
+  echo "Shibboleth is already installed"
+else
 
-    # install non-CentOS packages
-    yum -y -q install shibboleth
-    
-    # start shibboleth in runlevel 5
-    chkconfig --level 5 shibd on
-
-    rm -vf /etc/yum.repos.d/security\:shibboleth.repo
-    
-    cp -f /vagrant/configs/shibboleth/* /etc/shibboleth/
-    
-    service shibd restart
+  # install non-CentOS packages
+  cd /etc/yum.repos.d/
+  curl -s -O http://download.opensuse.org/repositories/security://shibboleth/RHEL_6/security:shibboleth.repo
+  cd -
+  yum -y -q install shibboleth
+  # Cleanup
+  rm -vf /etc/yum.repos.d/security\:shibboleth.repo
 fi
+
+# start shibboleth in runlevel 235
+chkconfig --level 235 shibd on
+
+cp -f $OC_BASEDIR/configs/shibboleth/* /etc/shibboleth/
+
+service shibd restart

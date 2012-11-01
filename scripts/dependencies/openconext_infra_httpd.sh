@@ -8,7 +8,7 @@ cp -f $OC_BASEDIR/configs/httpd/conf.d/*  /etc/httpd/conf.d
 
 for httpdConfigFile in /etc/httpd/conf.d/*
 do
-  sed -i "s/_OPENCONEXT_DOMAIN_/$OC_HOSTNAME/" httpdConfigFile
+  sed -i "s/_OPENCONEXT_DOMAIN_/$OC_HOSTNAME/" $httpdConfigFile
 done
 
 # DocumentRoots
@@ -20,6 +20,7 @@ mkdir -p /var/www/html/default
 ###########################
 
 rm -rf /etc/httpd/keys/* &&
+mkdir -p /etc/httpd/keys &&
 cp $OC_BASEDIR/certs/*.* /etc/httpd/keys/
 
 
