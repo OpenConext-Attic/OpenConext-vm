@@ -31,40 +31,5 @@ Vagrant::Config.run do |config|
   # folder, and the third is the path on the host to the actual folder.
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
   
-  config.vm.provision :shell, :path => "scripts/tomcat_install.sh"
-  config.vm.provision :shell, :path => "scripts/mysql_install.sh"
-  config.vm.provision :shell, :path => "scripts/httpd_install.sh"
-  config.vm.provision :shell, :path => "scripts/php_install.sh"
-  config.vm.provision :shell, :path => "scripts/openldap_install.sh"
-  config.vm.provision :shell, :path => "scripts/memcached_install.sh"
-  config.vm.provision :shell, :path => "scripts/maven_install.sh"
-
-  config.vm.provision :shell, :path => "scripts/hosts_install.sh"
-  config.vm.provision :shell, :path => "scripts/firewall_disable.sh"
-
-  config.vm.provision :shell, :path => "scripts/openconext_www.sh"
-  config.vm.provision :shell, :path => "scripts/openconext_logging.sh"
-  config.vm.provision :shell, :path => "scripts/openconext_configuration.sh"
-  config.vm.provision :shell, :path => "scripts/samba_install.sh"
-
-  config.vm.provision :shell, :path => "scripts/mujina_install.sh"
-  config.vm.provision :shell, :path => "scripts/openconext_static.sh"
-  config.vm.provision :shell, :path => "scripts/openconext_engine_install.sh"
-  config.vm.provision :shell, :path => "scripts/openconext_ldap.sh"
-  config.vm.provision :shell, :path => "scripts/openconext_serviceregistry_install.sh"
-  config.vm.provision :shell, :path => "scripts/openconext_manage_install.sh"
-  config.vm.provision :shell, :path => "scripts/openconext_api.sh"
-
-  config.vm.provision :shell, :path => "scripts/chown_www.sh"
-
-  config.vm.provision :shell, :path => "scripts/shibboleth_install.sh"
-
-  config.vm.provision :shell, :path => "scripts/openconext_infra_httpd.sh"
-
-  config.vm.provision :shell, :path => "scripts/grouper.sh"
-  
-  config.vm.provision :shell, :path => "scripts/openconext_teams.sh"
-  
-  config.vm.provision :shell, :path => "scripts/certificates.sh"
- 
+  config.vm.provision :shell, :path => "scripts/install_openconext.sh"
 end
