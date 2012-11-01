@@ -2,5 +2,5 @@
 if [ ! -d /etc/surfconext ];
 then
     mkdir -p /etc/surfconext/
-    cp -dpRf /vagrant/configs/surfconext/* /etc/surfconext/
+    cp -dpRf $OC_BASEDIR/configs/surfconext/* /etc/surfconext/
 fi

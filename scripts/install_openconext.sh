@@ -16,7 +16,8 @@ then
   exit 1
 fi
 
-
+# Base directory where the scripts (and config etc) is stored.
+OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
@@ -74,7 +75,7 @@ then
   esac
 
   echo ""
-  ALLVERSIONFILES=versions*.sh
+  ALLVERSIONFILES=$(cd $OC_BASEDIR && ls versions*.sh)
   echo "3. Component versions"
   echo "The recommended version of OpenConext to run is the currently 'stable' one, which is: $OC_VERSION."
   echo "Other options are: " $ALLVERSIONFILES
@@ -90,6 +91,10 @@ then
   done
 
 fi
+
+# Set the component versions as variables, for use in later scripts
+source $OC_BASEDIR/$OC_VERSION
+
 
 
 # Dependencies of components
@@ -126,14 +131,13 @@ do
   fi
 done
 
+OC_SCRIPT_DIR=$OC_BASEDIR/scripts
 
 # Global dependencies, infra-related
 # TODO: only do actual infra-stuff. Component-specific stuff belongs in component-install-scripts
 for subscript in \
-  httpd_install.sh \
   hosts_install.sh \
-  firewall_disable.sh \
-  openconext_www.sh \
+  iptables.sh \
   openconext_logging.sh \
   openconext_configuration.sh \
   samba_install.sh \
@@ -143,44 +147,44 @@ for subscript in \
   certificates.sh
 do
   echo "Running global prerequisite installscript $subscript..."
-  echo bash $subscript
+  bash $OC_SCRIPT_DIR/dependencies/$subscript
 done
 
 if [[ $DEP_MAVEN -eq "true" ]]
 then
   echo "Installing Maven..."
-  echo bash maven_install.sh
+  echo bash $OC_SCRIPT_DIR/dependencies/maven_install.sh
 fi
 if [[ $DEP_MEMCACHED -eq "true" ]]
 then
   echo "Installing memcached..."
-  echo bash memcached_install.sh
+  echo bash $OC_SCRIPT_DIR/dependencies/memcached_install.sh
 fi
 if [[ $DEP_PHP -eq "true" ]]
 then
   echo "Installing PHP..."
-  echo bash php_install.sh
+  echo bash $OC_SCRIPT_DIR/dependencies/php_install.sh
 fi
 if [[ $DEP_MYSQL -eq "true" ]]
 then
   echo "Installing MySQL..."
-  echo bash mysql_install.sh
+  echo bash $OC_SCRIPT_DIR/dependencies/mysql_install.sh
 fi
 if [[ $DEP_TOMCAT -eq "true" ]]
 then
   echo "Installing Tomcat..."
-  echo bash tomcat_install.sh
+  echo bash $OC_SCRIPT_DIR/dependencies/tomcat_install.sh
 fi
 if [[ $DEP_LDAP -eq "true" ]]
 then
   echo "Installing OpenLDAP..."
-  echo bash openldap_install.sh
-  echo bash openconext_ldap_install.sh
+  echo bash $OC_SCRIPT_DIR/dependencies/openldap_install.sh
+  echo bash $OC_SCRIPT_DIR/dependencies/openconext_ldap_install.sh
 fi
 if [[ $DEP_SHIBBOLETH -eq "true" ]]
 then
   echo "Installing Shibboleth..."
-  echo bash shibboleth_install.sh
+  echo bash $OC_SCRIPT_DIR/dependencies/shibboleth_install.sh
 fi
 
 echo "Done installing dependencies."
@@ -191,41 +195,41 @@ echo "Done installing dependencies."
 if echo $OC_COMPONENTS | grep -q GROUPER
 then
   echo "Installing Grouper..."
-  echo bash grouper.sh
+  echo bash $OC_SCRIPT_DIR/components/grouper.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q SR
 then
   echo "Installing Service registry..."
-  echo bash openconext_serviceregistry_install.sh
+  echo bash $OC_SCRIPT_DIR/components/openconext_serviceregistry_install.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q EB
 then
   echo "Installing EngineBlock..."
-  echo bash openconext_engine_install.sh
+  echo bash $OC_SCRIPT_DIR/components/openconext_engine_install.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q MANAGE
 then
   echo "Installing Manage..."
-  echo bash openconext_manage_install.sh
+  echo bash $OC_SCRIPT_DIR/components/openconext_manage_install.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q MUJINA
 then
   echo "Installing Mujina IDP/SP..."
-  echo bash mujina_install.sh
+  echo bash $OC_SCRIPT_DIR/components/mujina_install.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q API
 then
   echo "Installing API..."
-  echo bash openconext_api.sh
+  echo bash $OC_SCRIPT_DIR/components/openconext_api.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q TEAMS
 then
   echo "Installing Teams..."
-  echo bash openconext_teams.sh
+  echo bash $OC_SCRIPT_DIR/components/openconext_teams.sh
 fi
