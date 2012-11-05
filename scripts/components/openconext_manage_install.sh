@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source /vagrant/scripts/versions.sh
-
 if [ ! -h /opt/www/manage ];
 then
     cd /opt/www/

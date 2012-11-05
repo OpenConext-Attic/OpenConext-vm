@@ -1,26 +1,24 @@
 #!/bin/sh
 # configure some OpenConext DNS entries on this machine
-grep openconext /etc/hosts > /dev/null
-if [ $? -eq 1 ]
+
+# Arbitrary loopback address. Also used for
+IP_ADDR=127.0.167.2
+
+if grep $IP_ADDR /etc/hosts > /dev/null
 then
-	# add DNS entries to hosts file
-	echo "# OpenConext" >> /etc/hosts
-	echo "127.5.0.1  db.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.2  ldap.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.3  grouper.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.4  serviceregistry.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.5  engine.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.5  profile.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.6  manage.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.7  guestidp.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.8  portal.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.9  teams.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.10 os.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.11 testsp.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.12 static.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.13 testidp.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.14 mujina-sp.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.15 mujina-idp.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.16 teams.demo.openconext.org" >> /etc/hosts
-	echo "127.5.0.17 api.demo.openconext.org" >> /etc/hosts
+  echo "/etc/hosts already filled, will update it."
+else
+	# add the ip address, as a placeholder only at first
+	echo $IP_ADDR >> /etc/hosts
 fi
+
+# Build one huge line
+COMPONENTS="db ldap grouper serviceregistry engine profile manage guestidp portal teams os testsp static testidp mujina-sp mujina-idp teams api"
+for comp in $COMPONENTS
+do
+  HOSTSLINE="$HOSTSLINE $comp.$OC_DOMAIN"
+done
+
+# Replace the current line with the new one
+sed -i "s/$IP_ADDR.*$/$IP_ADDR $HOSTSLINE/" /etc/hosts
+

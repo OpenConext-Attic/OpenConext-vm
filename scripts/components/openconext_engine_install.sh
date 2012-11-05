@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source /vagrant/scripts/versions.sh
-
 #######################
 # Install EngineBlock #
 #######################
@@ -16,11 +14,11 @@ then
     git checkout ${ENGINEBLOCK_VERSION}
     cd -
 
-    cp -Rf /vagrant/configs/attribute-manipulations /opt/www
+    cp -Rf $OC_BASEDIR/configs/attribute-manipulations /opt/www
 
     # Create database
     echo "create database engineblock default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
-    mysql -u root --password=c0n3xt engineblock < /vagrant/data/engineblock.sql
+    mysql -u root --password=c0n3xt engineblock < $OC_BASEDIR/data/engineblock.sql
 fi
 
 #############################################
@@ -53,3 +51,9 @@ fi
 cd /opt/www/engineblock/
 ./bin/migrate
 cd -
+
+
+# Updating LDAP schema some more...
+ldapmodify -x -D cn=admin,cn=config -w c0n3xt -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
+ldapmodify -x -D cn=admin,cn=config -w c0n3xt -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
+ldapmodify -x -D cn=admin,dc=surfconext,dc=nl -w c0n3xt -f /opt/www/engineblock/ldap/changes/versAccount.ldif

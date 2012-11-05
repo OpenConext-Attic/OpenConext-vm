@@ -1,6 +1,5 @@
 #!/bin/sh
 
-source /vagrant/scripts/versions.sh
 
 if [ ! -d /usr/share/tomcat6/webapps/teams.demo.openconext.org ];
 then
@@ -32,7 +31,7 @@ then
         /usr/share/tomcat6/conf/Catalina/teams.demo.openconext.org/teams.xml
     
     echo "create database teams default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
-		mysql -u root --password=c0n3xt teams < /vagrant/data/teams.sql
+		mysql -u root --password=c0n3xt teams < $OC_BASEDIR/data/teams.sql
       
     mkdir -p /usr/share/tomcat6/webapps/teams.demo.openconext.org
     chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/

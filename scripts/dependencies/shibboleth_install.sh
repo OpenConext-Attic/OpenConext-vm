@@ -4,6 +4,7 @@
 if rpm -qi shibboleth > /dev/null
 then
   echo "Shibboleth is already installed"
+  service shibd stop
 else
   REPO_FILE=/etc/yum.repos.d/security:shibboleth.repo
   # install non-CentOS packages
@@ -18,6 +19,6 @@ chkconfig --level 235 shibd on
 
 cp -f $OC_BASEDIR/configs/shibboleth/* /etc/shibboleth/
 
-service shibd restart
+service shibd start
 
 # httpd config is covered by RPM installation

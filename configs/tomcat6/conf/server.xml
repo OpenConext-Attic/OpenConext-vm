@@ -54,16 +54,11 @@
                   xmlValidation="false"
                   xmlNamespaceAware="false" />
 
-            <Host name="mujina-idp.demo.openconext.org" appBase="webapps/mujina-idp.demo.openconext.org"/>
-
-            <Host name="mujina-sp.demo.openconext.org" appBase="webapps/mujina-sp.demo.openconext.org"/>
-            
-            <Host name="teams.demo.openconext.org" appBase="webapps/teams.demo.openconext.org"/>
-            
-            <Host name="api.demo.openconext.org" appBase="webapps/api.demo.openconext.org"/>
-            
-            <Host name="grouper.demo.openconext.org" appBase="webapps/grouper.demo.openconext.org"/>
-
+            <Host name="mujina-idp._OPENCONEXT_DOMAIN_" appBase="webapps/mujina-idp._OPENCONEXT_DOMAIN_"/>
+            <Host name="mujina-sp._OPENCONEXT_DOMAIN_" appBase="webapps/mujina-sp._OPENCONEXT_DOMAIN_"/>
+            <Host name="teams._OPENCONEXT_DOMAIN_" appBase="webapps/teams._OPENCONEXT_DOMAIN_"/>
+            <Host name="api._OPENCONEXT_DOMAIN_" appBase="webapps/api._OPENCONEXT_DOMAIN_"/>
+            <Host name="grouper._OPENCONEXT_DOMAIN_" appBase="webapps/grouper._OPENCONEXT_DOMAIN_"/>
         </Engine>
     </Service>
 </Server>

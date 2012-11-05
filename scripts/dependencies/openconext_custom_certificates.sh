@@ -51,7 +51,7 @@ commonName=*.$OC_DOMAIN
   -batch \
   -subj "$(echo -n "$SUBJECT_CSR" | tr "\n" "/")" # openssl wants multiple lines to be separated with a forward slash
 
-
+  # Sign with the CA
   openssl ca \
   -name OpenConext \
   -config $TMP_DIR/ca-config.cfg \
@@ -64,9 +64,7 @@ commonName=*.$OC_DOMAIN
   -outdir $TMP_DIR \
   -out $TMP_DIR/server.crt
 
-  # Now we have the key and the certificate.
-
-  # Copy them to the right place
+  # Now we have the key and the certificates, copy them to the right place
   cp $TMP_DIR/server.crt $KEY_DIR/openconext.crt
   cp $TMP_DIR/server.key $KEY_DIR/openconext.key
   cp $TMP_DIR/ca.crt $KEY_DIR/openconext_cabundle.pem
@@ -83,33 +81,38 @@ function explain_bring_your_own() {
   echo "openconext_cabundle.pem (the trust chain)"
   echo ""
   echo "Place the files and press enter to validate (by a configtest of httpd)"
-  read FOOBAR
+  read FOOBAR # input not used afterwards
 
   if service httpd configtest
   then
     echo "Configuration test was successful, will restart httpd."
-    echo; echo;
+    echo; echo
     service httpd restart
   else
     echo "Configuration test failed, please retry."
-    echo; echo;
+    echo; echo
     explain_bring_your_own
   fi
 }
 
-echo; echo;
-echo "For HTTP over SSL and SAML signing/encryption, a set of self-signed, default keys and certificates are installed. You can customize this now, if you want to."
-echo
-echo "1. Generate a new set, based on the chosen base domain ($OC_DOMAIN)"
-echo "2, Bring your own certificates, (including trust chain)"
-echo "3. Keep the default (for demo.openconext.org)"
+if [ $INTERACTIVE == "true" ]
+then
+  echo; echo;
+  echo "For HTTP over SSL and SAML signing/encryption, a set of self-signed, default keys and certificates are installed. You can customize this now, if you want to."
+  echo
+  echo "1. Generate a new set, based on the chosen base domain ($OC_DOMAIN)"
+  echo "2, Bring your own certificates, (including trust chain)"
+  echo "3. Keep the default (for demo.openconext.org)"
 
-read CERTCHOICE
-echo; echo;
-case "$CERTCHOICE" in
-  "1" ) generate_new_certs ;;
-  "2" ) explain_bring_your_own ;;
-  * )
-    echo "The current, default set will be used, valid for demo.openconext.org."
-      ;;
-esac
+  read CERTCHOICE
+  echo; echo;
+  case "$CERTCHOICE" in
+    "1" ) generate_new_certs ;;
+    "2" ) explain_bring_your_own ;;
+    * )
+      echo "The default set will be used, valid for demo.openconext.org." ;;
+  esac
+else
+  # Running in non-interactive mode, use the default certs
+  echo "Will use the default set of SSL certificates."
+fi

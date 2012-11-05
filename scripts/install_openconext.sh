@@ -138,16 +138,17 @@ done
 # Global dependencies, infra-related
 # TODO: only do actual infra-stuff. Component-specific stuff belongs in component-install-scripts
 for subscript in \
+  base_packages.sh \
   hosts_install.sh \
   iptables.sh \
   openconext_logging.sh \
   openconext_configuration.sh \
   samba_install.sh \
-  openconext_static.sh \
   openconext_infra_httpd.sh \
-  openconext_custom_certificates.sh
+  openconext_custom_certificates.sh \
+  openconext_static.sh
 do
-  echo "Running global prerequisite installscript $subscript..."
+  echo "Running dependency script $subscript..."
   source $OC_SCRIPTDIR/dependencies/$subscript
 done
 
@@ -196,41 +197,41 @@ echo "Done installing dependencies."
 if echo $OC_COMPONENTS | grep -q GROUPER
 then
   echo "Installing Grouper..."
-  echo bash $OC_SCRIPTDIR/components/grouper.sh
+  source $OC_SCRIPTDIR/components/grouper.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q SR
 then
   echo "Installing Service registry..."
-  echo bash $OC_SCRIPTDIR/components/openconext_serviceregistry_install.sh
+  echo source $OC_SCRIPTDIR/components/openconext_serviceregistry_install.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q EB
 then
   echo "Installing EngineBlock..."
-  echo bash $OC_SCRIPTDIR/components/openconext_engine_install.sh
+  echo source $OC_SCRIPTDIR/components/openconext_engine_install.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q MANAGE
 then
   echo "Installing Manage..."
-  echo bash $OC_SCRIPTDIR/components/openconext_manage_install.sh
+  echo source $OC_SCRIPTDIR/components/openconext_manage_install.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q MUJINA
 then
   echo "Installing Mujina IDP/SP..."
-  echo bash $OC_SCRIPTDIR/components/mujina_install.sh
+  echo source $OC_SCRIPTDIR/components/mujina_install.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q API
 then
   echo "Installing API..."
-  echo bash $OC_SCRIPTDIR/components/openconext_api.sh
+  echo source $OC_SCRIPTDIR/components/openconext_api.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q TEAMS
 then
   echo "Installing Teams..."
-  echo bash $OC_SCRIPTDIR/components/openconext_teams.sh
+  echo source $OC_SCRIPTDIR/components/openconext_teams.sh
 fi
