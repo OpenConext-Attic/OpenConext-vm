@@ -23,7 +23,7 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
-OC_HOSTNAME=demo.openconext.org
+OC_DOMAIN=demo.openconext.org
 OC_VERSION=versions_v2.5.sh
 OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 
@@ -35,7 +35,7 @@ then
   echo "Running in interactive mode."
 else
   echo "Running in non-interactive mode. Defaults to be used are:"
-  echo "Hostname: " $OC_HOSTNAME
+  echo "Base domain: " $OC_DOMAIN
   echo "Version file: " $OC_VERSION
 fi
 
@@ -46,8 +46,8 @@ then
   echo ""
 
   echo "1. Hostname"
-  echo "What is the hostname of the OpenConext instance? This will be used in all URLs as well as in SSL certificates (to be setup later on)."
-  echo -n "Hostname: [$OC_HOSTNAME] "
+  echo "What is the base domain of the OpenConext instance? This will be used in all URLs as well as in SSL certificates (to be setup later on)."
+  echo -n "Base domain: [$OC_DOMAIN] "
   read OC_HOSTNAME
 
   echo ""
@@ -128,7 +128,7 @@ do
     DEP_MYSQL=true
   fi
 
-  if [[ COMPONENT == "TEAMS" ]]
+  if [[ COMPONENT == "TEAMS" || COMPONENT == "GROUPER" ]]
   then
     DEP_SHIBBOLETH=true
   fi
@@ -145,7 +145,7 @@ for subscript in \
   samba_install.sh \
   openconext_static.sh \
   openconext_infra_httpd.sh \
-  certificates.sh
+  openconext_custom_certificates.sh
 do
   echo "Running global prerequisite installscript $subscript..."
   source $OC_SCRIPTDIR/dependencies/$subscript
@@ -180,7 +180,7 @@ if [[ $DEP_LDAP -eq "true" ]]
 then
   echo "Installing OpenLDAP..."
   source $OC_SCRIPTDIR/dependencies/openldap_install.sh
-  source $OC_SCRIPTDIR/dependencies/openconext_ldap_install.sh
+  source $OC_SCRIPTDIR/dependencies/openconext_ldap.sh
 fi
 if [[ $DEP_SHIBBOLETH -eq "true" ]]
 then
