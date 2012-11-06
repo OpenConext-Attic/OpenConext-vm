@@ -213,23 +213,23 @@ fi
 if echo $OC_COMPONENTS | grep -q MANAGE
 then
   echo "Installing Manage..."
-  echo source $OC_SCRIPTDIR/components/openconext_manage_install.sh
+  source $OC_SCRIPTDIR/components/manage.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q MUJINA
 then
   echo "Installing Mujina IDP/SP..."
-  echo source $OC_SCRIPTDIR/components/mujina_install.sh
+  source $OC_SCRIPTDIR/components/mujina.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q API
 then
   echo "Installing API..."
-  echo source $OC_SCRIPTDIR/components/openconext_api.sh
+  source $OC_SCRIPTDIR/components/api.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q TEAMS
 then
   echo "Installing Teams..."
-  echo source $OC_SCRIPTDIR/components/openconext_teams.sh
+  source $OC_SCRIPTDIR/components/teams.sh
 fi
