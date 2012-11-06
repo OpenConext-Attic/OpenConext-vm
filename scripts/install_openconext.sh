@@ -4,8 +4,6 @@
 # Run with -i for interactive setup.
 #
 #
-#
-# TODO: check git
 
 
 # Verify that user root runs this script
@@ -203,13 +201,13 @@ fi
 if echo $OC_COMPONENTS | grep -q SR
 then
   echo "Installing Service registry..."
-  echo source $OC_SCRIPTDIR/components/openconext_serviceregistry_install.sh
+  source $OC_SCRIPTDIR/components/serviceregistry.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q EB
 then
   echo "Installing EngineBlock..."
-  echo source $OC_SCRIPTDIR/components/openconext_engine_install.sh
+  echo source $OC_SCRIPTDIR/components/engineblock.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q MANAGE

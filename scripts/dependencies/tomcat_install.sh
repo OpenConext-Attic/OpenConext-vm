@@ -1,10 +1,13 @@
 #!/bin/sh
 
-yum -y -q install tomcat6 mysql-connector-java
+echo "Installing packages for Tomcat. This may take several minutes. (depending on available bandwidth)"
+# Install java-1.6.0-openjdk to overrule the default gcj, which is horribly broken for us.
+yum -y -q install java-1.6.0-openjdk tomcat6 mysql-connector-java
+
 
 CATALINA_HOME=/usr/share/tomcat6
 
-if [ ! -d $CATALINA_HOME/conf/classpath_properties ];
+if [ ! -d $CATALINA_HOME/conf/classpath_properties ]
 then
 	mkdir -p $CATALINA_HOME/conf/classpath_properties
     cp $OC_BASEDIR/configs/tomcat6/conf/classpath_properties/* $CATALINA_HOME/conf/classpath_properties/
@@ -27,7 +30,8 @@ mkdir -p $CATALINA_HOME/conf/classpath_properties
 cp -f $OC_BASEDIR/configs/tomcat6/conf/classpath_properties/* $CATALINA_HOME/conf/classpath_properties/
 
 ## TODO replace with something simple: the ca cert can be found in /etc/httpd/keys
-echo |openssl s_client -connect api.demo.openconext.org:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo keytool -import -trustcacerts -alias "api cacert" -keystore /usr/java/jdk1.6.0_32/jre/lib/security/cacerts -storepass changeit -noprompt
+openssl s_client -connect api.demo.openconext.org:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | \
+keytool -import -trustcacerts -alias "api cacert" -keystore /usr/java/jdk1.6.0_32/jre/lib/security/cacerts -storepass changeit -noprompt
 
 service tomcat6 stop
 sleep 5

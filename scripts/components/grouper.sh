@@ -30,3 +30,9 @@ echo "<Context path=\"/grouper\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WAR\
 
 rm -rf /tmp/grouper-dist-*-bin.tar.gz
 rm -rf /tmp/tomcat
+
+cat $OC_BASEDIR/configs/httpd/conf.d/grouper.conf  | \
+  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" > \
+  /etc/httpd/conf.d/grouper.conf
+
+service httpd reload
