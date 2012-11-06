@@ -32,3 +32,10 @@ cd -
 
 # Install EngineBlock's certificate for ServiceRegistry
 cp /etc/surfconext/engineblock.crt /etc/surfconext/serviceregistry-certs/engineblock.crt
+
+
+cat $OC_BASEDIR/configs/httpd/conf.d/serviceregistry.conf  | \
+  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" > \
+  /etc/httpd/conf.d/serviceregistry.conf
+
+service httpd reload

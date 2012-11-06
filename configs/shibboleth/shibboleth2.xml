@@ -266,26 +266,6 @@
         <ApplicationOverride id="admin" entityID="https://admin.example.org/shibboleth"/>
         -->
 
-        <ApplicationOverride id="shindig" entityID="https://os.demo.openconext.org/shibboleth">
-            <MetadataProvider type="Chaining">
-                <!-- Engineblock IDP metadata -->
-                <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata?sp-entity-id=https://os.demo.openconext.org/shibboleth"
-                                  backingFilePath="/etc/shibboleth/engineblock-metadata-saml2-shindig.xml"
-                                  reloadInterval="7200">
-                </MetadataProvider>
-            </MetadataProvider>
-        </ApplicationOverride>
-        <ApplicationOverride id="api" entityID="https://api.demo.openconext.org/shibboleth">
-            <MetadataProvider type="Chaining">
-                <!-- Engineblock IDP metadata -->
-                <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata"
-                                  backingFilePath="/etc/shibboleth/engineblock-metadata-saml2-api.xml"
-                                  reloadInterval="7200">
-                </MetadataProvider>
-            </MetadataProvider>
-                </ApplicationOverride>
         <ApplicationOverride id="teams" entityID="https://teams.demo.openconext.org/shibboleth">
             <MetadataProvider type="Chaining">
                 <!-- Engineblock IDP metadata -->
@@ -299,33 +279,6 @@
                 <MetadataProvider type="XML"
                                   uri="https://engine.demo.openconext.org/authentication/proxy/idps-metadata?sp-entity-id=https://teams.demo.openconext.org/shibboleth"
                                   backingFilePath="/etc/shibboleth/engineblock-idps-metadata-saml2-teams.xml"
-                                  reloadInterval="7200">
-                </MetadataProvider>
-            </MetadataProvider>
-        </ApplicationOverride>
-        <ApplicationOverride id="testsp" entityID="https://testsp.demo.openconext.org/shibboleth">
-            <MetadataProvider type="Chaining">
-                <!-- Engineblock IDP metadata -->
-                <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata?sp-entity-id=https://testsp.demo.openconext.org/shibboleth"
-                                  backingFilePath="/etc/shibboleth/engineblock-metadata-saml2-testsp.xml"
-                                  reloadInterval="7200">
-                </MetadataProvider>
-
-                <!-- EngineBlock VO endpoints -->
-                <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata/vo:testsp"
-                                  backingFilePath="/etc/shibboleth/engineblock-vo-testsp-metadata-saml2-testsp.xml"
-                                  reloadInterval="7200">
-                </MetadataProvider>
-                <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata/vo:scn-devs"
-                                  backingFilePath="/etc/shibboleth/engineblock-vo-scn-devs-metadata-saml2-testsp.xml"
-                                  reloadInterval="7200">
-                </MetadataProvider>
-                <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata/vo:rave-devs"
-                                  backingFilePath="/etc/shibboleth/engineblock-vo-rave-devs-metadata-saml2-testsp.xml"
                                   reloadInterval="7200">
                 </MetadataProvider>
             </MetadataProvider>
@@ -364,7 +317,7 @@
             <MetadataProvider type="Chaining">
                 <!-- Engineblock Management VO metadata -->
                 <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata"
+                                  uri="__OC_BASEDOMAIN__ TODO"
                                   backingFilePath="/etc/shibboleth/engineblock-metadata-saml2-grouper.xml"
                                   reloadInterval="7200">
                 </MetadataProvider>

@@ -15,7 +15,9 @@ done
 # DocumentRoots
 mkdir -p /opt/www
 mkdir -p /var/www/html/default
+mkdir -p /opt/www/catchall
 
+echo "This domain is not (yet) configured for OpenConext. Perhaps a not-installed component?" > /opt/www/catchall/index.html
 ###########################
 # Install SSL certificate #
 ###########################

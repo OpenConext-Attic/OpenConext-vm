@@ -198,16 +198,16 @@ then
   source $OC_SCRIPTDIR/components/grouper.sh
 fi
 
+if echo $OC_COMPONENTS | grep -q EB
+then
+  echo "Installing EngineBlock..."
+  source $OC_SCRIPTDIR/components/engineblock.sh
+fi
+
 if echo $OC_COMPONENTS | grep -q SR
 then
   echo "Installing Service registry..."
   source $OC_SCRIPTDIR/components/serviceregistry.sh
-fi
-
-if echo $OC_COMPONENTS | grep -q EB
-then
-  echo "Installing EngineBlock..."
-  echo source $OC_SCRIPTDIR/components/engineblock.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q MANAGE
