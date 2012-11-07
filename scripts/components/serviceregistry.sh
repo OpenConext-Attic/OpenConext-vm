@@ -22,7 +22,11 @@ then
     # Add TestIdP (as IdP) and serviceregistry (as SP) and engine (as SP) to serviceregistry DB
     # and configure the TestIdP "employee" user as ServiceRegistry "admin"
     # we need to figure out the SSL cert of engine, or be smart about updating it!!!
-    mysql -u root --password=c0n3xt serviceregistry < $OC_BASEDIR/data/serviceregistry.sql
+
+    cat $OC_BASEDIR/data/serviceregistry.sql | \
+      sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
+      mysql -u root --password=c0n3xt serviceregistry
+
 fi
 
 
