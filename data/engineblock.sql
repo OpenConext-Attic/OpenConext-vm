@@ -40,7 +40,7 @@ CREATE TABLE `consent` (
 
 LOCK TABLES `consent` WRITE;
 /*!40000 ALTER TABLE `consent` DISABLE KEYS */;
-INSERT INTO `consent` VALUES ('2012-06-27 09:01:37','2012-06-27 09:01:37','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e'),('2012-06-27 09:13:32','2012-06-27 09:13:32','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e');
+INSERT INTO `consent` VALUES ('2012-06-27 09:01:37','2012-06-27 09:01:37','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e'),\n('2012-06-27 09:13:32','2012-06-27 09:13:32','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e');
 /*!40000 ALTER TABLE `consent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +68,7 @@ CREATE TABLE `db_changelog` (
 
 LOCK TABLES `db_changelog` WRITE;
 /*!40000 ALTER TABLE `db_changelog` DISABLE KEYS */;
-INSERT INTO `db_changelog` VALUES (1,'default',1340787301,'patch-0001.php','9e47c3b8','Move the groupProviders configuration from the local config to the database.'),(2,'default',1340787301,'patch-0002.sql','2a482377','Initial migration away from LiquiBase'),(3,'default',1340787301,'patch-0003.sql','271b9ee1','Remove LiquiBase tables'),(4,'default',1340787301,'patch-0004.sql','bece62cf','Table structure for table `emails`'),(5,'default',1340787301,'patch-0005.sql','61a65c9d','Add new emails for deprovisioning'),(6,'default',1340787301,'patch-0006.sql','e7075a42','Update deprovisioning mail'),(7,'default',1340787301,'patch-0007.sql','445ce3bd','Add id field to login table (ported from manage patch-001.sql)'),(8,'default',1340787301,'patch-0008.php','e452a2b0','Add urn:collab:group: prefixing to Grouper group providers'),(9,'default',1340787301,'patch-0009.sql','7fed17ad','Add tables for new persistent NameID'),(10,'default',1340788257,'patch-0010.php','d2a6343a','Assign a UUID to all users in LDAP'),(11,'default',1340788257,'patch-0011.sql','015c7b4a','Add useragent field to login_logs table for logging the User-Agent'),(12,'default',1340788257,'patch-0012.sql','a668c1a3','Add voname field to login_logs table for logging the Virtual Organisation Context'),(13,'default',1340788257,'patch-0013.sql','ab0053d5','Add table for storing the ACL Group provider information for service providers'),(14,'default',1340788257,'patch-0014.sql','e2e35650',''),(15,'default',1340788257,'patch-0015.sql','479a53d4','Add logo_url field to group_provider table for displaying the picture in teams');
+INSERT INTO `db_changelog` VALUES (1,'default',1340787301,'patch-0001.php','9e47c3b8','Move the groupProviders configuration from the local config to the database.'),\n(2,'default',1340787301,'patch-0002.sql','2a482377','Initial migration away from LiquiBase'),\n(3,'default',1340787301,'patch-0003.sql','271b9ee1','Remove LiquiBase tables'),\n(4,'default',1340787301,'patch-0004.sql','bece62cf','Table structure for table `emails`'),\n(5,'default',1340787301,'patch-0005.sql','61a65c9d','Add new emails for deprovisioning'),\n(6,'default',1340787301,'patch-0006.sql','e7075a42','Update deprovisioning mail'),\n(7,'default',1340787301,'patch-0007.sql','445ce3bd','Add id field to login table (ported from manage patch-001.sql)'),\n(8,'default',1340787301,'patch-0008.php','e452a2b0','Add urn:collab:group: prefixing to Grouper group providers'),\n(9,'default',1340787301,'patch-0009.sql','7fed17ad','Add tables for new persistent NameID'),\n(10,'default',1340788257,'patch-0010.php','d2a6343a','Assign a UUID to all users in LDAP'),\n(11,'default',1340788257,'patch-0011.sql','015c7b4a','Add useragent field to login_logs table for logging the User-Agent'),\n(12,'default',1340788257,'patch-0012.sql','a668c1a3','Add voname field to login_logs table for logging the Virtual Organisation Context'),\n(13,'default',1340788257,'patch-0013.sql','ab0053d5','Add table for storing the ACL Group provider information for service providers'),\n(14,'default',1340788257,'patch-0014.sql','e2e35650',''),\n(15,'default',1340788257,'patch-0015.sql','479a53d4','Add logo_url field to group_provider table for displaying the picture in teams');
 /*!40000 ALTER TABLE `db_changelog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +97,7 @@ CREATE TABLE `emails` (
 
 LOCK TABLES `emails` WRITE;
 /*!40000 ALTER TABLE `emails` DISABLE KEYS */;
-INSERT INTO `emails` VALUES (1,'introduction_email','Dear {user},<br />\r\n<br />\r\nThis mail is a confirmation that we have created a profile for you on the SURFconext platform. Please visit https://profile.surfconext.nl to see and manage your profile. If you have any questions regarding this mail please contact help@surfconext.nl.<br />\r\n<br />\r\nBest regards, Surfconext ','help@surfconext.nl','Welcome to SURFconext',1),(2,'deprovisioning_warning_email','Dear {user},<br /><br />This mail is to inform you that you will be deprovisioned at {deprovision_time}. If you have any questions regarding this mail please contact help@surfconext.nl.<br /><br />You will be deleted as a member of all the groups. Currently you are member of the following groups:<br />{groups}<br />In the groups displayed below you are the only administrator. Please make another member administrator before you are deprovisioned, for these teams will be without an administrator otherwise.&nbsp;<br />{onlyAdminGroups}<br />Best regards,<br />SURFconext','help@surfconext.nl','Deprovisioning SURFconext',NULL),(3,'deprovisioning_warning_email_group_members','Dear {user},<br />\r\n<br />\r\nThis mail is to inform you that your administrator in team {team} will be deprovisioned at {deprovision_time}. If you have any questions regarding this mail please contact help@surfconext.nl.<br />\r\n<br />\r\nBest regards<br />, SURFconext','help@surfconext.nl','Deprovisioning  SURFconext',NULL);
+INSERT INTO `emails` VALUES (1,'introduction_email','Dear {user},<br />\r\n<br />\r\nThis mail is a confirmation that we have created a profile for you on the SURFconext platform. Please visit https://profile.surfconext.nl to see and manage your profile. If you have any questions regarding this mail please contact help@surfconext.nl.<br />\r\n<br />\r\nBest regards, Surfconext ','help@surfconext.nl','Welcome to SURFconext',1),\n(2,'deprovisioning_warning_email','Dear {user},<br /><br />This mail is to inform you that you will be deprovisioned at {deprovision_time}. If you have any questions regarding this mail please contact help@surfconext.nl.<br /><br />You will be deleted as a member of all the groups. Currently you are member of the following groups:<br />{groups}<br />In the groups displayed below you are the only administrator. Please make another member administrator before you are deprovisioned, for these teams will be without an administrator otherwise.&nbsp;<br />{onlyAdminGroups}<br />Best regards,<br />SURFconext','help@surfconext.nl','Deprovisioning SURFconext',NULL),\n(3,'deprovisioning_warning_email_group_members','Dear {user},<br />\r\n<br />\r\nThis mail is to inform you that your administrator in team {team} will be deprovisioned at {deprovision_time}. If you have any questions regarding this mail please contact help@surfconext.nl.<br />\r\n<br />\r\nBest regards<br />, SURFconext','help@surfconext.nl','Deprovisioning  SURFconext',NULL);
 /*!40000 ALTER TABLE `emails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +174,7 @@ CREATE TABLE `group_provider_decorator_option` (
 
 LOCK TABLES `group_provider_decorator_option` WRITE;
 /*!40000 ALTER TABLE `group_provider_decorator_option` DISABLE KEYS */;
-INSERT INTO `group_provider_decorator_option` VALUES (1,'replace','$1'),(1,'search','|urn:collab:group:dev.surfteams.nl:(.+)|');
+INSERT INTO `group_provider_decorator_option` VALUES (1,'replace','$1'),\n(1,'search','|urn:collab:group:dev.surfteams.nl:(.+)|');
 /*!40000 ALTER TABLE `group_provider_decorator_option` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,7 +225,7 @@ CREATE TABLE `group_provider_filter_option` (
 
 LOCK TABLES `group_provider_filter_option` WRITE;
 /*!40000 ALTER TABLE `group_provider_filter_option` DISABLE KEYS */;
-INSERT INTO `group_provider_filter_option` VALUES (1,'property','id'),(1,'replace','urn:collab:group:dev.surfteams.nl:$1'),(1,'search','|(.+)|');
+INSERT INTO `group_provider_filter_option` VALUES (1,'property','id'),\n(1,'replace','urn:collab:group:dev.surfteams.nl:$1'),\n(1,'search','|(.+)|');
 /*!40000 ALTER TABLE `group_provider_filter_option` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +250,7 @@ CREATE TABLE `group_provider_option` (
 
 LOCK TABLES `group_provider_option` WRITE;
 /*!40000 ALTER TABLE `group_provider_option` DISABLE KEYS */;
-INSERT INTO `group_provider_option` VALUES (1,'host','grouper.demo.openconext.org'),(1,'password','KJ75DFeg32a'),(1,'path','/grouper-ws/servicesRest'),(1,'protocol','https'),(1,'timeout','10'),(1,'user','engine'),(1,'version','v1_6_000');
+INSERT INTO `group_provider_option` VALUES (1,'host','grouper._OPENCONEXT_DOMAIN_'),\n(1,'password','KJ75DFeg32a'),\n(1,'path','/grouper-ws/servicesRest'),\n(1,'protocol','https'),\n(1,'timeout','10'),\n(1,'user','engine'),\n(1,'version','v1_6_000');
 /*!40000 ALTER TABLE `group_provider_option` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,7 +354,8 @@ CREATE TABLE `log_logins` (
 
 LOCK TABLES `log_logins` WRITE;
 /*!40000 ALTER TABLE `log_logins` DISABLE KEYS */;
-INSERT INTO `log_logins` VALUES ('2012-06-27 09:13:33','urn:collab:person:example.com:john.doe','https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp','http://mock-idp','OpenConext ServiceRegistry','OpenConext Mujina','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:13.0) Gecko/20100101 Firefox/13.0.1',NULL,1);
+INSERT INTO `log_logins` VALUES
+('2012-06-27 09:13:33','urn:collab:person:example.com:john.doe','https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp','http://mock-idp','OpenConext ServiceRegistry','OpenConext Mujina','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:13.0) Gecko/20100101 Firefox/13.0.1',NULL,1);
 /*!40000 ALTER TABLE `log_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,7 +381,7 @@ CREATE TABLE `saml_persistent_id` (
 
 LOCK TABLES `saml_persistent_id` WRITE;
 /*!40000 ALTER TABLE `saml_persistent_id` DISABLE KEYS */;
-INSERT INTO `saml_persistent_id` VALUES ('9a26dd18d7f33511b4a98d838cae09543ce5f171','b06b98b0-c036-11e1-b910-cd9212b8c0d3','5e5717a0-c038-11e1-8b8e-234ffa2d0a60'),('3f18e71b45ef07f3110e3cb418bdeb1be0c9ef83','b06b98b0-c036-11e1-b910-cd9212b8c0d3','b416cbc0-c036-11e1-b5a6-216cccc3b1fc');
+INSERT INTO `saml_persistent_id` VALUES ('9a26dd18d7f33511b4a98d838cae09543ce5f171','b06b98b0-c036-11e1-b910-cd9212b8c0d3','5e5717a0-c038-11e1-8b8e-234ffa2d0a60'),\n('3f18e71b45ef07f3110e3cb418bdeb1be0c9ef83','b06b98b0-c036-11e1-b910-cd9212b8c0d3','b416cbc0-c036-11e1-b5a6-216cccc3b1fc');
 /*!40000 ALTER TABLE `saml_persistent_id` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -408,7 +409,7 @@ CREATE TABLE `service_provider_group_acl` (
 
 LOCK TABLES `service_provider_group_acl` WRITE;
 /*!40000 ALTER TABLE `service_provider_group_acl` DISABLE KEYS */;
-INSERT INTO `service_provider_group_acl` VALUES (1,1,'https://engine.demo.openconext.org/authentication/sp/metadata',1,1),(2,1,'https://profile.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),(3,1,'https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),(4,1,'https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),(5,1,'http://mock-sp',1,1),(6,1,'https://grouper.demo.openconext.org/grouper/shibboleth',1,1),(7,1,'https://teams.demo.openconext.org/shibboleth',1,1);
+INSERT INTO `service_provider_group_acl` VALUES (1,1,'https://engine._OPENCONEXT_DOMAIN_/authentication/sp/metadata',1,1),\n(2,1,'https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),\n(3,1,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),\n(4,1,'https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),\n(5,1,'http://mock-sp',1,1),\n(6,1,'https://grouper.demo.openconext.org/grouper/shibboleth',1,1),\n(7,1,'https://teams.demo.openconext.org/shibboleth',1,1);
 /*!40000 ALTER TABLE `service_provider_group_acl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -433,7 +434,7 @@ CREATE TABLE `service_provider_uuid` (
 
 LOCK TABLES `service_provider_uuid` WRITE;
 /*!40000 ALTER TABLE `service_provider_uuid` DISABLE KEYS */;
-INSERT INTO `service_provider_uuid` VALUES ('5e5717a0-c038-11e1-8b8e-234ffa2d0a60','https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp'),('b416cbc0-c036-11e1-b5a6-216cccc3b1fc','https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp');
+INSERT INTO `service_provider_uuid` VALUES ('5e5717a0-c038-11e1-8b8e-234ffa2d0a60','https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp'),\n('b416cbc0-c036-11e1-b5a6-216cccc3b1fc','https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp');
 /*!40000 ALTER TABLE `service_provider_uuid` ENABLE KEYS */;
 UNLOCK TABLES;
 
