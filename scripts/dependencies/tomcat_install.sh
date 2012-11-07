@@ -7,6 +7,8 @@ yum -y -q install java-1.6.0-openjdk tomcat6 mysql-connector-java
 
 CATALINA_HOME=/usr/share/tomcat6
 
+ln -s $CATALINA_HOME /opt/tomcat
+
 if [ ! -d $CATALINA_HOME/conf/classpath_properties ]
 then
 	mkdir -p $CATALINA_HOME/conf/classpath_properties
@@ -29,9 +31,13 @@ cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat-users.xml $CATALINA_HOME/conf/tomc
 mkdir -p $CATALINA_HOME/conf/classpath_properties
 cp -f $OC_BASEDIR/configs/tomcat6/conf/classpath_properties/* $CATALINA_HOME/conf/classpath_properties/
 
-## TODO replace with something simple: the ca cert can be found in /etc/httpd/keys
-openssl s_client -connect api.demo.openconext.org:443 2>&1 |sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | \
-keytool -import -trustcacerts -alias "api cacert" -keystore /usr/java/jdk1.6.0_32/jre/lib/security/cacerts -storepass changeit -noprompt
+
+keytool -delete -alias "openconext cacert" \
+  -keystore /etc/pki/java/cacerts -storepass changeit -noprompt
+
+keytool -import -file /etc/httpd/keys/openconext_cabundle.pem \
+  -trustcacerts -alias "openconext cacert" \
+  -keystore /etc/pki/java/cacerts -storepass changeit -noprompt
 
 service tomcat6 stop
 sleep 5
@@ -40,10 +46,6 @@ then
   killall -9 java
 fi
 sleep 2
-
-# Fill in domain name placeholder
-sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $CATALINA_HOME/conf/server.xml
-
 
 # Remove possibly previously installed webapps and caches
 rm -Rf $CATALINA_HOME/webapps/*

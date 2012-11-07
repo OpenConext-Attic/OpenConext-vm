@@ -39,4 +39,9 @@ then
 
 		# clean up afterwards
     rm -rf /tmp/OpenConext-api
+
+    cat $OC_BASEDIR/configs/httpd/conf.d/api.conf  | \
+      sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
+      /etc/httpd/conf.d/api.conf
+
 fi

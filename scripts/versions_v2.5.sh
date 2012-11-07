@@ -11,6 +11,3 @@ export MUJINA_VERSION=mujina-2.8.0
 
 # these are _not_ tag names
 export GROUPER_VERSION=2.8.0
-export MVN_VERSION=3.0.4
-
-

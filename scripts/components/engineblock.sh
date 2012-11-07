@@ -61,9 +61,11 @@ ldapmodify -x -D cn=admin,dc=surfconext,dc=nl -w c0n3xt -f /opt/www/engineblock/
 cat $OC_BASEDIR/configs/httpd/conf.d/engine.conf  | \
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
   /etc/httpd/conf.d/engine.conf
-
 cat $OC_BASEDIR/configs/httpd/conf.d/engine-internal.conf  | \
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
   /etc/httpd/conf.d/engine-internal.conf
+cat $OC_BASEDIR/configs/httpd/conf.d/profile.conf  | \
+  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
+  /etc/httpd/conf.d/profile.conf
 
 service httpd reload

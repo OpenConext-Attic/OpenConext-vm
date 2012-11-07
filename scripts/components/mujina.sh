@@ -1,15 +1,13 @@
 #!/bin/sh
 
-if [ ! -d /usr/share/tomcat6/webapps/mujina-sp.demo.openconext.org ];
+if [ ! -d /usr/share/tomcat6/webapps/mujina-sp.$OC_DOMAIN ]
 then
-    cd /tmp
-    git clone git://github.com/OpenConext/Mujina.git
+    git clone git://github.com/OpenConext/Mujina.git /tmp/Mujina
     cd /tmp/Mujina
     git checkout ${MUJINA_VERSION}
     mvn -q clean install -DskipTests
 
-
-    rm /usr/share/tomcat6/wars/mujina-*.war
+    rm -f /usr/share/tomcat6/wars/mujina-*.war
     
 		# extract deployable artifact
 		tar -zxf mujina-idp-dist/target/*-bin.tar.gz -C mujina-idp-dist/target
@@ -36,22 +34,29 @@ then
     
 
 		    
-    mkdir -p /usr/share/tomcat6/conf/Catalina/mujina-sp.demo.openconext.org
+    mkdir -p /usr/share/tomcat6/conf/Catalina/mujina-sp.$OC_DOMAIN
     echo "<Context path=\"/\" docBase=\"/usr/share/tomcat6/wars/$MUJINA_SP_WAR\"/>" > \
-		/usr/share/tomcat6/conf/Catalina/mujina-sp.demo.openconext.org/ROOT.xml
+		/usr/share/tomcat6/conf/Catalina/mujina-sp.$OC_DOMAIN/ROOT.xml
 	
-	mkdir -p /usr/share/tomcat6/conf/Catalina/mujina-idp.demo.openconext.org
+	mkdir -p /usr/share/tomcat6/conf/Catalina/mujina-idp.$OC_DOMAIN
     echo "<Context path=\"/\" docBase=\"/usr/share/tomcat6/wars/$MUJINA_IDP_WAR\"/>" > \
-		/usr/share/tomcat6/conf/Catalina/mujina-idp.demo.openconext.org/ROOT.xml
+		/usr/share/tomcat6/conf/Catalina/mujina-idp.$OC_DOMAIN/ROOT.xml
 
-    mkdir -p /usr/share/tomcat6/webapps/mujina-sp.demo.openconext.org
-    mkdir -p /usr/share/tomcat6/webapps/mujina-idp.demo.openconext.org
+    mkdir -p /usr/share/tomcat6/webapps/mujina-sp.$OC_DOMAIN
+    mkdir -p /usr/share/tomcat6/webapps/mujina-idp.$OC_DOMAIN
     chown -R tomcat:tomcat /usr/share/tomcat6/webapps/
 
     SERVERXMLLINE1='<Host name="mujina-idp.'$OC_DOMAIN'" appBase="webapps/mujina-idp.'$OC_DOMAIN'"/>'
     sed -i "s#</Engine>#$SERVERXMLLINE1\n</Engine>#" /usr/share/tomcat6/conf/server.xml
     SERVERXMLLINE2='<Host name="mujina-sp.'$OC_DOMAIN'" appBase="webapps/mujina-sp.'$OC_DOMAIN'"/>'
     sed -i "s#</Engine>#$SERVERXMLLINE2\n</Engine>#" /usr/share/tomcat6/conf/server.xml
+
+    cat $OC_BASEDIR/configs/httpd/conf.d/mujina-sp.conf  | \
+      sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
+      /etc/httpd/conf.d/mujina-sp.conf
+    cat $OC_BASEDIR/configs/httpd/conf.d/mujina-idp.conf  | \
+      sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
+      /etc/httpd/conf.d/mujina-idp.conf
 
     rm -rf /tmp/Mujina
 

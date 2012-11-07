@@ -22,8 +22,9 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
 OC_DOMAIN=demo.openconext.org
-OC_VERSION=versions_v2.5.sh
+OC_VERSION=versions_v2.10.sh
 OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
+export MVN_VERSION=3.0.4
 
 # interactive run?
 INTERACTIVE=false
@@ -150,16 +151,17 @@ do
   source $OC_SCRIPTDIR/dependencies/$subscript
 done
 
-if [[ $DEP_TOMCAT -eq "true" ]]
-then
-  echo "Installing Tomcat..."
-  source $OC_SCRIPTDIR/dependencies/tomcat_install.sh
-fi
 if [[ $DEP_MAVEN -eq "true" ]]
 then
   echo "Installing Maven..."
   source $OC_SCRIPTDIR/dependencies/maven_install.sh
 fi
+if [[ $DEP_TOMCAT -eq "true" ]]
+then
+  echo "Installing Tomcat..."
+  source $OC_SCRIPTDIR/dependencies/tomcat_install.sh
+fi
+
 if [[ $DEP_MEMCACHED -eq "true" ]]
 then
   echo "Installing memcached..."

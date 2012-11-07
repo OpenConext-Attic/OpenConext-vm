@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-if [ ! -d /usr/share/tomcat6/webapps/teams.demo.openconext.org ];
+if [ ! -d /usr/share/tomcat6/webapps/teams.$OC_DOMAIN ];
 then
     cd /tmp
     git clone git://github.com/OpenConext/OpenConext-teams.git
@@ -26,18 +26,23 @@ then
 
    	# create Tomcat-specific context configuration file
 		TEAMS_WAR=`basename /usr/share/tomcat6/wars/coin-teams-*.war`    
-    mkdir -p /usr/share/tomcat6/conf/Catalina/teams.demo.openconext.org
+    mkdir -p /usr/share/tomcat6/conf/Catalina/teams.$OC_DOMAIN
     echo "<Context path=\"/teams\" docBase=\"/usr/share/tomcat6/wars/$TEAMS_WAR\"/>" > \
-        /usr/share/tomcat6/conf/Catalina/teams.demo.openconext.org/teams.xml
+        /usr/share/tomcat6/conf/Catalina/teams.$OC_DOMAIN/teams.xml
     
     echo "create database teams default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
 		mysql -u root --password=c0n3xt teams < $OC_BASEDIR/data/teams.sql
       
-    mkdir -p /usr/share/tomcat6/webapps/teams.demo.openconext.org
+    mkdir -p /usr/share/tomcat6/webapps/teams.$OC_DOMAIN
     chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
 
     SERVERXMLLINE='<Host name="teams.'$OC_DOMAIN'" appBase="webapps/teams.'$OC_DOMAIN'"/>'
     sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
 
 		rm -rf /tmp/OpenConext-teams
+
+    cat $OC_BASEDIR/configs/httpd/conf.d/teams.conf  | \
+      sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
+      /etc/httpd/conf.d/teams.conf
+
 fi
