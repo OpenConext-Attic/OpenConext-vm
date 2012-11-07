@@ -3,9 +3,9 @@
 if [ ! -d /usr/share/tomcat6/webapps/api.$OC_DOMAIN ]
 then
     cd /tmp    
-    git clone git://github.com/OpenConext/OpenConext-api.git
+    $GITCLONE git://github.com/OpenConext/OpenConext-api.git
     cd /tmp/OpenConext-api
-    git checkout ${API_VERSION}
+    $GITCHECKOUT ${API_VERSION}
     $MVN clean install -DskipTests
 
 		# extract deployable artifact

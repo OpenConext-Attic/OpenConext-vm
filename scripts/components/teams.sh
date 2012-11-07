@@ -4,10 +4,10 @@
 if [ ! -d /usr/share/tomcat6/webapps/teams.$OC_DOMAIN ];
 then
     cd /tmp
-    git clone git://github.com/OpenConext/OpenConext-teams.git
+    $GITCLONE git://github.com/OpenConext/OpenConext-teams.git
     cd /tmp/OpenConext-teams
-    git checkout ${TEAMS_VERSION}
-    $MVN -q clean install -DskipTests
+    $GITCHECKOUT ${TEAMS_VERSION}
+    $MVN clean install -DskipTests
 
 		# extract deployable artifact
 		tar -zxf coin-teams-dist/target/*-bin.tar.gz -C coin-teams-dist/target

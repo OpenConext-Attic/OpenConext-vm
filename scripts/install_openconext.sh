@@ -28,14 +28,19 @@ MVN_VERSION=3.0.4
 VERBOSE=true
 
 
+## Suppress output of various commands by default
 MVN="mvn -q"
 YUM="yum -q"
+GITCLONE="git clone -q"
+GITCHECKOUT="git checkout -q"
 
 if [ $VERBOSE == "true" ]
 then
-  echo "Verbose is true, will not suppress output from mvn/yum"
+  echo "Verbose is true, will not suppress output from mvn/yum/git"
   MVN=mvn
   YUM=yum
+  GITCHECKOUT="git checkout"
+  GITCLONE="git clone"
 fi
 
 

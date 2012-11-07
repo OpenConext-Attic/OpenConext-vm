@@ -5,10 +5,10 @@
 #######################
 if [ ! -h /opt/www/engineblock ]
 then
-    git clone git://github.com/OpenConext/OpenConext-engineblock.git /opt/www/OpenConext-engineblock
+    $GITCLONE git://github.com/OpenConext/OpenConext-engineblock.git /opt/www/OpenConext-engineblock
     ln -sf /opt/www/OpenConext-engineblock /opt/www/engineblock
     cd /opt/www/engineblock
-    git checkout ${ENGINEBLOCK_VERSION}
+    $GITCHECKOUT ${ENGINEBLOCK_VERSION}
     cd -
 
     cp -Rf $OC_BASEDIR/configs/attribute-manipulations /opt/www

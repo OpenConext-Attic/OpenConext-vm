@@ -2,10 +2,10 @@
 
 if [ ! -d /usr/share/tomcat6/webapps/mujina-sp.$OC_DOMAIN ]
 then
-    git clone git://github.com/OpenConext/Mujina.git /tmp/Mujina
+    $GITCLONE git://github.com/OpenConext/Mujina.git /tmp/Mujina
     cd /tmp/Mujina
-    git checkout ${MUJINA_VERSION}
-    $MVN -q clean install -DskipTests
+    $GITCHECKOUT ${MUJINA_VERSION}
+    $MVN clean install -DskipTests
 
     rm -f /usr/share/tomcat6/wars/mujina-*.war
     
@@ -58,6 +58,7 @@ then
       sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
       /etc/httpd/conf.d/mujina-idp.conf
 
+    cd -
     rm -rf /tmp/Mujina
 
     service tomcat6 restart

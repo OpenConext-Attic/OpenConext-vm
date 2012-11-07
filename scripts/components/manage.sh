@@ -3,11 +3,11 @@
 if [ ! -h /opt/www/manage ];
 then
     cd /opt/www/
-    git clone git://github.com/OpenConext/OpenConext-manage.git    
+    $GITCLONE git://github.com/OpenConext/OpenConext-manage.git
     ln -s OpenConext-manage manage
     cd -
     cd /opt/www/manage
-    git checkout ${MANAGE_VERSION}
+    $GITCHECKOUT ${MANAGE_VERSION}
     cd -
 
     echo "create database manage default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
