@@ -14,6 +14,10 @@ then
   exit 1
 fi
 
+# Do not prompt for overwrites etc.
+unalias cp rm mv
+
+
 # Base directory where the scripts (and config etc) is stored.
 OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 OC_SCRIPTDIR=$OC_BASEDIR/scripts
@@ -94,14 +98,14 @@ then
   esac
 
   echo ""
-  ALLVERSIONFILES=$(cd $OC_BASEDIR && ls versions*.sh)
+  ALLVERSIONFILES=$(cd $OC_SCRIPTDIR && ls versions*.sh)
   echo "3. Component versions"
   echo "The recommended version of OpenConext to run is the currently 'stable' one, which is: $OC_VERSION."
   echo "Other options are: " $ALLVERSIONFILES
   echo -n "Version: [$OC_VERSION] "
   read OC_VERSION
 
-  while [ ! -f $OC_VERSION ]
+  while [ ! -f $OC_SCRIPTDIR/$OC_VERSION ]
   do
     echo "Version file $OC_VERSION does not exist."
     echo "The options are: " $ALLVERSIONFILES
@@ -253,3 +257,31 @@ then
   echo "Installing Teams..."
   source $OC_SCRIPTDIR/components/teams.sh
 fi
+
+service httpd restart
+if [[ $DEP_TOMCAT -eq "true" ]]
+then
+  echo "Starting Tomcat..."
+  service tomcat6 start
+fi
+
+echo; echo
+echo "Install script is done."
+
+# Line for use in the hosts-file of the VM-host and potential other systems.
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static testidp mujina-sp mujina-idp teams api"
+HOSTSLINE="$OC_DOMAIN" # the domain itself
+for comp in $COMPONENTS
+do
+  HOSTSLINE="$HOSTSLINE $comp.$OC_DOMAIN"
+done
+
+echo "The hosts-file of computers that want to use this OpenConext instance should contain the following entry: "
+echo "-----"
+echo "IP_ADDRESS $HOSTSLINE"
+echo "-----"
+echo "Where IP_ADDRESS is an IP address of this system that is reachable from the outside."
+
+echo
+echo "Next step: go to this URL with your browser: http://$OC_DOMAIN/"
+echo

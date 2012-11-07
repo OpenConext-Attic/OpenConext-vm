@@ -36,13 +36,13 @@ then
     # Generate Self Signed Certificate for EngineBlock and add it to the configuration
     cd /tmp &&
     openssl req -subj '/CN=EngineBlock/OU=Services/O=SURFnet/C=NL/' -newkey rsa:2048 -new -x509 -days 3652 -nodes -out example.org.crt -keyout example.org.pem > /dev/null
-    CRT=`cat example.org.crt` &&
-    PEM=`cat example.org.pem` &&
-    CRT_NO_HEADERS=`sed '1d;$d' example.org.crt` &&
+    EB_CRT=`cat example.org.crt` &&
+    EB_KEY=`cat example.org.pem` &&
+    EB_CRT_NO_HEADERS=`sed '1d;$d' example.org.crt` &&
     echo "" >> /etc/surfconext/engineblock.ini &&
-    echo "encryption.key.public = \"${CRT}\"" >> /etc/surfconext/engineblock.ini &&
-    echo "encryption.key.private = \"${PEM}\"" >> /etc/surfconext/engineblock.ini &&
-    echo "auth.simplesamlphp.idp.cert       = \"${CRT_NO_HEADERS}\"" >> /etc/surfconext/engineblock.ini
+    echo "encryption.key.public = \"${EB_CRT}\"" >> /etc/surfconext/engineblock.ini &&
+    echo "encryption.key.private = \"${EB_KEY}\"" >> /etc/surfconext/engineblock.ini &&
+    echo "auth.simplesamlphp.idp.cert       = \"${EB_CRT_NO_HEADERS}\"" >> /etc/surfconext/engineblock.ini
     cp example.org.crt /etc/surfconext/engineblock.crt &&
     rm example.org.crt example.org.pem &&
     cd -
@@ -68,4 +68,5 @@ cat $OC_BASEDIR/configs/httpd/conf.d/profile.conf  | \
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
   /etc/httpd/conf.d/profile.conf
 
-service httpd reload
+# Make public key available for other components
+ENGINEBLOCK_CERT=$EB_CRT_NO_HEADERS

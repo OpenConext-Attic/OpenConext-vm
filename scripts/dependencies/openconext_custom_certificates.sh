@@ -54,6 +54,7 @@ commonName=*.$OC_DOMAIN
   # Sign with the CA
   openssl ca \
   -name OpenConext \
+  -notext \
   -config $TMP_DIR/ca-config.cfg \
   -cert $TMP_DIR/ca.crt \
   -keyfile $TMP_DIR/ca.key \
@@ -65,7 +66,7 @@ commonName=*.$OC_DOMAIN
   -out $TMP_DIR/server.crt
 
   # Now we have the key and the certificates, copy them to the right place
-  cp $TMP_DIR/server.crt $KEY_DIR/openconext.crt
+  cp $TMP_DIR/server.crt $KEY_DIR/openconext.pem
   cp $TMP_DIR/server.key $KEY_DIR/openconext.key
   cp $TMP_DIR/ca.crt $KEY_DIR/openconext_cabundle.pem
 
@@ -116,3 +117,10 @@ else
   # Running in non-interactive mode, use the default certs
   echo "Will use the default set of SSL certificates."
 fi
+
+cp $KEY_DIR/openconext_cabundle.pem /opt/www/welcome/openconext_cabundle.crt
+
+# Make certificate/key available for other script parts, as variables
+OC_CACERT=`sed -e '1d;$d' $KEY_DIR/openconext_cabundle.pem | tr -d '\n'`
+OC_CERT=`sed -e '1d;$d' $KEY_DIR/openconext.pem | tr -d '\n'`
+OC_KEY=`sed -e '1d;$d' $KEY_DIR/openconext.key | tr -d '\n'`

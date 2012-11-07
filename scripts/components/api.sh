@@ -23,19 +23,29 @@ then
 			mv $i `dirname $i`/`basename $i .vm`
 		done
 
-   	# create Tomcat-specific context configuration file
+
+    sed -i \
+      -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" \
+      -e "s~spCertificate=.*$~spCertificate=$OC_CERT~" \
+      -e "s~idpCertificate=.*$~idpCertificate=$ENGINEBLOCK_CERT~" \
+      -e "s~spPrivateKey=.*$~spPrivateKey=$OC_KEY~" \
+      /usr/share/tomcat6/conf/classpath_properties/coin-api.properties
+
+
+    # create Tomcat-specific context configuration file
     API_WAR=`basename /usr/share/tomcat6/wars/coin-api-*.war`
     mkdir -p /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN
     echo "<Context path=\"/v1\" docBase=\"/usr/share/tomcat6/wars/$API_WAR\"/>" > \
         /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN/v1.xml
-
-    echo "create database api default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
 
     mkdir -p /usr/share/tomcat6/webapps/api.$OC_DOMAIN
     chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
 
     SERVERXMLLINE='<Host name="api.'$OC_DOMAIN'" appBase="webapps/api.'$OC_DOMAIN'"/>'
     sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
+
+    echo "create database api default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
+
 
 		# clean up afterwards
     rm -rf /tmp/OpenConext-api

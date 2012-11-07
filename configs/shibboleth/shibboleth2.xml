@@ -229,7 +229,7 @@
         <MetadataProvider type="Chaining">
             <!-- Metadata of IdP's registered with Engineblock -->
             <MetadataProvider type="XML"
-                              uri="https://engine.demo.openconext.org/authentication/proxy/idps-metadata?sp-entity-id=https://portal.demo.openconext.org/shibboleth"
+                              uri="https://engine._OPENCONEXT_DOMAIN_/authentication/proxy/idps-metadata?sp-entity-id=https://portal.demo.openconext.org/shibboleth"
                               backingFilePath="/etc/shibboleth/engineblock-idps-metadata-saml2.xml"
                               reloadInterval="7200">
             </MetadataProvider>
@@ -250,8 +250,8 @@
 
         <!-- Simple file-based resolver for using a single keypair. -->
         <CredentialResolver type="File"
-                            key="/etc/httpd/keys/star.demo.openconext.org.key"
-                            certificate="/etc/httpd/keys/star.demo.openconext.org.pem"/>
+                            key="/etc/httpd/keys/openconext.key"
+                            certificate="/etc/httpd/keys/openconext.pem"/>
 
         <!--
         The default settings can be overridden by creating ApplicationOverride elements (see
@@ -270,14 +270,14 @@
             <MetadataProvider type="Chaining">
                 <!-- Engineblock IDP metadata -->
                 <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/idp/metadata?sp-entity-id=https://teams.demo.openconext.org/shibboleth"
+                                  uri="https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata?sp-entity-id=https://teams.demo.openconext.org/shibboleth"
                                   backingFilePath="/etc/shibboleth/engineblock-metadata-saml2-teams.xml"
                                   reloadInterval="7200">
                 </MetadataProvider>
 
                 <!-- Metadata of IdP's registered with Engineblock -->
                 <MetadataProvider type="XML"
-                                  uri="https://engine.demo.openconext.org/authentication/proxy/idps-metadata?sp-entity-id=https://teams.demo.openconext.org/shibboleth"
+                                  uri="https://engine._OPENCONEXT_DOMAIN_/authentication/proxy/idps-metadata?sp-entity-id=https://teams.demo.openconext.org/shibboleth"
                                   backingFilePath="/etc/shibboleth/engineblock-idps-metadata-saml2-teams.xml"
                                   reloadInterval="7200">
                 </MetadataProvider>
@@ -292,7 +292,7 @@
               handlerURL="/grouper/Shibboleth.sso"
               handlerSSL="true"
               relayState="ss:mem"
-              exportLocation="https://grouper.demo.openconext.org/grouper/Shibboleth.sso/GetAssertion"
+              exportLocation="https://grouper._OPENCONEXT_DOMAIN_/grouper/Shibboleth.sso/GetAssertion"
               exportACL="127.0.0.1"
               idpHistory="false"
               idpHistoryDays="7"
@@ -317,7 +317,7 @@
             <MetadataProvider type="Chaining">
                 <!-- Engineblock Management VO metadata -->
                 <MetadataProvider type="XML"
-                                  uri="__OC_BASEDOMAIN__ TODO"
+                                  uri="https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata"
                                   backingFilePath="/etc/shibboleth/engineblock-metadata-saml2-grouper.xml"
                                   reloadInterval="7200">
                 </MetadataProvider>

@@ -37,5 +37,3 @@ cat $OC_BASEDIR/configs/httpd/conf.d/grouper.conf  | \
 
     SERVERXMLLINE='<Host name="grouper.'$OC_DOMAIN'" appBase="webapps/grouper.'$OC_DOMAIN'"/>'
     sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
-
-service httpd reload

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-$YUM -y install git subversion
+
+$YUM -y install git subversion policycoreutils-python

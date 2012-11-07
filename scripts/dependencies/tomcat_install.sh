@@ -51,5 +51,3 @@ sleep 2
 rm -Rf $CATALINA_HOME/webapps/*
 rm -Rf $CATALINA_HOME/work/*
 rm -Rf $CATALINA_HOME/conf/Catalina/*
-
-service tomcat6 start

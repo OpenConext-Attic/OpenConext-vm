@@ -4,7 +4,7 @@
 
 # these versions are tag names
 export ENGINEBLOCK_VERSION=engineblock-v2.6.0
-export API_VERSION=coin-api-parent-2.10.0
+export API_VERSION=HEAD
 export MANAGE_VERSION=manage-v2.5.0
 export SERVICEREGISTRY_VERSION=serviceregistry-v2.6.0
 export STATIC_VERSION=static-v2.6.0

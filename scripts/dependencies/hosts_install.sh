@@ -1,7 +1,7 @@
 #!/bin/sh
 # configure some OpenConext DNS entries on this machine
 
-# Arbitrary loopback address. Also used for
+# Arbitrary loopback address.
 IP_ADDR=127.0.167.2
 
 if grep $IP_ADDR /etc/hosts > /dev/null
@@ -13,7 +13,7 @@ else
 fi
 
 # Build one huge line
-COMPONENTS="db ldap grouper serviceregistry engine profile manage guestidp portal teams os testsp static testidp mujina-sp mujina-idp teams api"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static testidp mujina-sp mujina-idp teams api"
 for comp in $COMPONENTS
 do
   HOSTSLINE="$HOSTSLINE $comp.$OC_DOMAIN"

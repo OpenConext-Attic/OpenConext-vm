@@ -16,6 +16,10 @@ done
 mkdir -p /opt/www
 mkdir -p /var/www/html/default
 mkdir -p /opt/www/catchall
+mkdir -p /opt/www/welcome
+
+cp -Rf $OC_BASEDIR/data/catchall/* /opt/www/catchall/
+cp -Rf $OC_BASEDIR/data/welcome/* /opt/www/welcome/
 
 echo "This domain is not (yet) configured for OpenConext. Perhaps a not-installed component?" > /opt/www/catchall/index.html
 ###########################
@@ -24,7 +28,5 @@ echo "This domain is not (yet) configured for OpenConext. Perhaps a not-installe
 
 rm -rf /etc/httpd/keys/* &&
 mkdir -p /etc/httpd/keys &&
-cp $OC_BASEDIR/certs/*.* /etc/httpd/keys/
-
 
 service httpd restart
