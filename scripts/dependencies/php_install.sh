@@ -1,5 +1,5 @@
 #!/bin/sh
-yum -y -q install php \
+$YUM -y    install php \
                   php-apc \
                   php-cli \
                   php-curl \

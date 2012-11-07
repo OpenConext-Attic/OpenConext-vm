@@ -6,7 +6,7 @@ then
     git clone git://github.com/OpenConext/OpenConext-api.git
     cd /tmp/OpenConext-api
     git checkout ${API_VERSION}
-    mvn -q clean install -DskipTests
+    $MVN clean install -DskipTests
 
 		# extract deployable artifact
 		tar -zxf coin-api-dist/target/*-bin.tar.gz -C coin-api-dist/target

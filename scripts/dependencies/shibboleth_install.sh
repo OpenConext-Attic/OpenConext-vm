@@ -9,7 +9,7 @@ else
   REPO_FILE=/etc/yum.repos.d/security:shibboleth.repo
   # install non-CentOS packages
   curl -s -o $REPO_FILE http://download.opensuse.org/repositories/security://shibboleth/RHEL_6/security:shibboleth.repo
-  yum -y -q install shibboleth
+  $YUM -y install shibboleth
   # Cleanup
   rm -vf $REPO_FILE
 fi

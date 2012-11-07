@@ -1,9 +1,9 @@
 #!/bin/sh
 
-yum list installed | grep samba > /dev/null
+$YUM list installed | grep samba > /dev/null
 if [ $? -ne 0 ]
 then
-    yum -y -q install samba
+    $YUM -y install samba
 
     cat >> /etc/samba/smb.conf << SMB
 [www]

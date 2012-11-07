@@ -1,2 +1,2 @@
 #!/bin/sh
-yum -y -q install openldap-servers openldap-clients
+$YUM -y install openldap-servers openldap-clients

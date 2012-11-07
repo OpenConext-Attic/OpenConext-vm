@@ -7,7 +7,7 @@ then
     git clone git://github.com/OpenConext/OpenConext-teams.git
     cd /tmp/OpenConext-teams
     git checkout ${TEAMS_VERSION}
-    mvn -q clean install -DskipTests    
+    $MVN -q clean install -DskipTests
 
 		# extract deployable artifact
 		tar -zxf coin-teams-dist/target/*-bin.tar.gz -C coin-teams-dist/target

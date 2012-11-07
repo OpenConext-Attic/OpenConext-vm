@@ -5,7 +5,7 @@ then
     git clone git://github.com/OpenConext/Mujina.git /tmp/Mujina
     cd /tmp/Mujina
     git checkout ${MUJINA_VERSION}
-    mvn -q clean install -DskipTests
+    $MVN -q clean install -DskipTests
 
     rm -f /usr/share/tomcat6/wars/mujina-*.war
     

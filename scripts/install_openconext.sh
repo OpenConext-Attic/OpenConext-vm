@@ -24,7 +24,20 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 OC_DOMAIN=demo.openconext.org
 OC_VERSION=versions_v2.10.sh
 OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
-export MVN_VERSION=3.0.4
+MVN_VERSION=3.0.4
+VERBOSE=true
+
+
+MVN="mvn -q"
+YUM="yum -q"
+
+if [ $VERBOSE == "true" ]
+then
+  echo "Verbose is true, will not suppress output from mvn/yum"
+  MVN=mvn
+  YUM=yum
+fi
+
 
 # interactive run?
 INTERACTIVE=false

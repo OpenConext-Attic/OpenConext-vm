@@ -1,3 +1,3 @@
 #!/bin/bash
 
-yum -y -q install git subversion > /dev/null
+$YUM -y install git subversion

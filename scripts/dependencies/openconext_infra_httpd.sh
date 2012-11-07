@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Installing httpd if not present. Will enable in runlevel 2,3,5."
-yum -y -q install httpd mod_ssl &&
+$YUM -y install httpd mod_ssl &&
 chkconfig --level 235 httpd on &&
 
 # TODO: what about the components' config files? Only the _ ones are copied here now.
