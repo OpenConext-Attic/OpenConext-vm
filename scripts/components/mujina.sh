@@ -57,7 +57,6 @@ then
     cat $OC_BASEDIR/configs/httpd/conf.d/mujina-idp.conf  | \
       sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
       /etc/httpd/conf.d/mujina-idp.conf
-    service httpd reload
     cd -
     rm -rf /tmp/Mujina
 fi

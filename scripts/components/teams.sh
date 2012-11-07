@@ -11,7 +11,8 @@ then
 
 		# extract deployable artifact
 		tar -zxf coin-teams-dist/target/*-bin.tar.gz -C coin-teams-dist/target
-		
+		cd -
+
 		# remove old deployed war
     rm /usr/share/tomcat6/wars/coin-teams-war-*.war 2> /dev/null        
 		# copy new war to Tomcat

@@ -86,9 +86,8 @@ function explain_bring_your_own() {
 
   if service httpd configtest
   then
-    echo "Configuration test was successful, will restart httpd."
+    echo "Configuration test was successful."
     echo; echo
-    service httpd restart
   else
     echo "Configuration test failed, please retry."
     echo; echo

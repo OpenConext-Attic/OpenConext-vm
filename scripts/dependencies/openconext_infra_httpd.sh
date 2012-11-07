@@ -28,5 +28,4 @@ echo "This domain is not (yet) configured for OpenConext. Perhaps a not-installe
 
 rm -rf /etc/httpd/keys/* &&
 mkdir -p /etc/httpd/keys &&
-
-service httpd restart
+cp $OC_BASEDIR/certs/*.* /etc/httpd/keys/

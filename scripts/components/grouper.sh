@@ -10,11 +10,19 @@ cp -f tomcat/webapps/*.war /usr/share/tomcat6/wars
 cp -f tomcat/conf/classpath_properties/*.dev /usr/share/tomcat6/conf/classpath_properties/
 cp -f tomcat/conf/classpath_properties/grouper.properties /usr/share/tomcat6/conf/classpath_properties/
 cp -f tomcat/conf/classpath_properties/log4j.properties /usr/share/tomcat6/conf/classpath_properties/
-# strip off the .dev extension
+
+# change dev.surfconext.nl to proper openconext name and strip off the .dev extension
 for i in $(ls /usr/share/tomcat6/conf/classpath_properties/*.dev)
 do
+  sed -i "s/dev.surfconext.nl/$OC_DOMAIN/g" $i
   mv $i `dirname $i`/`basename $i .dev`
 done
+
+# The config files for dev are not exactly the same as for vm. Therefore some specific replacements after all :-(
+# TODO: create a vm-version of all the property files and ship it with our grouper dist.
+sed -i "s/teamsrw/root/g" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
+sed -i "s/asd7rR53hj62ERFse45/c0n3xt/g" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
+
 
 mkdir -p /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
 mkdir -p /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN

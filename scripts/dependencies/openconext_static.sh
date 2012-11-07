@@ -13,5 +13,3 @@ fi
 cat $OC_BASEDIR/configs/httpd/conf.d/static.conf  | \
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" > \
   /etc/httpd/conf.d/static.conf
-
-service httpd reload

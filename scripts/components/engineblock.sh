@@ -69,4 +69,4 @@ cat $OC_BASEDIR/configs/httpd/conf.d/profile.conf  | \
   /etc/httpd/conf.d/profile.conf
 
 # Make public key available for other components
-ENGINEBLOCK_CERT=$EB_CRT_NO_HEADERS
+ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`

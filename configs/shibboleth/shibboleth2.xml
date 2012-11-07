@@ -78,7 +78,7 @@
     Resource requests are mapped by the RequestMapper to an applicationId that
     points into to this section (or to the defaults here).
     -->
-    <ApplicationDefaults entityID="https://portal.demo.openconext.org/shibboleth"
+    <ApplicationDefaults entityID="https://teams.demo.openconext.org/shibboleth"
                          REMOTE_USER="name-id"
                          signing="true" encryption="true">
 
@@ -97,7 +97,7 @@
                   handlerURL="/Shibboleth.sso"
                   handlerSSL="true"
                   relayState="ss:mem"
-                  exportLocation="https://portal.demo.openconext.org/Shibboleth.sso/GetAssertion"
+                  exportLocation="https://teams._OPENCONEXT_DOMAIN_/Shibboleth.sso/GetAssertion"
                   exportACL="127.0.0.1"
                   idpHistory="false"
                   idpHistoryDays="7"
@@ -201,35 +201,11 @@
             <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>
         </Sessions>
 
-        <!--
-        Allows overriding of error template information/filenames. You can
-        also add attributes with values that can be plugged into the templates.
-        
-        <Errors session="sessionError.html"
-                metadata="metadataError.html"
-                access="accessError.html"
-                ssl="sslError.html"
-                localLogout="localLogout.html"
-                globalLogout="globalLogout.html"
-                logoLocation="/shibboleth-sp/logo.jpg"
-                logoLocation2="../coin/media/logo.jpg"
-                styleSheet="https://os.demo.openconext.org/css/oauth.css"
-                styleSheet2="https://os.demo.openconext.org/css/oauth_ie.css"
-                supportContact="coin-beheer@surfnet.nl"/>
-        -->
-        
-        <!--
-        Uncomment and modify to tweak settings for specific IdPs or groups. Settings here
-        generally match those allowed by the <ApplicationDefaults> element.
-        -->
-        <!--
-        <RelyingParty Name="SpecialFederation" keyName="SpecialKey"/>
-        -->
 
         <MetadataProvider type="Chaining">
             <!-- Metadata of IdP's registered with Engineblock -->
             <MetadataProvider type="XML"
-                              uri="https://engine._OPENCONEXT_DOMAIN_/authentication/proxy/idps-metadata?sp-entity-id=https://portal.demo.openconext.org/shibboleth"
+                              uri="https://engine._OPENCONEXT_DOMAIN_/authentication/proxy/idps-metadata?sp-entity-id=https://teams.demo.openconext.org/shibboleth"
                               backingFilePath="/etc/shibboleth/engineblock-idps-metadata-saml2.xml"
                               reloadInterval="7200">
             </MetadataProvider>
