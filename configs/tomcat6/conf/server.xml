@@ -54,11 +54,6 @@
                   xmlValidation="false"
                   xmlNamespaceAware="false" />
 
-            <Host name="mujina-idp._OPENCONEXT_DOMAIN_" appBase="webapps/mujina-idp._OPENCONEXT_DOMAIN_"/>
-            <Host name="mujina-sp._OPENCONEXT_DOMAIN_" appBase="webapps/mujina-sp._OPENCONEXT_DOMAIN_"/>
-            <Host name="teams._OPENCONEXT_DOMAIN_" appBase="webapps/teams._OPENCONEXT_DOMAIN_"/>
-            <Host name="api._OPENCONEXT_DOMAIN_" appBase="webapps/api._OPENCONEXT_DOMAIN_"/>
-            <Host name="grouper._OPENCONEXT_DOMAIN_" appBase="webapps/grouper._OPENCONEXT_DOMAIN_"/>
         </Engine>
     </Service>
 </Server>

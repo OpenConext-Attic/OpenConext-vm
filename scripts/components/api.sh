@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -d /usr/share/tomcat6/webapps/api.demo.openconext.org ]
+if [ ! -d /usr/share/tomcat6/webapps/api.$OC_DOMAIN ]
 then
     cd /tmp    
     git clone git://github.com/OpenConext/OpenConext-api.git
@@ -25,14 +25,17 @@ then
 
    	# create Tomcat-specific context configuration file
     API_WAR=`basename /usr/share/tomcat6/wars/coin-api-*.war`
-    mkdir -p /usr/share/tomcat6/conf/Catalina/api.demo.openconext.org
+    mkdir -p /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN
     echo "<Context path=\"/v1\" docBase=\"/usr/share/tomcat6/wars/$API_WAR\"/>" > \
-        /usr/share/tomcat6/conf/Catalina/api.demo.openconext.org/v1.xml
+        /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN/v1.xml
 
     echo "create database api default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
 
-    mkdir -p /usr/share/tomcat6/webapps/api.demo.openconext.org
+    mkdir -p /usr/share/tomcat6/webapps/api.$OC_DOMAIN
     chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
+
+    SERVERXMLLINE='<Host name="api.'$OC_DOMAIN'" appBase="webapps/api.'$OC_DOMAIN'"/>'
+    sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
 
 		# clean up afterwards
     rm -rf /tmp/OpenConext-api

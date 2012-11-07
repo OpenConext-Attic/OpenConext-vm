@@ -48,6 +48,11 @@ then
     mkdir -p /usr/share/tomcat6/webapps/mujina-idp.demo.openconext.org
     chown -R tomcat:tomcat /usr/share/tomcat6/webapps/
 
+    SERVERXMLLINE1='<Host name="mujina-idp.'$OC_DOMAIN'" appBase="webapps/mujina-idp.'$OC_DOMAIN'"/>'
+    sed -i "s#</Engine>#$SERVERXMLLINE1\n</Engine>#" /usr/share/tomcat6/conf/server.xml
+    SERVERXMLLINE2='<Host name="mujina-sp.'$OC_DOMAIN'" appBase="webapps/mujina-sp.'$OC_DOMAIN'"/>'
+    sed -i "s#</Engine>#$SERVERXMLLINE2\n</Engine>#" /usr/share/tomcat6/conf/server.xml
+
     rm -rf /tmp/Mujina
 
     service tomcat6 restart

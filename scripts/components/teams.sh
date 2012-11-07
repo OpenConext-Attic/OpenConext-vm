@@ -35,5 +35,9 @@ then
       
     mkdir -p /usr/share/tomcat6/webapps/teams.demo.openconext.org
     chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
+
+    SERVERXMLLINE='<Host name="teams.'$OC_DOMAIN'" appBase="webapps/teams.'$OC_DOMAIN'"/>'
+    sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
+
 		rm -rf /tmp/OpenConext-teams
 fi
