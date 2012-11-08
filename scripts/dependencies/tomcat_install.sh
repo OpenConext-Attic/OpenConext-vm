@@ -35,7 +35,7 @@ cp -f $OC_BASEDIR/configs/tomcat6/conf/classpath_properties/* $CATALINA_HOME/con
 keytool -delete -alias "openconext cacert" \
   -keystore /etc/pki/java/cacerts -storepass changeit -noprompt > /dev/null
 
-keytool -import -file /etc/httpd/keys/openconext_cabundle.pem \
+keytool -import -file /etc/httpd/keys/openconext_ca.pem \
   -trustcacerts -alias "openconext cacert" \
   -keystore /etc/pki/java/cacerts -storepass changeit -noprompt
 

@@ -2,22 +2,25 @@
 
 KEY_DIR=/etc/httpd/keys
 
+CA_KEY_PASSWORD=mysecret
+
 function generate_new_certs() {
+
   TMP_DIR=/tmp/$$_$RANDOM
   mkdir $TMP_DIR
 
-  # Setup a (throwaway) CA
-  openssl req -new -x509 -days 3650 \
-  -extensions v3_ca \
-  -passout pass:mysecret \
-  -keyout $TMP_DIR/ca.key \
-  -subj "/O=OpenConext CA" \
-  -out $TMP_DIR/ca.crt
+  # We use a one-time generated CA key/cert.
+  # These were generated using this command:
+  # openssl req -new -x509 -days 3650 \
+  # -extensions v3_ca -passout pass:mysecret -keyout $TMP_DIR/ca.key \
+  # -subj "/O=OpenConext CA" \
+  # -out $TMP_DIR/ca.crt
+
 
   # Index and serial files
   echo -n "" > $TMP_DIR/ca_index.txt
   # Here we do a nasty trick. Normally, a CA should issue subsequent serial numbers, and not give the same serial twice.
-  # However, as we do not keep state spanning over (possibly) multiple installs, we cannot keep a real serial.
+  # However, as we do not keep state over (possibly) multiple installs, we cannot keep a real serial.
   # Therefore, just starting with a random serial, and hope we do not clash with earlier/later installs.
   # In the end, it's only a self-issued cert for a self-managed domain anyway...
   echo "$RANDOM" > $TMP_DIR/serial.txt
@@ -60,9 +63,9 @@ commonName=*.$OC_DOMAIN
   -name OpenConext \
   -notext \
   -config $TMP_DIR/ca-config.cfg \
-  -cert $TMP_DIR/ca.crt \
-  -keyfile $TMP_DIR/ca.key \
-  -passin pass:mysecret \
+  -cert $OC_BASEDIR/certs/openconext_ca.pem \
+  -keyfile $OC_BASEDIR/certs/openconext_ca.key \
+  -passin pass:$CA_KEY_PASSWORD \
   -in $TMP_DIR/server.csr \
   -days 1825 \
   -batch \
@@ -72,9 +75,12 @@ commonName=*.$OC_DOMAIN
   # Now we have the key and the certificates, copy them to the right place
   cp $TMP_DIR/server.crt $KEY_DIR/openconext.pem
   cp $TMP_DIR/server.key $KEY_DIR/openconext.key
-  cp $TMP_DIR/ca.crt $KEY_DIR/openconext_cabundle.pem
+
+  cp $OC_BASEDIR/certs/openconext_ca.pem $KEY_DIR/openconext_ca.pem
 
   # Delete working directory (including the throwaway-CA... )
+  echo "ca key:"
+  cat $TMP_DIR/ca.key
   rm -Rf $TMP_DIR
 }
 
@@ -83,7 +89,7 @@ function explain_bring_your_own() {
   echo "They should be called:"
   echo "openconext.pem (the certificate)"
   echo "openconext.key (the private key, not password protected)"
-  echo "openconext_cabundle.pem (the trust chain)"
+  echo "openconext_ca.pem (the trust chain)"
   echo ""
   echo "Place the files and press enter to validate (by a configtest of httpd)"
   read FOOBAR # input not used afterwards
@@ -121,9 +127,9 @@ else
   echo "Will use the default set of SSL certificates."
 fi
 
-cp $KEY_DIR/openconext_cabundle.pem /opt/www/welcome/openconext_cabundle.crt
+cp $KEY_DIR/openconext_ca.pem /opt/www/welcome/openconext_ca.crt
 
 # Make certificate/key available for other script parts, as variables
-OC_CACERT=`sed -e '1d;$d' $KEY_DIR/openconext_cabundle.pem | tr -d '\n'`
+OC_CACERT=`sed -e '1d;$d' $KEY_DIR/openconext_ca.pem | tr -d '\n'`
 OC_CERT=`sed -e '1d;$d' $KEY_DIR/openconext.pem | tr -d '\n'`
 OC_KEY=`sed -e '1d;$d' $KEY_DIR/openconext.key | tr -d '\n'`

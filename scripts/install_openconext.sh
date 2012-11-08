@@ -272,7 +272,7 @@ echo; echo
 echo "Install script is done."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static testidp mujina-sp mujina-idp teams api"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp teams api"
 HOSTSLINE="$OC_DOMAIN" # the domain itself
 for comp in $COMPONENTS
 do
