@@ -279,7 +279,7 @@ do
   HOSTSLINE="$HOSTSLINE $comp.$OC_DOMAIN"
 done
 
-echo "The hosts-file of computers that want to use this OpenConext instance should contain the following entry: "
+echo "The hosts-file of computers (other than this VM) that want to use this OpenConext instance should contain the following entry: "
 echo "-----"
 echo "IP_ADDRESS $HOSTSLINE"
 echo "-----"

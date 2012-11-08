@@ -4,7 +4,6 @@ echo "Installing httpd if not present. Will enable in runlevel 2,3,5."
 $YUM -y install httpd mod_ssl &&
 chkconfig --level 235 httpd on &&
 
-# TODO: what about the components' config files? Only the _ ones are copied here now.
 cp -f $OC_BASEDIR/configs/httpd/conf.d/_*  /etc/httpd/conf.d
 
 for httpdConfigFile in /etc/httpd/conf.d/*
@@ -20,8 +19,8 @@ mkdir -p /opt/www/welcome
 
 cp -Rf $OC_BASEDIR/data/catchall/* /opt/www/catchall/
 cp -Rf $OC_BASEDIR/data/welcome/* /opt/www/welcome/
+sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /opt/www/welcome/index.html
 
-echo "This domain is not (yet) configured for OpenConext. Perhaps a not-installed component?" > /opt/www/catchall/index.html
 ###########################
 # Install SSL certificate #
 ###########################
