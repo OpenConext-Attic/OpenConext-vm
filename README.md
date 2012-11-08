@@ -1,8 +1,65 @@
 # OpenConext Virtual Machine
 
-These are the source files to build an OpenConext Virtual Machine. We do not make assumptions on how you create the actual VM, but we do provide a way to build a VM using VirtualBox, VeeWee and Vagrant. Note that you are not forced to build the initial VM like this. 
+These are the source files to build an OpenConext Virtual Machine.
+We do not make assumptions on how you create the actual VM, but we do provide a way to build a VM using VirtualBox, VeeWee and Vagrant.
+
+Note that you are not forced to build the initial VM like this.
+
+# Bring your own VM instance
+Prerequisites: a VM running CentOS 6 or RedHat EL 6.
+
+## 1. Clone
+From within the VM, clone this repo:
+
+    git clone git://github.com/OpenConext/OpenConext-vm.git
+
+(Install git first, if not already present: ````yum install git````)
+## 2. Run the installer
+Run the install script:
+
+    bash OpenConext-vm/scripts/install_openconext.sh
+
+By default, the installer will run an 'unattended' setup, choosing sensible defaults.
+If you want to install a specific version of the platform, install a subset of components or change the default domain (demo.openconext.org), run the installer with a ````-i```` flag:
+
+    bash OpenConext-vm/scripts/install_openconext.sh -i
+
+## 3. Change your hosts-file
+The installer ends with a message suggesting to add an entry to your hosts-file (that is: of the VM-host).
+Follow this suggestion.
+
+## 4. Visit Welcome URL
+Point your browser to the welcome-URL, as mentioned by the installer.
+_Install the CA's certificate in your browser_ as mentioned on that page.
+
+
+## Platform usage
+
+You can now use the following OpenConext components:
+
+* [OpenConext Profile](https://profile.demo.openconext.org)
+* [OpenConext Manage](https://manage.demo.openconext.org)
+* [OpenConext ServiceRegistry](https://serviceregistry.demo.openconext.org)
+* [OpenConext Teams](https://teams.demo.openconext.org)
+* [OpenConext Api](https://api.demo.openconext.org/v1/test)
+* [OpenConext Mujina-SP](https://mujina-sp.demo.openconext.org)
+
+If you want to make modifications to the components a Samba share is available at:
+
+    smb://172.18.5.2/www
+    username: openconext
+    password: openconext
+
+If you want to query or update the database, you can connect to it either from the prompt:
+
+    $ vagrant ssh
+    $ mysql -u root -p
+    Enter password: c0n3xt
+
 
 # Requirements for building the initial VM (in order) with Vagrant and Veewee
+
+**Only required when building your own VM using vagrant**
 
 Please do not start installing the software. There are step-by-step guides in the next sections.
 
@@ -11,15 +68,12 @@ Please do not start installing the software. There are step-by-step guides in th
 * [Git](http://http://git-scm.com/)
 * Patience (a full build, depending on your network connection, should take about 1 hour)
 
-# Requirements for installing the OpenConext software on your VM
-
-* [Git](http://http://git-scm.com/)
-
-# Requirements on Debian/Ubuntu
-Install Virtualbox, see: https://www.virtualbox.org/wiki/Linux_Downloads
-Install required packages:
+And on Debian/Ubuntu install these required packages (for using rbenv):
 
     $ sudo apt-get install git libssl-dev libopenssl-ruby zlib zlib1g-dev
+
+Install Virtualbox, see: https://www.virtualbox.org/wiki/Linux_Downloads
+
 
 # Installation (Note that this is only necessary if you don't already have a CentOS-6+ VM)
 
@@ -95,30 +149,6 @@ into your browser.
 
 To login in on the several Service Providers you can choose OpenConext Mujina IdP from the WAYF and login with admin, secret.
 
-# Platform usage
-
-You can now use the following OpenConext components:
-
-* [OpenConext Profile](https://profile.demo.openconext.org)
-* [OpenConext Manage](https://manage.demo.openconext.org)
-* [OpenConext ServiceRegistry](https://serviceregistry.demo.openconext.org)
-* [OpenConext Teams](https://teams.demo.openconext.org)
-* [OpenConext Api](https://api.demo.openconext.org/v1/test)
-* [OpenConext Mujina-SP](https://mujina-sp.demo.openconext.org)
-
-If you want to make modifications to the components a Samba share is available at:
-
-    smb://172.18.5.2/www
-    username: openconext
-    password: openconext
-    
-If you want to query or update the database, you can connect to it either from the prompt:
-
-    $ vagrant ssh
-    $ mysql -u root -p
-    Enter password: c0n3xt
-
-Or use the host DNS entry demo.openconext.org and default port 3306.
     
 # VM usage
 

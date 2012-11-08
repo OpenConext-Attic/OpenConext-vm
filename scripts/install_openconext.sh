@@ -128,12 +128,12 @@ source $OC_SCRIPTDIR/$OC_VERSION
 
 for COMPONENT in $OC_COMPONENTS
 do
-  if [[ COMPONENT == "SR" ]]
+  if [[ $COMPONENT == "SR" ]]
   then
     DEP_PHP=true
     DEP_MYSQL=true
   fi
-  if [[ COMPONENT == "EB" ]]
+  if [[ $COMPONENT == "EB" ]]
   then
     DEP_PHP=true
     DEP_MYSQL=true
@@ -141,18 +141,18 @@ do
     DEP_LDAP=true
   fi
 
-  if [[ COMPONENT == "API" || COMPONENT == "MUJINA" || COMPONENT == "TEAMS" || COMPONENT == "GROUPER" ]]
+  if [[ $COMPONENT == "API" || $COMPONENT == "MUJINA" || $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER" ]]
   then
     DEP_TOMCAT=true
     DEP_MAVEN=true
   fi
 
-  if [[ COMPONENT == "API" || COMPONENT == "TEAMS" || COMPONENT == "GROUPER" ]]
+  if [[ $COMPONENT == "API" || $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER" ]]
   then
     DEP_MYSQL=true
   fi
 
-  if [[ COMPONENT == "TEAMS" || COMPONENT == "GROUPER" ]]
+  if [[ $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER" ]]
   then
     DEP_SHIBBOLETH=true
   fi
