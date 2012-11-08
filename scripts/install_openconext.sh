@@ -72,13 +72,15 @@ then
   echo "2. Components"
   echo "You can either install all components, or a subset of them."
   echo "Possible options are:"
-  echo "a. All (EngineBlock, Service registry, Manage, API, Teams, SelfService, Mujina IDP/SP)"
-  echo "b. EngineBlock, Service registry, Mujina IDP/SP"
-  echo "c. Mix and match (experts only)"
+  echo "1. All (EngineBlock, Service registry, Manage, API, Teams, SelfService, Mujina IDP/SP)"
+  echo "2. EngineBlock, Service registry, Mujina IDP/SP"
+  echo "3. Mix and match (experts only)"
+  echo
+  echo -n "Component choice: [1]: "
   read COMPONENTCHOICE
   case "$COMPONENTCHOICE" in
-    "a" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER";;
-    "b" ) OC_COMPONENTS="EB SR MUJINA";;
+    "1" | "" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER";;
+    "2" ) OC_COMPONENTS="EB SR MUJINA";;
     * )
         OC_COMPONENTS=""
         for component in EB SR MANAGE GROUPER API TEAMS MUJINA
@@ -95,21 +97,25 @@ then
   esac
 
   echo ""
+  VERSION_DEFAULT=$OC_VERSION
   ALLVERSIONFILES=$(cd $OC_SCRIPTDIR && ls versions*.sh)
   echo "3. Component versions"
-  echo "The recommended version of OpenConext to run is the currently 'stable' one, which is: $OC_VERSION."
-  echo "Other options are: " $ALLVERSIONFILES
-  echo -n "Version: [$OC_VERSION] "
-  read OC_VERSION
 
-  while [ ! -f $OC_SCRIPTDIR/$OC_VERSION ]
+  OC_VERSION_INPUT=""
+  while [ ! -f $OC_SCRIPTDIR/$OC_VERSION_INPUT ]
   do
-    echo "Version file $OC_VERSION does not exist."
-    echo "The options are: " $ALLVERSIONFILES
-    echo -n "Version: "
-    read OC_VERSION
-  done
+    echo "The recommended version of OpenConext to run is the currently 'stable' one, which is: $VERSION_DEFAULT."
+    echo "Other options are: " $ALLVERSIONFILES
+    echo -n "Version: [$VERSION_DEFAULT] "
+    read OC_VERSION_INPUT
 
+    if [ "$OC_VERSION_INPUT" == "" ]
+    then
+      OC_VERSION_INPUT=$VERSION_DEFAULT
+    fi
+  done
+  OC_VERSION=$OC_VERSION_INPUT
+  echo "Using version file $OC_VERSION"
 fi
 
 
@@ -170,39 +176,39 @@ do
   source $OC_SCRIPTDIR/dependencies/$subscript
 done
 
-if [[ $DEP_MAVEN -eq "true" ]]
+if [[ $DEP_MAVEN == "true" ]]
 then
   echo "Installing Maven..."
   source $OC_SCRIPTDIR/dependencies/maven_install.sh
 fi
-if [[ $DEP_TOMCAT -eq "true" ]]
+if [[ $DEP_TOMCAT == "true" ]]
 then
   echo "Installing Tomcat..."
   source $OC_SCRIPTDIR/dependencies/tomcat_install.sh
 fi
 
-if [[ $DEP_MEMCACHED -eq "true" ]]
+if [[ $DEP_MEMCACHED == "true" ]]
 then
   echo "Installing memcached..."
   source $OC_SCRIPTDIR/dependencies/memcached_install.sh
 fi
-if [[ $DEP_PHP -eq "true" ]]
+if [[ $DEP_PHP == "true" ]]
 then
   echo "Installing PHP..."
   source $OC_SCRIPTDIR/dependencies/php_install.sh
 fi
-if [[ $DEP_MYSQL -eq "true" ]]
+if [[ $DEP_MYSQL == "true" ]]
 then
   echo "Installing MySQL..."
   source $OC_SCRIPTDIR/dependencies/mysql_install.sh
 fi
-if [[ $DEP_LDAP -eq "true" ]]
+if [[ $DEP_LDAP == "true" ]]
 then
   echo "Installing OpenLDAP..."
   source $OC_SCRIPTDIR/dependencies/openldap_install.sh
   source $OC_SCRIPTDIR/dependencies/openconext_ldap.sh
 fi
-if [[ $DEP_SHIBBOLETH -eq "true" ]]
+if [[ $DEP_SHIBBOLETH == "true" ]]
 then
   echo "Installing Shibboleth..."
   source $OC_SCRIPTDIR/dependencies/shibboleth_install.sh

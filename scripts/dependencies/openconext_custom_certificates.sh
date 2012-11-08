@@ -16,13 +16,17 @@ function generate_new_certs() {
 
   # Index and serial files
   echo -n "" > $TMP_DIR/ca_index.txt
-  echo "01" > $TMP_DIR/serial.txt
+  # Here we do a nasty trick. Normally, a CA should issue subsequent serial numbers, and not give the same serial twice.
+  # However, as we do not keep state spanning over (possibly) multiple installs, we cannot keep a real serial.
+  # Therefore, just starting with a random serial, and hope we do not clash with earlier/later installs.
+  # In the end, it's only a self-issued cert for a self-managed domain anyway...
+  echo "$RANDOM" > $TMP_DIR/serial.txt
   echo "[ ca ]
 default_ca      = OpenConext            # The default ca section
 [ OpenConext ]
 database = $TMP_DIR/ca_index.txt
 serial = $TMP_DIR/serial.txt
-default_md     = md5
+default_md     = sha1
 policy         = policy_any            # default policy
 email_in_dn    = no                    # Don't add the email into cert DN
 name_opt       = ca_default            # Subject name display option
