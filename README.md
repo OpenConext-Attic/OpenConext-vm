@@ -1,15 +1,19 @@
 # OpenConext Virtual Machine
 
-These are the source files to build an OpenConext Virtual Machine.
+These are the source files to build an OpenConext Virtual Machine. We do not make assumptions on how you create the actual VM, but we do provide a way to build a VM using VirtualBox, VeeWee and Vagrant. Note that you are not forced to build the initial VM like this. 
 
-# Requirements for building the OpenConext VM (in order)
+# Requirements for building the initial VM (in order) with Vagrant and Veewee
 
-Do not start installing 
+Please do not start installing the software. There are step-by-step guides in the next sections.
 
 * The **latest** version of [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-* [RVM](https://rvm.io/)
+* [rbenv](https://github.com/sstephenson/rbenv)
 * [Git](http://http://git-scm.com/)
 * Patience (a full build, depending on your network connection, should take about 1 hour)
+
+# Requirements for installing the OpenConext software on your VM
+
+* [Git](http://http://git-scm.com/)
 
 # Requirements on Debian/Ubuntu
 Install Virtualbox, see: https://www.virtualbox.org/wiki/Linux_Downloads
@@ -17,78 +21,40 @@ Install required packages:
 
     $ sudo apt-get install git libssl-dev libopenssl-ruby zlib zlib1g-dev
 
-# Installation
+# Installation (Note that this is only necessary if you don't already have a CentOS-6+ VM)
 
 First install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) if you have not done already.
 Make sure you use the latest version. 
 
 The OpenConext Virtual Machines scripts uses [Ruby](http://www.ruby-lang.org/en/), [Vagrant](http://vagrantup.com/) and [VeeWee](https://github.com/jedi4ever/veewee) for building up the VM. 
-You don't have to install these dependencies as we use [Bundler](http://gembundler.com/) to install gems in the local gemset (to avoid polluting your global applications and/ or gemset).
+You don't have to install these dependencies as we use [Bundler](http://gembundler.com/) to install these.
 
-To use Ruby and use local gemsets we first need to install [RVM](https://rvm.io//rvm/install/) using:
+To use Ruby and use gemsets we first need to install [rbenv](https://github.com/sstephenson/rbenv#section_2). The instructions on the github page are simple to follow. We also make use of the following plugins for rbenv to manage ruby versions and the gems:
 
-    $ curl https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash -s stable
+* [rbenv Ruby Build Plugin](https://github.com/sstephenson/ruby-build)    
+* [rbenv Bundler Plugin](https://github.com/carsomyr/rbenv-bundler)    
 
-Make sure to restart your terminal, or session in order to add the directory of the
-`rvm` command to your PATH. 
+With the two plugins installed (and of course rbenv) you can simply tell rbenv to install the version of ruby we use:
 
-Due to an incompatibility with the default openssl installation on mac-os it might be necessary to (re)compile ruby with a different openssl. See for more information:
-
-    http://blog.55minutes.com/2012/01/fixing-a-segmentation-fault-in-ruby-193/
-
-Now we can install the latests Ruby version (*NOTE* if you are on mac-os you will have to use the second command) : 
-
-    $ rvm install 1.9.3 
-
-Or
-
-    $ rvm install 1.9.3 --with-openssl-dir=/opt/local --with-iconv-dir=/opt/local
-
-
-And set the 1.9.3 version to the default (not strictly necessary)
-
-    $ rvm --default use 1.9.3
-
-Please note that RVM uses bash profile to load itself in your shell.
-Thus, RVM doesn't load when you use another shell or don't login to your shell.
-In gnome-terminal on Ubuntu you can enable login by: Edit > Profile preferences > Run command as a login shell.
+    $ rbenv install 1.9.3-p286
+    $ rbenv rehash
 
 Verify the correct installation by typing:
 
-    $ ruby -v
+    $ rbenv versions
 
-You should see:
+You should see (at least):
 
-    ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-darwin10.8.0]
+* 1.9.3-p286
 
 Now get the source code of the  OpenConext VM:
 
     $ git clone git://github.com/OpenConext/OpenConext-vm.git
     $ cd OpenConext-vm
     
-Now you are prompted to accept the OpenConext .rvmrc file:
-
-    RVM has encountered a new or modified .rvmrc file in the current directory =
-    This is a shell script and therefore may contain any shell commands.       =
-
-    Examine the contents of this file carefully to be sure the contents are    =
-    safe before trusting it! ( Choose v[iew] below to view the contents )      =
-
-    Do you wish to trust this .rvmrc file? (/path/OpenConext-vm/.rvmrc)
-    y[es], n[o], v[iew], c[ancel]>
-
-Accept the .rmvrc file by typing **y**
-
-Now install bundler as local gem:
+	Now install bundler as gem in your ruby version (managed by rbenv):
 
     $ gem install bundler
-
-If this results in a zlib error, install zlib with the command:
-    
-    $ rvm pkg install zlib
-    $ rvm reinstall 1.9.3
-
-You may also need to install zlib1g-dev at your OS
 
 Next use the gems defined in the Gemfile to install vagrant and veewee:
 
