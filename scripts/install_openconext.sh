@@ -66,7 +66,7 @@ then
   echo "1. Hostname"
   echo "What is the base domain of the OpenConext instance? This will be used in all URLs as well as in SSL certificates (to be setup later on)."
   echo -n "Base domain: [$OC_DOMAIN] "
-  read OC_HOSTNAME
+  read OC_DOMAIN
 
   echo ""
   echo "2. Components"
