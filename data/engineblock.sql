@@ -40,8 +40,9 @@ CREATE TABLE `consent` (
 
 LOCK TABLES `consent` WRITE;
 /*!40000 ALTER TABLE `consent` DISABLE KEYS */;
-INSERT INTO `consent` VALUES ('2012-06-27 09:01:37','2012-06-27 09:01:37','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e'),
-('2012-06-27 09:13:32','2012-06-27 09:13:32','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e');
+INSERT INTO `consent` VALUES
+('2012-06-27 09:01:37','2012-06-27 09:01:37','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e'),
+('2012-06-27 09:13:32','2012-06-27 09:13:32','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e');
 /*!40000 ALTER TABLE `consent` ENABLE KEYS */;
 UNLOCK TABLES;
 
