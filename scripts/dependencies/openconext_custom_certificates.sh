@@ -24,7 +24,10 @@ function generate_new_certs() {
   # Therefore, just starting with a random serial, and hope we do not clash with earlier/later installs.
   # In the end, it's only a self-issued cert for a self-managed domain anyway...
   # Normal Bash $RANDOM does not suffice because it generates a too large number too often.
-  echo | awk ' { srand(); printf ( "%d\n", rand()*100) } ' > $TMP_DIR/serial.txt
+  #
+  # rand() * 100 because we want to end up with an integer between 0 and 100
+  # +10 because the serial format does not like 1-digit numbers. So the net result is between 10-110
+  echo | awk ' { srand(); printf ( "%d\n", rand()*100+10) } ' > $TMP_DIR/serial.txt
   echo "[ ca ]
 default_ca      = OpenConext            # The default ca section
 [ OpenConext ]
