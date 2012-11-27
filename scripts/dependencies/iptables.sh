@@ -21,7 +21,10 @@ COMMIT
 EOF
 
 # ipv4
-cp /etc/sysconfig/iptables /etc/sysconfig/iptables-before-openconext-install
+if [ -f /etc/sysconfig/iptables ]
+then
+  cp /etc/sysconfig/iptables /etc/sysconfig/iptables-before-openconext-install
+fi
 mv /etc/sysconfig/iptables-openconext /etc/sysconfig/iptables
 
 
@@ -42,7 +45,10 @@ COMMIT
 EOF2
 
 # ipv6
-cp /etc/sysconfig/ip6tables /etc/sysconfig/ip6tables-before-openconext-install
+if [ -f /etc/sysconfig/ip6tables ]
+then
+  cp /etc/sysconfig/ip6tables /etc/sysconfig/ip6tables-before-openconext-install
+fi
 mv /etc/sysconfig/ip6tables-openconext /etc/sysconfig/ip6tables
 
 service iptables restart
