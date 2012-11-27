@@ -1,11 +1,13 @@
 #!/bin/sh
 
-$YUM list installed | grep samba > /dev/null
+$YUM list installed | grep samba\\. > /dev/null
 if [ $? -ne 0 ]
 then
-    $YUM -y install samba
+  if $YUM info samba > /dev/null
+  then
+      $YUM -y install samba
 
-    cat >> /etc/samba/smb.conf << SMB
+      cat >> /etc/samba/smb.conf << SMB
 [www]
     comment = OpenConext /opt/www
     path = /opt/www
@@ -19,11 +21,14 @@ then
     valid users = openconext
 SMB
 
-    useradd -c "OpenConext user" openconext
-    (echo openconext; echo openconext) | smbpasswd -as openconext
+      useradd -c "OpenConext user" openconext
+      (echo openconext; echo openconext) | smbpasswd -as openconext
 
-    chown -Rf openconext /opt/www
+      chown -Rf openconext /opt/www
 
-    chkconfig smb on &&
-    service smb restart
+      chkconfig smb on &&
+      service smb start
+    else
+      echo "No Samba package available, will skip it."
+    fi
 fi

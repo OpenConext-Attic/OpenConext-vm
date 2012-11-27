@@ -9,8 +9,7 @@ function generate_new_certs() {
   TMP_DIR=/tmp/$$_$RANDOM
   mkdir $TMP_DIR
 
-  # We use a one-time generated CA key/cert.
-  # These were generated using this command:
+  # The CA key/cert were generated using this command:
   # openssl req -new -x509 -days 3650 \
   # -extensions v3_ca -passout pass:mysecret -keyout $TMP_DIR/ca.key \
   # -subj "/O=OpenConext CA" \
@@ -19,11 +18,13 @@ function generate_new_certs() {
 
   # Index and serial files
   echo -n "" > $TMP_DIR/ca_index.txt
+
   # Here we do a nasty trick. Normally, a CA should issue subsequent serial numbers, and not give the same serial twice.
   # However, as we do not keep state over (possibly) multiple installs, we cannot keep a real serial.
   # Therefore, just starting with a random serial, and hope we do not clash with earlier/later installs.
   # In the end, it's only a self-issued cert for a self-managed domain anyway...
-  echo "$RANDOM" > $TMP_DIR/serial.txt
+  # Normal Bash $RANDOM does not suffice because it generates a too large number too often.
+  echo | awk ' { srand(); printf ( "%d\n", rand()*100) } ' > $TMP_DIR/serial.txt
   echo "[ ca ]
 default_ca      = OpenConext            # The default ca section
 [ OpenConext ]
@@ -78,10 +79,8 @@ commonName=*.$OC_DOMAIN
 
   cp $OC_BASEDIR/certs/openconext_ca.pem $KEY_DIR/openconext_ca.pem
 
-  # Delete working directory (including the throwaway-CA... )
-  echo "ca key:"
-  cat $TMP_DIR/ca.key
-  rm -Rf $TMP_DIR
+  # Delete working directory
+  #rm -Rf $TMP_DIR
 }
 
 function explain_bring_your_own() {
@@ -105,7 +104,7 @@ function explain_bring_your_own() {
   fi
 }
 
-if [ $INTERACTIVE == "true" ]
+if [ "$INTERACTIVE" == "true" ]
 then
   echo; echo;
   echo "For HTTP over SSL and SAML signing/encryption, a set of self-signed, default keys and certificates are installed. You can customize this now, if you want to."
