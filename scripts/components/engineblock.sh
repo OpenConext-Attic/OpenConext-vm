@@ -70,3 +70,9 @@ cat $OC_BASEDIR/configs/httpd/conf.d/profile.conf  | \
 
 # Make public key available for other components
 ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`
+
+mkdir -p /var/log/surfconext
+# TODO: is this chmod really neccessary?
+chmod o+w /var/log/surfconext
+touch /var/log/surfconext/engineblock.log
+chmod o+w /var/log/surfconext/engineblock.log
