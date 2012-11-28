@@ -170,7 +170,6 @@ for subscript in \
   base_packages.sh \
   hosts_install.sh \
   iptables.sh \
-  openconext_logging.sh \
   openconext_configuration.sh \
   samba_install.sh \
   openconext_infra_httpd.sh \
