@@ -24,6 +24,12 @@ fi
 # Modify the EngineBlock configuration file #
 #############################################
 
+if [ ! -f /etc/surfconext/engineblock.ini ]
+then
+    mkdir -p /etc/surfconext/
+    sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/engineblock.ini > /etc/surfconext/engineblock.ini
+fi
+
 # Edit the profile.sh file to set correct environment variable
 echo 'export ENGINEBLOCK_ENV="demo"' > /etc/profile.d/openconext.sh
 

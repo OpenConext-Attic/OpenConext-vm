@@ -14,6 +14,7 @@ then
   exit 1
 fi
 
+trap "echo \"caught signal, will exit installation script\"; exit" INT TERM EXIT
 
 # Base directory where the scripts (and config etc) is stored.
 OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
@@ -26,7 +27,7 @@ OC_DOMAIN=demo.openconext.org
 OC_VERSION=versions_v2.10.sh
 OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 MVN_VERSION=3.0.4
-VERBOSE=true
+VERBOSE=false
 
 
 ## Suppress output of various commands by default
@@ -170,7 +171,6 @@ for subscript in \
   base_packages.sh \
   hosts_install.sh \
   iptables.sh \
-  openconext_configuration.sh \
   samba_install.sh \
   openconext_infra_httpd.sh \
   openconext_custom_certificates.sh \

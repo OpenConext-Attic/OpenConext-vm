@@ -22,4 +22,10 @@ then
       sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
       /etc/httpd/conf.d/vomanage.conf
 
+  if [ ! -f /etc/surfconext/manage.ini ]
+  then
+      mkdir -p /etc/surfconext/
+      sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/manage.ini > /etc/surfconext/manage.ini
+  fi
+
 fi

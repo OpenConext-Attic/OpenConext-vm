@@ -25,15 +25,20 @@ then
 
 fi
 
+if [ ! -f /etc/surfconext/serviceregistry.config.php ]
+then
+  cp $OC_BASEDIR/configs/surfconext/serviceregistry*.php /etc/surfconext/
+  sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" /etc/surfconext/serviceregistry*.php
+fi
 
 cd /opt/www/serviceregistry/
 ./bin/migrate
 cd -
 
 # Install EngineBlock's certificate for ServiceRegistry
+mkdir -p  /etc/surfconext/serviceregistry-certs/
 cp /etc/surfconext/engineblock.crt /etc/surfconext/serviceregistry-certs/engineblock.crt
 
 
-cat $OC_BASEDIR/configs/httpd/conf.d/serviceregistry.conf  | \
-  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" > \
+sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" $OC_BASEDIR/configs/httpd/conf.d/serviceregistry.conf > \
   /etc/httpd/conf.d/serviceregistry.conf
