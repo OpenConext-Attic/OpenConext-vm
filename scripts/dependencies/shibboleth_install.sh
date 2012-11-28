@@ -20,7 +20,8 @@ chkconfig --level 235 shibd on
 cp -Rf $OC_BASEDIR/configs/shibboleth/* /etc/shibboleth/
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" /etc/shibboleth/shibboleth2.xml
 chown -R shibd:shibd /etc/shibboleth/
-service shibd start
+
+# Not starting Shibd here. Metadata is only available for fetching once all components have been installed.
 
 # httpd config is covered by RPM installation
 

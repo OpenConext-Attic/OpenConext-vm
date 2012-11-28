@@ -7,18 +7,19 @@ if [ ! -h /opt/www/engineblock ]
 then
     $GITCLONE git://github.com/OpenConext/OpenConext-engineblock.git /opt/www/OpenConext-engineblock
     ln -sf /opt/www/OpenConext-engineblock /opt/www/engineblock
-    cd /opt/www/engineblock
-    $GITCHECKOUT ${ENGINEBLOCK_VERSION}
-    cd -
-
-    cp -Rf $OC_BASEDIR/configs/attribute-manipulations /opt/www
-
-    # Create database
-    echo "create database engineblock default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
-    cat $OC_BASEDIR/data/engineblock.sql | \
-      sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
-      mysql -u root --password=c0n3xt engineblock
 fi
+cd /opt/www/engineblock
+$GITCHECKOUT ${ENGINEBLOCK_VERSION}
+
+
+cp -Rf $OC_BASEDIR/configs/attribute-manipulations /opt/www
+
+# Create database
+mysql -u root --password=c0n3xt -e "drop database if exists engineblock; create database engineblock default charset utf8 default collate utf8_unicode_ci;"
+cat $OC_BASEDIR/data/engineblock.sql | \
+  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
+  mysql -u root --password=c0n3xt engineblock
+
 
 #############################################
 # Modify the EngineBlock configuration file #
@@ -62,13 +63,11 @@ chmod o+w /var/log/surfconext/engineblock.log
 
 cd /opt/www/engineblock/
 ./bin/migrate
-cd -
 
 
 # Updating LDAP schema some more...
 ldapmodify -x -D cn=admin,cn=config -w c0n3xt -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
 ldapmodify -x -D cn=admin,cn=config -w c0n3xt -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
-ldapmodify -x -D cn=admin,dc=surfconext,dc=nl -w c0n3xt -f /opt/www/engineblock/ldap/changes/versAccount.ldif
 
 cat $OC_BASEDIR/configs/httpd/conf.d/engine.conf  | \
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \

@@ -14,7 +14,8 @@ then
   exit 1
 fi
 
-trap "echo \"caught signal, will exit installation script\"; exit" INT TERM EXIT
+# Catch ctrl-c and quit, instead of rambling on
+trap "echo \"caught signal, will exit installation script\"; exit" INT TERM
 
 # Base directory where the scripts (and config etc) is stored.
 OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
@@ -48,7 +49,7 @@ fi
 
 # interactive run?
 INTERACTIVE=false
-if [ "$1" == "-i" ]
+if [ $# -gt 0 -a "$1" == "-i" ]
 then
   INTERACTIVE=true
   echo "Running in interactive mode."
@@ -265,11 +266,22 @@ then
   source $OC_SCRIPTDIR/components/teams.sh
 fi
 
-service httpd restart
+
+# stop if running
+if service httpd status > /dev/null
+then
+  service httpd stop
+fi
+service httpd start
+
 if [[ $DEP_TOMCAT -eq "true" ]]
 then
-  echo "Starting Tomcat..."
   service tomcat6 start
+fi
+
+if [[ $DEP_SHIBBOLETH -eq "true" ]]
+then
+  service shibd start
 fi
 
 echo; echo

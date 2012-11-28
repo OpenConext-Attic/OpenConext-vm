@@ -3,27 +3,27 @@
 # Install ServiceRegistry #
 ###########################
 
-if [ ! -h /opt/www/serviceregistry ];
+if [ ! -h /opt/www/serviceregistry ]
 then
     cd /opt/www/
     $GITCLONE git://github.com/OpenConext/OpenConext-serviceregistry.git
     ln -s OpenConext-serviceregistry serviceregistry
     cd -
-    cd /opt/www/serviceregistry
-    $GITCHECKOUT ${SERVICEREGISTRY_VERSION}
-    cd -
-
-    echo "create database serviceregistry default charset utf8 default collate utf8_unicode_ci;" | mysql -u root --password=c0n3xt
-
-    #############################
-    # ServiceRegistry Bootstrap #
-    #############################
-
-    cat $OC_BASEDIR/data/serviceregistry.sql | \
-      sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
-      mysql -u root --password=c0n3xt serviceregistry
-
 fi
+cd /opt/www/serviceregistry
+$GITCHECKOUT ${SERVICEREGISTRY_VERSION}
+cd -
+
+mysql -u root --password=c0n3xt -e "drop database if exists serviceregistry; create database serviceregistry default charset utf8 default collate utf8_unicode_ci;"
+
+#############################
+# ServiceRegistry Bootstrap #
+#############################
+
+cat $OC_BASEDIR/data/serviceregistry.sql | \
+  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
+  mysql -u root --password=c0n3xt serviceregistry
+
 
 if [ ! -f /etc/surfconext/serviceregistry.config.php ]
 then
@@ -33,7 +33,6 @@ fi
 
 cd /opt/www/serviceregistry/
 ./bin/migrate
-cd -
 
 # Install EngineBlock's certificate for ServiceRegistry
 mkdir -p  /etc/surfconext/serviceregistry-certs/
