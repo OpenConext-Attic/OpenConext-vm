@@ -142,7 +142,7 @@ CREATE TABLE `group_provider` (
 
 LOCK TABLES `group_provider` WRITE;
 /*!40000 ALTER TABLE `group_provider` DISABLE KEYS */;
-INSERT INTO `group_provider` VALUES (1,'SURFteams grouper','SURFteams grouper','EngineBlock_Group_Provider_Grouper','SURFteams grouper');
+INSERT INTO `group_provider` VALUES (1,'grouper','SURFteams grouper','EngineBlock_Group_Provider_Grouper','SURFteams grouper');
 /*!40000 ALTER TABLE `group_provider` ENABLE KEYS */;
 UNLOCK TABLES;
 
