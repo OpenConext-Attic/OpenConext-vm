@@ -1239,6 +1239,7 @@ INSERT INTO `janus__metadata` VALUES (1,0,'name:en','','2012-06-12T10:38:18+02:0
 (10,1,'contacts:0:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1'),
 (10,1,'contacts:1:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1'),
 (10,1,'contacts:2:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1'),
+(10,1,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1'),
 (11,0,'name:en','','2012-06-25T16:34:30+02:00','172.18.5.1'),
 (11,0,'name:nl','','2012-06-25T16:34:30+02:00','172.18.5.1'),
 (11,0,'description:en','','2012-06-25T16:34:30+02:00','172.18.5.1'),
@@ -1383,6 +1384,7 @@ INSERT INTO `janus__metadata` VALUES (1,0,'name:en','','2012-06-12T10:38:18+02:0
 (12,1,'contacts:1:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1'),
 (12,1,'contacts:2:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1'),
 (12,1,'coin:no_consent_required','1','2012-06-27T13:24:02+02:00','172.18.5.1');
+
 /*!40000 ALTER TABLE `janus__metadata` ENABLE KEYS */;
 UNLOCK TABLES;
 
