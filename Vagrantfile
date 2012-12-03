@@ -31,5 +31,5 @@ Vagrant::Config.run do |config|
   # folder, and the third is the path on the host to the actual folder.
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
   
-  config.vm.provision :shell, :path => "scripts/install_openconext.sh"
+  config.vm.provision :shell, :path => "scripts/install_openconext_vagrant_wrapper.sh"
 end
