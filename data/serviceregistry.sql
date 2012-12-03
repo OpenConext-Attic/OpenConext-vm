@@ -1383,7 +1383,8 @@ INSERT INTO `janus__metadata` VALUES (1,0,'name:en','','2012-06-12T10:38:18+02:0
 (12,1,'contacts:0:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1'),
 (12,1,'contacts:1:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1'),
 (12,1,'contacts:2:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'coin:no_consent_required','1','2012-06-27T13:24:02+02:00','172.18.5.1');
+(12,1,'coin:no_consent_required','1','2012-06-27T13:24:02+02:00','172.18.5.1'),
+(12,1,'certData','_OPENCONEXT_CERT_','2012-06-12T12:51:28+02:00','172.18.5.1');
 
 /*!40000 ALTER TABLE `janus__metadata` ENABLE KEYS */;
 UNLOCK TABLES;

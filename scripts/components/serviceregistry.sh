@@ -21,7 +21,9 @@ mysql -u root --password=c0n3xt -e "drop database if exists serviceregistry; cre
 #############################
 
 cat $OC_BASEDIR/data/serviceregistry.sql | \
-  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
+  sed \
+    -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" \
+    -e "s~_OPENCONEXT_CERT_~$OC_CERT~" | \
   mysql -u root --password=c0n3xt serviceregistry
 
 
