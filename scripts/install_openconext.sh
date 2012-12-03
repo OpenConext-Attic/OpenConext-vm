@@ -25,7 +25,7 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
 OC_DOMAIN=demo.openconext.org
-OC_VERSION=versions_v2.10.sh
+OC_VERSION=versions_master.sh
 OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 MVN_VERSION=3.0.4
 VERBOSE=false

@@ -341,7 +341,7 @@ CREATE TABLE `janus__message` (
 
 LOCK TABLES `janus__message` WRITE;
 /*!40000 ALTER TABLE `janus__message` DISABLE KEYS */;
-INSERT INTO `janus__message` VALUES (1,0,'New entity created','User: admin<br />Permalink: <a href=\"https://serviceregistry.demo.openconext.org/simplesaml/module.php/janus/editentity.php?eid=1\">https://serviceregistry.demo.openconext.org/simplesaml/module.php/janus/editentity.php?eid=1</a><br /><br />A new entity has been created.<br />Entityid: https://engine.demo.openconext.org/authentication/sp/metadata<br />Entity type: saml20-sp',1,'ENTITYCREATE','no','2012-06-12T10:38:18+02:00','172.18.5.1'),;
+INSERT INTO `janus__message` VALUES (1,0,'New entity created','User: admin<br />Permalink: <a href=\"https://serviceregistry.demo.openconext.org/simplesaml/module.php/janus/editentity.php?eid=1\">https://serviceregistry.demo.openconext.org/simplesaml/module.php/janus/editentity.php?eid=1</a><br /><br />A new entity has been created.<br />Entityid: https://engine.demo.openconext.org/authentication/sp/metadata<br />Entity type: saml20-sp',1,'ENTITYCREATE','no','2012-06-12T10:38:18+02:00','172.18.5.1');
 /*!40000 ALTER TABLE `janus__message` ENABLE KEYS */;
 UNLOCK TABLES;
 

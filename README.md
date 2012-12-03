@@ -50,7 +50,11 @@ If you want to make modifications to the components a Samba share is available a
     username: openconext
     password: openconext
 
-If you want to query or update the database, you can connect to it either from the prompt:
+If you want to query or update the database you will have to open the 3306 port in a VM shell 
+
+    iptables -I INPUT -p tcp -m tcp  --dport 3306 -j ACCEPT
+
+Then can connect to it either from the prompt:
 
     $ vagrant ssh
     $ mysql -u root -p
