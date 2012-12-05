@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.61, for redhat-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.1.66, for redhat-linux-gnu (i386)
 --
--- Host: localhost    Database: serviceregistry
+-- Host: localhost    Database: srnew
 -- ------------------------------------------------------
--- Server version	5.1.61
+-- Server version	5.1.66
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -39,19 +39,19 @@ CREATE TABLE `db_changelog` (
 
 LOCK TABLES `db_changelog` WRITE;
 /*!40000 ALTER TABLE `db_changelog` DISABLE KEYS */;
-INSERT INTO `db_changelog` VALUES (1,'default',1339486578,'patch-0001.sql','cc44f128','Create Tables for JANUS'),
-(2,'default',1339486578,'patch-0002.sql','c21bafcb','Initial users for JANUS'),
-(3,'default',1339486578,'patch-0003.php','ce9a2d0e','Add metadata_valid_until and metadata_cache_until fields for metadata refreshing.'),
-(4,'default',1339486578,'patch-0004.sql','b93a31b5','Turn off required signature validation for all SPs'),
-(5,'default',1339486579,'patch-0005.sql','d349d559','Primary key for JANUS entities (ported from manage/patch-002.sql)'),
-(6,'default',1339486579,'patch-0006.sql','82f24f5e','Add deleted column for deleting ARP rules in JANUS 1.10.0'),
-(7,'default',1339486579,'patch-0007.sql','2d5543cb','Set all entities to production workflow state'),
-(8,'default',1339486579,'patch-0008.php','c0943bec','Remove all usertypes other than technical and admin'),
-(9,'default',1339486579,'patch-0009.php','57f47b80','Update all NameIDFormat keys to urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified'),
-(10,'default',1339486579,'patch-0010.sql','f832671a',''),
-(11,'default',1340091386,'patch-0011.sql','2da0be49',''),
-(12,'default',1340787309,'patch-0012.sql','3cf38d8c',''),
-(13,'default',1340787309,'patch-0013.php','9d981bbf','Convert allowed / blocked entities from remoteentityid to remoteeid (see BACKLOG-505)');
+INSERT INTO `db_changelog` VALUES (1,'default',1339486578,'patch-0001.sql','cc44f128','Create Tables for JANUS');
+INSERT INTO `db_changelog` VALUES (2,'default',1339486578,'patch-0002.sql','c21bafcb','Initial users for JANUS');
+INSERT INTO `db_changelog` VALUES (3,'default',1339486578,'patch-0003.php','ce9a2d0e','Add metadata_valid_until and metadata_cache_until fields for metadata refreshing.');
+INSERT INTO `db_changelog` VALUES (4,'default',1339486578,'patch-0004.sql','b93a31b5','Turn off required signature validation for all SPs');
+INSERT INTO `db_changelog` VALUES (5,'default',1339486579,'patch-0005.sql','d349d559','Primary key for JANUS entities (ported from manage/patch-002.sql)');
+INSERT INTO `db_changelog` VALUES (6,'default',1339486579,'patch-0006.sql','82f24f5e','Add deleted column for deleting ARP rules in JANUS 1.10.0');
+INSERT INTO `db_changelog` VALUES (7,'default',1339486579,'patch-0007.sql','2d5543cb','Set all entities to production workflow state');
+INSERT INTO `db_changelog` VALUES (8,'default',1339486579,'patch-0008.php','c0943bec','Remove all usertypes other than technical and admin');
+INSERT INTO `db_changelog` VALUES (9,'default',1339486579,'patch-0009.php','57f47b80','Update all NameIDFormat keys to urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified');
+INSERT INTO `db_changelog` VALUES (10,'default',1339486579,'patch-0010.sql','f832671a','');
+INSERT INTO `db_changelog` VALUES (11,'default',1340091386,'patch-0011.sql','2da0be49','');
+INSERT INTO `db_changelog` VALUES (12,'default',1340787309,'patch-0012.sql','3cf38d8c','');
+INSERT INTO `db_changelog` VALUES (13,'default',1340787309,'patch-0013.php','9d981bbf','Convert allowed / blocked entities from remoteentityid to remoteeid (see BACKLOG-505)');
 /*!40000 ALTER TABLE `db_changelog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,8 +109,8 @@ CREATE TABLE `janus__arp` (
 
 LOCK TABLES `janus__arp` WRITE;
 /*!40000 ALTER TABLE `janus__arp` DISABLE KEYS */;
-INSERT INTO `janus__arp` VALUES (1,'No attributes','Don\'t release any attributes to the Service Provider','a:0:{}',0,'2012-06-13T11:05:08+02:00','2012-06-13T11:05:08+02:00','','172.18.5.1'),
-(2,'Minimal','Minimal set of attributes to release to Service Providers','a:2:{s:38:\"urn:mace:dir:attribute-def:displayName\";a:1:{i:0;s:1:\"*\";}s:31:\"urn:mace:dir:attribute-def:mail\";a:1:{i:0;s:1:\"*\";}}',0,'2012-06-13T11:05:47+02:00','2012-06-13T11:05:47+02:00','','172.18.5.1');
+INSERT INTO `janus__arp` VALUES (1,'No attributes','Don\'t release any attributes to the Service Provider','a:0:{}',0,'2012-06-13T11:05:08+02:00','2012-06-13T11:05:08+02:00','','172.18.5.1');
+INSERT INTO `janus__arp` VALUES (2,'Minimal','Minimal set of attributes to release to Service Providers','a:2:{s:38:\"urn:mace:dir:attribute-def:displayName\";a:1:{i:0;s:1:\"*\";}s:31:\"urn:mace:dir:attribute-def:mail\";a:1:{i:0;s:1:\"*\";}}',0,'2012-06-13T11:05:47+02:00','2012-06-13T11:05:47+02:00','','172.18.5.1');
 /*!40000 ALTER TABLE `janus__arp` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,52 +229,18 @@ CREATE TABLE `janus__entity` (
 
 LOCK TABLES `janus__entity` WRITE;
 /*!40000 ALTER TABLE `janus__entity` DISABLE KEYS */;
-INSERT INTO `janus__entity` VALUES
-(1,'https://engine.demo.openconext.org/authentication/sp/metadata',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T10:38:18+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(2,'https://engine.demo.openconext.org/authentication/idp/metadata',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T10:38:32+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(3,'https://profile.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T10:39:39+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(4,'https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T11:09:48+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(5,'http://idp.ssocircle.com',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T11:36:19+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(5,'http://idp.ssocircle.com',1,'prodaccepted','saml20-idp',NULL,'http://idp.ssocircle.com/idp-meta.xml',NULL,NULL,'yes',0,1,'2012-06-12T11:36:34+02:00','172.18.5.1',0,'No revision note','yes'),
-(5,'http://idp.ssocircle.com',2,'prodaccepted','saml20-idp',NULL,'http://idp.ssocircle.com/idp-meta.xml',NULL,NULL,'yes',0,1,'2012-06-12T12:51:28+02:00','172.18.5.1',1,'No revision note','yes'),
-(2,'https://engine.demo.openconext.org/authentication/idp/metadata',1,'prodaccepted','saml20-idp',NULL,'https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata',NULL,NULL,'yes',0,1,'2012-06-12T12:52:01+02:00','172.18.5.1',0,'No revision note','yes'),
-(2,'https://engine.demo.openconext.org/authentication/idp/metadata',2,'prodaccepted','saml20-idp',NULL,'https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata',NULL,NULL,'yes',0,1,'2012-06-12T12:54:18+02:00','172.18.5.1',1,'No revision note','yes'),
-(6,'http://mock-idp',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:07:17+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(7,'http://mock-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:07:26+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(1,'https://engine.demo.openconext.org/authentication/sp/metadata',1,'prodaccepted','saml20-sp',NULL,'https://engine._OPENCONEXT_DOMAIN_/authentication/sp/metadata',NULL,NULL,'yes',0,1,'2012-06-12T13:07:59+02:00','172.18.5.1',0,'No revision note','yes'),
-(1,'https://engine.demo.openconext.org/authentication/sp/metadata',2,'prodaccepted','saml20-sp',NULL,'https://engine._OPENCONEXT_DOMAIN_/authentication/sp/metadata',NULL,NULL,'yes',0,1,'2012-06-12T13:09:41+02:00','172.18.5.1',1,'No revision note','yes'),
-(3,'https://profile.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,'prodaccepted','saml20-sp',NULL,'https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-12T13:09:56+02:00','172.18.5.1',0,'No revision note','yes'),
-(3,'https://profile.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',2,'prodaccepted','saml20-sp',NULL,'https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-12T13:10:57+02:00','172.18.5.1',1,'No revision note','yes'),
-(4,'https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,'prodaccepted','saml20-sp',NULL,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-12T13:11:10+02:00','172.18.5.1',0,'No revision note','yes'),
-(4,'https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',2,'prodaccepted','saml20-sp',NULL,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-12T13:11:56+02:00','172.18.5.1',1,'No revision note','yes'),
-(1,'https://engine.demo.openconext.org/authentication/sp/metadata',3,'prodaccepted','saml20-sp',NULL,'https://engine._OPENCONEXT_DOMAIN_/authentication/sp/metadata',NULL,NULL,'yes',0,1,'2012-06-12T13:12:33+02:00','172.18.5.1',2,'No revision note','yes'),
-(4,'https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',3,'prodaccepted','saml20-sp',NULL,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-12T13:12:51+02:00','172.18.5.1',2,'No revision note','yes'),
-(3,'https://profile.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',3,'prodaccepted','saml20-sp',NULL,'https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-12T13:13:05+02:00','172.18.5.1',2,'No revision note','yes'),
-(7,'http://mock-sp',1,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:14:58+02:00','172.18.5.1',0,'No revision note','yes'),
-(6,'http://mock-idp',1,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:17:54+02:00','172.18.5.1',0,'No revision note','yes'),
-(8,'https://openidp.feide.no',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:19:21+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(8,'https://openidp.feide.no',1,'prodaccepted','saml20-idp',NULL,'https://openidp.feide.no/simplesaml/saml2/idp/metadata.php',NULL,NULL,'yes',0,1,'2012-06-12T13:19:46+02:00','172.18.5.1',0,'No revision note','yes'),
-(8,'https://openidp.feide.no',2,'prodaccepted','saml20-idp',NULL,'https://openidp.feide.no/simplesaml/saml2/idp/metadata.php',NULL,NULL,'yes',0,1,'2012-06-12T13:22:27+02:00','172.18.5.1',1,'No revision note','yes'),
-(6,'http://mock-idp',2,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T16:17:13+02:00','172.18.5.1',1,'No revision note','yes'),
-(6,'http://mock-idp',3,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T16:18:15+02:00','172.18.5.1',2,'No revision note','yes'),
-(9,'https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-13T08:00:55+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(9,'https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,'prodaccepted','saml20-sp',NULL,'https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-13T08:01:03+02:00','172.18.5.1',0,'No revision note','yes'),
-(9,'https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',2,'prodaccepted','saml20-sp',NULL,'https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-13T08:02:29+02:00','172.18.5.1',1,'No revision note','yes'),
-(4,'https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',4,'prodaccepted','saml20-sp',NULL,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-13T08:04:27+02:00','172.18.5.1',3,'No revision note','yes'),
-(4,'https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',5,'prodaccepted','saml20-sp',NULL,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-13T08:45:06+02:00','172.18.5.1',4,'No revision note','yes'),
-(4,'https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',6,'prodaccepted','saml20-sp',NULL,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-13T08:45:14+02:00','172.18.5.1',5,'No revision note','yes'),
-(4,'https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',7,'prodaccepted','saml20-sp',NULL,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',NULL,NULL,'yes',0,1,'2012-06-13T09:04:30+02:00','172.18.5.1',6,'No revision note','yes'),
-(7,'http://mock-sp',2,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',2,3,'2012-06-13T11:05:59+02:00','172.18.5.1',1,'No revision note','yes'),
-(7,'http://mock-sp',3,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',2,3,'2012-06-13T11:06:02+02:00','172.18.5.1',2,'No revision note','yes'),
-(7,'http://mock-sp',4,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',2,3,'2012-06-13T11:06:09+02:00','172.18.5.1',3,'No revision note','yes'),
-(10,'https://grouper.demo.openconext.org/grouper/shibboleth',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-19T09:43:48+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(10,'https://grouper.demo.openconext.org/grouper/shibboleth',1,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-19T09:44:38+02:00','172.18.5.1',0,'No revision note','yes'),
-(11,'https://teams.demo.openconext.org/shibboleth',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-25T16:34:29+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(11,'https://teams.demo.openconext.org/shibboleth',1,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-25T16:35:54+02:00','172.18.5.1',0,'No revision note','yes'),
-(11,'https://teams.demo.openconext.org/shibboleth',2,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-25T16:42:04+02:00','172.18.5.1',1,'No revision note','yes'),
-(6,'http://mock-idp',4,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-27T11:14:12+02:00','172.18.5.1',3,'No revision note','yes'),
-(12,'https://api.demo.openconext.org/',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-27T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes'),
-(12,'https://api.demo.openconext.org/',1,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-27T13:24:02+02:00','172.18.5.1',0,'No revision note','yes');
+INSERT INTO `janus__entity` VALUES (1,'https://engine.demo.openconext.org/authentication/sp/metadata',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T10:38:18+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (2,'https://engine.demo.openconext.org/authentication/idp/metadata',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T10:38:32+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (3,'https://profile.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T10:39:39+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (4,'https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T11:09:48+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (5,'http://idp.ssocircle.com',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T11:36:19+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (6,'http://mock-idp',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:07:17+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (7,'http://mock-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:07:26+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (8,'https://openidp.feide.no',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:19:21+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (9,'https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-13T08:00:55+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (10,'https://grouper.demo.openconext.org/grouper/shibboleth',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-19T09:43:48+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (11,'https://teams.demo.openconext.org/shibboleth',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-25T16:34:29+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (12,'https://api.demo.openconext.org/',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-27T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
 /*!40000 ALTER TABLE `janus__entity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,18 +265,18 @@ CREATE TABLE `janus__hasEntity` (
 
 LOCK TABLES `janus__hasEntity` WRITE;
 /*!40000 ALTER TABLE `janus__hasEntity` DISABLE KEYS */;
-INSERT INTO `janus__hasEntity` VALUES (1,1,'2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,2,'2012-06-12T10:38:32+02:00','172.18.5.1'),
-(1,3,'2012-06-12T10:39:39+02:00','172.18.5.1'),
-(1,4,'2012-06-12T11:09:48+02:00','172.18.5.1'),
-(1,5,'2012-06-12T11:36:19+02:00','172.18.5.1'),
-(1,6,'2012-06-12T13:07:17+02:00','172.18.5.1'),
-(1,7,'2012-06-12T13:07:26+02:00','172.18.5.1'),
-(1,8,'2012-06-12T13:19:21+02:00','172.18.5.1'),
-(1,9,'2012-06-13T08:00:55+02:00','172.18.5.1'),
-(3,10,'2012-06-19T09:43:48+02:00','172.18.5.1'),
-(3,11,'2012-06-25T16:34:29+02:00','172.18.5.1'),
-(3,12,'2012-06-27T13:22:35+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (1,1,'2012-06-12T10:38:18+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (1,2,'2012-06-12T10:38:32+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (1,3,'2012-06-12T10:39:39+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (1,4,'2012-06-12T11:09:48+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (1,5,'2012-06-12T11:36:19+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (1,6,'2012-06-12T13:07:17+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (1,7,'2012-06-12T13:07:26+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (1,8,'2012-06-12T13:19:21+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (1,9,'2012-06-13T08:00:55+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (3,10,'2012-06-19T09:43:48+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (3,11,'2012-06-25T16:34:29+02:00','172.18.5.1');
+INSERT INTO `janus__hasEntity` VALUES (3,12,'2012-06-27T13:22:35+02:00','172.18.5.1');
 /*!40000 ALTER TABLE `janus__hasEntity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,1022 +335,301 @@ CREATE TABLE `janus__metadata` (
 
 LOCK TABLES `janus__metadata` WRITE;
 /*!40000 ALTER TABLE `janus__metadata` DISABLE KEYS */;
-INSERT INTO `janus__metadata` VALUES (1,0,'name:en','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'name:nl','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'description:en','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'description:nl','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'contacts:0:givenName','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'contacts:1:givenName','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'contacts:2:givenName','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'contacts:0:surName','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'contacts:1:surName','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'contacts:2:surName','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'contacts:0:emailAddress','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'contacts:1:emailAddress','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'contacts:2:emailAddress','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'logo:0:url','https://.png','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'logo:0:width','120','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'logo:0:height','60','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'AssertionConsumerService:0:Location','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(1,0,'redirect.sign','','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(2,0,'name:en','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'name:nl','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'description:en','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'description:nl','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'certData','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'contacts:0:givenName','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'contacts:1:givenName','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'contacts:2:givenName','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'contacts:0:surName','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'contacts:1:surName','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'contacts:2:surName','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'contacts:0:emailAddress','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'contacts:1:emailAddress','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'contacts:2:emailAddress','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'logo:0:url','https://.png','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'logo:0:width','120','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'logo:0:height','60','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'SingleSignOnService:0:Location','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'coin:guest_qualifier','All','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'keywords:en','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(2,0,'keywords:nl','','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(3,0,'name:en','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'name:nl','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'description:en','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'description:nl','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'contacts:0:givenName','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'contacts:1:givenName','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'contacts:2:givenName','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'contacts:0:surName','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'contacts:1:surName','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'contacts:2:surName','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'contacts:0:emailAddress','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'contacts:1:emailAddress','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'contacts:2:emailAddress','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'logo:0:url','https://.png','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'logo:0:width','120','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'logo:0:height','60','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'AssertionConsumerService:0:Location','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(3,0,'redirect.sign','','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(4,0,'name:en','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'name:nl','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'description:en','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'description:nl','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'contacts:0:givenName','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'contacts:1:givenName','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'contacts:2:givenName','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'contacts:0:surName','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'contacts:1:surName','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'contacts:2:surName','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'contacts:0:emailAddress','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'contacts:1:emailAddress','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'contacts:2:emailAddress','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'logo:0:url','https://.png','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'logo:0:width','120','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'logo:0:height','60','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'AssertionConsumerService:0:Location','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(4,0,'redirect.sign','','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(5,0,'name:en','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'name:nl','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'description:en','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'description:nl','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'certData','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'contacts:0:givenName','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'contacts:1:givenName','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'contacts:2:givenName','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'contacts:0:surName','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'contacts:1:surName','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'contacts:2:surName','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'contacts:0:emailAddress','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'contacts:1:emailAddress','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'contacts:2:emailAddress','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'logo:0:url','https://.png','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'logo:0:width','120','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'logo:0:height','60','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'SingleSignOnService:0:Location','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'coin:guest_qualifier','All','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'keywords:en','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,0,'keywords:nl','','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(5,1,'certData','MIICjDCCAXSgAwIBAgIFAJRvxcMwDQYJKoZIhvcNAQEEBQAwLjELMAkGA1UEBhMCREUxEjAQBgNVBAoTCVNTT0NpcmNsZTELMAkGA1UEAxMCQ0EwHhcNMTEwNTE3MTk1NzIxWhcNMTYwODE3MTk1NzIxWjBLMQswCQYDVQQGEwJERTESMBAGA1UEChMJU1NPQ2lyY2xlMQwwCgYDVQQLEwNpZHAxGjAYBgNVBAMTEWlkcC5zc29jaXJjbGUuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbzDRkudC/aC2gMqRVVaLdPJJEwpFB4o71fR5bnNd2ocnnNzJ/W9CoCargzKx+EJ4Nm3vWmX/IZRCFvrvy9C78fP1cmt6Sa091K9luaMAyWn7oC8h/YBXH7rB42tdvWLY4Kl9VJy6UCclvasyrfKx+SR4KU6zCsM622Kvp5wW67QIDAQABoxgwFjAUBglghkgBhvhCAQEBAf8EBAMCBHAwDQYJKoZIhvcNAQEEBQADggEBAJ0heua7mFO3QszdGu1NblGaTDXtf6Txte0zpYIt+8YUcza2SaZXXvCLb9DvGxW1TJWaZpPGpHz5tLXJbdYQn7xTAnL4yQOKN6uNqUA/aTVgyyUJkWZt2giwEsWUvG0UBMSPS1tp2pV2c6/olIcbdYU6ZecUz6N24sSS7itEBC6nwCVBoHOL8u6MsfxMLDzJIPBI68UZjz3IMKTDUDv6U9DtYmXLc8iMVZBncYJn9NgNi3ghl9fYPpHcc6QbXeDUjhdzXXUqG+hB6FabGqdTdkIZwoi4gNpyr3kacKRVWJssDgakeL2MoDNqJyQ0fXC6Ze3f79CKy/WjeU5FLwDZR0Q=','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'coin:guest_qualifier','All','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:0:emailAddress','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:0:givenName','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:0:surName','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:1:emailAddress','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:1:givenName','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:1:surName','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:2:emailAddress','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:2:givenName','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:2:surName','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'description:en','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'description:nl','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'keywords:en','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'keywords:nl','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'logo:0:height','60','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'logo:0:url','https://.png','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'logo:0:width','120','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'name:en','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'name:nl','','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'SingleSignOnService:0:Location','https://idp.ssocircle.com:443/sso/SSORedirect/metaAlias/ssocircle','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:0:contactType','technical','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:1:contactType','technical','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'contacts:2:contactType','technical','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,1,'certData2','MIICjDCCAXSgAwIBAgIFAJRvxcMwDQYJKoZIhvcNAQEEBQAwLjELMAkGA1UEBhMCREUxEjAQBgNVBAoTCVNTT0NpcmNsZTELMAkGA1UEAxMCQ0EwHhcNMTEwNTE3MTk1NzIxWhcNMTYwODE3MTk1NzIxWjBLMQswCQYDVQQGEwJERTESMBAGA1UEChMJU1NPQ2lyY2xlMQwwCgYDVQQLEwNpZHAxGjAYBgNVBAMTEWlkcC5zc29jaXJjbGUuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbzDRkudC/aC2gMqRVVaLdPJJEwpFB4o71fR5bnNd2ocnnNzJ/W9CoCargzKx+EJ4Nm3vWmX/IZRCFvrvy9C78fP1cmt6Sa091K9luaMAyWn7oC8h/YBXH7rB42tdvWLY4Kl9VJy6UCclvasyrfKx+SR4KU6zCsM622Kvp5wW67QIDAQABoxgwFjAUBglghkgBhvhCAQEBAf8EBAMCBHAwDQYJKoZIhvcNAQEEBQADggEBAJ0heua7mFO3QszdGu1NblGaTDXtf6Txte0zpYIt+8YUcza2SaZXXvCLb9DvGxW1TJWaZpPGpHz5tLXJbdYQn7xTAnL4yQOKN6uNqUA/aTVgyyUJkWZt2giwEsWUvG0UBMSPS1tp2pV2c6/olIcbdYU6ZecUz6N24sSS7itEBC6nwCVBoHOL8u6MsfxMLDzJIPBI68UZjz3IMKTDUDv6U9DtYmXLc8iMVZBncYJn9NgNi3ghl9fYPpHcc6QbXeDUjhdzXXUqG+hB6FabGqdTdkIZwoi4gNpyr3kacKRVWJssDgakeL2MoDNqJyQ0fXC6Ze3f79CKy/WjeU5FLwDZR0Q=','2012-06-12T11:36:34+02:00','172.18.5.1'),
-(5,2,'certData','MIICjDCCAXSgAwIBAgIFAJRvxcMwDQYJKoZIhvcNAQEEBQAwLjELMAkGA1UEBhMCREUxEjAQBgNVBAoTCVNTT0NpcmNsZTELMAkGA1UEAxMCQ0EwHhcNMTEwNTE3MTk1NzIxWhcNMTYwODE3MTk1NzIxWjBLMQswCQYDVQQGEwJERTESMBAGA1UEChMJU1NPQ2lyY2xlMQwwCgYDVQQLEwNpZHAxGjAYBgNVBAMTEWlkcC5zc29jaXJjbGUuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbzDRkudC/aC2gMqRVVaLdPJJEwpFB4o71fR5bnNd2ocnnNzJ/W9CoCargzKx+EJ4Nm3vWmX/IZRCFvrvy9C78fP1cmt6Sa091K9luaMAyWn7oC8h/YBXH7rB42tdvWLY4Kl9VJy6UCclvasyrfKx+SR4KU6zCsM622Kvp5wW67QIDAQABoxgwFjAUBglghkgBhvhCAQEBAf8EBAMCBHAwDQYJKoZIhvcNAQEEBQADggEBAJ0heua7mFO3QszdGu1NblGaTDXtf6Txte0zpYIt+8YUcza2SaZXXvCLb9DvGxW1TJWaZpPGpHz5tLXJbdYQn7xTAnL4yQOKN6uNqUA/aTVgyyUJkWZt2giwEsWUvG0UBMSPS1tp2pV2c6/olIcbdYU6ZecUz6N24sSS7itEBC6nwCVBoHOL8u6MsfxMLDzJIPBI68UZjz3IMKTDUDv6U9DtYmXLc8iMVZBncYJn9NgNi3ghl9fYPpHcc6QbXeDUjhdzXXUqG+hB6FabGqdTdkIZwoi4gNpyr3kacKRVWJssDgakeL2MoDNqJyQ0fXC6Ze3f79CKy/WjeU5FLwDZR0Q=','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'certData2','MIICjDCCAXSgAwIBAgIFAJRvxcMwDQYJKoZIhvcNAQEEBQAwLjELMAkGA1UEBhMCREUxEjAQBgNVBAoTCVNTT0NpcmNsZTELMAkGA1UEAxMCQ0EwHhcNMTEwNTE3MTk1NzIxWhcNMTYwODE3MTk1NzIxWjBLMQswCQYDVQQGEwJERTESMBAGA1UEChMJU1NPQ2lyY2xlMQwwCgYDVQQLEwNpZHAxGjAYBgNVBAMTEWlkcC5zc29jaXJjbGUuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbzDRkudC/aC2gMqRVVaLdPJJEwpFB4o71fR5bnNd2ocnnNzJ/W9CoCargzKx+EJ4Nm3vWmX/IZRCFvrvy9C78fP1cmt6Sa091K9luaMAyWn7oC8h/YBXH7rB42tdvWLY4Kl9VJy6UCclvasyrfKx+SR4KU6zCsM622Kvp5wW67QIDAQABoxgwFjAUBglghkgBhvhCAQEBAf8EBAMCBHAwDQYJKoZIhvcNAQEEBQADggEBAJ0heua7mFO3QszdGu1NblGaTDXtf6Txte0zpYIt+8YUcza2SaZXXvCLb9DvGxW1TJWaZpPGpHz5tLXJbdYQn7xTAnL4yQOKN6uNqUA/aTVgyyUJkWZt2giwEsWUvG0UBMSPS1tp2pV2c6/olIcbdYU6ZecUz6N24sSS7itEBC6nwCVBoHOL8u6MsfxMLDzJIPBI68UZjz3IMKTDUDv6U9DtYmXLc8iMVZBncYJn9NgNi3ghl9fYPpHcc6QbXeDUjhdzXXUqG+hB6FabGqdTdkIZwoi4gNpyr3kacKRVWJssDgakeL2MoDNqJyQ0fXC6Ze3f79CKy/WjeU5FLwDZR0Q=','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'coin:guest_qualifier','All','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:0:contactType','technical','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:0:emailAddress','support@openconext.org','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:0:givenName','Support','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:0:surName','OpenConext','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:1:contactType','support','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:1:emailAddress','support@openconext.org','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:1:givenName','Support','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:1:surName','OpenConext.org','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:2:contactType','administrative','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:2:emailAddress','support@openconext.org','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:2:givenName','Support','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'contacts:2:surName','OpenConext','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'description:en','SSOCircle public IdP','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'description:nl','SSOCircle public IdP','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'keywords:en','public idp open','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'keywords:nl','public idp open','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'logo:0:height','73','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/sso_circle_logo.png','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'logo:0:width','73','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'name:en','SSOCircle IDP','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'name:nl','SSOCircle IDP','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'SingleSignOnService:0:Location','https://idp.ssocircle.com:443/sso/SSORedirect/metaAlias/ssocircle','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(5,2,'coin:schachomeorganization','','2012-06-12T12:51:28+02:00','172.18.5.1'),
-(2,1,'certData','MIIDYzCCAkugAwIBAgIJAMWzFQ+2+7UtMA0GCSqGSIb3DQEBBQUAMEgxFDASBgNVBAMMC0VuZ2luZUJsb2NrMREwDwYDVQQLDAhTZXJ2aWNlczEQMA4GA1UECgwHU1VSRm5ldDELMAkGA1UEBhMCTkwwHhcNMTIwNjEyMDczNjA2WhcNMjIwNjEyMDczNjA2WjBIMRQwEgYDVQQDDAtFbmdpbmVCbG9jazERMA8GA1UECwwIU2VydmljZXMxEDAOBgNVBAoMB1NVUkZuZXQxCzAJBgNVBAYTAk5MMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyl/YsyxuCsqh44RwBz8a0qy15/NbFNL635N0DW2vBVzkppJQN5SJih1aG+ES7pEleWcnvMDyAWSnKTA6uOQCNQIAPJMaJXJuYK8tdTbJWFJTAmiaJxF2NvpA4q4ToY1n1L7cLWBvM9HERLIPC6rFLgv6O05c00s/XqzymlMV9EsAXQbJRp3n5DXNOJrRjfqclK7gpy8O5cD1NWy4OuaA086ipjW6lESKPONTscdFjKDtLarX3JthjAoaK8b/0OCQcbAklaDJXpQTnZNtFZUBWj3n/fuv4jyKvVBWwx5XGACrPEnLTwkLkZZG7oav75jS9sOiDxnTEh+m42Tp17tFZQIDAQABo1AwTjAdBgNVHQ4EFgQU0S9rclotGkC2jUYpy7HTgB/DCU0wHwYDVR0jBBgwFoAU0S9rclotGkC2jUYpy7HTgB/DCU0wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEAHbAa/lSpNf1ayKtq0c513vxboCTaclZ76vmN2jTFpu5qWiwboumRsn9q4Irhxt2kIjdpUHIg8hr46tYtep/tmf9UjbdDeZxZ1sxwhxzrMMjv972/mF1wJcENBZW/degXevz4fiEB//t0wyaA7bWeC2Ry13cvmg0x8fztqJgr4JjjxOSNKbBJ2PmN9ES3hf54UZZTy5iyW2E/3I59uRYyuPhDZDu2Uf0LlEeEuYmbY2AEgPvC+W2eR6axWkw6406jLh0Qf2ph0Wk+1YV94QmHBT9dFCyumnYIByWbqj2TSz2pCu5Gv8Kiik5k/xDDXMQ5W3EHUZIf6gdajhyH3kQkRg==','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'coin:guest_qualifier','All','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:0:emailAddress','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:0:givenName','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:0:surName','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:1:emailAddress','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:1:givenName','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:1:surName','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:2:emailAddress','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:2:givenName','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:2:surName','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'description:en','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'description:nl','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'keywords:en','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'keywords:nl','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'logo:0:height','60','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'logo:0:url','https://.png','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'logo:0:width','120','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'name:en','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'name:nl','','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'SingleSignOnService:0:Location','https://engine._OPENCONEXT_DOMAIN_/authentication/idp/single-sign-on','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:0:contactType','technical','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:1:contactType','technical','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,1,'contacts:2:contactType','technical','2012-06-12T12:52:01+02:00','172.18.5.1'),
-(2,2,'certData','MIIDYzCCAkugAwIBAgIJAMWzFQ+2+7UtMA0GCSqGSIb3DQEBBQUAMEgxFDASBgNVBAMMC0VuZ2luZUJsb2NrMREwDwYDVQQLDAhTZXJ2aWNlczEQMA4GA1UECgwHU1VSRm5ldDELMAkGA1UEBhMCTkwwHhcNMTIwNjEyMDczNjA2WhcNMjIwNjEyMDczNjA2WjBIMRQwEgYDVQQDDAtFbmdpbmVCbG9jazERMA8GA1UECwwIU2VydmljZXMxEDAOBgNVBAoMB1NVUkZuZXQxCzAJBgNVBAYTAk5MMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyl/YsyxuCsqh44RwBz8a0qy15/NbFNL635N0DW2vBVzkppJQN5SJih1aG+ES7pEleWcnvMDyAWSnKTA6uOQCNQIAPJMaJXJuYK8tdTbJWFJTAmiaJxF2NvpA4q4ToY1n1L7cLWBvM9HERLIPC6rFLgv6O05c00s/XqzymlMV9EsAXQbJRp3n5DXNOJrRjfqclK7gpy8O5cD1NWy4OuaA086ipjW6lESKPONTscdFjKDtLarX3JthjAoaK8b/0OCQcbAklaDJXpQTnZNtFZUBWj3n/fuv4jyKvVBWwx5XGACrPEnLTwkLkZZG7oav75jS9sOiDxnTEh+m42Tp17tFZQIDAQABo1AwTjAdBgNVHQ4EFgQU0S9rclotGkC2jUYpy7HTgB/DCU0wHwYDVR0jBBgwFoAU0S9rclotGkC2jUYpy7HTgB/DCU0wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEAHbAa/lSpNf1ayKtq0c513vxboCTaclZ76vmN2jTFpu5qWiwboumRsn9q4Irhxt2kIjdpUHIg8hr46tYtep/tmf9UjbdDeZxZ1sxwhxzrMMjv972/mF1wJcENBZW/degXevz4fiEB//t0wyaA7bWeC2Ry13cvmg0x8fztqJgr4JjjxOSNKbBJ2PmN9ES3hf54UZZTy5iyW2E/3I59uRYyuPhDZDu2Uf0LlEeEuYmbY2AEgPvC+W2eR6axWkw6406jLh0Qf2ph0Wk+1YV94QmHBT9dFCyumnYIByWbqj2TSz2pCu5Gv8Kiik5k/xDDXMQ5W3EHUZIf6gdajhyH3kQkRg==','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'coin:guest_qualifier','All','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:0:contactType','technical','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:0:emailAddress','support@openconext.org','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:0:givenName','Support','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:0:surName','OpenConext','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:1:contactType','support','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:1:emailAddress','support@openconext.org','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:1:givenName','Support','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:1:surName','OpenConext','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:2:contactType','administrative','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:2:emailAddress','support@openconext.org','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:2:givenName','Support','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'contacts:2:surName','OpenConext','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'description:en','OpenConext SSO Proxy','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'description:nl','OpenConext SSO Proxy','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'keywords:en','openconext engine engineblock proxy sso saml2','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'keywords:nl','openconext engine engineblock proxy sso saml2','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'logo:0:height','96','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'logo:0:width','96','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'name:en','OpenConext Engine','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'name:nl','OpenConext Engine','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(2,2,'SingleSignOnService:0:Location','https://engine._OPENCONEXT_DOMAIN_/authentication/idp/single-sign-on','2012-06-12T12:54:18+02:00','172.18.5.1'),
-(6,0,'name:en','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'name:nl','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'description:en','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'description:nl','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'certData','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'contacts:0:givenName','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'contacts:1:givenName','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'contacts:2:givenName','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'contacts:0:surName','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'contacts:1:surName','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'contacts:2:surName','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'contacts:0:emailAddress','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'contacts:1:emailAddress','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'contacts:2:emailAddress','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'logo:0:url','https://.png','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'logo:0:width','120','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'logo:0:height','60','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'SingleSignOnService:0:Location','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'coin:guest_qualifier','All','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'keywords:en','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(6,0,'keywords:nl','','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(7,0,'name:en','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'name:nl','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'description:en','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'description:nl','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'contacts:0:givenName','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'contacts:1:givenName','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'contacts:2:givenName','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'contacts:0:surName','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'contacts:1:surName','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'contacts:2:surName','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'contacts:0:emailAddress','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'contacts:1:emailAddress','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'contacts:2:emailAddress','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'logo:0:url','https://.png','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'logo:0:width','120','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'logo:0:height','60','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'AssertionConsumerService:0:Location','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(7,0,'redirect.sign','','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(1,1,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'AssertionConsumerService:0:Location','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:0:emailAddress','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:0:givenName','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:0:surName','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:1:emailAddress','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:1:givenName','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:1:surName','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:2:emailAddress','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:2:givenName','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:2:surName','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'description:en','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'description:nl','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'logo:0:height','60','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'logo:0:url','https://.png','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'logo:0:width','120','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'name:en','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'name:nl','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'redirect.sign','','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:0:contactType','technical','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:1:contactType','technical','2012-06-12T13:07:59+02:00','172.18.5.1'),
-(1,1,'contacts:2:contactType','technical','2012-06-12T13:08:00+02:00','172.18.5.1'),
-(1,2,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'AssertionConsumerService:0:Location','https://engine._OPENCONEXT_DOMAIN_/authentication/sp/consume-assertion','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:0:contactType','technical','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:0:emailAddress','support@openconext.org','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:0:givenName','Support','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:0:surName','OpenConext','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:1:contactType','support','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:1:emailAddress','support@openconext.org','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:1:givenName','Support','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:1:surName','OpenConext','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:2:contactType','administrative','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:2:emailAddress','support@openconext.org','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:2:givenName','Support','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'contacts:2:surName','OpenConext','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'description:en','OpenConext SSO Proxy','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'description:nl','OpenConext SSO Proxy','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'logo:0:height','60','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'logo:0:url','https://.png','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'logo:0:width','120','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'name:en','OpenConext Engine','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'name:nl','OpenConext Engine','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(1,2,'redirect.sign','','2012-06-12T13:09:41+02:00','172.18.5.1'),
-(3,1,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'AssertionConsumerService:0:Location','https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:0:emailAddress','coin-beheer@surfnet.nl','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:0:givenName','SURFconext','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:0:surName','Beheer','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:1:emailAddress','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:1:givenName','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:1:surName','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:2:emailAddress','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:2:givenName','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:2:surName','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'description:en','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'description:nl','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'logo:0:height','60','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'logo:0:url','https://.png','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'logo:0:width','120','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'name:en','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'name:nl','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'redirect.sign','','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:0:contactType','technical','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:1:contactType','technical','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,1,'contacts:2:contactType','technical','2012-06-12T13:09:56+02:00','172.18.5.1'),
-(3,2,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'AssertionConsumerService:0:Location','https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:0:contactType','technical','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:0:emailAddress','support@openconext.org','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:0:givenName','Support','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:0:surName','OpenConext','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:1:contactType','support','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:1:emailAddress','support@openconext.org','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:1:givenName','Support','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:1:surName','OpenConext','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:2:contactType','administrative','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:2:emailAddress','support@openconext.org','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:2:givenName','Support','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'contacts:2:surName','OpenConext','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'description:en','OpenConext Profile management','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'description:nl','OpenConext Profile management','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'logo:0:height','60','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'logo:0:url','https://.png','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'logo:0:width','120','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'name:en','OpenConext Profile','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'name:nl','OpenConext Profile','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(3,2,'redirect.sign','','2012-06-12T13:10:57+02:00','172.18.5.1'),
-(4,1,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'AssertionConsumerService:0:Location','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:0:emailAddress','marc@ibuildings.nl','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:0:givenName','Marc','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:0:surName','Veldman','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:1:emailAddress','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:1:givenName','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:1:surName','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:2:emailAddress','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:2:givenName','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:2:surName','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'description:en','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'description:nl','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'logo:0:height','60','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'logo:0:url','https://.png','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'logo:0:width','120','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'name:en','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'name:nl','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'redirect.sign','','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:0:contactType','technical','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:1:contactType','technical','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,1,'contacts:2:contactType','technical','2012-06-12T13:11:10+02:00','172.18.5.1'),
-(4,2,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'AssertionConsumerService:0:Location','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:0:contactType','technical','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:0:emailAddress','support@openconext.org','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:0:givenName','Support','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:0:surName','OpenConext','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:1:contactType','support','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:1:emailAddress','support@openconext.org','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:1:givenName','Support','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:1:surName','OpenConext','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:2:contactType','administrative','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:2:emailAddress','support@openconext.org','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:2:givenName','Support','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'contacts:2:surName','OpenConext','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'description:en','OpenConext Management application','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'description:nl','OpenConext Management application','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'logo:0:height','60','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'logo:0:url','https://.png','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'logo:0:width','120','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'name:en','OpenConext Manage','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'name:nl','OpenConext Manage','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(4,2,'redirect.sign','','2012-06-12T13:11:56+02:00','172.18.5.1'),
-(1,3,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'AssertionConsumerService:0:Location','https://engine._OPENCONEXT_DOMAIN_/authentication/sp/consume-assertion','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:0:contactType','technical','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:0:emailAddress','support@openconext.org','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:0:givenName','Support','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:0:surName','OpenConext','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:1:contactType','support','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:1:emailAddress','support@openconext.org','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:1:givenName','Support','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:1:surName','OpenConext','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:2:contactType','administrative','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:2:emailAddress','support@openconext.org','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:2:givenName','Support','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'contacts:2:surName','OpenConext','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'description:en','OpenConext SSO Proxy','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'description:nl','OpenConext SSO Proxy','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'logo:0:height','96','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'logo:0:width','96','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'name:en','OpenConext Engine','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'name:nl','OpenConext Engine','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(1,3,'redirect.sign','','2012-06-12T13:12:33+02:00','172.18.5.1'),
-(4,3,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'AssertionConsumerService:0:Location','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:0:contactType','technical','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:0:emailAddress','support@openconext.org','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:0:givenName','Support','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:0:surName','OpenConext','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:1:contactType','support','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:1:emailAddress','support@openconext.org','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:1:givenName','Support','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:1:surName','OpenConext','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:2:contactType','administrative','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:2:emailAddress','support@openconext.org','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:2:givenName','Support','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'contacts:2:surName','OpenConext','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'description:en','OpenConext Management application','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'description:nl','OpenConext Management application','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'logo:0:height','96','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'logo:0:width','96','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'name:en','OpenConext Manage','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'name:nl','OpenConext Manage','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(4,3,'redirect.sign','','2012-06-12T13:12:51+02:00','172.18.5.1'),
-(3,3,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'AssertionConsumerService:0:Location','https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:0:contactType','technical','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:0:emailAddress','support@openconext.org','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:0:givenName','Support','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:0:surName','OpenConext','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:1:contactType','support','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:1:emailAddress','support@openconext.org','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:1:givenName','Support','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:1:surName','OpenConext','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:2:contactType','administrative','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:2:emailAddress','support@openconext.org','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:2:givenName','Support','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'contacts:2:surName','OpenConext','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'description:en','OpenConext Profile management','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'description:nl','OpenConext Profile management','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'logo:0:height','96','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'logo:0:width','96','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'name:en','OpenConext Profile','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'name:nl','OpenConext Profile','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(3,3,'redirect.sign','','2012-06-12T13:13:05+02:00','172.18.5.1'),
-(7,1,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'AssertionConsumerService:0:Location','https://mujina-sp._OPENCONEXT_DOMAIN_/AssertionConsumerService','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:0:emailAddress','support@openconext.org','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:0:givenName','Support','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:0:surName','OpenConext','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:1:emailAddress','support@openconext.org','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:1:givenName','Support','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:1:surName','OpenConext','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:2:emailAddress','support@openconext.org','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:2:givenName','Support','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:2:surName','OpenConext','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'description:en','OpenConext Mujina Test Service Provider','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'description:nl','OpenConext Mujina Test Service Provider','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'logo:0:height','96','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'logo:0:width','96','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'name:en','OpenConext Mujina','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'name:nl','OpenConext Mujina','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'redirect.sign','','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:0:contactType','technical','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:1:contactType','support','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(7,1,'contacts:2:contactType','administrative','2012-06-12T13:14:58+02:00','172.18.5.1'),
-(6,1,'certData','MIICHzCCAYgCCQD7KMJ17XQa7TANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJOTDEQMA4GA1UECAwHVXRyZWNodDEQMA4GA1UEBwwHVXRyZWNodDEQMA4GA1UECgwHU3VyZm5ldDEPMA0GA1UECwwGQ29uZXh0MB4XDTEyMDMwODA4NTQyNFoXDTEzMDMwODA4NTQyNFowVDELMAkGA1UEBhMCTkwxEDAOBgNVBAgMB1V0cmVjaHQxEDAOBgNVBAcMB1V0cmVjaHQxEDAOBgNVBAoMB1N1cmZuZXQxDzANBgNVBAsMBkNvbmV4dDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2slVe459WUDL4RXxJf5h5t5oUbPkPlFZ9lQysSoS3fnFTdCgzA6FzQzGRDcfRj0HnWBdA1YH+LxBjNcBIJ/nBc7Ssu4e4rMO3MSAV5Ouo3MaGgHqVq6dCD47f52b98df6QTAA3C+7sHqOdiQ0UDCAK0C+qP5LtTcmB8QrJhKmV8CAwEAATANBgkqhkiG9w0BAQUFAAOBgQCvPhO0aSbqX7g7IkR79IFVdJ/P7uSlYFtJ9cMxec85cYLmWL1aVgF5ZFFJqC25blyPJu2GRcSxoVwB3ae8sPCECWwqRQA4AHKIjiW5NgrAGYR++ssTOQR8mcAucEBfNaNdlJoy8GdZIhHZNkGlyHfY8kWS3OWkGzhWSsuRCLl78A==','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'coin:guest_qualifier','All','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:0:emailAddress','support@openconext.org','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:0:givenName','Support','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:0:surName','OpenConext','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:1:emailAddress','support@openconext.org','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:1:givenName','Support','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:1:surName','OpenConext','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:2:emailAddress','support@openconext.org','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:2:givenName','Support','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:2:surName','OpenConext','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'description:en','OpenConext Mujina Test Identity Provider','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'description:nl','OpenConext Mujina Test Identity Provider','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'keywords:en','mock idp mujina','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'keywords:nl','mock idp mujina','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'logo:0:height','96','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'logo:0:width','96','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'name:en','OpenConext Mujina','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'name:nl','OpenConext Mujina','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'SingleSignOnService:0:Location','','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:0:contactType','technical','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:1:contactType','support','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(6,1,'contacts:2:contactType','administrative','2012-06-12T13:17:54+02:00','172.18.5.1'),
-(8,0,'name:en','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'name:nl','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'description:en','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'description:nl','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'certData','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'contacts:0:givenName','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'contacts:1:givenName','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'contacts:2:givenName','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'contacts:0:surName','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'contacts:1:surName','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'contacts:2:surName','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'contacts:0:emailAddress','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'contacts:1:emailAddress','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'contacts:2:emailAddress','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'logo:0:url','https://.png','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'logo:0:width','120','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'logo:0:height','60','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'SingleSignOnService:0:Location','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'coin:guest_qualifier','All','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'keywords:en','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,0,'keywords:nl','','2012-06-12T13:19:21+02:00','172.18.5.1'),
-(8,1,'certData','MIICizCCAfQCCQCY8tKaMc0BMjANBgkqhkiG9w0BAQUFADCBiTELMAkGA1UEBhMCTk8xEjAQBgNVBAgTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEOMAwGA1UECxMFRmVpZGUxGTAXBgNVBAMTEG9wZW5pZHAuZmVpZGUubm8xKTAnBgkqhkiG9w0BCQEWGmFuZHJlYXMuc29sYmVyZ0B1bmluZXR0Lm5vMB4XDTA4MDUwODA5MjI0OFoXDTM1MDkyMzA5MjI0OFowgYkxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEDAOBgNVBAoTB1VOSU5FVFQxDjAMBgNVBAsTBUZlaWRlMRkwFwYDVQQDExBvcGVuaWRwLmZlaWRlLm5vMSkwJwYJKoZIhvcNAQkBFhphbmRyZWFzLnNvbGJlcmdAdW5pbmV0dC5ubzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAt8jLoqI1VTlxAZ2axiDIThWcAOXdu8KkVUWaN/SooO9O0QQ7KRUjSGKN9JK65AFRDXQkWPAu4HlnO4noYlFSLnYyDxI66LCr71x4lgFJjqLeAvB/GqBqFfIZ3YK/NrhnUqFwZu63nLrZjcUZxNaPjOOSRSDaXpv1kb5k3jOiSGECAwEAATANBgkqhkiG9w0BAQUFAAOBgQBQYj4cAafWaYfjBU2zi1ElwStIaJ5nyp/s/8B8SAPK2T79McMyccP3wSW13LHkmM1jwKe3ACFXBvqGQN0IbcH49hu0FKhYFM/GPDJcIHFBsiyMBXChpye9vBaTNEBCtU3KjjyG0hRT2mAQ9h+bkPmOvlEo/aH0xR68Z9hw4PF13w==','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'coin:guest_qualifier','All','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:0:emailAddress','support@feide.no','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:0:givenName','Feide','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:0:surName','support','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:1:emailAddress','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:1:givenName','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:1:surName','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:2:emailAddress','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:2:givenName','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:2:surName','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'description:en','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'description:nl','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'keywords:en','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'keywords:nl','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'logo:0:height','60','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'logo:0:url','https://.png','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'logo:0:width','120','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'name:en','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'name:nl','','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'SingleSignOnService:0:Location','https://openidp.feide.no/simplesaml/saml2/idp/SSOService.php','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:0:contactType','technical','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:1:contactType','technical','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,1,'contacts:2:contactType','technical','2012-06-12T13:19:46+02:00','172.18.5.1'),
-(8,2,'certData','MIICizCCAfQCCQCY8tKaMc0BMjANBgkqhkiG9w0BAQUFADCBiTELMAkGA1UEBhMCTk8xEjAQBgNVBAgTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEOMAwGA1UECxMFRmVpZGUxGTAXBgNVBAMTEG9wZW5pZHAuZmVpZGUubm8xKTAnBgkqhkiG9w0BCQEWGmFuZHJlYXMuc29sYmVyZ0B1bmluZXR0Lm5vMB4XDTA4MDUwODA5MjI0OFoXDTM1MDkyMzA5MjI0OFowgYkxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEDAOBgNVBAoTB1VOSU5FVFQxDjAMBgNVBAsTBUZlaWRlMRkwFwYDVQQDExBvcGVuaWRwLmZlaWRlLm5vMSkwJwYJKoZIhvcNAQkBFhphbmRyZWFzLnNvbGJlcmdAdW5pbmV0dC5ubzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAt8jLoqI1VTlxAZ2axiDIThWcAOXdu8KkVUWaN/SooO9O0QQ7KRUjSGKN9JK65AFRDXQkWPAu4HlnO4noYlFSLnYyDxI66LCr71x4lgFJjqLeAvB/GqBqFfIZ3YK/NrhnUqFwZu63nLrZjcUZxNaPjOOSRSDaXpv1kb5k3jOiSGECAwEAATANBgkqhkiG9w0BAQUFAAOBgQBQYj4cAafWaYfjBU2zi1ElwStIaJ5nyp/s/8B8SAPK2T79McMyccP3wSW13LHkmM1jwKe3ACFXBvqGQN0IbcH49hu0FKhYFM/GPDJcIHFBsiyMBXChpye9vBaTNEBCtU3KjjyG0hRT2mAQ9h+bkPmOvlEo/aH0xR68Z9hw4PF13w==','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'coin:guest_qualifier','All','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:0:contactType','technical','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:0:emailAddress','support@feide.no','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:0:givenName','Feide','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:0:surName','support','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:1:contactType','support','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:1:emailAddress','support@feide.no','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:1:givenName','Feide','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:1:surName','support','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:2:contactType','administrative','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:2:emailAddress','support@feide.no','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:2:givenName','Feide','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'contacts:2:surName','support','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'description:en','Feide Public Open IdP','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'description:nl','Feide Public Open IdP','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'keywords:en','feide norway open idp','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'keywords:nl','feide norway open idp','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'logo:0:height','240','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/feide_logo.jpg','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'logo:0:width','435','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'name:en','Feide Public Open IdP','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'name:nl','Feide Public Open IdP','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(8,2,'SingleSignOnService:0:Location','https://openidp.feide.no/simplesaml/saml2/idp/SSOService.php','2012-06-12T13:22:27+02:00','172.18.5.1'),
-(6,2,'certData','MIICHzCCAYgCCQD7KMJ17XQa7TANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJOTDEQMA4GA1UECAwHVXRyZWNodDEQMA4GA1UEBwwHVXRyZWNodDEQMA4GA1UECgwHU3VyZm5ldDEPMA0GA1UECwwGQ29uZXh0MB4XDTEyMDMwODA4NTQyNFoXDTEzMDMwODA4NTQyNFowVDELMAkGA1UEBhMCTkwxEDAOBgNVBAgMB1V0cmVjaHQxEDAOBgNVBAcMB1V0cmVjaHQxEDAOBgNVBAoMB1N1cmZuZXQxDzANBgNVBAsMBkNvbmV4dDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2slVe459WUDL4RXxJf5h5t5oUbPkPlFZ9lQysSoS3fnFTdCgzA6FzQzGRDcfRj0HnWBdA1YH+LxBjNcBIJ/nBc7Ssu4e4rMO3MSAV5Ouo3MaGgHqVq6dCD47f52b98df6QTAA3C+7sHqOdiQ0UDCAK0C+qP5LtTcmB8QrJhKmV8CAwEAATANBgkqhkiG9w0BAQUFAAOBgQCvPhO0aSbqX7g7IkR79IFVdJ/P7uSlYFtJ9cMxec85cYLmWL1aVgF5ZFFJqC25blyPJu2GRcSxoVwB3ae8sPCECWwqRQA4AHKIjiW5NgrAGYR++ssTOQR8mcAucEBfNaNdlJoy8GdZIhHZNkGlyHfY8kWS3OWkGzhWSsuRCLl78A==','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'coin:guest_qualifier','All','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:0:contactType','technical','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:0:emailAddress','support@openconext.org','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:0:givenName','Support','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:0:surName','OpenConext','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:1:contactType','support','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:1:emailAddress','support@openconext.org','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:1:givenName','Support','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:1:surName','OpenConext','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:2:contactType','administrative','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:2:emailAddress','support@openconext.org','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:2:givenName','Support','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'contacts:2:surName','OpenConext','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'description:en','OpenConext Mujina Test Identity Provider','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'description:nl','OpenConext Mujina Test Identity Provider','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'keywords:en','mock idp mujina','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'keywords:nl','mock idp mujina','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'logo:0:height','96','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'logo:0:width','96','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'name:en','OpenConext Mujina','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'name:nl','OpenConext Mujina','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,2,'SingleSignOnService:0:Location','https://mujina-idp._OPENCONEXT_DOMAIN_/SingleSignOnService','2012-06-12T16:17:13+02:00','172.18.5.1'),
-(6,3,'certData','MIICHzCCAYgCCQD7KMJ17XQa7TANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJOTDEQMA4GA1UECAwHVXRyZWNodDEQMA4GA1UEBwwHVXRyZWNodDEQMA4GA1UECgwHU3VyZm5ldDEPMA0GA1UECwwGQ29uZXh0MB4XDTEyMDMwODA4NTQyNFoXDTEzMDMwODA4NTQyNFowVDELMAkGA1UEBhMCTkwxEDAOBgNVBAgMB1V0cmVjaHQxEDAOBgNVBAcMB1V0cmVjaHQxEDAOBgNVBAoMB1N1cmZuZXQxDzANBgNVBAsMBkNvbmV4dDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2slVe459WUDL4RXxJf5h5t5oUbPkPlFZ9lQysSoS3fnFTdCgzA6FzQzGRDcfRj0HnWBdA1YH+LxBjNcBIJ/nBc7Ssu4e4rMO3MSAV5Ouo3MaGgHqVq6dCD47f52b98df6QTAA3C+7sHqOdiQ0UDCAK0C+qP5LtTcmB8QrJhKmV8CAwEAATANBgkqhkiG9w0BAQUFAAOBgQCvPhO0aSbqX7g7IkR79IFVdJ/P7uSlYFtJ9cMxec85cYLmWL1aVgF5ZFFJqC25blyPJu2GRcSxoVwB3ae8sPCECWwqRQA4AHKIjiW5NgrAGYR++ssTOQR8mcAucEBfNaNdlJoy8GdZIhHZNkGlyHfY8kWS3OWkGzhWSsuRCLl78A==','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'coin:guest_qualifier','All','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:0:contactType','technical','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:0:emailAddress','support@openconext.org','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:0:givenName','Support','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:0:surName','OpenConext','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:1:contactType','support','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:1:emailAddress','support@openconext.org','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:1:givenName','Support','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:1:surName','OpenConext','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:2:contactType','administrative','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:2:emailAddress','support@openconext.org','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:2:givenName','Support','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'contacts:2:surName','OpenConext','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'description:en','OpenConext Mujina Test Identity Provider','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'description:nl','OpenConext Mujina Test Identity Provider','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'keywords:en','mock idp mujina','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'keywords:nl','mock idp mujina','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'logo:0:height','96','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'logo:0:width','96','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'name:en','OpenConext Mujina','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'name:nl','OpenConext Mujina','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(6,3,'SingleSignOnService:0:Location','https://mujina-idp._OPENCONEXT_DOMAIN_/SingleSignOnService','2012-06-12T16:18:15+02:00','172.18.5.1'),
-(9,0,'name:en','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'name:nl','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'description:en','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'description:nl','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'contacts:0:givenName','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'contacts:1:givenName','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'contacts:2:givenName','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'contacts:0:surName','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'contacts:1:surName','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'contacts:2:surName','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'contacts:0:emailAddress','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'contacts:1:emailAddress','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'contacts:2:emailAddress','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'logo:0:url','https://.png','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'logo:0:width','120','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'logo:0:height','60','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'AssertionConsumerService:0:Location','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,0,'redirect.sign','','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(9,1,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'AssertionConsumerService:0:Location','https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:0:emailAddress','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:0:givenName','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:0:surName','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:1:emailAddress','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:1:givenName','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:1:surName','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:2:emailAddress','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:2:givenName','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:2:surName','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'description:en','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'description:nl','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'logo:0:height','60','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'logo:0:url','https://.png','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'logo:0:width','120','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'name:en','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'name:nl','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'redirect.sign','','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:0:contactType','technical','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:1:contactType','technical','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,1,'contacts:2:contactType','technical','2012-06-13T08:01:03+02:00','172.18.5.1'),
-(9,2,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'AssertionConsumerService:0:Location','https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:0:contactType','technical','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:0:emailAddress','support@openconext.org','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:0:givenName','Support','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:0:surName','OpenConext','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:1:contactType','support','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:1:emailAddress','support@openconext.org','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:1:givenName','Support','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:1:surName','OpenConext','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:2:contactType','administrative','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:2:emailAddress','support@openconext.org','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:2:givenName','Support','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'contacts:2:surName','OpenConext','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'description:en','OpenConext Service Registry, register all SPs and IdPs here','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'description:nl','OpenConext Service Registry, register all SPs and IdPs here','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'logo:0:height','96','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'logo:0:width','96','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'name:en','OpenConext ServiceRegistry','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'name:nl','OpenConext ServiceRegistry','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(9,2,'redirect.sign','','2012-06-13T08:02:29+02:00','172.18.5.1'),
-(4,4,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'AssertionConsumerService:0:Location','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:0:contactType','technical','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:0:emailAddress','support@openconext.org','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:0:givenName','Support','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:0:surName','OpenConext','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:1:contactType','support','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:1:emailAddress','support@openconext.org','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:1:givenName','Support','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:1:surName','OpenConext','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:2:contactType','administrative','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:2:emailAddress','support@openconext.org','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:2:givenName','Support','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'contacts:2:surName','OpenConext','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'description:en','OpenConext Management application','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'description:nl','OpenConext Management application','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'logo:0:height','96','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'logo:0:width','96','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'name:en','OpenConext Manage','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'name:nl','OpenConext Manage','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,4,'redirect.sign','','2012-06-13T08:04:27+02:00','172.18.5.1'),
-(4,5,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'AssertionConsumerService:0:Location','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:0:contactType','technical','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:0:emailAddress','support@openconext.org','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:0:givenName','Support','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:0:surName','OpenConext','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:1:contactType','support','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:1:emailAddress','support@openconext.org','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:1:givenName','Support','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:1:surName','OpenConext','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:2:contactType','administrative','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:2:emailAddress','support@openconext.org','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:2:givenName','Support2','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'contacts:2:surName','OpenConext','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'description:en','OpenConext Management application','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'description:nl','OpenConext Management application','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'logo:0:height','96','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'logo:0:width','96','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'name:en','OpenConext Manage','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'name:nl','OpenConext Manage','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,5,'redirect.sign','','2012-06-13T08:45:06+02:00','172.18.5.1'),
-(4,6,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'AssertionConsumerService:0:Location','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:0:contactType','technical','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:0:emailAddress','support@openconext.org','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:0:givenName','Support','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:0:surName','OpenConext','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:1:contactType','support','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:1:emailAddress','support@openconext.org','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:1:givenName','Support','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:1:surName','OpenConext','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:2:contactType','administrative','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:2:emailAddress','support@openconext.org','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:2:givenName','Support','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'contacts:2:surName','OpenConext','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'description:en','OpenConext Management application','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'description:nl','OpenConext Management application','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'logo:0:height','96','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'logo:0:width','96','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'name:en','OpenConext Manage','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'name:nl','OpenConext Manage','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,6,'redirect.sign','','2012-06-13T08:45:14+02:00','172.18.5.1'),
-(4,7,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'AssertionConsumerService:0:Location','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:0:contactType','technical','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:0:emailAddress','support@openconext.org','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:0:givenName','Support','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:0:surName','OpenConext','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:1:contactType','support','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:1:emailAddress','support@openconext.org','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:1:givenName','Support','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:1:surName','OpenConext','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:2:contactType','administrative','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:2:emailAddress','support@openconext.org','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:2:givenName','Support','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'contacts:2:surName','OpenConext','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'description:en','OpenConext Management application','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'description:nl','OpenConext Management application','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'logo:0:height','96','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'logo:0:width','96','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'name:en','OpenConext Manage','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'name:nl','OpenConext Manage','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(4,7,'redirect.sign','','2012-06-13T09:04:30+02:00','172.18.5.1'),
-(7,2,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'AssertionConsumerService:0:Location','https://mujina-sp._OPENCONEXT_DOMAIN_/AssertionConsumerService','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:0:contactType','technical','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:0:emailAddress','support@openconext.org','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:0:givenName','Support','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:0:surName','OpenConext','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:1:contactType','support','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:1:emailAddress','support@openconext.org','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:1:givenName','Support','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:1:surName','OpenConext','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:2:contactType','administrative','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:2:emailAddress','support@openconext.org','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:2:givenName','Support','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'contacts:2:surName','OpenConext','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'description:en','OpenConext Mujina Test Service Provider','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'description:nl','OpenConext Mujina Test Service Provider','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'logo:0:height','96','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'logo:0:width','96','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'name:en','OpenConext Mujina','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'name:nl','OpenConext Mujina','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,2,'redirect.sign','','2012-06-13T11:05:59+02:00','172.18.5.1'),
-(7,3,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'AssertionConsumerService:0:Location','https://mujina-sp._OPENCONEXT_DOMAIN_/AssertionConsumerService','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:0:contactType','technical','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:0:emailAddress','support@openconext.org','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:0:givenName','Support','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:0:surName','OpenConext','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:1:contactType','support','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:1:emailAddress','support@openconext.org','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:1:givenName','Support','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:1:surName','OpenConext','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:2:contactType','administrative','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:2:emailAddress','support@openconext.org','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:2:givenName','Support','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'contacts:2:surName','OpenConext','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'description:en','OpenConext Mujina Test Service Provider','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'description:nl','OpenConext Mujina Test Service Provider','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'logo:0:height','96','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'logo:0:width','96','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'name:en','OpenConext Mujina','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'name:nl','OpenConext Mujina','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,3,'redirect.sign','','2012-06-13T11:06:02+02:00','172.18.5.1'),
-(7,4,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'AssertionConsumerService:0:Location','https://mujina-sp._OPENCONEXT_DOMAIN_/AssertionConsumerService','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:0:contactType','technical','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:0:emailAddress','support@openconext.org','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:0:givenName','Support','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:0:surName','OpenConext','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:1:contactType','support','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:1:emailAddress','support@openconext.org','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:1:givenName','Support','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:1:surName','OpenConext','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:2:contactType','administrative','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:2:emailAddress','support@openconext.org','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:2:givenName','Support','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'contacts:2:surName','OpenConext','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'description:en','OpenConext Mujina Test Service Provider','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'description:nl','OpenConext Mujina Test Service Provider','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'logo:0:height','96','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'logo:0:width','96','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'name:en','OpenConext Mujina','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'name:nl','OpenConext Mujina','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(7,4,'redirect.sign','','2012-06-13T11:06:09+02:00','172.18.5.1'),
-(10,0,'name:en','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'name:nl','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'description:en','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'description:nl','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'contacts:0:givenName','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'contacts:1:givenName','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'contacts:2:givenName','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'contacts:0:surName','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'contacts:1:surName','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'contacts:2:surName','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'contacts:0:emailAddress','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'contacts:1:emailAddress','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'contacts:2:emailAddress','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'logo:0:url','https://.png','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'logo:0:width','120','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'logo:0:height','60','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'AssertionConsumerService:0:Location','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,0,'redirect.sign','','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(10,1,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'AssertionConsumerService:0:Location','https://grouper._OPENCONEXT_DOMAIN_/grouper/Shibboleth.sso/SAML2/POST','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:0:emailAddress','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:0:givenName','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:0:surName','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:1:emailAddress','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:1:givenName','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:1:surName','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:2:emailAddress','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:2:givenName','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:2:surName','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'description:en','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'description:nl','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'logo:0:height','60','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'logo:0:url','https://.png','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'logo:0:width','120','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'name:en','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'name:nl','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'redirect.sign','','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:0:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:1:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'contacts:2:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1'),
-(10,1,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1'),
-(11,0,'name:en','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'name:nl','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'description:en','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'description:nl','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'contacts:0:givenName','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'contacts:1:givenName','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'contacts:2:givenName','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'contacts:0:surName','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'contacts:1:surName','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'contacts:2:surName','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'contacts:0:emailAddress','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'contacts:1:emailAddress','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'contacts:2:emailAddress','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'logo:0:url','https://.png','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'logo:0:width','120','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'logo:0:height','60','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'AssertionConsumerService:0:Location','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'redirect.sign','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'url:en','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,0,'url:nl','','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(11,1,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'AssertionConsumerService:0:Location','https://teams.dev.surfconext.nl/Shibboleth.sso/SAML2/POST','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'contacts:0:emailAddress','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'contacts:0:givenName','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'contacts:0:surName','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'contacts:1:emailAddress','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'contacts:1:givenName','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'contacts:1:surName','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'contacts:2:emailAddress','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'contacts:2:givenName','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'contacts:2:surName','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'description:en','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'description:nl','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'logo:0:height','60','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'logo:0:url','https://.png','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'logo:0:width','120','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'name:en','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'name:nl','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'redirect.sign','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'url:en','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'url:nl','','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'coin:gadgetbaseurl','https://teams.demo.openconext.org/.*','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'coin:oauth:secret','mysecret','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'coin:oauth:two_legged_allowed','1','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,1,'contacts:0:contactType','technical','2012-06-25T16:35:54+02:00','172.18.5.1'),
-(11,2,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'AssertionConsumerService:0:Location','https://teams._OPENCONEXT_DOMAIN_/Shibboleth.sso/SAML2/POST','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'coin:gadgetbaseurl','https://teams.demo.openconext.org/.*','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'coin:oauth:secret','mysecret','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'coin:oauth:two_legged_allowed','1','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:0:contactType','technical','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:0:emailAddress','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:0:givenName','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:0:surName','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:1:emailAddress','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:1:givenName','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:1:surName','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:2:emailAddress','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:2:givenName','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:2:surName','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'description:en','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'description:nl','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'logo:0:height','60','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'logo:0:url','https://.png','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'logo:0:width','120','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'name:en','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'name:nl','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'redirect.sign','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'url:en','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'url:nl','','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:1:contactType','technical','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(11,2,'contacts:2:contactType','technical','2012-06-25T16:42:04+02:00','172.18.5.1'),
-(6,4,'certData','MIICHzCCAYgCCQD7KMJ17XQa7TANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJOTDEQMA4GA1UECAwHVXRyZWNodDEQMA4GA1UEBwwHVXRyZWNodDEQMA4GA1UECgwHU3VyZm5ldDEPMA0GA1UECwwGQ29uZXh0MB4XDTEyMDMwODA4NTQyNFoXDTEzMDMwODA4NTQyNFowVDELMAkGA1UEBhMCTkwxEDAOBgNVBAgMB1V0cmVjaHQxEDAOBgNVBAcMB1V0cmVjaHQxEDAOBgNVBAoMB1N1cmZuZXQxDzANBgNVBAsMBkNvbmV4dDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2slVe459WUDL4RXxJf5h5t5oUbPkPlFZ9lQysSoS3fnFTdCgzA6FzQzGRDcfRj0HnWBdA1YH+LxBjNcBIJ/nBc7Ssu4e4rMO3MSAV5Ouo3MaGgHqVq6dCD47f52b98df6QTAA3C+7sHqOdiQ0UDCAK0C+qP5LtTcmB8QrJhKmV8CAwEAATANBgkqhkiG9w0BAQUFAAOBgQCvPhO0aSbqX7g7IkR79IFVdJ/P7uSlYFtJ9cMxec85cYLmWL1aVgF5ZFFJqC25blyPJu2GRcSxoVwB3ae8sPCECWwqRQA4AHKIjiW5NgrAGYR++ssTOQR8mcAucEBfNaNdlJoy8GdZIhHZNkGlyHfY8kWS3OWkGzhWSsuRCLl78A==','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'coin:guest_qualifier','None','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:0:contactType','technical','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:0:emailAddress','support@openconext.org','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:0:givenName','Support','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:0:surName','OpenConext','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:1:contactType','support','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:1:emailAddress','support@openconext.org','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:1:givenName','Support','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:1:surName','OpenConext','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:2:contactType','administrative','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:2:emailAddress','support@openconext.org','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:2:givenName','Support','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'contacts:2:surName','OpenConext','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'description:en','OpenConext Mujina Test Identity Provider','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'description:nl','OpenConext Mujina Test Identity Provider','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'keywords:en','mock idp mujina','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'keywords:nl','mock idp mujina','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'logo:0:height','96','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'logo:0:width','96','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'name:en','OpenConext Mujina','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'name:nl','OpenConext Mujina','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(6,4,'SingleSignOnService:0:Location','https://mujina-idp._OPENCONEXT_DOMAIN_/SingleSignOnService','2012-06-27T11:14:12+02:00','172.18.5.1'),
-(12,0,'name:en','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'name:nl','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'description:en','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'description:nl','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'contacts:0:givenName','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'contacts:1:givenName','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'contacts:2:givenName','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'contacts:0:surName','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'contacts:1:surName','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'contacts:2:surName','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'contacts:0:emailAddress','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'contacts:1:emailAddress','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'contacts:2:emailAddress','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'logo:0:url','https://.png','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'logo:0:width','120','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'logo:0:height','60','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'AssertionConsumerService:0:Location','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'redirect.sign','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'url:en','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,0,'url:nl','','2012-06-27T13:22:35+02:00','172.18.5.1'),
-(12,1,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'AssertionConsumerService:0:Location','https://api._OPENCONEXT_DOMAIN_/v1/assertionConsumer','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:0:emailAddress','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:0:givenName','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:0:surName','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:1:emailAddress','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:1:givenName','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:1:surName','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:2:emailAddress','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:2:givenName','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:2:surName','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'description:en','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'description:nl','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'logo:0:height','60','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'logo:0:url','https://.png','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'logo:0:width','120','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'name:en','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'name:nl','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'redirect.sign','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'url:en','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'url:nl','','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:0:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:1:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'contacts:2:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'coin:no_consent_required','1','2012-06-27T13:24:02+02:00','172.18.5.1'),
-(12,1,'certData','_OPENCONEXT_CERT_','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'certData','MIICjDCCAXSgAwIBAgIFAJRvxcMwDQYJKoZIhvcNAQEEBQAwLjELMAkGA1UEBhMCREUxEjAQBgNVBAoTCVNTT0NpcmNsZTELMAkGA1UEAxMCQ0EwHhcNMTEwNTE3MTk1NzIxWhcNMTYwODE3MTk1NzIxWjBLMQswCQYDVQQGEwJERTESMBAGA1UEChMJU1NPQ2lyY2xlMQwwCgYDVQQLEwNpZHAxGjAYBgNVBAMTEWlkcC5zc29jaXJjbGUuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbzDRkudC/aC2gMqRVVaLdPJJEwpFB4o71fR5bnNd2ocnnNzJ/W9CoCargzKx+EJ4Nm3vWmX/IZRCFvrvy9C78fP1cmt6Sa091K9luaMAyWn7oC8h/YBXH7rB42tdvWLY4Kl9VJy6UCclvasyrfKx+SR4KU6zCsM622Kvp5wW67QIDAQABoxgwFjAUBglghkgBhvhCAQEBAf8EBAMCBHAwDQYJKoZIhvcNAQEEBQADggEBAJ0heua7mFO3QszdGu1NblGaTDXtf6Txte0zpYIt+8YUcza2SaZXXvCLb9DvGxW1TJWaZpPGpHz5tLXJbdYQn7xTAnL4yQOKN6uNqUA/aTVgyyUJkWZt2giwEsWUvG0UBMSPS1tp2pV2c6/olIcbdYU6ZecUz6N24sSS7itEBC6nwCVBoHOL8u6MsfxMLDzJIPBI68UZjz3IMKTDUDv6U9DtYmXLc8iMVZBncYJn9NgNi3ghl9fYPpHcc6QbXeDUjhdzXXUqG+hB6FabGqdTdkIZwoi4gNpyr3kacKRVWJssDgakeL2MoDNqJyQ0fXC6Ze3f79CKy/WjeU5FLwDZR0Q=','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'certData2','MIICjDCCAXSgAwIBAgIFAJRvxcMwDQYJKoZIhvcNAQEEBQAwLjELMAkGA1UEBhMCREUxEjAQBgNVBAoTCVNTT0NpcmNsZTELMAkGA1UEAxMCQ0EwHhcNMTEwNTE3MTk1NzIxWhcNMTYwODE3MTk1NzIxWjBLMQswCQYDVQQGEwJERTESMBAGA1UEChMJU1NPQ2lyY2xlMQwwCgYDVQQLEwNpZHAxGjAYBgNVBAMTEWlkcC5zc29jaXJjbGUuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbzDRkudC/aC2gMqRVVaLdPJJEwpFB4o71fR5bnNd2ocnnNzJ/W9CoCargzKx+EJ4Nm3vWmX/IZRCFvrvy9C78fP1cmt6Sa091K9luaMAyWn7oC8h/YBXH7rB42tdvWLY4Kl9VJy6UCclvasyrfKx+SR4KU6zCsM622Kvp5wW67QIDAQABoxgwFjAUBglghkgBhvhCAQEBAf8EBAMCBHAwDQYJKoZIhvcNAQEEBQADggEBAJ0heua7mFO3QszdGu1NblGaTDXtf6Txte0zpYIt+8YUcza2SaZXXvCLb9DvGxW1TJWaZpPGpHz5tLXJbdYQn7xTAnL4yQOKN6uNqUA/aTVgyyUJkWZt2giwEsWUvG0UBMSPS1tp2pV2c6/olIcbdYU6ZecUz6N24sSS7itEBC6nwCVBoHOL8u6MsfxMLDzJIPBI68UZjz3IMKTDUDv6U9DtYmXLc8iMVZBncYJn9NgNi3ghl9fYPpHcc6QbXeDUjhdzXXUqG+hB6FabGqdTdkIZwoi4gNpyr3kacKRVWJssDgakeL2MoDNqJyQ0fXC6Ze3f79CKy/WjeU5FLwDZR0Q=','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'coin:guest_qualifier','All','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:0:contactType','technical','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:0:emailAddress','support@openconext.org','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:0:givenName','Support','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:0:surName','OpenConext','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:1:contactType','support','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:1:emailAddress','support@openconext.org','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:1:givenName','Support','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:1:surName','OpenConext.org','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:2:contactType','administrative','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:2:emailAddress','support@openconext.org','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:2:givenName','Support','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'contacts:2:surName','OpenConext','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'description:en','SSOCircle public IdP','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'description:nl','SSOCircle public IdP','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'keywords:en','public idp open','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'keywords:nl','public idp open','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'logo:0:height','73','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/sso_circle_logo.png','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'logo:0:width','73','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'name:en','SSOCircle IDP','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'name:nl','SSOCircle IDP','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'SingleSignOnService:0:Location','https://idp.ssocircle.com:443/sso/SSORedirect/metaAlias/ssocircle','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (5,0,'coin:schachomeorganization','','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'certData','MIIDYzCCAkugAwIBAgIJAMWzFQ+2+7UtMA0GCSqGSIb3DQEBBQUAMEgxFDASBgNVBAMMC0VuZ2luZUJsb2NrMREwDwYDVQQLDAhTZXJ2aWNlczEQMA4GA1UECgwHU1VSRm5ldDELMAkGA1UEBhMCTkwwHhcNMTIwNjEyMDczNjA2WhcNMjIwNjEyMDczNjA2WjBIMRQwEgYDVQQDDAtFbmdpbmVCbG9jazERMA8GA1UECwwIU2VydmljZXMxEDAOBgNVBAoMB1NVUkZuZXQxCzAJBgNVBAYTAk5MMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyl/YsyxuCsqh44RwBz8a0qy15/NbFNL635N0DW2vBVzkppJQN5SJih1aG+ES7pEleWcnvMDyAWSnKTA6uOQCNQIAPJMaJXJuYK8tdTbJWFJTAmiaJxF2NvpA4q4ToY1n1L7cLWBvM9HERLIPC6rFLgv6O05c00s/XqzymlMV9EsAXQbJRp3n5DXNOJrRjfqclK7gpy8O5cD1NWy4OuaA086ipjW6lESKPONTscdFjKDtLarX3JthjAoaK8b/0OCQcbAklaDJXpQTnZNtFZUBWj3n/fuv4jyKvVBWwx5XGACrPEnLTwkLkZZG7oav75jS9sOiDxnTEh+m42Tp17tFZQIDAQABo1AwTjAdBgNVHQ4EFgQU0S9rclotGkC2jUYpy7HTgB/DCU0wHwYDVR0jBBgwFoAU0S9rclotGkC2jUYpy7HTgB/DCU0wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEAHbAa/lSpNf1ayKtq0c513vxboCTaclZ76vmN2jTFpu5qWiwboumRsn9q4Irhxt2kIjdpUHIg8hr46tYtep/tmf9UjbdDeZxZ1sxwhxzrMMjv972/mF1wJcENBZW/degXevz4fiEB//t0wyaA7bWeC2Ry13cvmg0x8fztqJgr4JjjxOSNKbBJ2PmN9ES3hf54UZZTy5iyW2E/3I59uRYyuPhDZDu2Uf0LlEeEuYmbY2AEgPvC+W2eR6axWkw6406jLh0Qf2ph0Wk+1YV94QmHBT9dFCyumnYIByWbqj2TSz2pCu5Gv8Kiik5k/xDDXMQ5W3EHUZIf6gdajhyH3kQkRg==','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'coin:guest_qualifier','All','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:0:contactType','technical','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:0:emailAddress','support@openconext.org','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:0:givenName','Support','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:0:surName','OpenConext','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:1:contactType','support','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:1:emailAddress','support@openconext.org','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:1:givenName','Support','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:1:surName','OpenConext','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:2:contactType','administrative','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:2:emailAddress','support@openconext.org','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:2:givenName','Support','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'contacts:2:surName','OpenConext','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'description:en','OpenConext SSO Proxy','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'description:nl','OpenConext SSO Proxy','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'keywords:en','openconext engine engineblock proxy sso saml2','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'keywords:nl','openconext engine engineblock proxy sso saml2','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'logo:0:height','96','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'logo:0:width','96','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'name:en','OpenConext Engine','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'name:nl','OpenConext Engine','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (2,0,'SingleSignOnService:0:Location','https://engine._OPENCONEXT_DOMAIN_/authentication/idp/single-sign-on','2012-06-12T12:54:18+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'AssertionConsumerService:0:Location','https://engine._OPENCONEXT_DOMAIN_/authentication/sp/consume-assertion','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:0:contactType','technical','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:0:emailAddress','support@openconext.org','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:0:givenName','Support','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:0:surName','OpenConext','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:1:contactType','support','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:1:emailAddress','support@openconext.org','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:1:givenName','Support','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:1:surName','OpenConext','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:2:contactType','administrative','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:2:emailAddress','support@openconext.org','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:2:givenName','Support','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'contacts:2:surName','OpenConext','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'description:en','OpenConext SSO Proxy','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'description:nl','OpenConext SSO Proxy','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'logo:0:height','96','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'logo:0:width','96','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'name:en','OpenConext Engine','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'name:nl','OpenConext Engine','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'redirect.sign','','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'AssertionConsumerService:0:Location','https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:0:contactType','technical','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:0:emailAddress','support@openconext.org','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:0:givenName','Support','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:0:surName','OpenConext','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:1:contactType','support','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:1:emailAddress','support@openconext.org','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:1:givenName','Support','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:1:surName','OpenConext','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:2:contactType','administrative','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:2:emailAddress','support@openconext.org','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:2:givenName','Support','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'contacts:2:surName','OpenConext','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'description:en','OpenConext Profile management','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'description:nl','OpenConext Profile management','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'logo:0:height','96','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'logo:0:width','96','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'name:en','OpenConext Profile','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'name:nl','OpenConext Profile','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'redirect.sign','','2012-06-12T13:13:05+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'certData','MIICizCCAfQCCQCY8tKaMc0BMjANBgkqhkiG9w0BAQUFADCBiTELMAkGA1UEBhMCTk8xEjAQBgNVBAgTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEOMAwGA1UECxMFRmVpZGUxGTAXBgNVBAMTEG9wZW5pZHAuZmVpZGUubm8xKTAnBgkqhkiG9w0BCQEWGmFuZHJlYXMuc29sYmVyZ0B1bmluZXR0Lm5vMB4XDTA4MDUwODA5MjI0OFoXDTM1MDkyMzA5MjI0OFowgYkxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEDAOBgNVBAoTB1VOSU5FVFQxDjAMBgNVBAsTBUZlaWRlMRkwFwYDVQQDExBvcGVuaWRwLmZlaWRlLm5vMSkwJwYJKoZIhvcNAQkBFhphbmRyZWFzLnNvbGJlcmdAdW5pbmV0dC5ubzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAt8jLoqI1VTlxAZ2axiDIThWcAOXdu8KkVUWaN/SooO9O0QQ7KRUjSGKN9JK65AFRDXQkWPAu4HlnO4noYlFSLnYyDxI66LCr71x4lgFJjqLeAvB/GqBqFfIZ3YK/NrhnUqFwZu63nLrZjcUZxNaPjOOSRSDaXpv1kb5k3jOiSGECAwEAATANBgkqhkiG9w0BAQUFAAOBgQBQYj4cAafWaYfjBU2zi1ElwStIaJ5nyp/s/8B8SAPK2T79McMyccP3wSW13LHkmM1jwKe3ACFXBvqGQN0IbcH49hu0FKhYFM/GPDJcIHFBsiyMBXChpye9vBaTNEBCtU3KjjyG0hRT2mAQ9h+bkPmOvlEo/aH0xR68Z9hw4PF13w==','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'coin:guest_qualifier','All','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:0:contactType','technical','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:0:emailAddress','support@feide.no','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:0:givenName','Feide','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:0:surName','support','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:1:contactType','support','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:1:emailAddress','support@feide.no','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:1:givenName','Feide','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:1:surName','support','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:2:contactType','administrative','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:2:emailAddress','support@feide.no','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:2:givenName','Feide','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'contacts:2:surName','support','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'description:en','Feide Public Open IdP','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'description:nl','Feide Public Open IdP','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'keywords:en','feide norway open idp','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'keywords:nl','feide norway open idp','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'logo:0:height','240','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/feide_logo.jpg','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'logo:0:width','435','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'name:en','Feide Public Open IdP','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'name:nl','Feide Public Open IdP','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (8,0,'SingleSignOnService:0:Location','https://openidp.feide.no/simplesaml/saml2/idp/SSOService.php','2012-06-12T13:22:27+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'AssertionConsumerService:0:Location','https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:0:contactType','technical','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:0:emailAddress','support@openconext.org','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:0:givenName','Support','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:0:surName','OpenConext','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:1:contactType','support','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:1:emailAddress','support@openconext.org','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:1:givenName','Support','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:1:surName','OpenConext','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:2:contactType','administrative','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:2:emailAddress','support@openconext.org','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:2:givenName','Support','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'contacts:2:surName','OpenConext','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'description:en','OpenConext Service Registry, register all SPs and IdPs here','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'description:nl','OpenConext Service Registry, register all SPs and IdPs here','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'logo:0:height','96','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'logo:0:width','96','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'name:en','OpenConext ServiceRegistry','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'name:nl','OpenConext ServiceRegistry','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'redirect.sign','','2012-06-13T08:02:29+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'AssertionConsumerService:0:Location','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:0:contactType','technical','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:0:emailAddress','support@openconext.org','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:0:givenName','Support','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:0:surName','OpenConext','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:1:contactType','support','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:1:emailAddress','support@openconext.org','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:1:givenName','Support','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:1:surName','OpenConext','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:2:contactType','administrative','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:2:emailAddress','support@openconext.org','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:2:givenName','Support','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'contacts:2:surName','OpenConext','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'description:en','OpenConext Management application','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'description:nl','OpenConext Management application','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'logo:0:height','96','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'logo:0:width','96','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'name:en','OpenConext Manage','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'name:nl','OpenConext Manage','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'redirect.sign','','2012-06-13T09:04:30+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'AssertionConsumerService:0:Location','https://mujina-sp._OPENCONEXT_DOMAIN_/AssertionConsumerService','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:0:contactType','technical','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:0:emailAddress','support@openconext.org','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:0:givenName','Support','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:0:surName','OpenConext','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:1:contactType','support','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:1:emailAddress','support@openconext.org','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:1:givenName','Support','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:1:surName','OpenConext','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:2:contactType','administrative','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:2:emailAddress','support@openconext.org','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:2:givenName','Support','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'contacts:2:surName','OpenConext','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'description:en','OpenConext Mujina Test Service Provider','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'description:nl','OpenConext Mujina Test Service Provider','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'logo:0:height','96','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'logo:0:width','96','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'name:en','OpenConext Mujina','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'name:nl','OpenConext Mujina','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'redirect.sign','','2012-06-13T11:06:09+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'AssertionConsumerService:0:Location','https://grouper._OPENCONEXT_DOMAIN_/grouper/Shibboleth.sso/SAML2/POST','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:0:emailAddress','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:0:givenName','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:0:surName','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:1:emailAddress','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:1:givenName','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:1:surName','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:2:emailAddress','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:2:givenName','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:2:surName','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'description:en','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'description:nl','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'logo:0:height','60','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'logo:0:url','https://.png','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'logo:0:width','120','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'name:en','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'name:nl','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'redirect.sign','','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:0:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:1:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'contacts:2:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'AssertionConsumerService:0:Location','https://teams._OPENCONEXT_DOMAIN_/Shibboleth.sso/SAML2/POST','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'coin:gadgetbaseurl','https://teams.demo.openconext.org/.*','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'coin:oauth:secret','mysecret','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'coin:oauth:two_legged_allowed','1','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:0:contactType','technical','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:0:emailAddress','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:0:givenName','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:0:surName','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:1:emailAddress','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:1:givenName','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:1:surName','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:2:emailAddress','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:2:givenName','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:2:surName','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'description:en','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'description:nl','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'logo:0:height','60','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'logo:0:url','https://.png','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'logo:0:width','120','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'name:en','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'name:nl','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'redirect.sign','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'url:en','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'url:nl','','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:1:contactType','technical','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'contacts:2:contactType','technical','2012-06-25T16:42:04+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'certData','MIICHzCCAYgCCQD7KMJ17XQa7TANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJOTDEQMA4GA1UECAwHVXRyZWNodDEQMA4GA1UEBwwHVXRyZWNodDEQMA4GA1UECgwHU3VyZm5ldDEPMA0GA1UECwwGQ29uZXh0MB4XDTEyMDMwODA4NTQyNFoXDTEzMDMwODA4NTQyNFowVDELMAkGA1UEBhMCTkwxEDAOBgNVBAgMB1V0cmVjaHQxEDAOBgNVBAcMB1V0cmVjaHQxEDAOBgNVBAoMB1N1cmZuZXQxDzANBgNVBAsMBkNvbmV4dDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2slVe459WUDL4RXxJf5h5t5oUbPkPlFZ9lQysSoS3fnFTdCgzA6FzQzGRDcfRj0HnWBdA1YH+LxBjNcBIJ/nBc7Ssu4e4rMO3MSAV5Ouo3MaGgHqVq6dCD47f52b98df6QTAA3C+7sHqOdiQ0UDCAK0C+qP5LtTcmB8QrJhKmV8CAwEAATANBgkqhkiG9w0BAQUFAAOBgQCvPhO0aSbqX7g7IkR79IFVdJ/P7uSlYFtJ9cMxec85cYLmWL1aVgF5ZFFJqC25blyPJu2GRcSxoVwB3ae8sPCECWwqRQA4AHKIjiW5NgrAGYR++ssTOQR8mcAucEBfNaNdlJoy8GdZIhHZNkGlyHfY8kWS3OWkGzhWSsuRCLl78A==','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'coin:guest_qualifier','None','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:0:contactType','technical','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:0:emailAddress','support@openconext.org','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:0:givenName','Support','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:0:surName','OpenConext','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:1:contactType','support','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:1:emailAddress','support@openconext.org','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:1:givenName','Support','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:1:surName','OpenConext','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:2:contactType','administrative','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:2:emailAddress','support@openconext.org','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:2:givenName','Support','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'contacts:2:surName','OpenConext','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'description:en','OpenConext Mujina Test Identity Provider','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'description:nl','OpenConext Mujina Test Identity Provider','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'keywords:en','mock idp mujina','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'keywords:nl','mock idp mujina','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'logo:0:height','96','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'logo:0:url','https://static._OPENCONEXT_DOMAIN_/media/conext_logo.png','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'logo:0:width','96','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'name:en','OpenConext Mujina','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'name:nl','OpenConext Mujina','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'SingleSignOnService:0:Location','https://mujina-idp._OPENCONEXT_DOMAIN_/SingleSignOnService','2012-06-27T11:14:12+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'AssertionConsumerService:0:Location','https://api._OPENCONEXT_DOMAIN_/v1/assertionConsumer','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:0:emailAddress','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:0:givenName','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:0:surName','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:1:emailAddress','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:1:givenName','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:1:surName','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:2:emailAddress','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:2:givenName','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:2:surName','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'description:en','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'description:nl','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'logo:0:height','60','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'logo:0:url','https://.png','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'logo:0:width','120','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'name:en','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'name:nl','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'redirect.sign','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'url:en','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'url:nl','','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:0:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:1:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'contacts:2:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'coin:no_consent_required','1','2012-06-27T13:24:02+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'certData','_OPENCONEXT_CERT_','2012-06-12T12:51:28+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
 
 /*!40000 ALTER TABLE `janus__metadata` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -1413,19 +658,19 @@ CREATE TABLE `janus__subscription` (
 
 LOCK TABLES `janus__subscription` WRITE;
 /*!40000 ALTER TABLE `janus__subscription` DISABLE KEYS */;
-INSERT INTO `janus__subscription` VALUES (1,1,'ENTITYUPDATE-1','INBOX','2012-06-12T10:38:18+02:00','172.18.5.1'),
-(2,1,'ENTITYUPDATE-2','INBOX','2012-06-12T10:38:32+02:00','172.18.5.1'),
-(3,1,'ENTITYUPDATE-3','INBOX','2012-06-12T10:39:39+02:00','172.18.5.1'),
-(4,1,'ENTITYUPDATE-4','INBOX','2012-06-12T11:09:48+02:00','172.18.5.1'),
-(5,1,'ENTITYUPDATE-5','INBOX','2012-06-12T11:36:19+02:00','172.18.5.1'),
-(6,1,'ENTITYUPDATE-6','INBOX','2012-06-12T13:07:17+02:00','172.18.5.1'),
-(7,1,'ENTITYUPDATE-7','INBOX','2012-06-12T13:07:26+02:00','172.18.5.1'),
-(8,1,'ENTITYUPDATE-8','INBOX','2012-06-12T13:19:22+02:00','172.18.5.1'),
-(9,1,'ENTITYUPDATE-9','INBOX','2012-06-13T08:00:55+02:00','172.18.5.1'),
-(10,3,'USER-3','INBOX','2012-06-13T10:57:08+02:00','172.18.5.1'),
-(11,3,'ENTITYUPDATE-10','INBOX','2012-06-19T09:43:49+02:00','172.18.5.1'),
-(12,3,'ENTITYUPDATE-11','INBOX','2012-06-25T16:34:30+02:00','172.18.5.1'),
-(13,3,'ENTITYUPDATE-12','INBOX','2012-06-27T13:22:35+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (1,1,'ENTITYUPDATE-1','INBOX','2012-06-12T10:38:18+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (2,1,'ENTITYUPDATE-2','INBOX','2012-06-12T10:38:32+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (3,1,'ENTITYUPDATE-3','INBOX','2012-06-12T10:39:39+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (4,1,'ENTITYUPDATE-4','INBOX','2012-06-12T11:09:48+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (5,1,'ENTITYUPDATE-5','INBOX','2012-06-12T11:36:19+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (6,1,'ENTITYUPDATE-6','INBOX','2012-06-12T13:07:17+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (7,1,'ENTITYUPDATE-7','INBOX','2012-06-12T13:07:26+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (8,1,'ENTITYUPDATE-8','INBOX','2012-06-12T13:19:22+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (9,1,'ENTITYUPDATE-9','INBOX','2012-06-13T08:00:55+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (10,3,'USER-3','INBOX','2012-06-13T10:57:08+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (11,3,'ENTITYUPDATE-10','INBOX','2012-06-19T09:43:49+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (12,3,'ENTITYUPDATE-11','INBOX','2012-06-25T16:34:30+02:00','172.18.5.1');
+INSERT INTO `janus__subscription` VALUES (13,3,'ENTITYUPDATE-12','INBOX','2012-06-27T13:22:35+02:00','172.18.5.1');
 /*!40000 ALTER TABLE `janus__subscription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1475,7 +720,7 @@ CREATE TABLE `janus__user` (
   `data` text,
   `secret` text,
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1484,10 +729,10 @@ CREATE TABLE `janus__user` (
 
 LOCK TABLES `janus__user` WRITE;
 /*!40000 ALTER TABLE `janus__user` DISABLE KEYS */;
-INSERT INTO `janus__user` VALUES (1,'admin','a:2:{i:0;s:9:\"technical\";i:1;s:5:\"admin\";}',NULL,'yes','2011-04-12T01:02:43-07:00','2011-04-12T01:02:43-07:00','192.168.212.1',NULL,NULL),
-(2,'engine','a:2:{i:0;s:9:\"technical\";i:1;s:5:\"admin\";}',NULL,'yes','2011-04-12T02:42:25-07:00','2011-04-12T02:42:25-07:00','192.168.212.1',NULL,'engineblock'),
-(3,'urn:collab:person:example.com:john.doe','a:2:{i:0;s:9:\"technical\";i:1;s:5:\"admin\";}',NULL,'yes','2012-06-13T10:57:08+02:00','2012-06-13T10:57:08+02:00','172.18.5.1',NULL,NULL),
-(4,'urn:collab:person:example.com:admin','a:2:{i:0;s:9:\"technical\";i:1;s:5:\"admin\";}',NULL,'yes','2012-06-13T10:57:08+02:00','2012-06-13T10:57:08+02:00','172.18.5.1',NULL,NULL);
+INSERT INTO `janus__user` VALUES (1,'admin','a:2:{i:0;s:9:\"technical\";i:1;s:5:\"admin\";}',NULL,'yes','2011-04-12T01:02:43-07:00','2011-04-12T01:02:43-07:00','192.168.212.1',NULL,NULL);
+INSERT INTO `janus__user` VALUES (2,'engine','a:2:{i:0;s:9:\"technical\";i:1;s:5:\"admin\";}',NULL,'yes','2011-04-12T02:42:25-07:00','2011-04-12T02:42:25-07:00','192.168.212.1',NULL,'engineblock');
+INSERT INTO `janus__user` VALUES (3,'urn:collab:person:example.com:john.doe','a:2:{i:0;s:9:\"technical\";i:1;s:5:\"admin\";}',NULL,'yes','2012-06-13T10:57:08+02:00','2012-06-13T10:57:08+02:00','172.18.5.1',NULL,NULL);
+INSERT INTO `janus__user` VALUES (4,'urn:collab:person:example.com:admin','a:2:{i:0;s:9:\"technical\";i:1;s:5:\"admin\";}',NULL,'yes','2012-06-13T10:57:08+02:00','2012-06-13T10:57:08+02:00','172.18.5.1',NULL,NULL);
 /*!40000 ALTER TABLE `janus__user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1527,5 +772,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-06-27 11:27:18
-
+-- Dump completed on 2012-12-05  9:47:36
