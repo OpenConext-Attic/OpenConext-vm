@@ -193,7 +193,7 @@ CREATE TABLE `group_provider_decorator_option` (
 LOCK TABLES `group_provider_decorator_option` WRITE;
 /*!40000 ALTER TABLE `group_provider_decorator_option` DISABLE KEYS */;
 INSERT INTO `group_provider_decorator_option` VALUES (1,'replace','$1'),
-(1,'search','|urn:collab:group:dev.surfteams.nl:(.+)|');
+(1,'search','|urn:collab:group:vm-demo.surfteams.nl:(.+)|');
 /*!40000 ALTER TABLE `group_provider_decorator_option` ENABLE KEYS */;
 UNLOCK TABLES;
 
