@@ -26,6 +26,11 @@ do
   mv $i `dirname $i`/`basename $i .vm`
 done
 
+sed -i \
+  -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" \
+  /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
+
+
 # create Tomcat-specific context configuration file
 TEAMS_WAR=`basename /usr/share/tomcat6/wars/coin-teams-*.war`
 mkdir -p /usr/share/tomcat6/conf/Catalina/teams.$OC_DOMAIN
