@@ -34,11 +34,9 @@ sed -i \
   /usr/share/tomcat6/conf/classpath_properties/coin-api.properties
 
 
-# create Tomcat-specific context configuration file
-API_WAR=`basename /usr/share/tomcat6/wars/coin-api-*.war`
+# Copy Tomcat-specific context configuration file
 mkdir -p /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN
-echo "<Context path=\"/v1\" docBase=\"/usr/share/tomcat6/wars/$API_WAR\"/>" > \
-    /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN/v1.xml
+cp coin-api-dist/target/coin-api-dist*/tomcat/conf/context/*.xml /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN/
 
 mkdir -p /usr/share/tomcat6/webapps/api.$OC_DOMAIN
 chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/

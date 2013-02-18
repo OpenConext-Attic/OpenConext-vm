@@ -36,15 +36,11 @@ MUJINA_SP_WAR=`basename /usr/share/tomcat6/wars/mujina-sp-*.war`
 MUJINA_IDP_WAR=`basename /usr/share/tomcat6/wars/mujina-idp-*.war`
 
 
-
+# Copy Tomcat-specific context configuration files
 mkdir -p /usr/share/tomcat6/conf/Catalina/mujina-sp.$OC_DOMAIN
-echo "<Context path=\"/\" docBase=\"/usr/share/tomcat6/wars/$MUJINA_SP_WAR\"/>" > \
-/usr/share/tomcat6/conf/Catalina/mujina-sp.$OC_DOMAIN/ROOT.xml
-
 mkdir -p /usr/share/tomcat6/conf/Catalina/mujina-idp.$OC_DOMAIN
-
-echo "<Context path=\"/\" docBase=\"/usr/share/tomcat6/wars/$MUJINA_IDP_WAR\"/>" > \
-/usr/share/tomcat6/conf/Catalina/mujina-idp.$OC_DOMAIN/ROOT.xml
+cp mujina-sp-dist/target/mujina-sp-dist*/tomcat/conf/context/*.xml /usr/share/tomcat6/conf/Catalina/mujina-sp.$OC_DOMAIN/
+cp mujina-idp-dist/target/mujina-idp-dist*/tomcat/conf/context/*.xml /usr/share/tomcat6/conf/Catalina/mujina-idp.$OC_DOMAIN/
 
 mkdir -p /usr/share/tomcat6/webapps/mujina-sp.$OC_DOMAIN
 mkdir -p /usr/share/tomcat6/webapps/mujina-idp.$OC_DOMAIN

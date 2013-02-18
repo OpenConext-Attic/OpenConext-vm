@@ -30,12 +30,11 @@ sed -i \
   -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" \
   /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
 
-
-# create Tomcat-specific context configuration file
-TEAMS_WAR=`basename /usr/share/tomcat6/wars/coin-teams-*.war`
+# Copy Tomcat-specific context configuration files
 mkdir -p /usr/share/tomcat6/conf/Catalina/teams.$OC_DOMAIN
-echo "<Context path=\"/teams\" docBase=\"/usr/share/tomcat6/wars/$TEAMS_WAR\"/>" > \
-    /usr/share/tomcat6/conf/Catalina/teams.$OC_DOMAIN/teams.xml
+cp coin-teams-dist/target/coin-teams-dist*/tomcat/conf/context/*.xml /usr/share/tomcat6/conf/Catalina/teams.$OC_DOMAIN/
+
+
 
 mysql -u root --password=c0n3xt -e "drop database if exists teams; create database teams default charset utf8 default collate utf8_unicode_ci;"
 mysql -u root --password=c0n3xt teams < $OC_BASEDIR/data/teams.sql
