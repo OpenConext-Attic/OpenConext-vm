@@ -11,6 +11,7 @@ fi
 cd /opt/www/engineblock
 $GITCHECKOUT ${ENGINEBLOCK_VERSION}
 
+./bin/composer.phar self-update
 ./bin/composer.phar install
 
 cp -Rf $OC_BASEDIR/configs/attribute-manipulations /opt/www
