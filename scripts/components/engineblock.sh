@@ -27,6 +27,7 @@ cat $OC_BASEDIR/data/engineblock.sql | \
 # Modify the EngineBlock configuration file #
 #############################################
 
+## TODO: replace ini file anyway, regardless of current state? (we could save a version of course...)
 if [ ! -f /etc/surfconext/engineblock.ini ]
 then
     mkdir -p /etc/surfconext/
