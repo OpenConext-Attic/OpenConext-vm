@@ -113,20 +113,17 @@ then
   echo "For HTTP over SSL and SAML signing/encryption, a set of self-signed, default keys and certificates are installed. You can customize this now, if you want to."
   echo
   echo "1. Generate a new set, based on the chosen base domain ($OC_DOMAIN)"
-  echo "2, Bring your own certificates, (including trust chain)"
-  echo "3. Keep the default (for demo.openconext.org)"
+  echo "2. Bring your own certificates, (including trust chain)"
 
   read CERTCHOICE
   echo; echo;
   case "$CERTCHOICE" in
     "1" ) generate_new_certs ;;
     "2" ) explain_bring_your_own ;;
-    * )
-      echo "The default set will be used, valid for demo.openconext.org." ;;
+    * )  generate_new_certs ;;
   esac
 else
-  # Running in non-interactive mode, use the default certs
-  echo "Will use the default set of SSL certificates."
+  echo "Will generate a set of SSL certificates for the domain $OC_DOMAIN."
 fi
 
 cp $KEY_DIR/openconext_ca.pem /opt/www/welcome/openconext_ca.crt
