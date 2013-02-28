@@ -7,6 +7,7 @@ then
 fi
 
 cd /opt/www/Mujina
+$GITPULL
 $GITCHECKOUT ${MUJINA_VERSION}
 $MVN clean install -DskipTests
 

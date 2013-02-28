@@ -20,10 +20,13 @@ cat $OC_BASEDIR/configs/httpd/conf.d/vomanage.conf  | \
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
   /etc/httpd/conf.d/vomanage.conf
 
-if [ ! -f /etc/surfconext/manage.ini ]
+if [ -f /etc/surfconext/manage.ini ]
 then
-    mkdir -p /etc/surfconext/
-    sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/manage.ini > /etc/surfconext/manage.ini
+  backupFile /etc/surfconext/manage.ini
 fi
+
+mkdir -p /etc/surfconext/
+sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/manage.ini > /etc/surfconext/manage.ini
+
 CRT_NO_HEADERS=`sed '1d;$d' /etc/surfconext/engineblock.crt` &&
 echo "auth.simplesamlphp.idp.cert = \"${CRT_NO_HEADERS}\"" >> /etc/surfconext/manage.ini

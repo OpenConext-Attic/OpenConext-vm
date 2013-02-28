@@ -19,7 +19,7 @@ $config['auth'] = 'default-sp'; // Single Sign On via EngineBlock
  * Attibute used to identify users
  */
 #$config['useridattr'] = 'user';
-$config['useridattr'] = 'NameID';
+$config['useridattr'] = 'urn:mace:dir:attribute-def:eduPersonTargetedID';
 
 $config['store'] = array(
     'dsn'       => 'mysql:host=localhost;dbname=serviceregistry',

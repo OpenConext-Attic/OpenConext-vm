@@ -14,7 +14,8 @@ $GITCHECKOUT ${ENGINEBLOCK_VERSION}
 ./bin/composer.phar self-update
 ./bin/composer.phar install
 
-cp -Rf $OC_BASEDIR/configs/attribute-manipulations /opt/www
+# Directory for potential attribute-manipulations
+mkdir -p /opt/www/attribute-manipulations
 
 # Create database
 mysql -u root --password=c0n3xt -e "drop database if exists engineblock; create database engineblock default charset utf8 default collate utf8_unicode_ci;"
@@ -27,12 +28,13 @@ cat $OC_BASEDIR/data/engineblock.sql | \
 # Modify the EngineBlock configuration file #
 #############################################
 
-## TODO: replace ini file anyway, regardless of current state? (we could save a version of course...)
-if [ ! -f /etc/surfconext/engineblock.ini ]
+
+if [ -f /etc/surfconext/engineblock.ini ]
 then
-    mkdir -p /etc/surfconext/
-    sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/engineblock.ini > /etc/surfconext/engineblock.ini
+  backupFile /etc/surfconext/engineblock.ini
 fi
+mkdir -p /etc/surfconext/
+sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/engineblock.ini > /etc/surfconext/engineblock.ini
 
 # Edit the profile.sh file to set correct environment variable
 echo 'export ENGINEBLOCK_ENV="demo"' > /etc/profile.d/openconext.sh
@@ -40,23 +42,22 @@ echo 'export ENGINEBLOCK_ENV="demo"' > /etc/profile.d/openconext.sh
 chmod +x /etc/profile.d/openconext.sh
 source /etc/profile.d/openconext.sh
 
-if [ ! -f /etc/surfconext/engineblock.crt ];
+if [ -f /etc/surfconext/engineblock.crt ]
 then
-
-    # Generate Self Signed Certificate for EngineBlock and add it to the configuration
-    cd /tmp &&
-    openssl req -subj '/CN=EngineBlock/OU=Services/O=SURFnet/C=NL/' -newkey rsa:2048 -new -x509 -days 3652 -nodes -out example.org.crt -keyout example.org.pem > /dev/null
-    EB_CRT=`cat example.org.crt` &&
-    EB_KEY=`cat example.org.pem` &&
-    EB_CRT_NO_HEADERS=`sed '1d;$d' example.org.crt` &&
-    echo "" >> /etc/surfconext/engineblock.ini &&
-    echo "encryption.key.public = \"${EB_CRT}\"" >> /etc/surfconext/engineblock.ini &&
-    echo "encryption.key.private = \"${EB_KEY}\"" >> /etc/surfconext/engineblock.ini &&
-    echo "auth.simplesamlphp.idp.cert       = \"${EB_CRT_NO_HEADERS}\"" >> /etc/surfconext/engineblock.ini
-    cp example.org.crt /etc/surfconext/engineblock.crt &&
-    rm example.org.crt example.org.pem &&
-    cd -
+  backupFile /etc/surfconext/engineblock.crt
 fi
+# Generate Self Signed Certificate for EngineBlock and add it to the configuration
+cd /tmp &&
+  openssl req -subj '/CN=EngineBlock/OU=Services/O=SURFnet/C=NL/' -newkey rsa:2048 -new -x509 -days 3652 -nodes -out example.org.crt -keyout example.org.pem > /dev/null
+EB_CRT=`cat example.org.crt` &&
+EB_KEY=`cat example.org.pem` &&
+EB_CRT_NO_HEADERS=`sed '1d;$d' example.org.crt` &&
+echo "" >> /etc/surfconext/engineblock.ini &&
+echo "encryption.key.public = \"${EB_CRT}\"" >> /etc/surfconext/engineblock.ini &&
+echo "encryption.key.private = \"${EB_KEY}\"" >> /etc/surfconext/engineblock.ini &&
+echo "auth.simplesamlphp.idp.cert       = \"${EB_CRT_NO_HEADERS}\"" >> /etc/surfconext/engineblock.ini
+cp example.org.crt /etc/surfconext/engineblock.crt &&
+rm example.org.crt example.org.pem
 
 mkdir -p /var/log/surfconext
 # TODO: is this chmod really neccessary?
