@@ -24,6 +24,8 @@ function backupFile()
   cp -p $FILENAME $NEW_FILENAME
 }
 
+# errors are fatal
+set -e
 
 # Verify that user root runs this script
 ROOT_UID=0   # Root has $UID 0.
