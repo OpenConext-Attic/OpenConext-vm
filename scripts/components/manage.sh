@@ -25,7 +25,7 @@ then
   backupFile /etc/surfconext/manage.ini
 fi
 
-mkdir -p /etc/surfconext/
+install -d /etc/surfconext/
 sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/manage.ini > /etc/surfconext/manage.ini
 
 CRT_NO_HEADERS=`sed '1d;$d' /etc/surfconext/engineblock.crt` &&

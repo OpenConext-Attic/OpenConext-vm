@@ -33,7 +33,7 @@ if [ -f /etc/surfconext/engineblock.ini ]
 then
   backupFile /etc/surfconext/engineblock.ini
 fi
-mkdir -p /etc/surfconext/
+install -d /etc/surfconext/
 sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/engineblock.ini > /etc/surfconext/engineblock.ini
 
 # Edit the profile.sh file to set correct environment variable
@@ -59,7 +59,7 @@ echo "auth.simplesamlphp.idp.cert       = \"${EB_CRT_NO_HEADERS}\"" >> /etc/surf
 cp example.org.crt /etc/surfconext/engineblock.crt &&
 rm example.org.crt example.org.pem
 
-mkdir -p /var/log/surfconext
+install -d /var/log/surfconext
 # TODO: is this chmod really neccessary?
 chmod o+w /var/log/surfconext
 touch /var/log/surfconext/engineblock.log

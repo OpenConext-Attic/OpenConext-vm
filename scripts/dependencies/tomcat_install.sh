@@ -8,33 +8,37 @@ chkconfig --level 235 tomcat6 on
 
 CATALINA_HOME=/usr/share/tomcat6
 
-ln -s $CATALINA_HOME /opt/tomcat
+ln -fs $CATALINA_HOME /opt/tomcat
 
 if [ ! -d $CATALINA_HOME/conf/classpath_properties ]
 then
-	mkdir -p $CATALINA_HOME/conf/classpath_properties
+	install -d $CATALINA_HOME/conf/classpath_properties
     cp $OC_BASEDIR/configs/tomcat6/conf/classpath_properties/* $CATALINA_HOME/conf/classpath_properties/
 fi
 
 if [ ! -h $CATALINA_HOME/shared/lib/mysql-connector-java.jar ]
 then
-  mkdir -p $CATALINA_HOME/shared/lib/
+  install -d $CATALINA_HOME/shared/lib/
   ln -s /usr/share/java/mysql-connector-java.jar $CATALINA_HOME/shared/lib/mysql-connector-java.jar
 fi
 
-mkdir -p $CATALINA_HOME/wars
+install -d $CATALINA_HOME/wars
 
 cp -f $OC_BASEDIR/configs/tomcat6/conf/catalina.properties $CATALINA_HOME/conf/catalina.properties
 cp -f $OC_BASEDIR/configs/tomcat6/conf/server.xml $CATALINA_HOME/conf/server.xml
 cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat6.conf $CATALINA_HOME/conf/tomcat6.conf
 cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat-users.xml $CATALINA_HOME/conf/tomcat-users.xml
 
-mkdir -p $CATALINA_HOME/conf/classpath_properties
+install -d $CATALINA_HOME/conf/classpath_properties
 cp -f $OC_BASEDIR/configs/tomcat6/conf/classpath_properties/* $CATALINA_HOME/conf/classpath_properties/
 
 
-keytool -delete -alias "openconext cacert" \
-  -keystore /etc/pki/java/cacerts -storepass changeit -noprompt > /dev/null
+if keytool -list -alias 'openconext cacert' -keystore /etc/pki/java/cacerts \
+    -storepass changeit -noprompt > /dev/null
+then
+    keytool -delete -alias "openconext cacert" \
+      -keystore /etc/pki/java/cacerts -storepass changeit -noprompt > /dev/null
+fi
 
 keytool -import -file /etc/httpd/keys/openconext_ca.pem \
   -trustcacerts -alias "openconext cacert" \
@@ -42,9 +46,9 @@ keytool -import -file /etc/httpd/keys/openconext_ca.pem \
 
 service tomcat6 stop
 sleep 5
-if ps faxuww | grep tomcat | grep -v grep > /dev/null
+if ps faxuww | egrep -a '^tomcat '
 then
-  killall -9 java
+  killall -q -9 -u tomcat  java
 fi
 sleep 2
 

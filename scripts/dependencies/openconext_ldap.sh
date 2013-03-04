@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rm -f /etc/openldap/schema/collab.schema
+
 if [ ! -f /etc/openldap/schema/collab.schema ]
 then
     # Remove existing schemas and entries

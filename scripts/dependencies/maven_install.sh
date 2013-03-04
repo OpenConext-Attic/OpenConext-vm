@@ -17,7 +17,7 @@ else
 
   MVN_SYMLINK=/opt/maven
 
-  mkdir -p $MVN_INSTALLDIR &&
+  install -d $MVN_INSTALLDIR &&
   curl -s $MVN_URL -o $MVN_LOCALTARBALL &&
   tar -xzf $MVN_LOCALTARBALL -C $MVN_INSTALLDIR
 

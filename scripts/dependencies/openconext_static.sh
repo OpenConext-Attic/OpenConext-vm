@@ -5,8 +5,11 @@
 
 if [ ! -h /opt/www/static ]
 then
-    cd /opt/www &&
-    $GITCLONE --branch ${STATIC_VERSION} git://github.com/OpenConext/OpenConext-static.git /opt/www/OpenConext-static
+    cd /opt/www
+    $GITCLONE git://github.com/OpenConext/OpenConext-static.git /opt/www/OpenConext-static
+    cd /opt/www/OpenConext-static
+    $GITCHECKOUT ${STATIC_VERSION}
+    cd ..
     ln -sf /opt/www/OpenConext-static /opt/www/static
 fi
 

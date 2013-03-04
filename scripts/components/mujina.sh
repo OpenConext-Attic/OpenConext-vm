@@ -38,13 +38,13 @@ MUJINA_IDP_WAR=`basename /usr/share/tomcat6/wars/mujina-idp-*.war`
 
 
 # Copy Tomcat-specific context configuration files
-mkdir -p /usr/share/tomcat6/conf/Catalina/mujina-sp.$OC_DOMAIN
-mkdir -p /usr/share/tomcat6/conf/Catalina/mujina-idp.$OC_DOMAIN
+install -d /usr/share/tomcat6/conf/Catalina/mujina-sp.$OC_DOMAIN
+install -d /usr/share/tomcat6/conf/Catalina/mujina-idp.$OC_DOMAIN
 cp mujina-sp-dist/target/mujina-sp-dist*/tomcat/conf/context/*.xml /usr/share/tomcat6/conf/Catalina/mujina-sp.$OC_DOMAIN/
 cp mujina-idp-dist/target/mujina-idp-dist*/tomcat/conf/context/*.xml /usr/share/tomcat6/conf/Catalina/mujina-idp.$OC_DOMAIN/
 
-mkdir -p /usr/share/tomcat6/webapps/mujina-sp.$OC_DOMAIN
-mkdir -p /usr/share/tomcat6/webapps/mujina-idp.$OC_DOMAIN
+install -d /usr/share/tomcat6/webapps/mujina-sp.$OC_DOMAIN
+install -d /usr/share/tomcat6/webapps/mujina-idp.$OC_DOMAIN
 chown -R tomcat:tomcat /usr/share/tomcat6/webapps/
 
 SERVERXMLLINE1='<Host name="mujina-idp.'$OC_DOMAIN'" appBase="webapps/mujina-idp.'$OC_DOMAIN'"/>'

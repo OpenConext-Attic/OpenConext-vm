@@ -1,7 +1,6 @@
 #!/bin/sh
 
-$YUM list installed | grep samba\\. > /dev/null
-if [ $? -ne 0 ]
+if $YUM list installed | grep -q 'samba\.'
 then
   if $YUM info samba > /dev/null
   then

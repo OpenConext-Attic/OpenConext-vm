@@ -40,7 +40,7 @@ cd /opt/www/serviceregistry/
 ./bin/migrate
 
 # Install EngineBlock's certificate for ServiceRegistry
-mkdir -p  /etc/surfconext/serviceregistry-certs/
+install -d  /etc/surfconext/serviceregistry-certs/
 cp /etc/surfconext/engineblock.crt /etc/surfconext/serviceregistry-certs/engineblock.crt
 
 

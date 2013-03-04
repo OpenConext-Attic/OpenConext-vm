@@ -28,8 +28,8 @@ sed -i "s/teamsrw/root/g" /usr/share/tomcat6/conf/classpath_properties/grouper.h
 sed -i "s/asd7rR53hj62ERFse45/c0n3xt/g" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
 
 
-mkdir -p /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
-mkdir -p /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
+install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
+install -d /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
 chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
 
 GROUPER_WS_WAR=`basename /usr/share/tomcat6/wars/grouper-ws-*.war`

@@ -6,8 +6,7 @@ CA_KEY_PASSWORD=mysecret
 
 function generate_new_certs() {
 
-  TMP_DIR=/tmp/$$_$RANDOM
-  mkdir $TMP_DIR
+  TMP_DIR=$(mktemp -d)
 
   # The CA key/cert were generated using this command:
   # openssl req -new -x509 -days 3650 \

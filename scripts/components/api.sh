@@ -16,7 +16,7 @@ $MVN clean install -DskipTests
 tar -zxf coin-api-dist/target/*-bin.tar.gz -C coin-api-dist/target
 
 # remove old deployed war
-rm /usr/share/tomcat6/wars/coin-api-*.war 2> /dev/null
+rm -f /usr/share/tomcat6/wars/coin-api-*.war 2> /dev/null
 # copy new war to Tomcat
 cp coin-api-dist/target/coin-api-dist*/tomcat/webapps/*.war /usr/share/tomcat6/wars
 
@@ -37,10 +37,10 @@ sed -i \
 
 
 # Copy Tomcat-specific context configuration file
-mkdir -p /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN
+install -d /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN
 cp coin-api-dist/target/coin-api-dist*/tomcat/conf/context/*.xml /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN/
 
-mkdir -p /usr/share/tomcat6/webapps/api.$OC_DOMAIN
+install -d /usr/share/tomcat6/webapps/api.$OC_DOMAIN
 chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
 
 SERVERXMLLINE='<Host name="api.'$OC_DOMAIN'" appBase="webapps/api.'$OC_DOMAIN'"/>'
