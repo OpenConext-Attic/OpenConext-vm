@@ -78,7 +78,7 @@
     Resource requests are mapped by the RequestMapper to an applicationId that
     points into to this section (or to the defaults here).
     -->
-    <ApplicationDefaults entityID="https://teams.demo.openconext.org/shibboleth"
+    <ApplicationDefaults entityID="https://teams._OPENCONEXT_DOMAIN_/shibboleth"
                          REMOTE_USER="name-id"
                          signing="true" encryption="true">
 
@@ -121,7 +121,7 @@
                               isDefault="true"
                               id="Login"
                               relayState="cookie"
-                              entityID="https://engine.demo.openconext.org/authentication/idp/metadata">
+                              entityID="https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata">
               
                 <SessionInitiator type="SAML2"
                                   NameIDFormat="urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified"
@@ -205,7 +205,7 @@
         <MetadataProvider type="Chaining">
             <!-- Metadata of IdP's registered with Engineblock -->
             <MetadataProvider type="XML"
-                              uri="https://engine._OPENCONEXT_DOMAIN_/authentication/proxy/idps-metadata?sp-entity-id=https://teams.demo.openconext.org/shibboleth"
+                              uri="https://engine._OPENCONEXT_DOMAIN_/authentication/proxy/idps-metadata?sp-entity-id=https://teams._OPENCONEXT_DOMAIN_/shibboleth"
                               backingFilePath="/etc/shibboleth/engineblock-idps-metadata-saml2.xml"
                               reloadInterval="7200">
             </MetadataProvider>
@@ -242,18 +242,18 @@
         <ApplicationOverride id="admin" entityID="https://admin.example.org/shibboleth"/>
         -->
 
-        <ApplicationOverride id="teams" entityID="https://teams.demo.openconext.org/shibboleth">
+        <ApplicationOverride id="teams" entityID="https://teams._OPENCONEXT_DOMAIN_/shibboleth">
             <MetadataProvider type="Chaining">
                 <!-- Engineblock IDP metadata -->
                 <MetadataProvider type="XML"
-                                  uri="https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata?sp-entity-id=https://teams.demo.openconext.org/shibboleth"
+                                  uri="https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata?sp-entity-id=https://teams._OPENCONEXT_DOMAIN_/shibboleth"
                                   backingFilePath="/etc/shibboleth/engineblock-metadata-saml2-teams.xml"
                                   reloadInterval="7200">
                 </MetadataProvider>
 
                 <!-- Metadata of IdP's registered with Engineblock -->
                 <MetadataProvider type="XML"
-                                  uri="https://engine._OPENCONEXT_DOMAIN_/authentication/proxy/idps-metadata?sp-entity-id=https://teams.demo.openconext.org/shibboleth"
+                                  uri="https://engine._OPENCONEXT_DOMAIN_/authentication/proxy/idps-metadata?sp-entity-id=https://teams._OPENCONEXT_DOMAIN_/shibboleth"
                                   backingFilePath="/etc/shibboleth/engineblock-idps-metadata-saml2-teams.xml"
                                   reloadInterval="7200">
                 </MetadataProvider>
@@ -261,7 +261,7 @@
         </ApplicationOverride>
 
         <!-- Because Grouper lives in a seperate path, we need to configure more then host-only entityID's -->
-        <ApplicationOverride id="grouper" entityID="https://grouper.demo.openconext.org/grouper/shibboleth">
+        <ApplicationOverride id="grouper" entityID="https://grouper._OPENCONEXT_DOMAIN_/grouper/shibboleth">
             <Sessions lifetime="28800"
               timeout="3600"
               checkAddress="true"
@@ -280,7 +280,7 @@
                                   isDefault="true"
                                   id="Login"
                                   relayState="cookie"
-                                  entityID="https://engine.demo.openconext.org/authentication/idp/metadata">
+                                  entityID="https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata">
 
                     <SessionInitiator type="SAML2"
                                       NameIDFormat="urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified"

@@ -5,6 +5,25 @@
 #
 #
 
+# Functions
+
+##
+# Create a backup of the given file (complete path)
+# Will suffix with the current date and a sequence number
+function backupFile()
+{
+  FILENAME="$1"
+  DATE=`date +%Y%m%d`
+  SEQ=1
+  while [[ -f $FILENAME.$DATE.$SEQ ]]
+  do
+     SEQ=`expr $SEQ + 1`
+  done
+  NEW_FILENAME=$FILENAME.$DATE.$SEQ
+
+  cp -p $FILENAME $NEW_FILENAME
+}
+
 
 # Verify that user root runs this script
 ROOT_UID=0   # Root has $UID 0.
@@ -36,6 +55,7 @@ MVN="mvn -q"
 YUM="yum -q"
 GITCLONE="git clone -q"
 GITCHECKOUT="git checkout -q"
+GITPULL="git pull -q"
 
 if [ $VERBOSE == "true" ]
 then
@@ -124,6 +144,7 @@ then
   OC_VERSION=$OC_VERSION_INPUT
   echo "Using version file $OC_VERSION"
 fi
+
 
 
 

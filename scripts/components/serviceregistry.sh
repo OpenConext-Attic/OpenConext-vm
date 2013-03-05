@@ -27,11 +27,14 @@ cat $OC_BASEDIR/data/serviceregistry.sql | \
   mysql -u root --password=c0n3xt serviceregistry
 
 
-if [ ! -f /etc/surfconext/serviceregistry.config.php ]
+
+
+if [ -f /etc/surfconext/serviceregistry.config.php ]
 then
-  cp $OC_BASEDIR/configs/surfconext/serviceregistry*.php /etc/surfconext/
-  sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" /etc/surfconext/serviceregistry*.php
+  backupFile /etc/surfconext/serviceregistry.config.php
 fi
+cp $OC_BASEDIR/configs/surfconext/serviceregistry*.php /etc/surfconext/
+sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" /etc/surfconext/serviceregistry*.php
 
 cd /opt/www/serviceregistry/
 ./bin/migrate

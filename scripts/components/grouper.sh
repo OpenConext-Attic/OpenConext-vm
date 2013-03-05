@@ -1,12 +1,16 @@
 #!/bin/bash
 
 cd /tmp
-curl -O https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/${GROUPER_VERSION}/grouper-dist-${GROUPER_VERSION}-bin.tar.gz
+if [ ! -f grouper-dist-*-bin.tar.gz ]
+then
+  ## Only download if not exists yet. Optimization in case script is run successively.
+  curl -O https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/${GROUPER_VERSION}/grouper-dist-${GROUPER_VERSION}-bin.tar.gz
+fi
 tar zxf grouper-dist-*-bin.tar.gz
 
 cp -f tomcat/webapps/*.war /usr/share/tomcat6/wars
 
-# Here we use the .dev versions. There is no .vm version and they would be the same anyway.
+# Here we use the .dev versions. There is no .vm version.
 cp -f tomcat/conf/classpath_properties/*.dev /usr/share/tomcat6/conf/classpath_properties/
 cp -f tomcat/conf/classpath_properties/grouper.properties /usr/share/tomcat6/conf/classpath_properties/
 cp -f tomcat/conf/classpath_properties/log4j.properties /usr/share/tomcat6/conf/classpath_properties/

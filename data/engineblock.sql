@@ -41,8 +41,8 @@ CREATE TABLE `consent` (
 LOCK TABLES `consent` WRITE;
 /*!40000 ALTER TABLE `consent` DISABLE KEYS */;
 INSERT INTO `consent` VALUES
-('2012-06-27 09:01:37','2012-06-27 09:01:37','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e'),
-('2012-06-27 09:13:32','2012-06-27 09:13:32','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e');
+('2012-06-27 09:01:37','2012-06-27 09:01:37','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e'),
+('2012-06-27 09:13:32','2012-06-27 09:13:32','4e20080aba70103a60039bf19fdac0c4fb7ce367','https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp','f8fff30971a5477e0721ce45aa5dd7ad83b6848e');
 /*!40000 ALTER TABLE `consent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -440,10 +440,10 @@ LOCK TABLES `service_provider_group_acl` WRITE;
 INSERT INTO `service_provider_group_acl` VALUES (1,1,'https://engine._OPENCONEXT_DOMAIN_/authentication/sp/metadata',1,1),
 (2,1,'https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),
 (3,1,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),
-(4,1,'https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),
+(4,1,'https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),
 (5,1,'http://mock-sp',1,1),
-(6,1,'https://grouper.demo.openconext.org/grouper/shibboleth',1,1),
-(7,1,'https://teams.demo.openconext.org/shibboleth',1,1);
+(6,1,'https://grouper._OPENCONEXT_DOMAIN_/grouper/shibboleth',1,1),
+(7,1,'https://teams._OPENCONEXT_DOMAIN_/shibboleth',1,1);
 /*!40000 ALTER TABLE `service_provider_group_acl` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -469,8 +469,8 @@ CREATE TABLE `service_provider_uuid` (
 LOCK TABLES `service_provider_uuid` WRITE;
 /*!40000 ALTER TABLE `service_provider_uuid` DISABLE KEYS */;
 INSERT INTO `service_provider_uuid` VALUES
-('5e5717a0-c038-11e1-8b8e-234ffa2d0a60','https://serviceregistry.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp'),
-('b416cbc0-c036-11e1-b5a6-216cccc3b1fc','https://manage.demo.openconext.org/simplesaml/module.php/saml/sp/metadata.php/default-sp');
+('5e5717a0-c038-11e1-8b8e-234ffa2d0a60','https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp'),
+('b416cbc0-c036-11e1-b5a6-216cccc3b1fc','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp');
 /*!40000 ALTER TABLE `service_provider_uuid` ENABLE KEYS */;
 UNLOCK TABLES;
 

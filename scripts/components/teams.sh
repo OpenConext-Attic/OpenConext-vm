@@ -8,6 +8,7 @@ then
 fi
 
 cd /opt/www/OpenConext-teams
+$GITPULL
 $GITCHECKOUT ${TEAMS_VERSION}
 $MVN clean install -DskipTests
 
@@ -28,7 +29,9 @@ done
 
 sed -i \
   -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" \
-  /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
+  /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties \
+  /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
+
 
 # Copy Tomcat-specific context configuration files
 mkdir -p /usr/share/tomcat6/conf/Catalina/teams.$OC_DOMAIN

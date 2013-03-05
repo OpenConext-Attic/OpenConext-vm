@@ -6,7 +6,7 @@
  * please see serviceregistry/metadata/saml20-idp-remote.php
  */
 
-$metadata['https://engine.demo.openconext.org/authentication/idp/metadata'] = array(
+$metadata['https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata'] = array(
         'SingleSignOnService'   => 'https://engine._OPENCONEXT_DOMAIN_/authentication/idp/single-sign-on',
         'certificate'           =>'engineblock.crt',
 );

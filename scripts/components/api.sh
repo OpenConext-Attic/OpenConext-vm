@@ -7,7 +7,9 @@ then
 fi
 
 cd /opt/www/OpenConext-api
+$GITPULL
 $GITCHECKOUT ${API_VERSION}
+
 $MVN clean install -DskipTests
 
 # extract deployable artifact
