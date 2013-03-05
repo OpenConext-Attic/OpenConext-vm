@@ -28,6 +28,7 @@ cp mujina-sp-dist/target/mujina-sp-dist*/tomcat/conf/classpath_properties/*.vm /
 # strip off the .vm extension
 for i in $(ls /usr/share/tomcat6/conf/classpath_properties/*.vm)
 do
+  sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $i
   mv $i `dirname $i`/`basename $i .vm`
 done
 
