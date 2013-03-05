@@ -20,7 +20,10 @@ then
     valid users = openconext
 SMB
 
-      useradd -c "OpenConext user" openconext
+      if ! grep -q -E ^openconext: /etc/passwd
+      then
+        useradd -c "OpenConext user" openconext
+      fi
       (echo openconext; echo openconext) | smbpasswd -as openconext
 
       chown -Rf openconext /opt/www
