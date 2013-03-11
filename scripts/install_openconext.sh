@@ -318,9 +318,12 @@ do
   HOSTSLINE="$HOSTSLINE $comp.$OC_DOMAIN"
 done
 
-echo "The hosts-file of computers (other than this VM) that want to use this OpenConext instance should contain the following entry: "
+echo "The hosts-file of computers (other than this VM) that want to use this OpenConext instance should contain the following entries: "
 echo "-----"
-echo "IP_ADDRESS $HOSTSLINE"
+for hostline in $HOSTSLINE
+do
+  echo "IP_ADDRESS $hostline"
+done
 echo "-----"
 echo "Where IP_ADDRESS is an IP address of this system that is reachable from the outside."
 
