@@ -11,7 +11,9 @@ then
     service slapd start &&
 
     # Install schemas and configuration
-    cd /tmp &&
+    TMP_DIR=$(mktemp -d) &&
+    cd $TMP_DIR &&
+
     svn -q co https://svn.surfnet.nl/svn/coin-os/vendor/grouper/1.6.3/trunk/src/main/resources/ &&
     cp resources/ldap/eduperson-200412.ldif /etc/openldap/schema/ &&
     cp resources/ldap/nleduperson.schema    /etc/openldap/schema/ &&
