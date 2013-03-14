@@ -311,7 +311,7 @@ echo; echo
 echo "Install script is done."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp teams api"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api"
 HOSTSLINE="$OC_DOMAIN" # the domain itself
 for comp in $COMPONENTS
 do
@@ -320,10 +320,22 @@ done
 
 echo "The hosts-file of computers (other than this VM) that want to use this OpenConext instance should contain the following entries: "
 echo "-----"
+echo -n "IP_ADDRESS "
+
+count=1
 for hostline in $HOSTSLINE
 do
-  echo "IP_ADDRESS $hostline"
+  if (( $count % 3 == 0 ))
+  then
+    echo "$hostline"
+    echo -n "IP_ADDRESS "
+    count=1
+  else
+    echo -n "$hostline "
+    let "count=$count + 1"
+  fi
 done
+echo " "
 echo "-----"
 echo "Where IP_ADDRESS is an IP address of this system that is reachable from the outside."
 
