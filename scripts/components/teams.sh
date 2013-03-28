@@ -8,7 +8,7 @@ then
 fi
 
 cd /opt/www/OpenConext-teams
-$GITPULL
+$GITFETCH
 $GITCHECKOUT ${TEAMS_VERSION}
 $MVN clean install -DskipTests
 
@@ -31,6 +31,9 @@ sed -i \
   -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" \
   /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties \
   /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
+
+# Workaround for Teams version < 3.x.x
+sed -i -e "s/group-name-context=urn:collab:group:dev.surfteams.nl:/group-name-context=urn:collab:group:$OC_DOMAIN:/" /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
 
 
 # Copy Tomcat-specific context configuration files

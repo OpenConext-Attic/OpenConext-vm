@@ -9,7 +9,7 @@ then
     ln -sf /opt/www/OpenConext-engineblock /opt/www/engineblock
 fi
 cd /opt/www/engineblock
-$GITPULL
+$GITFETCH
 $GITCHECKOUT ${ENGINEBLOCK_VERSION}
 
 ./bin/composer.phar self-update

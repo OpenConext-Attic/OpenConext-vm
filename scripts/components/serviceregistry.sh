@@ -11,7 +11,7 @@ then
     cd -
 fi
 cd /opt/www/serviceregistry
-$GITPULL
+$GITFETCH
 $GITCHECKOUT ${SERVICEREGISTRY_VERSION}
 cd -
 

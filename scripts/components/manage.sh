@@ -8,7 +8,7 @@ then
 fi
 
 cd /opt/www/manage
-$GITPULL
+$GITFETCH
 $GITCHECKOUT ${MANAGE_VERSION}
 
 mysql -u root --password=c0n3xt -e "drop database if exists manage; create database manage default charset utf8 default collate utf8_unicode_ci;"

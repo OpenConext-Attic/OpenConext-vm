@@ -5,59 +5,18 @@
 #
 #
 
-# Functions
+source common.sh
 
-##
-# Create a backup of the given file (complete path)
-# Will suffix with the current date and a sequence number
-function backupFile()
-{
-  FILENAME="$1"
-  DATE=`date +%Y%m%d`
-  SEQ=1
-  while [[ -f $FILENAME.$DATE.$SEQ ]]
-  do
-     SEQ=`expr $SEQ + 1`
-  done
-  NEW_FILENAME=$FILENAME.$DATE.$SEQ
-
-  cp -p $FILENAME $NEW_FILENAME
-}
-
-# errors are fatal
-set -e
-
-# Verify that user root runs this script
-ROOT_UID=0   # Root has $UID 0.
-if [ $UID -ne ${ROOT_UID} ]
-then
-  echo "You must be root to run this install script, as it installs system packages and configures service."
-  exit 1
-fi
-
-# Catch ctrl-c and quit, instead of rambling on
-trap "echo \"caught signal, will exit installation script\"; exit" INT TERM
-
-# Base directory where the scripts (and config etc) is stored.
-OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
-OC_SCRIPTDIR=$OC_BASEDIR/scripts
 
 
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
 OC_DOMAIN=demo.openconext.org
-OC_VERSION=versions_v45.sh
+OC_VERSION=v45
 OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
-MVN_VERSION=3.0.4
-VERBOSE=false
 
 
-## Suppress output of various commands by default
-MVN="mvn -q"
-YUM="yum -q"
-GITCLONE="git clone -q"
-GITCHECKOUT="git checkout -q"
-GITPULL="git pull -q"
+
 
 if [ $VERBOSE == "true" ]
 then
@@ -68,6 +27,7 @@ then
   GITCLONE="git clone"
 fi
 
+UPGRADE=false
 
 # interactive run?
 INTERACTIVE=false
@@ -127,13 +87,13 @@ then
 
   echo ""
   VERSION_DEFAULT=$OC_VERSION
-  ALLVERSIONFILES=$(cd $OC_SCRIPTDIR && ls versions*.sh)
+  ALLVERSIONFILES=$(cd $OC_SCRIPTDIR/versions && ls )
   echo "3. Component versions"
 
   OC_VERSION_INPUT=""
-  while [ ! -f $OC_SCRIPTDIR/$OC_VERSION_INPUT ]
+  while [ ! -f $OC_SCRIPTDIR/versions/$OC_VERSION_INPUT ]
   do
-    echo "The recommended version of OpenConext to run is the currently 'stable' one, which is: $VERSION_DEFAULT."
+    echo "The recommended version of OpenConext to run is: $VERSION_DEFAULT."
     echo "Other options are: " $ALLVERSIONFILES
     echo -n "Version: [$VERSION_DEFAULT] "
     read OC_VERSION_INPUT
@@ -151,7 +111,7 @@ fi
 
 
 # Set the component versions as variables, for use in later scripts
-source $OC_SCRIPTDIR/$OC_VERSION
+source $OC_SCRIPTDIR/versions/$OC_VERSION
 
 
 # Dependencies of components
@@ -190,7 +150,6 @@ done
 
 
 # Global dependencies, infra-related
-# TODO: only do actual infra-stuff. Component-specific stuff belongs in component-install-scripts
 for subscript in \
   base_packages.sh \
   hosts_install.sh \
@@ -308,21 +267,16 @@ then
 fi
 
 echo; echo
-echo "Install script is done."
+echo "Installation of OpenConext is complete."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
 COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp teams api"
-HOSTSLINE="$OC_DOMAIN" # the domain itself
-for comp in $COMPONENTS
-do
-  HOSTSLINE="$HOSTSLINE $comp.$OC_DOMAIN"
-done
 
 echo "The hosts-file of computers (other than this VM) that want to use this OpenConext instance should contain the following entries: "
 echo "-----"
-for hostline in $HOSTSLINE
+for comp in $COMPONENTS
 do
-  echo "IP_ADDRESS $hostline"
+  echo "IP_ADDRESS $comp.$OC_DOMAIN"
 done
 echo "-----"
 echo "Where IP_ADDRESS is an IP address of this system that is reachable from the outside."
