@@ -1,8 +1,5 @@
 #!/bin/bash
 
-. upgrade_includes.sh
-
-echo "doing all kinds of things for v46"
 
 if [ -d /opt/www/OpenConext-serviceregistry ]
 then

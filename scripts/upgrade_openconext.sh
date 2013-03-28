@@ -11,7 +11,6 @@ ALL_ORDERED_VERSIONS="v45 v46 v47 master"
 DEFAULT_VERSION_TO="v47"
 
 
-
 if [ -f $NODE_PROPS ]
 then
   CURRENT_VERSION=`grep openconext-version= $NODE_PROPS | sed -e 's/.*=//g'`
@@ -35,6 +34,8 @@ then
 fi
 
 
+perl theperfile
+
 VERSION_TO=""
 while [ "$VERSION_TO" == "" ]
 do
@@ -45,7 +46,7 @@ do
     INPUT_VERSION_TO=$DEFAULT_VERSION_TO
   fi
 
-  if [ -f $INPUT_VERSION_TO ]
+  if [ -f $OC_SCRIPTDIR/versions/$INPUT_VERSION_TO ]
   then
     VERSION_TO=$INPUT_VERSION_TO
   else
@@ -65,10 +66,10 @@ for FIRST_NEXT_VERSION in $ALL_NEXT_VERSIONS
 do
   echo "Running version update from $CURRENT_VERSION to $FIRST_NEXT_VERSION..."
   # define versions of all components.
-  source $OC_SCRIPTDIR/$FIRST_NEXT_VERSION
+  source $OC_SCRIPTDIR/versions/$FIRST_NEXT_VERSION
 
   # the actual upgrade script
-  source ${CURRENT_VERSION}_to_${FIRST_NEXT_VERSION}.sh
+  source $OC_SCRIPTDIR/upgrades/${CURRENT_VERSION}_to_${FIRST_NEXT_VERSION}.sh
 
   # Reset working directory to starting directory
   cd $START_DIR

@@ -9,7 +9,6 @@ fi
 cd /opt/www/OpenConext-api
 $GITFETCH
 $GITCHECKOUT ${API_VERSION}
-
 $MVN clean install -DskipTests
 
 # extract deployable artifact
@@ -29,7 +28,7 @@ if $UPGRADE
 then
   rm -rf /usr/share/tomcat6/work/Catalina
   rm -rf /usr/share/tomcat6/webapps/*/*
-  echo "Upgrading API, TODO: replace properties etc."
+  # TODO: replace properties etc.
 
 else
   cp coin-api-dist/target/coin-api-dist*/tomcat/conf/classpath_properties/*.vm /usr/share/tomcat6/conf/classpath_properties/
