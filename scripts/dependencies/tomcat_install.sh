@@ -29,10 +29,6 @@ cp -f $OC_BASEDIR/configs/tomcat6/conf/server.xml $CATALINA_HOME/conf/server.xml
 cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat6.conf $CATALINA_HOME/conf/tomcat6.conf
 cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat-users.xml $CATALINA_HOME/conf/tomcat-users.xml
 
-install -d $CATALINA_HOME/conf/classpath_properties
-cp -f $OC_BASEDIR/configs/tomcat6/conf/classpath_properties/* $CATALINA_HOME/conf/classpath_properties/
-
-
 if keytool -list -alias 'openconext cacert' -keystore /etc/pki/java/cacerts \
     -storepass changeit -noprompt > /dev/null
 then
