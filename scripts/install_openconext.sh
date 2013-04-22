@@ -5,6 +5,10 @@
 #
 #
 
+# Base directory where the scripts (and config etc) is stored.
+OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
+OC_SCRIPTDIR=$OC_BASEDIR/scripts
+
 source common.sh
 
 

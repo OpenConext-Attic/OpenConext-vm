@@ -2,10 +2,14 @@
 # Upgrade script for OpenConext.
 #
 
+# Base directory where the scripts (and config etc) is stored.
+OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
+OC_SCRIPTDIR=$OC_BASEDIR/scripts
+
 source common.sh
 
 # TODO: Get from version files? But how to order them?
-ALL_ORDERED_VERSIONS="v45 v46 v47 master"
+ALL_ORDERED_VERSIONS="v45 v46 v47 v48 master"
 
 # TODO: get the 'currently stable' version from somewhere else?
 DEFAULT_VERSION_TO="v47"
@@ -33,8 +37,6 @@ then
   echo "Upgrades are supported from Release 45 onwards."
 fi
 
-
-perl theperfile
 
 VERSION_TO=""
 while [ "$VERSION_TO" == "" ]

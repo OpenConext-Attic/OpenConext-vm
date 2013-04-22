@@ -41,8 +41,13 @@ else
     /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties \
     /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
 
-  # Workaround for Teams version < 3.x.x
-  sed -i -e "s/group-name-context=urn:collab:group:dev.surfteams.nl:/group-name-context=urn:collab:group:$OC_DOMAIN:/" /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
+  if [[ "$OC_VERSION" < "r46" ]]
+  then
+    sed -i \
+      -e "s/group-name-context=urn:collab:group:dev.surfteams.nl:/group-name-context=urn:collab:group:$OC_DOMAIN:/" \
+      -e "s~teamsURL=.*~teamsURL=https://teams.$OC_DOMAIN/teams~" \
+      /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
+  fi
 
   mysql -u root --password=c0n3xt -e "create database if not exists teams default charset utf8 default collate utf8_unicode_ci;"
   mysql -u root --password=c0n3xt teams < $OC_BASEDIR/data/teams.sql
