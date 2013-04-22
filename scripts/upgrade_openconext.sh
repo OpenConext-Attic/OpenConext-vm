@@ -6,13 +6,12 @@
 OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 OC_SCRIPTDIR=$OC_BASEDIR/scripts
 
-source common.sh
+source $OC_SCRIPTDIR/common.sh
 
-# TODO: Get from version files? But how to order them?
+# TODO: Get from version files? (sort with 'sort')
 ALL_ORDERED_VERSIONS="v45 v46 v47 v48 master"
 
-# TODO: get the 'currently stable' version from somewhere else?
-DEFAULT_VERSION_TO="v47"
+DEFAULT_VERSION_TO="v48"
 
 
 if [ -f $NODE_PROPS ]
@@ -33,7 +32,7 @@ fi
 
 if [[ "$CURRENT_VERSION" == "" ]]
 then
-  echo "Cannot determine current version of OpenConext. Cannot run an upgrade. Please upgrade your OpenConext instance."
+  echo "Cannot determine current version of OpenConext. Cannot run an upgrade. Please upgrade your OpenConext instance manually."
   echo "Upgrades are supported from Release 45 onwards."
 fi
 

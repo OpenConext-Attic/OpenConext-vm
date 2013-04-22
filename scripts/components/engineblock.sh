@@ -12,7 +12,6 @@ cd /opt/www/engineblock
 $GITFETCH
 $GITCHECKOUT ${ENGINEBLOCK_VERSION}
 
-./bin/composer.phar self-update
 ./bin/composer.phar install
 
 if $UPGRADE

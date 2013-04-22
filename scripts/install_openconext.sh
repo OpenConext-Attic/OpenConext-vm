@@ -9,7 +9,7 @@
 OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 OC_SCRIPTDIR=$OC_BASEDIR/scripts
 
-source common.sh
+source $OC_SCRIPTDIR/common.sh
 
 
 

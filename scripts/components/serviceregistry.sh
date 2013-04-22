@@ -47,6 +47,5 @@ if [[ "$OC_VERSION" > "v47" ]]
 then
   # Using composer, beginning with R48,
   cd modules/janus
-  ./bin/composer.phar self-update
   ./bin/composer.phar install
 fi
