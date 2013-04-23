@@ -12,7 +12,7 @@ You can either use a VM instance you created yourself (read on), or use [our com
 # Bring your own VM instance
 Prerequisites: a VM running CentOS 6 or RedHat EL 6.
 
-## 1. Clone
+## 1. Download installer
 From within the VM, download this repo:
 
     curl https://nodeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zx
@@ -53,9 +53,11 @@ To login in on the several Service Providers you can choose OpenConext Mujina Id
 ### Samba share
 If you want to make modifications to the components a Samba share is available at:
 
-    smb://172.18.5.2/www
+    smb://address/www
     username: openconext
     password: openconext
+
+where ``address`` is the ip address of your VM.
 
 ### MySQL access
 If you want to query or update the database you will have to open up port 3306. Type in a VM shell:
@@ -63,3 +65,27 @@ If you want to query or update the database you will have to open up port 3306. 
     iptables -I INPUT -p tcp -m tcp  --dport 3306 -j ACCEPT
 
 The MySQL root-password is ``c0n3xt``.
+
+# Upgrades
+
+From OpenConext release 45 onwards, upgrades are supported. Refer to the [available releases and release notes](https://wiki.surfnetlabs.nl/display/OpenConext/Releases).
+
+## 1. Get the latest version of the OpenConext VM installer
+
+For one time installations, getting a tarball from the Github repo suffices, as described above in the installation instructions.
+But to upgrade your OpenConext instance, it's better to have a clone of the repository.
+
+Run within the VM:
+
+    git clone https://github.com/OpenConext/OpenConext-vm
+
+(or pull in the latest changes if you cloned before):
+
+    cd OpenConext-vm
+    git pull
+
+## 2. Run the upgrade installer
+
+    bash OpenConext-vm/scripts/upgrade_openconext.sh
+
+The installer will ask which version you want to upgrade to.
