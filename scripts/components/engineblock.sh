@@ -10,6 +10,7 @@ then
 fi
 cd /opt/www/engineblock
 $GITFETCH
+$GITCHECKOUT bin/composer.phar # revert potential 'self-update' changes to composer
 $GITCHECKOUT ${ENGINEBLOCK_VERSION}
 
 ./bin/composer.phar install

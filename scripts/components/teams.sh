@@ -14,34 +14,47 @@ $MVN clean install -DskipTests
 # extract deployable artifact
 tar -zxf coin-teams-dist/target/*-bin.tar.gz -C coin-teams-dist/target
 
+TEAMS_DIST_BASEDIR=/opt/www/OpenConext-teams/coin-teams-dist/target/coin-teams-dist-*/
+
+
 # remove old deployed war
 rm -f /usr/share/tomcat6/wars/coin-teams-war-*.war 2> /dev/null
 # copy new war to Tomcat
-cp coin-teams-dist/target/coin-teams-dist*/tomcat/webapps/*.war /usr/share/tomcat6/wars
+cp $TEAMS_DIST_BASEDIR/tomcat/webapps/*.war /usr/share/tomcat6/wars
 
 # Copy Tomcat-specific context configuration files
 install -d /usr/share/tomcat6/conf/Catalina/teams.$OC_DOMAIN
-cp coin-teams-dist/target/coin-teams-dist*/tomcat/conf/context/*.xml /usr/share/tomcat6/conf/Catalina/teams.$OC_DOMAIN/
+cp $TEAMS_DIST_BASEDIR/tomcat/conf/context/*.xml /usr/share/tomcat6/conf/Catalina/teams.$OC_DOMAIN/
+
+cp $TEAMS_DIST_BASEDIR/tomcat/conf/classpath_properties/coin-teams.properties.vm /tmp/coin-teams.properties
+cp $TEAMS_DIST_BASEDIR/tomcat/conf/classpath_properties/grouper.client.properties.vm /tmp/grouper.client.properties
+
+sed -i \
+  -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" \
+  /tmp/coin-teams.properties \
+  /tmp/grouper.client.properties
 
 
 if $UPGRADE
 then
   rm -rf /usr/share/tomcat6/work/Catalina
   rm -rf /usr/share/tomcat6/webapps/*/*
-  # TODO: replace properties etc.
-else
-  cp coin-teams-dist/target/coin-teams-dist*/tomcat/conf/classpath_properties/*.vm /usr/share/tomcat6/conf/classpath_properties/
-  # strip off the .vm extension
-  for i in $(ls /usr/share/tomcat6/conf/classpath_properties/*.vm)
-  do
-    mv $i `dirname $i`/`basename $i .vm`
-  done
-  sed -i \
-    -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" \
-    /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties \
-    /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
 
-  if [[ "$OC_VERSION" < "r46" ]]
+  if [[ "$VERSION_TO" == "v46" ]]
+  then
+    cp $TEAMS_DIST_BASEDIR/tomcat/conf/classpath_properties/teams-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/teams-logback.xml
+  fi
+
+  backupFile /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
+  perl $OC_SCRIPTDIR/tools/replaceProperties/replaceProperties.pl /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
+
+else
+  cp $TEAMS_DIST_BASEDIR/tomcat/conf/classpath_properties/teams-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/teams-logback.xml
+  cp /tmp/grouper.client.properties /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
+  cp /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
+
+
+  if [[ "$OC_VERSION" < "v46" ]]
   then
     sed -i \
       -e "s/group-name-context=urn:collab:group:dev.surfteams.nl:/group-name-context=urn:collab:group:$OC_DOMAIN:/" \

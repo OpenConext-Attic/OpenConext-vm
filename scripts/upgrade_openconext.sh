@@ -9,7 +9,7 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 source $OC_SCRIPTDIR/common.sh
 
 # TODO: Get from version files? (sort with 'sort')
-ALL_ORDERED_VERSIONS="v45 v46 v47 v48 master"
+ALL_ORDERED_VERSIONS="v45 v46 v47 v48"
 
 DEFAULT_VERSION_TO="v48"
 
@@ -33,7 +33,8 @@ fi
 if [[ "$CURRENT_VERSION" == "" ]]
 then
   echo "Cannot determine current version of OpenConext. Cannot run an upgrade. Please upgrade your OpenConext instance manually."
-  echo "Upgrades are supported from Release 45 onwards."
+  echo "Upgrades are supported from Release 45 onwards. Upgrades from/to 'master' are not supported."
+  exit 1
 fi
 
 
@@ -59,6 +60,11 @@ done
 # Used by component scripts to distinguish between clean installs and upgrades
 UPGRADE=true
 
+# Certificate / key data, needed by property replacements in upgrade of components.
+# These oneliners are copied from engineblock.sh and openconext_custom_certificates.sh
+ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`
+OC_CERT=`sed -e '1d;$d' /etc/httpd/keys/openconext.pem | tr -d '\n'`
+OC_KEY=`sed -e '1d;$d' /etc/httpd/keys/openconext.key | tr -d '\n'`
 
 START_DIR=`pwd`
 
