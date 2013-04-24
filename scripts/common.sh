@@ -4,7 +4,7 @@
 NODE_PROPS=/etc/openconext/node.properties
 
 
-MVN_VERSION=3.0.4
+MVN_VERSION=3.0.5
 VERBOSE=false
 
 ## Suppress output of various commands by default
