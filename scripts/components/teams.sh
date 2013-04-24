@@ -57,8 +57,15 @@ else
   if [[ "$OC_VERSION" < "v46" ]]
   then
     sed -i \
+      -e "s~teamsURL=.*~teamsURL=httpsx://teams.$OC_DOMAIN/teams~" \
+      /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
+  fi
+
+  if [[ "$OC_VERSION" < "v49" ]]
+  then
+  # This is fixed for new installations only; existing installations probably already have teams configured. We do not want to touch those.
+    sed -i \
       -e "s/group-name-context=urn:collab:group:dev.surfteams.nl:/group-name-context=urn:collab:group:$OC_DOMAIN:/" \
-      -e "s~teamsURL=.*~teamsURL=https://teams.$OC_DOMAIN/teams~" \
       /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
   fi
 

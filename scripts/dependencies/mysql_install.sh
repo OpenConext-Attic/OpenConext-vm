@@ -6,7 +6,7 @@ chkconfig mysqld on
 
 # configure MySQL (WARNING: this is insecure!)
 
-if ! mysqladmin -u root --password=c0n3xt ping | grep -q "mysqld is alive"
+if ! mysqladmin -u root --password=c0n3xt ping 2> /dev/null | grep -q "mysqld is alive"
 then
 	mysqladmin -u root password 'c0n3xt'
 fi

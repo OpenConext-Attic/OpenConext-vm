@@ -278,6 +278,7 @@ COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static m
 
 echo "The hosts-file of computers (other than this VM) that want to use this OpenConext instance should contain the following entries: "
 echo "-----"
+echo "IP_ADDRESS $OC_DOMAIN" # The domain itself
 for comp in $COMPONENTS
 do
   echo "IP_ADDRESS $comp.$OC_DOMAIN"

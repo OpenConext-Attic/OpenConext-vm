@@ -47,4 +47,6 @@ then
   # Using composer, beginning with R48,
   cd modules/janus
   ./bin/composer.phar install
+  # Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
+  restorecon -r vendor
 fi

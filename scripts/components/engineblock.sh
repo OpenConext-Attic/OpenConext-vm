@@ -14,6 +14,8 @@ $GITCHECKOUT bin/composer.phar # revert potential 'self-update' changes to compo
 $GITCHECKOUT ${ENGINEBLOCK_VERSION}
 
 ./bin/composer.phar install
+# Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
+restorecon -r vendor
 
 if $UPGRADE
 then
