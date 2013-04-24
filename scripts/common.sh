@@ -66,7 +66,10 @@ function setOpenConextVersion() {
 ### Logging
 
 LOGFILE=/var/log/openconext-vm.log
-backupFile $LOGFILE
+if [ -f $LOGFILE ]
+then
+  backupFile $LOGFILE
+fi
 exec > >(tee $LOGFILE)
 exec 2> >(tee -a $LOGFILE)
 echo "Logging all output to $LOGFILE"
