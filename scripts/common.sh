@@ -4,10 +4,6 @@
 NODE_PROPS=/etc/openconext/node.properties
 
 
-# Base directory where the scripts (and config etc) is stored.
-OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
-OC_SCRIPTDIR=$OC_BASEDIR/scripts
-
 MVN_VERSION=3.0.4
 VERBOSE=false
 
@@ -17,6 +13,7 @@ YUM="yum -q"
 GITCLONE="git clone -q"
 GITCHECKOUT="git checkout -q"
 GITFETCH="git fetch -q"
+
 
 ### Settings, sanity checks
 
@@ -64,3 +61,12 @@ function setOpenConextVersion() {
     sed -i $NODE_PROPS -e "s/openconext-version=.*/openconext-version=$NEW_VERSION/"
   fi
 }
+
+
+### Logging
+
+LOGFILE=/var/log/openconext-vm.log
+backupFile $LOGFILE
+exec > >(tee $LOGFILE)
+exec 2> >(tee -a $LOGFILE)
+echo "Logging all output to $LOGFILE"
