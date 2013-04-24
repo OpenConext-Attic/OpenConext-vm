@@ -8,16 +8,15 @@ then
     cd /opt/www/
     $GITCLONE git://github.com/OpenConext/OpenConext-serviceregistry.git
     ln -s OpenConext-serviceregistry serviceregistry
-    cd -
 fi
 cd /opt/www/serviceregistry
 $GITFETCH
 $GITCHECKOUT ${SERVICEREGISTRY_VERSION}
-cd -
+
 
 if ! $UPGRADE
 then
-  mysql -u root --password=c0n3xt -e "create database serviceregistry if not exists default charset utf8 default collate utf8_unicode_ci;"
+  mysql -u root --password=c0n3xt -e "create database if not exists serviceregistry default charset utf8 default collate utf8_unicode_ci;"
 
   cat $OC_BASEDIR/data/serviceregistry.sql | \
     sed \

@@ -76,6 +76,7 @@ do
   echo "Running version update from $CURRENT_VERSION to $FIRST_NEXT_VERSION..."
   # define versions of all components.
   source $OC_SCRIPTDIR/versions/$FIRST_NEXT_VERSION
+  OC_VERSION=$FIRST_NEXT_VERSION
 
   # the actual upgrade script
   source $OC_SCRIPTDIR/upgrades/${CURRENT_VERSION}_to_${FIRST_NEXT_VERSION}.sh

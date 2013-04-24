@@ -40,7 +40,7 @@ then
   rm -rf /usr/share/tomcat6/work/Catalina
   rm -rf /usr/share/tomcat6/webapps/*/*
 
-  if [[ "$FIRST_NEXT_VERSION" == "v46" ]]
+  if [[ "$OC_VERSION" == "v46" ]]
   then
     cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-logback.xml
   fi
