@@ -10,6 +10,7 @@ then
     ln -s OpenConext-serviceregistry serviceregistry
 fi
 cd /opt/www/serviceregistry
+$GITRESET # revert potential changes
 $GITFETCH
 $GITCHECKOUT ${SERVICEREGISTRY_VERSION}
 
@@ -40,6 +41,12 @@ then
 fi
 
 cd /opt/www/serviceregistry/
+
+if [[ "$OC_VERSION" == "v46" ]]
+then
+  # Apply fix for broken dbpatch in R46
+  git cherry-pick -n 59df00dff1daef0cfeae72982471a687bf8fd9fb
+fi
 ./bin/migrate
 
 if [[ "$OC_VERSION" > "v47" ]]

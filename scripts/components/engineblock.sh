@@ -9,8 +9,8 @@ then
     ln -sf /opt/www/OpenConext-engineblock /opt/www/engineblock
 fi
 cd /opt/www/engineblock
+$GITRESET # revert potential changes
 $GITFETCH
-$GITCHECKOUT bin/composer.phar # revert potential 'self-update' changes to composer
 $GITCHECKOUT ${ENGINEBLOCK_VERSION}
 
 ./bin/composer.phar install
