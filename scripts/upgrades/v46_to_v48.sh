@@ -8,7 +8,18 @@ openconext-version=v46
 openconext-domain=$OC_DOMAIN
 EOF
 
-# Release 47 only contained an upgrade for selfservice, which is not part of OpenConext.
-# So no componets upgrades here.
 
-setOpenConextVersion v47
+
+if [ -d /opt/www/OpenConext-serviceregistry ]
+then
+  echo "Upgrading Service Registry..."
+  source $OC_SCRIPTDIR/components/serviceregistry.sh
+fi
+
+if [ -d /opt/www/OpenConext-engineblock ]
+then
+  echo "Upgrading Engineblock..."
+  source $OC_SCRIPTDIR/components/engineblock.sh
+fi
+
+setOpenConextVersion v48
