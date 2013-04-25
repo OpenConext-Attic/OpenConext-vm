@@ -11,7 +11,7 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 source $OC_SCRIPTDIR/common.sh
 
 # TODO: Get from version files? (sort with 'sort')
-ALL_ORDERED_VERSIONS="v45 v46 v47 v48"
+ALL_ORDERED_VERSIONS="v45 v46 v48"
 
 DEFAULT_VERSION_TO="v48"
 
