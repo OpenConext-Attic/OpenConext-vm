@@ -7,6 +7,7 @@ then
 fi
 
 cd /opt/www/OpenConext-teams
+$GITRESET
 $GITFETCH
 $GITCHECKOUT ${TEAMS_VERSION}
 $MVN clean install -DskipTests

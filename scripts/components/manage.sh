@@ -8,6 +8,7 @@ then
 fi
 
 cd /opt/www/manage
+$GITRESET # revert potential changes
 $GITFETCH
 $GITCHECKOUT ${MANAGE_VERSION}
 

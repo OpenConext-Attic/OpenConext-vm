@@ -7,6 +7,7 @@ then
 fi
 
 cd /opt/www/OpenConext-api
+$GITRESET # revert potential changes
 $GITFETCH
 $GITCHECKOUT ${API_VERSION}
 $MVN clean install -DskipTests
