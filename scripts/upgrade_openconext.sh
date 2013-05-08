@@ -11,9 +11,9 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 source $OC_SCRIPTDIR/common.sh
 
 # TODO: Get from version files? (sort with 'sort')
-ALL_ORDERED_VERSIONS="v45 v46 v48"
+ALL_ORDERED_VERSIONS="v45 v46 v48 v49"
 
-DEFAULT_VERSION_TO="v48"
+DEFAULT_VERSION_TO="v49"
 
 
 if [ -f $NODE_PROPS ]
@@ -62,6 +62,12 @@ done
 # Used by component scripts to distinguish between clean installs and upgrades
 UPGRADE=true
 
+# If tomcat is available we need to stop it before upgrades
+if rpm -qi tomcat6 > /dev/null
+then
+  service tomcat6 stop
+fi
+
 # Certificate / key data, needed by property replacements in upgrade of components.
 # These oneliners are copied from engineblock.sh and openconext_custom_certificates.sh
 ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`
@@ -89,4 +95,10 @@ do
     break
   fi
 done
+
+# starting tomcat again after all upgrade actions are performed
+if rpm -qi tomcat6 > /dev/null
+then
+  service tomcat6 start
+fi
 echo "Version $VERSION_TO reached. Ready."

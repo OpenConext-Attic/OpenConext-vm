@@ -50,7 +50,11 @@ then
   perl $OC_SCRIPTDIR/tools/replaceProperties/replaceProperties.pl /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
 
 else
-  cp $TEAMS_DIST_BASEDIR/tomcat/conf/classpath_properties/teams-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/teams-logback.xml
+
+  if [[ "$OC_VERSION" > "v45" ]]
+  then
+    cp $TEAMS_DIST_BASEDIR/tomcat/conf/classpath_properties/teams-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/teams-logback.xml
+  fi
   cp /tmp/grouper.client.properties /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
   cp /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
 

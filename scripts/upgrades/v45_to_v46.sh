@@ -13,11 +13,6 @@ then
   source $OC_SCRIPTDIR/components/engineblock.sh
 fi
 
-if rpm -qi tomcat6 > /dev/null
-then
-  service tomcat6 stop
-fi
-
 if [ -d /opt/www/OpenConext-api ]
 then
   echo "Upgrading API..."
@@ -28,11 +23,6 @@ if [ -d /opt/www/OpenConext-teams ]
 then
   echo "Upgrading Teams..."
   source $OC_SCRIPTDIR/components/teams.sh
-fi
-
-if rpm -qi tomcat6 > /dev/null
-then
-  service tomcat6 start
 fi
 
 echo "upgrading to v46 done."

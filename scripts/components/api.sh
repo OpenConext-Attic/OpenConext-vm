@@ -51,7 +51,10 @@ then
 
 else
 
-  cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-logback.xml
+  if [[ "$OC_VERSION" > "v45" ]]
+  then
+    cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-logback.xml
+  fi
   cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-ehcache.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-ehcache.xml
   cp /tmp/coin-api.properties /usr/share/tomcat6/conf/classpath_properties/
 

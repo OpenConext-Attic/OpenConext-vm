@@ -1,6 +1,6 @@
 #!/bin/sh
 $YUM -y    install php \
-                  php-apc \
+                  php-pecl-apc \
                   php-cli \
                   php-curl \
                   php-devel \
