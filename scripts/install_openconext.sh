@@ -260,12 +260,12 @@ then
 fi
 service httpd start
 
-if [[ $DEP_TOMCAT -eq "true" ]]
+if [[ "$DEP_TOMCAT" == "true" ]]
 then
   service tomcat6 start
 fi
 
-if [[ $DEP_SHIBBOLETH -eq "true" ]]
+if [[ "$DEP_SHIBBOLETH" == "true" ]]
 then
   service shibd start
 fi
