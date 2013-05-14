@@ -2,51 +2,55 @@
 
 KEY_DIR=/etc/httpd/keys
 
+CA_DIR=/etc/httpd/keys/ca
+mkdir -p $CA_DIR
+
 CA_KEY_PASSWORD=mysecret
 
 function generate_new_certs() {
 
-  TMP_DIR=$(mktemp -d)
-
-  # The CA key/cert were generated using this command:
-  # openssl req -new -x509 -days 3650 \
-  # -extensions v3_ca -passout pass:mysecret -keyout $TMP_DIR/ca.key \
-  # -subj "/O=OpenConext CA" \
-  # -out $TMP_DIR/ca.crt
+# The CA key/cert were generated using this command:
+# openssl req -new -x509 -days 3650 \
+# -extensions v3_ca -passout pass:mysecret -keyout $TMP_DIR/ca.key \
+# -subj "/O=OpenConext CA" \
+# -out $TMP_DIR/ca.crt
 
 
-  # Index and serial files
-  echo -n "" > $TMP_DIR/ca_index.txt
+  if [ -f $CA_DIR/serial.txt ]
+  then
+    echo "reusing ca in $CA_DIR"
+  else
+    # Index and serial files
+    echo -n "" > $CA_DIR/ca_index.txt
+    echo -n "00" > $CA_DIR/serial.txt
 
-  # Here we do a nasty trick. Normally, a CA should issue subsequent serial numbers, and not give the same serial twice.
-  # However, as we do not keep state over (possibly) multiple installs, we cannot keep a real serial.
-  # Therefore, just starting with a random serial, and hope we do not clash with earlier/later installs.
-  # In the end, it's only a self-issued cert for a self-managed domain anyway...
-  # Normal Bash $RANDOM does not suffice because it generates a too large number too often.
-  #
-  # rand() * 100 because we want to end up with an integer between 0 and 100
-  # +10 because the serial format does not like 1-digit numbers. So the net result is between 10-110
-  echo | awk ' { srand(); printf ( "%d\n", rand()*100+10) } ' > $TMP_DIR/serial.txt
-  echo "[ ca ]
-default_ca      = OpenConext            # The default ca section
-[ OpenConext ]
-database = $TMP_DIR/ca_index.txt
-serial = $TMP_DIR/serial.txt
-default_md     = sha1
-policy         = policy_any            # default policy
-email_in_dn    = no                    # Don't add the email into cert DN
-name_opt       = ca_default            # Subject name display option
-cert_opt       = ca_default            # Certificate display option
-copy_extensions = none                 # Don't copy extensions from request
-[ policy_any ]
-countryName            = optional
-stateOrProvinceName    = optional
-organizationName       = optional
-organizationalUnitName = optional
-commonName             = supplied
-emailAddress           = optional
-" > $TMP_DIR/ca-config.cfg
+    echo "
+  [ ca ]
+    default_ca      = OpenConext            # The default ca section
 
+  [ OpenConext ]
+    database = $CA_DIR/ca_index.txt
+    serial = $CA_DIR/serial.txt
+    default_md     = sha1
+    policy         = policy_any            # default policy
+    email_in_dn    = no                    # Don't add the email into cert DN
+    name_opt       = ca_default            # Subject name display option
+    cert_opt       = ca_default            # Certificate display option
+    copy_extensions = none                 # Don't copy extensions from request
+    unique_subject         = no            # Allow reuse of CN's in this CA
+
+  [ policy_any ]
+    countryName            = optional
+    stateOrProvinceName    = optional
+    organizationName       = optional
+    organizationalUnitName = optional
+    commonName             = supplied
+    emailAddress           = optional
+" > $CA_DIR/ca-config.cfg
+
+  fi
+
+  
   # Input for cert request
   SUBJECT_CSR="
 O=OpenConext
@@ -56,8 +60,8 @@ commonName=*.$OC_DOMAIN
   # Generate CSR, generating a private key on the fly
   openssl req -new \
   -nodes \
-  -out $TMP_DIR/server.csr \
-  -keyout $TMP_DIR/server.key \
+  -out $CA_DIR/server.csr \
+  -keyout $CA_DIR/server.key \
   -batch \
   -subj "$(echo -n "$SUBJECT_CSR" | tr "\n" "/")" # openssl wants multiple lines to be separated with a forward slash
 
@@ -65,24 +69,21 @@ commonName=*.$OC_DOMAIN
   openssl ca \
   -name OpenConext \
   -notext \
-  -config $TMP_DIR/ca-config.cfg \
+  -config $CA_DIR/ca-config.cfg \
   -cert $OC_BASEDIR/certs/openconext_ca.pem \
   -keyfile $OC_BASEDIR/certs/openconext_ca.key \
   -passin pass:$CA_KEY_PASSWORD \
-  -in $TMP_DIR/server.csr \
+  -in $CA_DIR/server.csr \
   -days 1825 \
   -batch \
-  -outdir $TMP_DIR \
-  -out $TMP_DIR/server.crt
+  -outdir $CA_DIR \
+  -out $CA_DIR/server.crt
 
   # Now we have the key and the certificates, copy them to the right place
-  cp $TMP_DIR/server.crt $KEY_DIR/openconext.pem
-  cp $TMP_DIR/server.key $KEY_DIR/openconext.key
+  cp $CA_DIR/server.crt $KEY_DIR/openconext.pem
+  cp $CA_DIR/server.key $KEY_DIR/openconext.key
 
   cp $OC_BASEDIR/certs/openconext_ca.pem $KEY_DIR/openconext_ca.pem
-
-  # Delete working directory
-  #rm -Rf $TMP_DIR
 }
 
 function explain_bring_your_own() {
@@ -123,6 +124,15 @@ then
   esac
 else
   echo "Will generate a set of SSL certificates for the domain $OC_DOMAIN."
+
+  ###########################
+  # Install SSL certificate #
+  ###########################
+
+  rm -rf /etc/httpd/keys/* &&
+  install -d /etc/httpd/keys &&
+  mkdir -p $CA_DIR &&
+  generate_new_certs
 fi
 
 cp $KEY_DIR/openconext_ca.pem /opt/www/welcome/openconext_ca.crt

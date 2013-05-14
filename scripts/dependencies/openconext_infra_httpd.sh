@@ -20,11 +20,3 @@ install -d /opt/www/welcome
 cp -Rf $OC_BASEDIR/data/catchall/* /opt/www/catchall/
 cp -Rf $OC_BASEDIR/data/welcome/* /opt/www/welcome/
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /opt/www/welcome/index.html
-
-###########################
-# Install SSL certificate #
-###########################
-
-rm -rf /etc/httpd/keys/* &&
-install -d /etc/httpd/keys &&
-cp $OC_BASEDIR/certs/*.* /etc/httpd/keys/
