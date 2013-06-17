@@ -10,10 +10,12 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 
 source $OC_SCRIPTDIR/common.sh
 
-# TODO: Get from version files? (sort with 'sort')
-ALL_ORDERED_VERSIONS="v45 v46 v48 v49"
+# A list of all available versions
+ALL_ORDERED_VERSIONS=$(cd $OC_SCRIPTDIR/versions && ls v*)
 
-DEFAULT_VERSION_TO="v49"
+# This is hardcoded: the latest version is not by definition the desired (i.e. most stable) one.
+DEFAULT_VERSION_TO=v50
+
 
 
 if [ -f $NODE_PROPS ]
