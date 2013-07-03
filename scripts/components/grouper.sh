@@ -40,9 +40,6 @@ echo "<Context path=\"/grouper-ws\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_W
 echo "<Context path=\"/grouper\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WAR\" debug=\"1\"></Context>" > \
   /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN/grouper.xml
 
-rm -rf /tmp/grouper-dist-*-bin.tar.gz
-rm -rf /tmp/tomcat
-
 cat $OC_BASEDIR/configs/httpd/conf.d/grouper.conf  | \
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" > \
   /etc/httpd/conf.d/grouper.conf
