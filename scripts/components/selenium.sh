@@ -18,14 +18,10 @@ $YUM -y install twm xterm firefox
 # generate a new dbus id to prevent problem on first startup of X
 dbus-uuidgen > /var/lib/dbus/machine-id
 
-# start the X environment
-/usr/bin/xinit /usr/bin/twm &
+# In order to make X11 with TWM work from the command line
+# we need to set the locale and language to "C" instead of "UTF-8"
+echo LANG="C" > /etc/sysconfig/i18n
+echo SYSFONT="latarcyrheb-sun16" >> /etc/sysconfig/i18n
 
-#wait for 3 seconds for X to come up
-sleep 3
-
-#set X display
-export DISPLAY=:0
-
-#start firefox pointed toward the Selenium IDE install
-/usr/bin/firefox http://release.seleniumhq.org/selenium-ide/2.0.0/selenium-ide-2.0.0.xpi &
+#replace the URL that firefox is looking at
+sed -i "s~/usr/bin/firefox /usr/share/doc/HTML/index.html~/usr/bin/firefox http://welcome.$OC_DOMAIN~" /etc/X11/xinit/Xclients
