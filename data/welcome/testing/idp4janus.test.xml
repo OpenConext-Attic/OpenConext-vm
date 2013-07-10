@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://idp4janus.test.surfconext.nl/simplesaml/saml2/idp/metadata.php">
+  <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <md:Extensions>
+      <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:Logo width="155" height="50" xml:lang="en">https://static.surfconext.nl/media/idp/SURFdrops.jpg</mdui:Logo>
+        <mdui:Logo width="180" height="74" xml:lang="nl">https://static.surfconext.nl/media/idp/SURFdropsBeta.jpg</mdui:Logo>
+        <mdui:Keywords xml:lang="en">Keywords1_en Keywords2_en Keywords3_en</mdui:Keywords>
+        <mdui:Keywords xml:lang="nl">Keywords1_nl Keywords2_nl Keywords3_nl</mdui:Keywords>
+        <mdui:Description xml:lang="en">Description_en</mdui:Description>
+        <mdui:Description xml:lang="nl">Description_nl</mdui:Description>
+        <mdui:DisplayName xml:lang="en">DisplayName_en</mdui:DisplayName>
+        <mdui:DisplayName xml:lang="nl">DisplayName_nl</mdui:DisplayName>
+        <mdui:InformationURL xml:lang="en">http://example.com/info/en</mdui:InformationURL>
+        <mdui:InformationURL xml:lang="nl">http://example.com/info/nl</mdui:InformationURL>
+        <mdui:PrivacyStatementURL xml:lang="en">http://example.com/privacy/en</mdui:PrivacyStatementURL>
+        <mdui:PrivacyStatementURL xml:lang="nl">http://example.com/privacy/nl</mdui:PrivacyStatementURL>
+        <mdui:institution_id>institution_id</mdui:institution_id>
+        <mdui:schachomeorganization>schachomeorganization</mdui:schachomeorganization>
+      </mdui:UIInfo>
+    </md:Extensions>
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDJjCCAg4CCQCAlGR3oORixDANBgkqhkiG9w0BAQUFADBVMSEwHwYDVQQDDBhsb2dpbi5kZW1vLnN1cmZjb25leHQubmwxETAPBgNVBAsMCFNlcnZpY2VzMRAwDgYDVQQKDAdTVVJGbmV0MQswCQYDVQQGEwJOTDAeFw0xMjA3MTIyMzE5NDNaFw0xNTA1MDIyMzE5NDNaMFUxITAfBgNVBAMMGGxvZ2luLmRlbW8uc3VyZmNvbmV4dC5ubDERMA8GA1UECwwIU2VydmljZXMxEDAOBgNVBAoMB1NVUkZuZXQxCzAJBgNVBAYTAk5MMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo4B5dfBKAlvdSXx1btD/i14S9ChLbvfGs0OWh7BxNuvGDFcO60p9qh0SzZgV0ke5rw0XE5z5P8Fg5KX46k/rCi1Aejm8RlQgfILkwmaCrFP8peYNesQqzPiFvPjgBvfXnuOy4nP4Qole7Kljw+wClbysr5xJ6OIJmHerMArnPvB2dbqfiIW50ojDEYKceCATwnUEeuxv2m5MQXJCeQT76yG/u6b9ej6lWIqqGMq0qqWBXS2RFjOir83BXVKy1AEOdXnmtzRX/T4YxqGtyjZm8sobEdigrgg8vCqMYilk+ZvNu/vETEf81RfJ7kF72mTCeCqKHK7tCbWU3EtccF74wQIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQB216jcvQywy0JL4mZNarVuvBoE/RkJkWW8hDNXvP9l81fgYLZOAK7p5zrW/1MlibFRQjyJCyUBUsDfljShIA4MX50udhzmRe7w1mUDWYgAP5bnLfBYxx5P6mj3HwFcJ25kRbf2F0q5F4kCyrj3pPk2V821TbsqozxDDxun3nWAwY0UyLngRy7khllU+36ZoTWvwOasYuJdjAg8Oce7cIFOWsRI2z2EcgJMzav14WMXE8Bd6g7msmgTJsBlGQX+ZBxcshsQWx3j9CDHM/S/1oCFS8zR7DSFaGCDDqbAKq+XrBbqEaT6Ldy/RZKsCrnrxXPElBoyqx2UnLUbNYvPkwsl</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:KeyDescriptor use="encryption">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDJjCCAg4CCQCAlGR3oORixDANBgkqhkiG9w0BAQUFADBVMSEwHwYDVQQDDBhsb2dpbi5kZW1vLnN1cmZjb25leHQubmwxETAPBgNVBAsMCFNlcnZpY2VzMRAwDgYDVQQKDAdTVVJGbmV0MQswCQYDVQQGEwJOTDAeFw0xMjA3MTIyMzE5NDNaFw0xNTA1MDIyMzE5NDNaMFUxITAfBgNVBAMMGGxvZ2luLmRlbW8uc3VyZmNvbmV4dC5ubDERMA8GA1UECwwIU2VydmljZXMxEDAOBgNVBAoMB1NVUkZuZXQxCzAJBgNVBAYTAk5MMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo4B5dfBKAlvdSXx1btD/i14S9ChLbvfGs0OWh7BxNuvGDFcO60p9qh0SzZgV0ke5rw0XE5z5P8Fg5KX46k/rCi1Aejm8RlQgfILkwmaCrFP8peYNesQqzPiFvPjgBvfXnuOy4nP4Qole7Kljw+wClbysr5xJ6OIJmHerMArnPvB2dbqfiIW50ojDEYKceCATwnUEeuxv2m5MQXJCeQT76yG/u6b9ej6lWIqqGMq0qqWBXS2RFjOir83BXVKy1AEOdXnmtzRX/T4YxqGtyjZm8sobEdigrgg8vCqMYilk+ZvNu/vETEf81RfJ7kF72mTCeCqKHK7tCbWU3EtccF74wQIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQB216jcvQywy0JL4mZNarVuvBoE/RkJkWW8hDNXvP9l81fgYLZOAK7p5zrW/1MlibFRQjyJCyUBUsDfljShIA4MX50udhzmRe7w1mUDWYgAP5bnLfBYxx5P6mj3HwFcJ25kRbf2F0q5F4kCyrj3pPk2V821TbsqozxDDxun3nWAwY0UyLngRy7khllU+36ZoTWvwOasYuJdjAg8Oce7cIFOWsRI2z2EcgJMzav14WMXE8Bd6g7msmgTJsBlGQX+ZBxcshsQWx3j9CDHM/S/1oCFS8zR7DSFaGCDDqbAKq+XrBbqEaT6Ldy/RZKsCrnrxXPElBoyqx2UnLUbNYvPkwsl</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://idp4janus.test.surfconext.nl/simplesaml/saml2/idp/SSOService.php"/>
+    <md:AttributeConsumingService index="0">
+      <md:ServiceName xml:lang="nl">ServiceName_nl</md:ServiceName>
+      <md:ServiceName xml:lang="en">ServiceName_en</md:ServiceName>
+      <md:ServiceDescription xml:lang="nl">ServiceDescription_nl</md:ServiceDescription>
+      <md:ServiceDescription xml:lang="en">ServiceDescription_en</md:ServiceDescription>
+      <md:RequestedAttribute Name="urn:mace:dir:attribute-def:mail"/>
+      <md:RequestedAttribute Name="urn:mace:dir:attribute-def:uid"/>
+      <md:RequestedAttribute Name="urn:mace:dir:attribute-def:displayName"/>
+    </md:AttributeConsumingService>
+  </md:IDPSSODescriptor>
+  <md:Organization>
+    <md:OrganizationName xml:lang="nl">OrganizationName_nl</md:OrganizationName>
+    <md:OrganizationName xml:lang="en">OrganizationName_en</md:OrganizationName>
+    <md:OrganizationDisplayName xml:lang="nl">OrganizationDisplayName_nl</md:OrganizationDisplayName>
+    <md:OrganizationDisplayName xml:lang="en">OrganizationDisplayName_en</md:OrganizationDisplayName>
+    <md:OrganizationURL xml:lang="nl">OrganizationURL_nl</md:OrganizationURL>
+    <md:OrganizationURL xml:lang="en">OrganizationURL_en</md:OrganizationURL>
+    <md:DisplayName xml:lang="nl">DisplayName_nl</md:DisplayName>
+    <md:DisplayName xml:lang="en">DisplayName_en</md:DisplayName>
+  </md:Organization>
+  <md:ContactPerson contactType="technical">
+    <md:GivenName>contacts:0:givenName</md:GivenName>
+    <md:SurName>contacts:0:surName</md:SurName>
+    <md:EmailAddress>contacts:0:emailAddress</md:EmailAddress>
+    <md:TelephoneNumber>+31-12-3456789</md:TelephoneNumber>
+  </md:ContactPerson>
+  <md:ContactPerson contactType="support">
+    <md:GivenName>contacts:1:givenName</md:GivenName>
+    <md:SurName>contacts:1:surName</md:SurName>
+    <md:EmailAddress>contacts:1:emailAddress</md:EmailAddress>
+    <md:TelephoneNumber>012-3456789</md:TelephoneNumber>
+  </md:ContactPerson>
+  <md:ContactPerson contactType="administrative">
+    <md:GivenName>contacts:2:givenName</md:GivenName>
+    <md:SurName>contacts:2:surName</md:SurName>
+    <md:EmailAddress>contacts:2:emailAddress</md:EmailAddress>
+    <md:TelephoneNumber>123456789</md:TelephoneNumber>
+  </md:ContactPerson>
+</md:EntityDescriptor>
