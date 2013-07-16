@@ -286,7 +286,7 @@ echo; echo
 echo "Installation of OpenConext is complete."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api welcome"
 HOSTS="$OC_DOMAIN" # the domain itself
 for comp in $COMPONENTS
 do
