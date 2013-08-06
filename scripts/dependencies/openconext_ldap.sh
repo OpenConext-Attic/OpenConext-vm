@@ -8,15 +8,10 @@ rm -rf /var/lib/ldap/* &&
 chkconfig slapd on &&
 service slapd start &&
 
-# Install schemas and configuration
-TMP_DIR=$(mktemp -d) &&
-cd $TMP_DIR &&
-
-svn -q co https://svn.surfnet.nl/svn/coin-os/vendor/grouper/1.6.3/trunk/src/main/resources/ &&
-cp resources/ldap/eduperson-200412.ldif /etc/openldap/schema/ &&
-cp resources/ldap/nleduperson.schema    /etc/openldap/schema/ &&
-cp resources/ldap/collab.schema         /etc/openldap/schema/ &&
-cp resources/ldap/slapd.conf            /etc/openldap &&
+cp $OC_BASEDIR/configs/ldap/eduperson-200412.ldif /etc/openldap/schema/ &&
+cp $OC_BASEDIR/configs/ldap/nleduperson.schema    /etc/openldap/schema/ &&
+cp $OC_BASEDIR/configs/ldap/collab.schema         /etc/openldap/schema/ &&
+cp $OC_BASEDIR/configs/ldap/slapd.conf            /etc/openldap &&
 sed -i 's/^rootpw.*/rootpw c0n3xt/g' /etc/openldap/slapd.conf &&
 
 # Migrate RHEL/CentOS 5.x config to RHEL/CentOS 6.x
@@ -30,4 +25,4 @@ chmod -R u+rwX /etc/openldap/slapd.d &&
 chkconfig slapd on && service slapd restart &&
 
 # Add entries...
-ldapadd -x -D cn=admin,dc=surfconext,dc=nl -w c0n3xt -f resources/ldap/ldap-entries.ldif
+ldapadd -x -D cn=admin,dc=surfconext,dc=nl -w c0n3xt -f $OC_BASEDIR/configs/ldap/ldap-entries.ldif

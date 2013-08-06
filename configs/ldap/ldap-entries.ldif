@@ -1,0 +1,32 @@
+dn: dc=surfconext,dc=nl
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+dc: surfconext
+o: surfconext
+
+dn: cn=engine,dc=surfconext,dc=nl
+objectClass: applicationProcess
+objectClass: simpleSecurityObject
+objectClass: top
+cn: engine
+userPassword: {SSHA}ujH3rPMNPN7gv0OjALIZZNzpsN/mUrpo
+
+dn: cn=ro,dc=surfconext,dc=nl
+objectClass: applicationProcess
+objectClass: simpleSecurityObject
+objectClass: top
+cn: ro
+userPassword: {SSHA}PcNUYFAyAWXQh22OXE4/MkJp1lVHzCia
+
+dn: cn=gadget,dc=surfconext,dc=nl
+objectClass: applicationProcess
+objectClass: top
+cn: gadget
+
+dn: cn=surfmedia,dc=surfconext,dc=nl
+objectClass: applicationProcess
+objectClass: simpleSecurityObject
+objectClass: top
+cn: surfmedia
+userPassword: {SSHA}arc/PwHYpUOBHpSF6sdNL9vK4e2OQY53WRYvGg==
