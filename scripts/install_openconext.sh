@@ -16,7 +16,7 @@ source $OC_SCRIPTDIR/common.sh
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
 OC_DOMAIN=demo.openconext.org
-OC_VERSION=v50
+OC_VERSION=v51
 OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 
 
@@ -65,18 +65,18 @@ then
   echo "2. Components"
   echo "You can either install all components, or a subset of them."
   echo "Possible options are:"
-  echo "1. All (EngineBlock, Service registry, Manage, API, Teams, SelfService, Mujina IDP/SP)"
+  echo "1. All (EngineBlock, Service registry, Manage, API, Teams, Mujina IDP/SP, Cruncher, Apis)"
   echo "2. EngineBlock, Service registry, Mujina IDP/SP"
   echo "3. Mix and match (experts only)"
   echo
   echo -n "Component choice: [1]: "
   read COMPONENTCHOICE
   case "$COMPONENTCHOICE" in
-    "1" | "" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER";;
+    "1" | "" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER";;
     "2" ) OC_COMPONENTS="EB SR MUJINA";;
     * )
         OC_COMPONENTS=""
-        for component in EB SR MANAGE GROUPER API TEAMS MUJINA
+        for component in EB SR MANAGE GROUPER API TEAMS MUJINA APIS CRUNCHER
         do
           echo Install $component? [Y/n]
           read answer
@@ -135,13 +135,13 @@ do
     DEP_LDAP=true
   fi
 
-  if [[ $COMPONENT == "API" || $COMPONENT == "MUJINA" || $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER" ]]
+  if [[ $COMPONENT == "API" || $COMPONENT == "MUJINA" || $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER" || $COMPONENT == "CRUNCHER" || $COMPONENT == "APIS" ]]
   then
     DEP_TOMCAT=true
     DEP_MAVEN=true
   fi
 
-  if [[ $COMPONENT == "API" || $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER" ]]
+  if [[ $COMPONENT == "API" || $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER"  || $COMPONENT == "CRUNCHER" || $COMPONENT == "APIS" ]]
   then
     DEP_MYSQL=true
   fi
@@ -252,6 +252,20 @@ then
   source $OC_SCRIPTDIR/components/teams.sh
 fi
 
+if [[ "$OC_VERSION" > "v51" ]]
+then
+  if echo $OC_COMPONENTS | grep -q APIS
+  then
+    echo "Installing Apis..."
+    source $OC_SCRIPTDIR/components/apis.sh
+  fi
+
+  if echo $OC_COMPONENTS | grep -q CRUNCHER
+  then
+    echo "Installing Cruncher..."
+    source $OC_SCRIPTDIR/components/cruncher.sh
+  fi
+fi
 
 # stop if running
 if service httpd status > /dev/null
@@ -274,7 +288,7 @@ echo; echo
 echo "Installation of OpenConext is complete."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher"
 HOSTS="$OC_DOMAIN" # the domain itself
 for comp in $COMPONENTS
 do
