@@ -8,6 +8,8 @@ export SERVICEREGISTRY_VERSION=master
 export STATIC_VERSION=master
 export TEAMS_VERSION=master
 export MUJINA_VERSION=master
+export CRUNCHER_VERSION=master
+export APIS_VERSION=master
 
 # these are _not_ tag names
 export GROUPER_VERSION=2.8.0

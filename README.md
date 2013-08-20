@@ -15,7 +15,7 @@ Prerequisites: a VM running CentOS 6 or RedHat EL 6.
 ## 1. Download installer
 From within the VM, download this repo:
 
-    curl https://nodeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zx
+    curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zx
 
 
 ## 2. Run the installer

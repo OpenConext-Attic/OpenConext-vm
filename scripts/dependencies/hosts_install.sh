@@ -13,7 +13,7 @@ else
 fi
 
 # Build one huge line for all the components
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp teams api welcome"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp teams api cruncher apis welcome"
 for comp in $COMPONENTS
 do
   HOSTSLINE="$HOSTSLINE $comp.$OC_DOMAIN"
