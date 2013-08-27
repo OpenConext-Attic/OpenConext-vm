@@ -20,8 +20,6 @@ OC_VERSION=v51
 OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 
 
-
-
 if [ $VERBOSE == "true" ]
 then
   echo "Verbose is true, will not suppress output from mvn/yum/git"
@@ -109,10 +107,15 @@ then
   done
   OC_VERSION=$OC_VERSION_INPUT
   echo "Using version file $OC_VERSION"
+
+  echo "Do you want to install tools for testing OpenConext with Selenium IDE? (y/n)"
+  read TEST_CHOICE
+  case "$TEST_CHOICE" in
+    "y" | "Y" ) INSTALL_TESTS="true";;
+    "n" | "N" ) INSTALL_TESTS="false";;
+    * ) INSTALL_TESTS="false";;
+  esac
 fi
-
-
-
 
 # Set the component versions as variables, for use in later scripts
 source $OC_SCRIPTDIR/versions/$OC_VERSION
@@ -284,11 +287,20 @@ then
   service shibd start
 fi
 
+
+# pacakges for testing with selenium
+if [[ $INSTALL_TESTS == "true" ]]
+then
+  echo "Installing tools for testing..."
+  source $OC_SCRIPTDIR/components/selenium.sh
+fi
+
+
 echo; echo
 echo "Installation of OpenConext is complete."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher welcome"
 HOSTS="$OC_DOMAIN" # the domain itself
 for comp in $COMPONENTS
 do

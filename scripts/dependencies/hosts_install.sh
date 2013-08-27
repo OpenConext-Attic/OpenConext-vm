@@ -12,12 +12,15 @@ else
 	echo $IP_ADDR >> /etc/hosts
 fi
 
-# Build one huge line
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp teams api cruncher apis"
+# Build one huge line for all the components
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp teams api cruncher apis welcome"
 for comp in $COMPONENTS
 do
   HOSTSLINE="$HOSTSLINE $comp.$OC_DOMAIN"
 done
+
+# Add the hosts itself to the hostline (for the welcome page)
+HOSTSLINE="$HOSTSLINE $OC_DOMAIN"
 
 # Replace the current line with the new one
 sed -i "s/$IP_ADDR.*$/$IP_ADDR $HOSTSLINE/" /etc/hosts
