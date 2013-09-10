@@ -17,13 +17,13 @@ $GITCHECKOUT ${SERVICEREGISTRY_VERSION}
 
 if ! $UPGRADE
 then
-  mysql -u root --password=c0n3xt -e "create database if not exists serviceregistry default charset utf8 default collate utf8_unicode_ci;"
+  mysql -u root --password=c0n3xt -e "create database if not exists sr default charset utf8 default collate utf8_unicode_ci;"
 
   cat $OC_BASEDIR/data/serviceregistry.sql | \
     sed \
       -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" \
       -e "s~_OPENCONEXT_CERT_~$OC_CERT~" | \
-    mysql -u root --password=c0n3xt serviceregistry
+    mysql -u root --password=c0n3xt sr
 
   if [ -f /etc/surfconext/serviceregistry.config.php ]
   then

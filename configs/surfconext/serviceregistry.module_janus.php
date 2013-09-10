@@ -22,7 +22,7 @@ $config['auth'] = 'default-sp'; // Single Sign On via EngineBlock
 $config['useridattr'] = 'urn:mace:dir:attribute-def:eduPersonTargetedID';
 
 $config['store'] = array(
-    'dsn'       => 'mysql:host=localhost;dbname=serviceregistry',
+    'dsn'       => 'mysql:host=localhost;dbname=sr',
     'username'  => 'root',
     'password'  => 'c0n3xt',
     'prefix'    => 'janus__',
