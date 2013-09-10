@@ -295,6 +295,12 @@ then
   source $OC_SCRIPTDIR/components/selenium.sh
 fi
 
+echo "Installing node properties file for OpenConext (useful for future upgrades): $NODE_PROPS"
+install -d /etc/openconext
+cat > $NODE_PROPS <<EOF
+openconext-version=$OC_VERSION
+openconext-domain=$OC_DOMAIN
+EOF
 
 echo; echo
 echo "Installation of OpenConext is complete."
