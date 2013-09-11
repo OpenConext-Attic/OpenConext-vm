@@ -56,4 +56,7 @@ then
   # Apply fix for broken dbpatch in R46
   git cherry-pick -n 59df00dff1daef0cfeae72982471a687bf8fd9fb
 fi
+
+# Perform database migration
+cd /opt/www/serviceregistry/
 ./bin/migrate

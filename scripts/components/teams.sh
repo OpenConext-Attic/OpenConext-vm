@@ -77,6 +77,12 @@ else
   mysql -u root --password=c0n3xt -e "create database if not exists teams default charset utf8 default collate utf8_unicode_ci;"
   mysql -u root --password=c0n3xt teams < $OC_BASEDIR/data/teams.sql
 
+  if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" == "master" ]]
+  then
+    # make the admin user member of the csa_admin team, allowing it to log in to CSA 
+    mysql -u root --password=c0n3xt teams < $OC_BASEDIR/data/teams_csa_admin_team.sql
+  fi
+  
   install -d /usr/share/tomcat6/webapps/teams.$OC_DOMAIN
   chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
 

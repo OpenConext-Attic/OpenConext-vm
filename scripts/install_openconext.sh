@@ -255,7 +255,7 @@ then
   source $OC_SCRIPTDIR/components/teams.sh
 fi
 
-if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" = "master" ]]
+if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" == "master" ]]
 then
   if echo $OC_COMPONENTS | grep -q APIS
   then
