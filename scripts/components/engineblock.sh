@@ -25,10 +25,10 @@ else
   mkdir -p /opt/www/attribute-manipulations
 
   # Create database
-  mysql -u root --password=c0n3xt -e "drop database if exists eb; create database eb default charset utf8 default collate utf8_unicode_ci;"
+  mysql -u root --password=c0n3xt -e "drop database if exists engineblock; create database engineblock default charset utf8 default collate utf8_unicode_ci;"
   cat $OC_BASEDIR/data/engineblock.sql | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
-    mysql -u root --password=c0n3xt eb
+    mysql -u root --password=c0n3xt engineblock
 
 
   #############################################
