@@ -77,7 +77,12 @@ else
   timeout 120 grep -q 'INFO: Server startup in' <(tail -n 0 -f /opt/tomcat/logs/catalina.out)
   if [ $? -eq 0 ] # If timeout did not occur.
   then
-    mysql -u root --password=c0n3xt apis -e "update client_attributes set attribute_value = 'https://apis.$OC_DOMAIN/client/client.html' where client_id = 99998 and attribute_name = 'CLIENT_SAML_ENTITY_NAME';"
+    echo "Importing data into APIS database"
+    cat $OC_BASEDIR/data/apis.sql | \
+    sed \
+      -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
+    mysql -u root --password=c0n3xt apis
+
     service tomcat6 stop
   else
     echo "Did not see Tomcat start up within reasonable time. Could not perform queries that had to be executed after startup"

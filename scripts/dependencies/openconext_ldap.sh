@@ -1,28 +1,30 @@
 #!/bin/sh
 
-rm -f /etc/openldap/schema/collab.schema
-
 # Remove existing schemas and entries
-service slapd stop &&
-rm -rf /var/lib/ldap/* &&
-chkconfig slapd on &&
-service slapd start &&
+service slapd stop
+rm -f /etc/openldap/schema/collab.schema
+rm -rf /var/lib/ldap/*
 
-cp $OC_BASEDIR/configs/ldap/eduperson-200412.ldif /etc/openldap/schema/ &&
-cp $OC_BASEDIR/configs/ldap/nleduperson.schema    /etc/openldap/schema/ &&
-cp $OC_BASEDIR/configs/ldap/collab.schema         /etc/openldap/schema/ &&
-cp $OC_BASEDIR/configs/ldap/slapd.conf            /etc/openldap &&
-sed -i 's/^rootpw.*/rootpw c0n3xt/g' /etc/openldap/slapd.conf &&
+# make sure LDAP will start at system start up
+chkconfig slapd on
 
-# Migrate RHEL/CentOS 5.x config to RHEL/CentOS 6.x
-# See http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/6/html-single/Migration_Planning_Guide/index.html#id4334890
+cp $OC_BASEDIR/configs/ldap/eduperson-200412.ldif /etc/openldap/schema/
+cp $OC_BASEDIR/configs/ldap/nleduperson.schema    /etc/openldap/schema/
+cp $OC_BASEDIR/configs/ldap/collab.schema         /etc/openldap/schema/
+cp $OC_BASEDIR/configs/ldap/slapd.conf            /etc/openldap
 
-rm -rf /etc/openldap/slapd.d/* &&
-slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d &&
-chown -R ldap:ldap /etc/openldap/slapd.d &&
-chmod -R 000 /etc/openldap/slapd.d &&
-chmod -R u+rwX /etc/openldap/slapd.d &&
-chkconfig slapd on && service slapd restart &&
+#remove the old config and generate a new one from the slapd.conf file
+service slapd start
+service slapd stop
+sleep 2
+rm -rf /etc/openldap/slapd.d/*
+sudo -u ldap /usr/sbin/slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d
 
-# Add entries...
+service slapd start
+sleep 2
+
+# Import needed entries
 ldapadd -x -D cn=admin,dc=surfconext,dc=nl -w c0n3xt -f $OC_BASEDIR/configs/ldap/ldap-entries.ldif
+
+# restart ldap
+service slapd restart

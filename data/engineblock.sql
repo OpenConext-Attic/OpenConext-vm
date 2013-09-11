@@ -193,7 +193,7 @@ CREATE TABLE `group_provider_decorator_option` (
 LOCK TABLES `group_provider_decorator_option` WRITE;
 /*!40000 ALTER TABLE `group_provider_decorator_option` DISABLE KEYS */;
 INSERT INTO `group_provider_decorator_option` VALUES (1,'replace','$1'),
-(1,'search','|urn:collab:group:vm-demo.surfteams.nl:(.+)|');
+(1,'search','|urn:collab:group:teams._OPENCONEXT_DOMAIN_:(.+)|');
 /*!40000 ALTER TABLE `group_provider_decorator_option` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +245,7 @@ CREATE TABLE `group_provider_filter_option` (
 LOCK TABLES `group_provider_filter_option` WRITE;
 /*!40000 ALTER TABLE `group_provider_filter_option` DISABLE KEYS */;
 INSERT INTO `group_provider_filter_option` VALUES (1,'property','id'),
-(1,'replace','urn:collab:group:dev.surfteams.nl:$1'),
+(1,'replace','urn:collab:group:teams._OPENCONEXT_DOMAIN_:$1'),
 (1,'search','|(.+)|');
 /*!40000 ALTER TABLE `group_provider_filter_option` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -443,7 +443,8 @@ INSERT INTO `service_provider_group_acl` VALUES (1,1,'https://engine._OPENCONEXT
 (4,1,'https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',1,1),
 (5,1,'http://mock-sp',1,1),
 (6,1,'https://grouper._OPENCONEXT_DOMAIN_/grouper/shibboleth',1,1),
-(7,1,'https://teams._OPENCONEXT_DOMAIN_/shibboleth',1,1);
+(7,1,'https://teams._OPENCONEXT_DOMAIN_/shibboleth',1,1),
+(8,1,'https://csa._OPENCONEXT_DOMAIN_/',1,1);
 /*!40000 ALTER TABLE `service_provider_group_acl` ENABLE KEYS */;
 UNLOCK TABLES;
 

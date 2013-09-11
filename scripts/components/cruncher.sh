@@ -60,9 +60,5 @@ else
   cat $OC_BASEDIR/configs/httpd/conf.d/cruncher.conf  | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
     /etc/httpd/conf.d/cruncher.conf
-
-    mysql -uroot -pc0n3xt apis -e "REPLACE INTO resourceserver (id, contactEmail,  contactName, resourceServerName, resourceServerKey, secret, owner, thumbNailUrl)
-    VALUES (99981, 'john.doe@example.com','john doe','Cruncher','cruncher', 'cruncher-secret', null, '')"
-
-#    RESOURCESERVER_ID=`mysql -uroot -pc0n3xt apis -e "select id from resourceserver where resourceServerKey = 'cruncher'"`
+    
 fi

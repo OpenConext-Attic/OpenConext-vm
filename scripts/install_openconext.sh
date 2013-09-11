@@ -16,8 +16,8 @@ source $OC_SCRIPTDIR/common.sh
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
 OC_DOMAIN=demo.openconext.org
-OC_VERSION=v51
-OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
+OC_VERSION=v52
+OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA"
 
 
 if [ $VERBOSE == "true" ]
@@ -63,18 +63,18 @@ then
   echo "2. Components"
   echo "You can either install all components, or a subset of them."
   echo "Possible options are:"
-  echo "1. All (EngineBlock, Service registry, Manage, API, Teams, Mujina IDP/SP, Cruncher, Apis)"
+  echo "1. All (EngineBlock, Service registry, Manage, API, Teams, Mujina IDP/SP, Cruncher, Apis, CSA)"
   echo "2. EngineBlock, Service registry, Mujina IDP/SP"
   echo "3. Mix and match (experts only)"
   echo
   echo -n "Component choice: [1]: "
   read COMPONENTCHOICE
   case "$COMPONENTCHOICE" in
-    "1" | "" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER";;
+    "1" | "" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA";;
     "2" ) OC_COMPONENTS="EB SR MUJINA";;
     * )
         OC_COMPONENTS=""
-        for component in EB SR MANAGE GROUPER API TEAMS MUJINA APIS CRUNCHER
+        for component in EB SR MANAGE GROUPER API TEAMS MUJINA APIS CRUNCHER CSA
         do
           echo Install $component? [Y/n]
           read answer
@@ -138,13 +138,13 @@ do
     DEP_LDAP=true
   fi
 
-  if [[ $COMPONENT == "API" || $COMPONENT == "MUJINA" || $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER" || $COMPONENT == "CRUNCHER" || $COMPONENT == "APIS" ]]
+  if [[ $COMPONENT == "API" || $COMPONENT == "MUJINA" || $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER" || $COMPONENT == "CRUNCHER" || $COMPONENT == "APIS" || $COMPONENT == "CSA"  ]]
   then
     DEP_TOMCAT=true
     DEP_MAVEN=true
   fi
 
-  if [[ $COMPONENT == "API" || $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER"  || $COMPONENT == "CRUNCHER" || $COMPONENT == "APIS" ]]
+  if [[ $COMPONENT == "API" || $COMPONENT == "TEAMS" || $COMPONENT == "GROUPER"  || $COMPONENT == "CRUNCHER" || $COMPONENT == "APIS" || $COMPONENT == "CSA" ]]
   then
     DEP_MYSQL=true
   fi
@@ -255,7 +255,7 @@ then
   source $OC_SCRIPTDIR/components/teams.sh
 fi
 
-if [[ "$OC_VERSION" > "v51" ]]
+if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" = "master" ]]
 then
   if echo $OC_COMPONENTS | grep -q APIS
   then
@@ -267,6 +267,12 @@ then
   then
     echo "Installing Cruncher..."
     source $OC_SCRIPTDIR/components/cruncher.sh
+  fi
+  
+  if echo $OC_COMPONENTS | grep -q CSA
+  then
+    echo "Installing CSA..."
+    source $OC_SCRIPTDIR/components/csa.sh
   fi
 fi
 
@@ -294,7 +300,6 @@ then
   echo "Installing tools for testing..."
   source $OC_SCRIPTDIR/components/selenium.sh
 fi
-
 
 echo; echo
 echo "Installation of OpenConext is complete."
