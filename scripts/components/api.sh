@@ -51,7 +51,7 @@ then
 
 else
 
-  if [[ "$OC_VERSION" > "v45" ]]
+  if [[ "$OC_VERSION" > "v45" || "$OC_VERSION" == "master" ]]
   then
     cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-logback.xml
   fi
