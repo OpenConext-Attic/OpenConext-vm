@@ -7,9 +7,9 @@ then
 fi
 
 cd /opt/www/OpenConext-csa
-#$GITRESET # revert potential changes
-#$GITFETCH
-#$GITCHECKOUT ${CSA_VERSION}
+$GITRESET # revert potential changes
+$GITFETCH
+$GITCHECKOUT ${CSA_VERSION}
 $MVN -DskipTests clean install
 
 # extract deployable artifact
