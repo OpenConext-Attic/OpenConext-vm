@@ -16,6 +16,6 @@ REPLACE INTO resourceserver (id, contactEmail,  contactName, resourceServerName,
 REPLACE INTO ResourceServer_scopes values (99980, 'cross-idp-services'),(99980, 'actions'),(99980, 'stats');
 REPLACE INTO client (id, contactEmail, contactName, description, clientName, resourceserver_id, clientId, secret, allowedClientCredentials)
 VALUES
-    (99998, 'client@integration.tests.surfnet', 'john.doe', 'credentials for the integration test suite of SURF',
+    (99978, 'client@integration.tests.surfnet', 'john.doe', 'credentials for the integration test suite of SURF',
     'integration-test-client', 99980, 'csa-integrationtest-client', 'ba1d6668-32d8-4ac8-a15f-fbfa07c1bb74', 1);
-INSERT INTO Client_scopes values (99998, 'cross-idp-services'), (99998, 'actions'),(99998, 'stats');
+INSERT INTO Client_scopes values (99978, 'cross-idp-services'), (99978, 'actions'),(99978, 'stats');

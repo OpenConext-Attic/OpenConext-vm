@@ -40,9 +40,17 @@ then
 
 fi
 
-if [[ "$OC_VERSION" > "v47" || "$OC_VERSION" == "master" ]]
+if [[ "$OC_VERSION" > "v47" && "$OC_VERSION" < "v53" ]]
 then
-  cd /opt/www/serviceregistry/
+  cd /opt/www/serviceregistry/modules/janus
+  ./bin/composer.phar install
+  # Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
+  restorecon -r vendor
+fi
+
+if [[ "$OC_VERSION" > "v52" || "$OC_VERSION" == "master" ]]
+then
+  cd /opt/www/serviceregistry
   ./bin/composer.phar install
   # Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
   restorecon -r vendor
