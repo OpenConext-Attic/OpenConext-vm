@@ -20,6 +20,10 @@ restorecon -r vendor
 if $UPGRADE
 then
   source /etc/profile.d/openconext.sh
+  if [[ "$OC_VERSION" == "v56" ]]
+  then
+    sed -i '/Alias \/simplesaml \/opt\/www\/engineblock\/library\/simplesamlphp\/www/c\    Alias /simplesaml /opt/www/engineblock/vendor/simplesamlphp/simplesamlphp/www' /etc/httpd/conf.d/profile.conf
+  fi  
 else
   # Directory for potential attribute-manipulations
   mkdir -p /opt/www/attribute-manipulations
@@ -83,6 +87,12 @@ else
   cat $OC_BASEDIR/configs/httpd/conf.d/profile.conf  | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
     /etc/httpd/conf.d/profile.conf
+
+  if [[ "$OC_VERSION" > "v55" ]]
+  then
+    # If we don't support pre v55 versions then we can change the /etc/httpd/conf.d/profile.conf
+    sed -i '/Alias \/simplesaml \/opt\/www\/engineblock\/library\/simplesamlphp\/www/c\    Alias /simplesaml /opt/www/engineblock/vendor/simplesamlphp/simplesamlphp/www' /etc/httpd/conf.d/profile.conf
+  fi  
 
   # Make public key available for other components
   ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`
