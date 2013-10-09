@@ -24,7 +24,7 @@ service slapd start
 sleep 2
 
 # Import needed entries
-ldapadd -x -D cn=admin,dc=surfconext,dc=nl -w c0n3xt -f $OC_BASEDIR/configs/ldap/ldap-entries.ldif
+ldapadd -x -D cn=admin,dc=surfconext,dc=nl -h localhost -w c0n3xt -f $OC_BASEDIR/configs/ldap/ldap-entries.ldif
 
 # restart ldap
 service slapd restart

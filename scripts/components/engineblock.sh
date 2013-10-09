@@ -75,8 +75,8 @@ else
   chmod o+w /var/log/surfconext/engineblock.log
 
     # Updating LDAP schema some more...
-  ldapmodify -x -D cn=admin,cn=config -w c0n3xt -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
-  ldapmodify -x -D cn=admin,cn=config -w c0n3xt -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
+  ldapmodify -x -D cn=admin,cn=config -h localhost -w c0n3xt -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
+  ldapmodify -x -D cn=admin,cn=config -h localhost -w c0n3xt -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
 
   cat $OC_BASEDIR/configs/httpd/conf.d/engine.conf  | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
