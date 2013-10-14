@@ -16,7 +16,7 @@ source $OC_SCRIPTDIR/common.sh
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
 OC_DOMAIN=demo.openconext.org
-OC_VERSION=v52
+OC_VERSION=v57
 OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA"
 
 
@@ -312,7 +312,7 @@ echo; echo
 echo "Installation of OpenConext is complete."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher welcome"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher csa welcome"
 HOSTS="$OC_DOMAIN" # the domain itself
 for comp in $COMPONENTS
 do
