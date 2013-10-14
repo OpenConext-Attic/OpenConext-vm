@@ -15,9 +15,16 @@ source $OC_SCRIPTDIR/common.sh
 
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
-OC_DOMAIN=demo.openconext.org
-OC_VERSION=v57
+DEFAULT_DOMAIN=demo.openconext.org
+DEFAULT_VERSION=v57
+
 OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA"
+
+# Override defaults with variables from invoking shell.
+# To use this, call like this:
+# $ DOMAIN=mydomain.com VERSION=master bash install_openconext.sh
+OC_DOMAIN=$([ "x$DOMAIN" == "x" ] && echo "$DEFAULT_DOMAIN" || echo "$DOMAIN")
+OC_VERSION=$([ "x$VERSION" == "x" ] && echo "$DEFAULT_VERSION" || echo "$VERSION")
 
 
 if [ $VERBOSE == "true" ]
