@@ -58,6 +58,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.name = "OpenConext"
     vb.gui  = true
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
 
   config.vm.provision :shell, :path => "scripts/install_openconext_vagrant_wrapper.sh"
