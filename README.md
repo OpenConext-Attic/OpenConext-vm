@@ -7,32 +7,62 @@ For more information regarding OpenConext, refer to the documentation at [http:/
 
 # How to use this OpenConext VM?
 
-You can either use a VM instance you created yourself (read on), or use [our complete procedure to create one](https://github.com/OpenConext/OpenConext-vm/wiki/Vagrant-and-Veewee).
+You can either use Vagrant and a VM instance (CentOS 6.4 basebox) graciously provided by the
+U.S. National Renewable Energy Laboratory Developer Network or install OpenConext on your own VM.
 
-# Bring your own VM instance
-Prerequisites: a VM running CentOS 6 or RedHat EL 6.
+# Option 1. Using Vagrant
 
-## 1. Download installer
+Prerequisites:
+* Recent version of [Vagrant](https://vagrantup.com)
+
+## 1.1. Make a new directory for all OpenConext code
+
+Example for OS X:
+```bash
+mkdir ~/Sites/OpenConext
+cd ~/Sites/OpenConext
+```
+
+## 1.2. Download the VM project there
+```bash
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zxv
+```
+
+You should now have a directory called OpenConext-vm-master, go there and run vagrant up.
+```bash
+cd OpenConext-vm-master && vagrant up
+```
+
+# Option 2. Bring your own VM instance
+Prerequisites:
+* a VM running CentOS 6 or RedHat EL 6.
+
+## 2.1. Download installer
 From within the VM, download this repo:
 
-    curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zx
+```bash
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zx
+```
 
-
-## 2. Run the installer
+## 2.2. Run the installer
 Run the install script:
 
-    bash OpenConext-vm-master/scripts/install_openconext.sh
+```bash
+bash OpenConext-vm-master/scripts/install_openconext.sh
+```bash
 
 By default, the installer will run an 'unattended' setup, choosing sensible defaults.
 If you want to install a specific version of the platform, install a subset of components or change the default domain (demo.openconext.org), run the installer with a ````-i```` flag:
 
     bash OpenConext-vm-master/scripts/install_openconext.sh -i
 
-## 3. Change your hosts-file
+# Once installed...
+
+## Change your hosts-file
 The installer ends with a message suggesting to add an entry to your hosts-file (that is: of the VM-host).
 Follow this suggestion if you want to use the OpenConext service from outside of the VM..
 
-## 4. Visit Welcome URL
+## Visit Welcome URL
 Point your browser to the welcome-URL, as mentioned by the installer.
 _Install the CA's certificate in your browser_ as mentioned on that page.
 
