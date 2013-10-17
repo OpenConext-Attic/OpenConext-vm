@@ -16,7 +16,7 @@ You can either:
 # Option 1. Using Vagrant
 
 Prerequisites:
-* Recent version of [Vagrant](https://vagrantup.com)
+* Recent version of [Vagrant](https://www.vagrantup.com)
 
 ## 1.1. Make a new directory for all OpenConext code
 
