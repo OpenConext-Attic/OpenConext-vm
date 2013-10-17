@@ -37,10 +37,8 @@ You should now have a directory called OpenConext-vm-master, go there and run va
 cd OpenConext-vm-master && vagrant up
 ```
 
-Then, once you have a working machine for OpenConext, install openconext by issueing the following command:
-```bash
-vagrant provision
-```
+Vagrant will download the basebox, set it up with NFS and install OpenConext for you.
+Note that the basebox is configured with 480Mb of memory, you might want to stop the machine (with vagrant halt) and increase it's memory to 2048Mb or OpenConext might run very slowly for you.
 
 # Option 2. I already have a machine I want to install OpenConext on.
 Prerequisites:
