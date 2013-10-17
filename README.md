@@ -7,32 +7,73 @@ For more information regarding OpenConext, refer to the documentation at [http:/
 
 # How to use this OpenConext VM?
 
-You can either use a VM instance you created yourself (read on), or use [our complete procedure to create one](https://github.com/OpenConext/OpenConext-vm/wiki/Vagrant-and-Veewee).
+You can either:
 
-# Bring your own VM instance
-Prerequisites: a VM running CentOS 6 or RedHat EL 6.
+1.  Use Vagrant and a VM instance (CentOS 6.4 basebox) graciously provided by the
+[U.S. National Renewable Energy Laboratory Developer Network](http://developer.nrel.gov/) or 
+2.  Install OpenConext on your own VM.
 
-## 1. Download installer
+# Option 1. Using Vagrant
+
+Prerequisites:
+* Recent version of [Vagrant](https://vagrantup.com)
+
+## 1.1. Make a new directory for all OpenConext code
+
+Example for OS X:
+```bash
+mkdir ~/Sites/OpenConext
+cd ~/Sites/OpenConext
+```
+
+## 1.2. Download the VM project there
+```bash
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zxv
+```
+
+## 1.3 Up, up and away!
+You should now have a directory called OpenConext-vm-master, go there and run vagrant up.
+```bash
+cd OpenConext-vm-master && vagrant up
+```
+
+Then, once you have a working machine for OpenConext, install openconext by issueing the following command:
+```bash
+vagrant provision
+```
+
+# Option 2. Bring your own VM instance
+Prerequisites:
+* a VM running CentOS 6 or RedHat EL 6.
+
+## 2.1. Download installer
 From within the VM, download this repo:
 
-    curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zx
+```bash
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zx
+```
 
-
-## 2. Run the installer
+## 2.2. Run the installer
 Run the install script:
 
-    bash OpenConext-vm-master/scripts/install_openconext.sh
+```bash
+bash OpenConext-vm-master/scripts/install_openconext.sh
+```
 
 By default, the installer will run an 'unattended' setup, choosing sensible defaults.
 If you want to install a specific version of the platform, install a subset of components or change the default domain (demo.openconext.org), run the installer with a ````-i```` flag:
 
-    bash OpenConext-vm-master/scripts/install_openconext.sh -i
+```bash
+bash OpenConext-vm-master/scripts/install_openconext.sh -i
+```
 
-## 3. Change your hosts-file
+# Once installed...
+
+## Change your hosts-file
 The installer ends with a message suggesting to add an entry to your hosts-file (that is: of the VM-host).
-Follow this suggestion if you want to use the OpenConext service from outside of the VM..
+Follow this suggestion if you want to use the OpenConext service from outside of the VM.
 
-## 4. Visit Welcome URL
+## Visit Welcome URL
 Point your browser to the welcome-URL, as mentioned by the installer.
 _Install the CA's certificate in your browser_ as mentioned on that page.
 
@@ -62,7 +103,9 @@ where ``address`` is the ip address of your VM.
 ### MySQL access
 If you want to query or update the database you will have to open up port 3306. Type in a VM shell:
 
-    iptables -I INPUT -p tcp -m tcp  --dport 3306 -j ACCEPT
+```bash
+iptables -I INPUT -p tcp -m tcp  --dport 3306 -j ACCEPT
+```
 
 The MySQL root-password is ``c0n3xt``.
 
@@ -77,15 +120,21 @@ But to upgrade your OpenConext instance, it's better to have a clone of the repo
 
 Run within the VM:
 
-    git clone https://github.com/OpenConext/OpenConext-vm
+```bash
+git clone https://github.com/OpenConext/OpenConext-vm
+```
 
 (or pull in the latest changes if you cloned before):
 
-    cd OpenConext-vm
-    git pull
+```bash
+cd OpenConext-vm
+git pull
+```
 
 ## 2. Run the upgrade installer
 
-    bash OpenConext-vm/scripts/upgrade_openconext.sh
+```bash
+bash OpenConext-vm/scripts/upgrade_openconext.sh
+```
 
 The installer will ask which version you want to upgrade to.
