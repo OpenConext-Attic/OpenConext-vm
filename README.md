@@ -9,11 +9,11 @@ For more information regarding OpenConext, refer to the documentation at [http:/
 
 You can either:
 
-1.  Use Vagrant and a VM instance (CentOS 6.4 basebox) graciously provided by the
-[U.S. National Renewable Energy Laboratory Developer Network](http://developer.nrel.gov/) or 
-2.  Install OpenConext on your own VM.
+1.  Let Vagrant install and manage a new virtual machine for you (CentOS 6.4 basebox graciously provided by the
+[U.S. National Renewable Energy Laboratory Developer Network](http://developer.nrel.gov/)). This option is recommended if you just want to play around with OpenConext. 
+2.  Install OpenConext on your own server / VM. This option is recommended if you already have a target machine for OpenConext or if you can't / won't use / trust Vagrant or the provided basebox.
 
-# Option 1. Using Vagrant
+# Option 1. Letting Vagrant set up a new virtual machine.
 
 Prerequisites:
 * Recent version of [Vagrant](https://www.vagrantup.com)
@@ -42,9 +42,9 @@ Then, once you have a working machine for OpenConext, install openconext by issu
 vagrant provision
 ```
 
-# Option 2. Bring your own VM instance
+# Option 2. I already have a machine I want to install OpenConext on.
 Prerequisites:
-* a VM running CentOS 6 or RedHat EL 6.
+* a VM running CentOS 6 or RedHat EL 6 (other operating systems may work, but are not supported).
 
 ## 2.1. Download installer
 From within the VM, download this repo:
