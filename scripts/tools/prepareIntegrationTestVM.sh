@@ -9,7 +9,7 @@
 cd /tmp
 echo "Installing base packages..."
 
-yum -y install git subversion policycoreutils-python ntp sudo java-1.6.0-openjdk java-1.6.0-openjdk-devel mysql mysql-server \
+yum -y install git subversion policycoreutils-python ntp sudo java-1.7.0-openjdk java-1.7.0-openjdk-devel mysql mysql-server \
   mysql-connector-java httpd mod_ssl openldap-servers openldap-clients php php-pecl-apc php-cli php-curl php-devel php-ldap \
   php-mbstring php-mcrypt php-mysql php-pecl-memcache php-soap php-xml samba tomcat6 mysql-connector-java
 
