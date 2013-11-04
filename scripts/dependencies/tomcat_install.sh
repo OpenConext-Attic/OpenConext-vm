@@ -1,8 +1,8 @@
 #!/bin/sh
 
 echo "Installing packages for Tomcat. This may take several minutes. (depending on available bandwidth)"
-# Install java-1.6.0-openjdk to overrule the default gcj, which is horribly broken for us.
-$YUM -y install java-1.6.0-openjdk tomcat6 mysql-connector-java
+# Install java-1.7.0-openjdk to overrule the default gcj, which is horribly broken for us.
+$YUM -y install java-1.7.0-openjdk tomcat6 mysql-connector-java
 
 chkconfig --level 235 tomcat6 on
 
