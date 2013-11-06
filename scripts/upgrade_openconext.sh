@@ -14,7 +14,7 @@ source $OC_SCRIPTDIR/common.sh
 ALL_ORDERED_VERSIONS=$(cd $OC_SCRIPTDIR/versions && ls v*)
 
 # This is hardcoded: the latest version is not by definition the desired (i.e. most stable) one.
-DEFAULT_VERSION_TO=v50
+DEFAULT_VERSION_TO=v57
 
 
 

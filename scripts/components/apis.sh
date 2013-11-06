@@ -74,7 +74,7 @@ else
   echo "Will startup Tomcat to execute queries that can only be done after initial filling of database tables."
   service tomcat6 start
   echo "Waiting for Tomcat startup to finish..."
-  timeout 120 grep -q 'INFO: Server startup in' <(tail -n 0 -f /opt/tomcat/logs/catalina.out)
+  timeout 300 grep -q 'INFO: Server startup in' <(tail -n 0 -f /opt/tomcat/logs/catalina.out)
   if [ $? -eq 0 ] # If timeout did not occur.
   then
     echo "Importing data into APIS database"
