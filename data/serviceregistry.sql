@@ -412,6 +412,9 @@ INSERT INTO `janus__metadata` VALUES (1,0,'logo:0:width','96','2012-06-12T13:12:
 INSERT INTO `janus__metadata` VALUES (1,0,'name:en','OpenConext Engine','2012-06-12T13:12:33+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (1,0,'name:nl','OpenConext Engine','2012-06-12T13:12:33+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (1,0,'redirect.sign','','2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'coin:gadgetbaseurl', 'oauth_key', '2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'coin:oauth:secret', 'oauth_secret', '2012-06-12T13:12:33+02:00','172.18.5.1');
+INSERT INTO `janus__metadata` VALUES (1,0,'coin:oauth:two_legged_allowed', '1', '2012-06-12T13:12:33+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (3,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-12T13:13:05+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (3,0,'AssertionConsumerService:0:Location','https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-12T13:13:05+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (3,0,'contacts:0:contactType','technical','2012-06-12T13:13:05+02:00','172.18.5.1');
