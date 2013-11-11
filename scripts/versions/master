@@ -3,7 +3,7 @@
 # these versions are tag names
 export ENGINEBLOCK_VERSION=develop
 export API_VERSION=master
-export MANAGE_VERSION=develop
+export MANAGE_VERSION=master
 export SERVICEREGISTRY_VERSION=develop
 export STATIC_VERSION=develop
 export TEAMS_VERSION=master
