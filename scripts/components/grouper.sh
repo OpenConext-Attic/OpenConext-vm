@@ -8,29 +8,18 @@ then
 fi
 tar zxf grouper-dist-*-bin.tar.gz
 
+# Delete
+rm -f /usr/share/tomcat6/wars/grouper-*.war
+
 cp -f tomcat/webapps/*.war /usr/share/tomcat6/wars
 
-# Here we use the .dev versions. There is no .vm version.
-cp -f tomcat/conf/classpath_properties/*.dev /usr/share/tomcat6/conf/classpath_properties/
+cp -f tomcat/conf/classpath_properties/sources.xml.vm /usr/share/tomcat6/conf/classpath_properties/
+cp -f tomcat/conf/classpath_properties/grouper.hibernate.properties.vm /usr/share/tomcat6/conf/classpath_properties/
 cp -f tomcat/conf/classpath_properties/grouper.properties /usr/share/tomcat6/conf/classpath_properties/
 cp -f tomcat/conf/classpath_properties/log4j.properties /usr/share/tomcat6/conf/classpath_properties/
 
-# change dev.surfconext.nl to proper openconext name and strip off the .dev extension
-for i in $(ls /usr/share/tomcat6/conf/classpath_properties/*.dev)
-do
-  sed -i "s/dev.surfconext.nl/$OC_DOMAIN/g" $i
-  mv $i `dirname $i`/`basename $i .dev`
-done
-
-# The config files for dev are not exactly the same as for vm. Therefore some specific replacements after all :-(
-# TODO: create a vm-version of all the property files and ship it with our grouper dist.
-sed -i "s/teamsrw/root/g" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
-sed -i "s/asd7rR53hj62ERFse45/c0n3xt/g" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
-
-
-install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
-install -d /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
-chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
+sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/sources.xml
+sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
 
 GROUPER_WS_WAR=`basename /usr/share/tomcat6/wars/grouper-ws-*.war`
 GROUPER_WAR=`basename /usr/share/tomcat6/wars/grouper-*.war`
@@ -40,9 +29,22 @@ echo "<Context path=\"/grouper-ws\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_W
 echo "<Context path=\"/grouper\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WAR\" debug=\"1\"></Context>" > \
   /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN/grouper.xml
 
-cat $OC_BASEDIR/configs/httpd/conf.d/grouper.conf  | \
-  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" > \
-  /etc/httpd/conf.d/grouper.conf
 
-SERVERXMLLINE='<Host name="grouper.'$OC_DOMAIN'" appBase="webapps/grouper.'$OC_DOMAIN'"/>'
-sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
+if $UPGRADE
+then
+  rm -Rf /usr/share/tomcat6/work/Catalina/grouper*
+  rm -Rf /usr/share/tomcat6/webapps/grouper.*/*
+else
+  install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
+  install -d /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
+  chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
+
+  cat $OC_BASEDIR/configs/httpd/conf.d/grouper.conf  | \
+    sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" > \
+    /etc/httpd/conf.d/grouper.conf
+
+  SERVERXMLLINE='<Host name="grouper.'$OC_DOMAIN'" appBase="webapps/grouper.'$OC_DOMAIN'"/>'
+  sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
+fi
+
+
