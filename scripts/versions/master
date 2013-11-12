@@ -6,7 +6,8 @@ export API_VERSION=master
 export MANAGE_VERSION=master
 export SERVICEREGISTRY_VERSION=develop
 export STATIC_VERSION=develop
-export TEAMS_VERSION=master
+# Teams still on 3.3.0, until Grouper upgrade is available on VM
+export TEAMS_VERSION=coin-teams-parent-3.3.0
 export MUJINA_VERSION=master
 export CRUNCHER_VERSION=master
 export APIS_VERSION=master
