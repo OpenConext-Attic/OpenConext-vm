@@ -31,7 +31,9 @@ else
   # Uses the same schema as Teams right now. This same statement is issued by teams-script, but running twice won't do harm.
   mysql -u root --password=c0n3xt -e "create database if not exists teams;"
 
+  echo "Downloading and installing Grouper Shell in /opt/www/grouper-shell..."
   curl -O http://www.internet2.edu/grouper/release/2.1.5/grouper.apiBinary-2.1.5.tar.gz
+  cd /opt/www
   tar zxf grouper.apiBinary-2.1.5.tar.gz
 
   # Substitute database parameters in hibernate configuration
@@ -46,16 +48,24 @@ else
   sed -i grouper.apiBinary-2.1.5/conf/grouper.properties \
   -e "s~^configuration.autocreate.system.groups.*~configuration.autocreate.system.groups=true~" \
   -e "s~^groups.wheel.use.*~groups.wheel.use=true~"
-  cd grouper.apiBinary-2.1.5
+  ln -s /opt/www/grouper.apiBinary-2.1.5 /opt/www/grouper-shell
+
+  cd /opt/www/grouper-shell
   # Run the registry initialization script
   bin/gsh -registry -runscript -noprompt
-  # Provision the admin user @ mujina up front
-  bin/gsh -runarg 'addSubject("urn:collab:person:example.com:admin","person","The-admin-user-at-Mujina-IdP")'
-  # Make Mujina user 'admin' member of the wheel group 'etc:sysadmingroup'
-  bin/gsh -runarg 'addMember("etc:sysadmingroup","urn:collab:person:example.com:admin");'
-  cd -
 
+  GSH_SCRIPT=`mktemp`
+cat << EOS > $GSH_SCRIPT
+// Provision the admin user @ mujina up front
+addSubject("urn:collab:person:example.com:admin","person","The admin user at Mujina IdP")
 
+// Make Mujina user 'admin' member of the wheel group 'etc:sysadmingroup'
+addMember("etc:sysadmingroup","urn:collab:person:example.com:admin");
+
+EOS
+
+  bin/gsh $GSH_SCRIPT
+  cd /tmp
 
   install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
   install -d /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN

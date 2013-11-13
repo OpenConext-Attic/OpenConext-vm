@@ -62,4 +62,13 @@ else
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
     /etc/httpd/conf.d/csa.conf
 
+  if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" == "master" ]]
+  then
+    cd /opt/www/grouper-shell
+    bin/gsh -runarg 'addGroup("nl:surfnet:diensten","csa_admin","csa_admin")'
+    bin/gsh -runarg 'addMember("nl:surfnet:diensten:csa_admin","urn:collab:person:example.com:admin")'
+    cd -
+  fi
+
+
 fi
