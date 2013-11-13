@@ -74,7 +74,8 @@ else
       /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
   fi
 
-  mysql -u root --password=c0n3xt -e "create database if not exists teams default charset utf8 default collate utf8_unicode_ci;"
+  # Uses the same schema as Grouper right now. This same statement is issued by teams-script, but running twice won't do harm.
+  mysql -u root --password=c0n3xt -e "create database if not exists teams;"
   mysql -u root --password=c0n3xt teams < $OC_BASEDIR/data/teams.sql
 
   if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" == "master" ]]

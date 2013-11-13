@@ -26,6 +26,37 @@ then
   rm -Rf /usr/share/tomcat6/work/Catalina/grouper*
   rm -Rf /usr/share/tomcat6/webapps/grouper.*/*
 else
+
+  # Initialize Grouper schema
+  # Uses the same schema as Teams right now. This same statement is issued by teams-script, but running twice won't do harm.
+  mysql -u root --password=c0n3xt -e "create database if not exists teams;"
+
+  curl -O http://www.internet2.edu/grouper/release/2.1.5/grouper.apiBinary-2.1.5.tar.gz
+  tar zxf grouper.apiBinary-2.1.5.tar.gz
+
+  # Substitute database parameters in hibernate configuration
+  sed -i grouper.apiBinary-2.1.5/conf/grouper.hibernate.properties \
+  -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://db.$OC_DOMAIN/teams~" \
+  -e "s~^hibernate.connection.username.*~hibernate.connection.username=root~" \
+  -e "s~^hibernate.connection.password.*~hibernate.connection.password=c0n3xt~"
+
+  # Set properties in grouper props to
+  # 1. autocreate the admin groups
+  # 2. add a 'wheel' group (that is: etc:sysadmingroup) to enable users in that group to obtain admin privileges
+  sed -i grouper.apiBinary-2.1.5/conf/grouper.properties \
+  -e "s~^configuration.autocreate.system.groups.*~configuration.autocreate.system.groups=true~" \
+  -e "s~^groups.wheel.use.*~groups.wheel.use=true~"
+  cd grouper.apiBinary-2.1.5
+  # Run the registry initialization script
+  bin/gsh -registry -runscript -noprompt
+  # Provision the admin user @ mujina up front
+  bin/gsh -runarg 'addSubject("urn:collab:person:example.com:admin","person","The-admin-user-at-Mujina-IdP")'
+  # Make Mujina user 'admin' member of the wheel group 'etc:sysadmingroup'
+  bin/gsh -runarg 'addMember("etc:sysadmingroup","urn:collab:person:example.com:admin");'
+  cd -
+
+
+
   install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
   install -d /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
   chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
