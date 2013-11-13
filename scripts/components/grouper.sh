@@ -21,15 +21,6 @@ cp -f tomcat/conf/classpath_properties/log4j.properties /usr/share/tomcat6/conf/
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/sources.xml
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
 
-GROUPER_WS_WAR=`basename /usr/share/tomcat6/wars/grouper-ws-*.war`
-GROUPER_WAR=`basename /usr/share/tomcat6/wars/grouper-*.war`
-
-echo "<Context path=\"/grouper-ws\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WS_WAR\" debug=\"1\"></Context>" > \
-  /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN/grouper-ws.xml
-echo "<Context path=\"/grouper\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WAR\" debug=\"1\"></Context>" > \
-  /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN/grouper.xml
-
-
 if $UPGRADE
 then
   rm -Rf /usr/share/tomcat6/work/Catalina/grouper*
@@ -47,4 +38,10 @@ else
   sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
 fi
 
+GROUPER_WS_WAR=`basename /usr/share/tomcat6/wars/grouper-ws-*.war`
+GROUPER_WAR=`basename /usr/share/tomcat6/wars/grouper-*.war`
 
+echo "<Context path=\"/grouper-ws\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WS_WAR\" debug=\"1\"></Context>" > \
+  /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN/grouper-ws.xml
+echo "<Context path=\"/grouper\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WAR\" debug=\"1\"></Context>" > \
+  /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN/grouper.xml
