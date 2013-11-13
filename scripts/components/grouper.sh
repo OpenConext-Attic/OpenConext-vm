@@ -54,6 +54,9 @@ else
   # Run the registry initialization script
   bin/gsh -registry -runscript -noprompt
 
+  # Run the following with sourceId == 'surfnet', this is the ldap source from Engineblock
+  sed -i conf/sources.xml -e 's~<id>jdbc</id>~<id>surfnet</id>~'
+
   GSH_SCRIPT=`mktemp`
 cat << EOS > $GSH_SCRIPT
 // Provision the admin user @ mujina up front
@@ -61,10 +64,27 @@ addSubject("urn:collab:person:example.com:admin","person","The admin user at Muj
 
 // Make Mujina user 'admin' member of the wheel group 'etc:sysadmingroup'
 addMember("etc:sysadmingroup","urn:collab:person:example.com:admin");
-
 EOS
-
   bin/gsh $GSH_SCRIPT
+
+  # Run the following with sourceId == 'applications', which is what Teams/Api expect
+  sed -i conf/sources.xml -e 's~<id>surfnet</id>~<id>applications</id>~'
+  GSH_SCRIPT=`mktemp`
+cat << EOS > $GSH_SCRIPT
+// Basic users (applications) of the system
+addSubject("gadget", "person", "gadget")
+addMember("etc:sysadmingroup","gadget");
+addMember("etc:webServiceActAsGroup", "gadget")
+
+addSubject("engine", "person", "engine")
+addMember("etc:sysadmingroup","engine");
+addMember("etc:webServiceActAsGroup", "engine")
+EOS
+  bin/gsh $GSH_SCRIPT
+
+  # Change sourceId back to jdbc
+    sed -i conf/sources.xml -e 's~<id>applications</id>~<id>jdbc</id>~'
+
   cd /tmp
 
   install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
