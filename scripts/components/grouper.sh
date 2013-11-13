@@ -13,8 +13,8 @@ rm -f /usr/share/tomcat6/wars/grouper-*.war
 
 cp -f tomcat/webapps/*.war /usr/share/tomcat6/wars
 
-cp -f tomcat/conf/classpath_properties/sources.xml.vm /usr/share/tomcat6/conf/classpath_properties/
-cp -f tomcat/conf/classpath_properties/grouper.hibernate.properties.vm /usr/share/tomcat6/conf/classpath_properties/
+cp -f tomcat/conf/classpath_properties/sources.xml.vm /usr/share/tomcat6/conf/classpath_properties/sources.xml
+cp -f tomcat/conf/classpath_properties/grouper.hibernate.properties.vm /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
 cp -f tomcat/conf/classpath_properties/grouper.properties /usr/share/tomcat6/conf/classpath_properties/
 cp -f tomcat/conf/classpath_properties/log4j.properties /usr/share/tomcat6/conf/classpath_properties/
 
