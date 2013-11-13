@@ -6,6 +6,8 @@ $YUM -y install xorg-x11-fonts-Type1 xorg-x11-fonts-misc
 $YUM -y install twm xterm firefox
 
 # checkout the regression test suite
+# this currently should be performed manually, because the regression tests
+# are part of a private repo
 #if [ ! -e /opt/regression ]
 #then
 #  $GITCLONE git@github.com:SURFnet/SURFnet-Regressie-test-Service-Registry.git /opt/OpenConext-integration-test

@@ -2,7 +2,7 @@
 
 KEY_DIR=/etc/httpd/keys
 
-CA_DIR=/etc/httpd/keys/ca
+CA_DIR=/opt/www/openconext-ca
 mkdir -p $CA_DIR
 
 CA_KEY_PASSWORD=mysecret

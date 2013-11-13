@@ -8,7 +8,6 @@
 # Base directory where the scripts (and config etc) is stored.
 OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 OC_SCRIPTDIR=$OC_BASEDIR/scripts
-
 source $OC_SCRIPTDIR/common.sh
 
 
@@ -17,7 +16,8 @@ source $OC_SCRIPTDIR/common.sh
 # TODO: Read from cached file, in case installation script is run again later on.
 DEFAULT_DOMAIN=demo.openconext.org
 
-OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA"
+# this is the default set of components in an install
+OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 
 # Override defaults with variables from invoking shell.
 # To use this, call like this:
@@ -45,6 +45,7 @@ then
 else
   echo "Running in non-interactive mode. Defaults to be used are:"
   echo "Base domain: " $OC_DOMAIN
+  echo "Components that are installed: " $OC_COMPONENTS
 fi
 
 if [ $INTERACTIVE == "true" ]
@@ -76,11 +77,11 @@ then
   read COMPONENTCHOICE
   case "$COMPONENTCHOICE" in
     "1" | "" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER";;
-    "2" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA";;
+    "2" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD";;
     "3" ) OC_COMPONENTS="EB SR MUJINA";;
     * )
         OC_COMPONENTS=""
-        for component in EB SR MANAGE GROUPER API TEAMS MUJINA APIS CRUNCHER CSA
+        for component in EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD
         do
           echo Install $component? [Y/n]
           read answer
@@ -93,13 +94,12 @@ then
   esac
   echo "List of components chosen: " $OC_COMPONENTS
 
-  echo "Do you want to install tools for testing OpenConext with Selenium IDE? (y/n)"
-  read TEST_CHOICE
-  case "$TEST_CHOICE" in
-    "y" | "Y" ) INSTALL_TESTS="true";;
-    "n" | "N" ) INSTALL_TESTS="false";;
-    * ) INSTALL_TESTS="false";;
-  esac
+  # Selenium tests are (by default) not installed, we do not want to bother the user with this
+  # this can be turned on via the command line
+  if [[ ! $INSTALL_TESTS ]]
+  then
+    INSTALL_TESTS="false";
+  fi
   
   echo; echo;
   echo "For HTTP over SSL and SAML signing/encryption, a set of self-signed, default keys and certificates are installed. You can customize this now, if you want to."
@@ -203,7 +203,6 @@ then
 fi
 
 echo "Done installing dependencies."
-exit 1;
 
 # Components
 
@@ -268,6 +267,12 @@ then
     echo "Installing CSA..."
     source $OC_SCRIPTDIR/components/csa.sh
   fi
+  
+  if echo $OC_COMPONENTS | grep -q DASHBOARD
+  then
+    echo "Installing Dashboard..."
+    source $OC_SCRIPTDIR/components/selfservice.sh
+  fi
 fi
 
 # stop if running
@@ -306,7 +311,7 @@ echo; echo
 echo "Installation of OpenConext is complete."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher csa welcome"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher csa welcome dashboard"
 HOSTS="$OC_DOMAIN" # the domain itself
 for comp in $COMPONENTS
 do
@@ -336,4 +341,8 @@ echo "Where IP_ADDRESS is an IP address of this system that is reachable from th
 
 echo
 echo "Next step: go to this URL with your browser: http://$OC_DOMAIN/"
+echo
+
+echo
+echo "A complete log of this installation can be found in /var/log/openconext-vm.log"
 echo

@@ -40,28 +40,9 @@ then
 
 fi
 
-if [[ "$OC_VERSION" > "v47" && "$OC_VERSION" < "v53" ]]
-then
-  cd /opt/www/serviceregistry/modules/janus
-  ./bin/composer.phar install
-  # Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
-  restorecon -r vendor
-fi
-
-if [[ "$OC_VERSION" > "v52" || "$OC_VERSION" == "master" ]]
-then
-  cd /opt/www/serviceregistry
-  ./bin/composer.phar install
-  # Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
-  restorecon -r vendor
-fi
-
-if [[ "$OC_VERSION" == "v46" ]]
-then
-  # Apply fix for broken dbpatch in R46
-  git cherry-pick -n 59df00dff1daef0cfeae72982471a687bf8fd9fb
-fi
+./bin/composer.phar install
+# Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
+restorecon -r vendor
 
 # Perform database migration
-cd /opt/www/serviceregistry/
 ./bin/migrate
