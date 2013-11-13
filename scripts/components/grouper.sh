@@ -32,8 +32,8 @@ else
   mysql -u root --password=c0n3xt -e "create database if not exists teams;"
 
   echo "Downloading and installing Grouper Shell in /opt/www/grouper-shell..."
-  curl -O http://www.internet2.edu/grouper/release/2.1.5/grouper.apiBinary-2.1.5.tar.gz
   cd /opt/www
+  curl -O http://www.internet2.edu/grouper/release/2.1.5/grouper.apiBinary-2.1.5.tar.gz
   tar zxf grouper.apiBinary-2.1.5.tar.gz
 
   # Substitute database parameters in hibernate configuration
