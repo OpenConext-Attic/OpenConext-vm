@@ -12,13 +12,13 @@ BRANCH_VERSION=$(git status | grep "# On branch" | awk '{print $4}');
 NEXT_VERSION="v61";
 
 #this should handle outdated git repos
-#$GITRESET
-#$GITFETCH
+$GITRESET
+$GITFETCH
 
 if [[ $(git status | grep -i "Your branch is behind") ]]
 then
   $GITPULL
-  bash upgrade.sh
+  bash $OC_SCRIPTDIR/upgrade.sh
 fi
 
 if [[ "$CURRENT_VERSION" == "$BRANCH_VERSION" && "$NEXT_VERSION" == "" ]]
@@ -27,8 +27,12 @@ then
 else
   if [[ "$CURRENT_VERSION" == "$BRANCH_VERSION" && "$NEXT_VERSION" != "" ]]
   then
-    git checkout $NEXT_VERSION;
-    bash do_upgrade.sh
+    $GITCHECKOUT $NEXT_VERSION;
+    if [[ $(git status | grep -i "Your branch is behind") ]]
+    then
+      $GITPULL
+    fi
+    bash $OC_SCRIPTDIR/do_upgrade.sh
   else
      echo "Cannot handle version $CURRENT_VERSION, I can only upgrade from version $BRANCH_VERSION to $NEXT_VERSION";
   fi
