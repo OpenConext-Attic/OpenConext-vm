@@ -32,7 +32,7 @@ else
     then
       $GITPULL
     fi
-    echo "Do you want to upgrade to version $NEXT_VERISON? (y/n)";
+    echo "Do you want to upgrade to version $NEXT_VERSION? (y/n)";
     read CONTINUE
     if [[ "$CONTINUE" == "N" || "$CONTINUE" == "n" ]]
     then
