@@ -74,16 +74,14 @@ cat << EOS > $GSH_SCRIPT
 // Basic users (applications) of the system
 addSubject("gadget", "person", "gadget")
 addMember("etc:sysadmingroup","gadget");
-addMember("etc:webServiceActAsGroup", "gadget")
 
 addSubject("engine", "person", "engine")
 addMember("etc:sysadmingroup","engine");
-addMember("etc:webServiceActAsGroup", "engine")
 EOS
   bin/gsh $GSH_SCRIPT
 
   # Change sourceId back to jdbc
-    sed -i conf/sources.xml -e 's~<id>applications</id>~<id>jdbc</id>~'
+    sed -i conf/sources.xml -e 's~<id>jdbc</id>~<id>jdbc</id>~'
 
   cd /tmp
 
