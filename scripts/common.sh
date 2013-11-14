@@ -14,6 +14,7 @@ GITCLONE="git clone -q"
 GITCHECKOUT="git checkout -q"
 GITFETCH="git fetch -q"
 GITRESET="git reset --hard -q"
+GITPULL="git pull -q"
 
 ### Settings, sanity checks
 
