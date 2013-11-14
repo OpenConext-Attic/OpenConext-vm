@@ -25,7 +25,7 @@ source $OC_SCRIPTDIR/versions.sh
 UPGRADE=true
 
 # If tomcat is available we need to stop it before upgrades
-service tomcat6 status && service tomcat6 stop > /dev/null
+service tomcat6 status 2> /dev/null && service tomcat6 stop > /dev/null
 
 # Certificate / key data, needed by property replacements in upgrade of components.
 # These oneliners are copied from engineblock.sh and openconext_custom_certificates.sh
@@ -62,13 +62,6 @@ if [ -d /opt/www/OpenConext-cruncher ]
 then
   echo "Upgrading Cruncher..."
   source $OC_SCRIPTDIR/components/cruncher.sh
-fi
-
-if [[ -d /opt/www/OpenConext-csa && -d /opt/www/OpenConext-cruncher ]]
-then
-  UPGRADE=false
-  echo "Installing dashboard..."
-  source $OC_SCRIPTDIR/components/selfservice.sh
 fi
 
 # starting tomcat again after all upgrade actions are performed
