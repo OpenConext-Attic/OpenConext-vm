@@ -32,7 +32,15 @@ else
     then
       $GITPULL
     fi
+    echo "Do you want to upgrade to version $NEXT_VERISON? (y/n)";
+    read CONTINUE
+    if [[ "$CONTINUE" == "N" || "$CONTINUE" == "n" ]]
+    then
+      echo "stopping upgrades (note I may have left you on another git branch)";
+      exit 0
+    fi
     bash $OC_SCRIPTDIR/do_upgrade.sh
+    bash $OC_SCRIPTDIR/upgrade_openconext.sh
   else
      echo "Cannot handle version $CURRENT_VERSION, I can only upgrade from version $BRANCH_VERSION to $NEXT_VERSION";
   fi
