@@ -3,23 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <title>OpenConext</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
-
   <link rel="stylesheet" href="css/style.min.css" />
-
 </head>
 <body>
-<script>document.body.className = 'js-loading'</script>
 <div class="wrapper">
   <div style="padding: 40px" class="column-center content-holder app-grid-holder">
     <h1 class="hidden-phone">Welcome to OpenConext</h1>
     <section>
       <p>You have completed the OpenConext setup. Import the <a href="openconext_ca.crt">Certificate Authority</a> into your browser for an optimal Conext-perience.</p>
+      <h2>OpenConext Services</h2>
       <ul class="app-grid filters-available lmng-active"
           data-search-placeholder="Search in applications">
+          <li class="connected" data-id="1">
+          <h2>
+            <a href="https://profile._OPENCONEXT_DOMAIN_/">
+              Profile
+            </a>
+          </h2>
+          <img src="images/profile-logo.png" alt="" />
+          <p class="desc">
+            View and edit your profile
+          </p>
+          <div class="app-meta-cta">
+            <a href="https://profile._OPENCONEXT_DOMAIN_/" target="_blank" rel="tooltip" title="Go to app">
+              <i class="icon-external-link"></i>
+            </a>
+          </div>
+        </li>
+        <li class="connected" data-id="1">
+          <h2>
+            <a href="https://teams._OPENCONEXT_DOMAIN_/">
+              Teams
+            </a>
+          </h2>
+          <img src="images/teams-logo.png" alt="" />
+          <p class="desc">
+            Manage team members
+          </p>
+          <div class="app-meta-cta">
+            <a href="https://teams._OPENCONEXT_DOMAIN_/" target="_blank" rel="tooltip" title="Go to app">
+              <i class="icon-external-link"></i>
+            </a>
+          </div>
+        </li>
+        <li class="connected" data-id="1">
+          <h2>
+            <a href="https://mujina-sp._OPENCONEXT_DOMAIN_/user.jsp">
+              Mujina SP
+            </a>
+          </h2>
+          <img src="images/mujina-logo.jpg" alt="" />
+          <p class="desc">
+            Mujina Service Provider
+          </p>
+          <div class="app-meta-cta">
+            <a href="https://mujina-sp._OPENCONEXT_DOMAIN_/user.jsp" target="_blank" rel="tooltip" title="Go to app">
+              <i class="icon-external-link"></i>
+            </a>
+          </div>
+        </li>
 
-
+        <li class="connected" data-id="1">
+          <h2>
+            <a href="https://mujina-idp._OPENCONEXT_DOMAIN_/user.jsp">
+              Mujina IdP
+            </a>
+          </h2>
+          <img src="images/mujina-logo.jpg" alt="" />
+          <p class="desc">
+            Mujina Identity Provider
+          </p>
+          <div class="app-meta-cta">
+            <a href="https://mujina-idp._OPENCONEXT_DOMAIN_/user.jsp" target="_blank" rel="tooltip" title="Go to app">
+              <i class="icon-external-link"></i>
+            </a>
+          </div>
+        </li>
+        
+        <li class="connected" data-id="1">
+          <h2>
+            <a href="https://dashboard._OPENCONEXT_DOMAIN_/">
+              OpenConext Dashboard
+            </a>
+          </h2>
+          <img src="images/dashboard-logo.png" alt="" />
+          <p class="desc">
+            Dashboard for OpenConext
+          </p>
+          <div class="app-meta-cta">
+            <a href="https://dashboard._OPENCONEXT_DOMAIN_/" target="_blank" rel="tooltip" title="Go to app">
+              <i class="icon-external-link"></i>
+            </a>
+          </div>
+        </li>
+      </ul>
+      
+      <h2>OpenConext Administration</h2>
+      <ul class="app-grid filters-available lmng-active"
+          data-search-placeholder="Search in applications">
         <li class="connected" data-id="1">
           <h2>
             <a href="https://manage._OPENCONEXT_DOMAIN_/">
@@ -37,58 +118,7 @@
           </div>
         </li>
 
-
-        <li class="connected" data-id="1">
-          <h2>
-            <a href="https://profile._OPENCONEXT_DOMAIN_/">
-              Profile
-            </a>
-          </h2>
-          <img src="images/openconext-logo.jpg" alt="" />
-          <p class="desc">
-            View and edit your profile
-          </p>
-          <div class="app-meta-cta">
-            <a href="https://profile._OPENCONEXT_DOMAIN_/" target="_blank" rel="tooltip" title="Go to app">
-              <i class="icon-external-link"></i>
-            </a>
-          </div>
-        </li>
-
-        <li class="connected" data-id="1">
-          <h2>
-            <a href="https://teams._OPENCONEXT_DOMAIN_/">
-              Teams
-            </a>
-          </h2>
-          <img src="images/openconext-logo.jpg" alt="" />
-          <p class="desc">
-            Manage team members
-          </p>
-          <div class="app-meta-cta">
-            <a href="https://teams._OPENCONEXT_DOMAIN_/" target="_blank" rel="tooltip" title="Go to app">
-              <i class="icon-external-link"></i>
-            </a>
-          </div>
-        </li>
-
-        <li class="connected" data-id="1">
-          <h2>
-            <a href="https://api._OPENCONEXT_DOMAIN_/v1/test">
-              API playground
-            </a>
-          </h2>
-          <img src="images/openconext-logo.jpg" alt="" />
-          <p class="desc">
-            Person/group API
-          </p>
-          <div class="app-meta-cta">
-            <a href="https://api._OPENCONEXT_DOMAIN_/v1/test" target="_blank" rel="tooltip" title="Go to app">
-              <i class="icon-external-link"></i>
-            </a>
-          </div>
-        </li>
-
+        
         <li class="connected" data-id="1">
           <h2>
             <a href="https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/janus/index.php">
@@ -123,22 +153,7 @@
           </div>
         </li>
         
-        <li class="connected" data-id="1">
-          <h2>
-            <a href="https://welcome._OPENCONEXT_DOMAIN_/testing/index.html">
-              Integration Testing
-            </a>
-          </h2>
-          <img src="images/openconext-logo.jpg" alt="" />
-          <p class="desc">
-            Integration Testing
-          </p>
-          <div class="app-meta-cta">
-            <a href="https://welcome._OPENCONEXT_DOMAIN_/testing/" target="_blank" rel="tooltip" title="Go to app">
-              <i class="icon-external-link"></i>
-            </a>
-          </div>
-        </li>
+        
 
         <li class="connected" data-id="1">
           <h2>
@@ -159,47 +174,13 @@
 
         <li class="connected" data-id="1">
           <h2>
-            <a href="https://mujina-sp._OPENCONEXT_DOMAIN_/user.jsp">
-              Mujina SP
-            </a>
-          </h2>
-          <img src="images/openconext-logo.jpg" alt="" />
-          <p class="desc">
-            Mujina Service Provider
-          </p>
-          <div class="app-meta-cta">
-            <a href="https://mujina-sp._OPENCONEXT_DOMAIN_/user.jsp" target="_blank" rel="tooltip" title="Go to app">
-              <i class="icon-external-link"></i>
-            </a>
-          </div>
-        </li>
-
-        <li class="connected" data-id="1">
-          <h2>
-            <a href="https://mujina-idp._OPENCONEXT_DOMAIN_/user.jsp">
-              Mujina IdP
-            </a>
-          </h2>
-          <img src="images/openconext-logo.jpg" alt="" />
-          <p class="desc">
-            Mujina Identity Provider
-          </p>
-          <div class="app-meta-cta">
-            <a href="https://mujina-idp._OPENCONEXT_DOMAIN_/user.jsp" target="_blank" rel="tooltip" title="Go to app">
-              <i class="icon-external-link"></i>
-            </a>
-          </div>
-        </li>
-
-        <li class="connected" data-id="1">
-          <h2>
             <a href="https://engine._OPENCONEXT_DOMAIN_">
-              OpenConext MetaData
+              OpenConext EngineBlock
             </a>
           </h2>
-          <img src="images/openconext-logo.jpg" alt="" />
+          <img src="images/engine-block-logo.jpg" alt="" />
           <p class="desc">
-            OpenConext MetaData
+            OpenConext EngineBlock
           </p>
           <div class="app-meta-cta">
             <a href="https://engine._OPENCONEXT_DOMAIN_" target="_blank" rel="tooltip" title="Go to app">
@@ -208,6 +189,43 @@
           </div>
         </li>
 
+      </ul>
+      
+      <h2>OpenConext Utilities</h2>
+      <ul class="app-grid filters-available lmng-active"
+          data-search-placeholder="Search in applications">
+        <li class="connected" data-id="1">
+          <h2>
+            <a href="https://welcome._OPENCONEXT_DOMAIN_/testing/index.html">
+              Integration Testing
+            </a>
+          </h2>
+          <img src="images/openconext-logo.jpg" alt="" />
+          <p class="desc">
+            Integration Testing
+          </p>
+          <div class="app-meta-cta">
+            <a href="https://welcome._OPENCONEXT_DOMAIN_/testing/" target="_blank" rel="tooltip" title="Go to app">
+              <i class="icon-external-link"></i>
+            </a>
+          </div>
+        </li>
+        <li class="connected" data-id="1">
+          <h2>
+            <a href="https://api._OPENCONEXT_DOMAIN_/v1/test">
+              API playground
+            </a>
+          </h2>
+          <img src="images/openconext-logo.jpg" alt="" />
+          <p class="desc">
+            Person/group API
+          </p>
+          <div class="app-meta-cta">
+            <a href="https://api._OPENCONEXT_DOMAIN_/v1/test" target="_blank" rel="tooltip" title="Go to app">
+              <i class="icon-external-link"></i>
+            </a>
+          </div>
+        </li>
       </ul>
     </section>
   </div>
