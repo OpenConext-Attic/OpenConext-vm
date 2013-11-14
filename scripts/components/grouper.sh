@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /tmp
-if [ ! -f grouper-dist-*-bin.tar.gz ]
+if [ ! -f grouper-dist-${GROUPER_VERSION}-bin.tar.gz ]
 then
   ## Only download if not exists yet. Optimization in case script is run successively.
   curl -O https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/${GROUPER_VERSION}/grouper-dist-${GROUPER_VERSION}-bin.tar.gz
