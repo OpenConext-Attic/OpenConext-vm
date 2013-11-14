@@ -28,13 +28,13 @@ cd ~/Sites/OpenConext
 
 ## 1.2. Download the VM project there
 ```bash
-curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zxv
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v57 | tar zxv
 ```
 
 ## 1.3 Up, up and away!
-You should now have a directory called OpenConext-vm-master, go there and run vagrant up.
+You should now have a directory called OpenConext-vm-v57, go there and run vagrant up.
 ```bash
-cd OpenConext-vm-master && vagrant up
+cd OpenConext-vm-v57 && vagrant up
 ```
 
 Vagrant will download the basebox, set it up with NFS and install OpenConext for you.
@@ -47,21 +47,21 @@ Prerequisites:
 From within the VM, download this repo:
 
 ```bash
-curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/master | tar zx
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v57 | tar zx
 ```
 
 ## 2.2. Run the installer
 Run the install script:
 
 ```bash
-bash OpenConext-vm-master/scripts/install_openconext.sh
+bash OpenConext-vm-v57/scripts/install_openconext.sh
 ```
 
 By default, the installer will run an 'unattended' setup, choosing sensible defaults.
 If you want to install a specific version of the platform, install a subset of components or change the default domain (demo.openconext.org), run the installer with a ````-i```` flag:
 
 ```bash
-bash OpenConext-vm-master/scripts/install_openconext.sh -i
+bash OpenConext-vm-v57/scripts/install_openconext.sh -i
 ```
 
 # Once installed...
@@ -129,9 +129,28 @@ git pull
 ```
 
 ## 2. Run the upgrade installer
+*Note* upgrades rely on git branches, you need to have a git checkout of the repository before you start upgrading your OpenConext VM.
+
+From version v57 onwards every version in OpenConext is represented by a git branch with the same name (v57, v61 etc). In order to upgrade your v57 VM you first need to checkout the correct git branch:
+
+```bash
+git fetch
+git checkout v57
+```
+
+After this you can upgrade with the following command:
 
 ```bash
 bash OpenConext-vm/scripts/upgrade_openconext.sh
 ```
 
 The installer will ask which version you want to upgrade to.
+
+If you have an older version of OpenConext you should first check out the tag 'upgrade_v57' to upgrade to v57 of openconext and then use the branching
+structure of git to move your version forwards.
+
+```bash
+git checkout upgrade_v57
+bash OpenConext-vm/scripts/upgrade_openconext.sh
+```
+
