@@ -8,7 +8,6 @@
 # Base directory where the scripts (and config etc) is stored.
 OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 OC_SCRIPTDIR=$OC_BASEDIR/scripts
-
 source $OC_SCRIPTDIR/common.sh
 
 
@@ -16,15 +15,14 @@ source $OC_SCRIPTDIR/common.sh
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
 DEFAULT_DOMAIN=demo.openconext.org
-DEFAULT_VERSION=v57
 
-OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA"
+# this is the default set of components in an install
+OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 
 # Override defaults with variables from invoking shell.
 # To use this, call like this:
-# $ DOMAIN=mydomain.com VERSION=master bash install_openconext.sh
+# $ DOMAIN=mydomain.com bash install_openconext.sh
 OC_DOMAIN=$([ "x$DOMAIN" == "x" ] && echo "$DEFAULT_DOMAIN" || echo "$DOMAIN")
-OC_VERSION=$([ "x$VERSION" == "x" ] && echo "$DEFAULT_VERSION" || echo "$VERSION")
 
 
 if [ $VERBOSE == "true" ]
@@ -47,7 +45,7 @@ then
 else
   echo "Running in non-interactive mode. Defaults to be used are:"
   echo "Base domain: " $OC_DOMAIN
-  echo "Version file: " $OC_VERSION
+  echo "Components that are installed: " $OC_COMPONENTS
 fi
 
 if [ $INTERACTIVE == "true" ]
@@ -70,18 +68,20 @@ then
   echo "2. Components"
   echo "You can either install all components, or a subset of them."
   echo "Possible options are:"
-  echo "1. All (EngineBlock, Service registry, Manage, API, Teams, Mujina IDP/SP, Cruncher, Apis, CSA)"
-  echo "2. EngineBlock, Service registry, Mujina IDP/SP"
-  echo "3. Mix and match (experts only)"
+  echo "1. Core Components (default) [EngineBlock, Service registry, Manage, API, Teams, Mujina IDP/SP]"
+  echo "2. All Components [EngineBlock, Service registry, Manage, API, Teams, Mujina IDP/SP, Cruncher, Apis, CSA]"
+  echo "3. Minimal Components [EngineBlock, Service registry, Mujina IDP/SP]"
+  echo "4. Mix and match (experts only)"
   echo
   echo -n "Component choice: [1]: "
   read COMPONENTCHOICE
   case "$COMPONENTCHOICE" in
-    "1" | "" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA";;
-    "2" ) OC_COMPONENTS="EB SR MUJINA";;
+    "1" | "" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER";;
+    "2" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD";;
+    "3" ) OC_COMPONENTS="EB SR MUJINA";;
     * )
         OC_COMPONENTS=""
-        for component in EB SR MANAGE GROUPER API TEAMS MUJINA APIS CRUNCHER CSA
+        for component in EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD
         do
           echo Install $component? [Y/n]
           read answer
@@ -90,42 +90,29 @@ then
           * ) ;;
           esac
         done
-        echo "List of components chosen: " $OC_COMPONENTS
         ;;
   esac
+  echo "List of components chosen: " $OC_COMPONENTS
 
-  echo ""
-  VERSION_DEFAULT=$OC_VERSION
-  ALLVERSIONFILES=$(cd $OC_SCRIPTDIR/versions && ls )
-  echo "3. Component versions"
+  # Selenium tests are (by default) not installed, we do not want to bother the user with this
+  # this can be turned on via the command line
+  if [[ ! $INSTALL_TESTS ]]
+  then
+    INSTALL_TESTS="false";
+  fi
+  
+  echo; echo;
+  echo "For HTTP over SSL and SAML signing/encryption, a set of self-signed, default keys and certificates are installed. You can customize this now, if you want to."
+  echo
+  echo "1. Generate a new set, based on the chosen base domain ($OC_DOMAIN)"
+  echo "2. Bring your own certificates, (including trust chain)"
 
-  OC_VERSION_INPUT=""
-  while [ ! -f $OC_SCRIPTDIR/versions/$OC_VERSION_INPUT ]
-  do
-    echo "The recommended version of OpenConext to run is: $VERSION_DEFAULT."
-    echo "Other options are: " $ALLVERSIONFILES
-    echo -n "Version: [$VERSION_DEFAULT] "
-    read OC_VERSION_INPUT
-
-    if [ "$OC_VERSION_INPUT" == "" ]
-    then
-      OC_VERSION_INPUT=$VERSION_DEFAULT
-    fi
-  done
-  OC_VERSION=$OC_VERSION_INPUT
-  echo "Using version file $OC_VERSION"
-
-  echo "Do you want to install tools for testing OpenConext with Selenium IDE? (y/n)"
-  read TEST_CHOICE
-  case "$TEST_CHOICE" in
-    "y" | "Y" ) INSTALL_TESTS="true";;
-    "n" | "N" ) INSTALL_TESTS="false";;
-    * ) INSTALL_TESTS="false";;
-  esac
+  read CERTCHOICE
+  
 fi
 
 # Set the component versions as variables, for use in later scripts
-source $OC_SCRIPTDIR/versions/$OC_VERSION
+source $OC_SCRIPTDIR/versions.sh
 
 
 # Dependencies of components
@@ -217,7 +204,6 @@ fi
 
 echo "Done installing dependencies."
 
-
 # Components
 
 if echo $OC_COMPONENTS | grep -q GROUPER
@@ -281,6 +267,12 @@ then
     echo "Installing CSA..."
     source $OC_SCRIPTDIR/components/csa.sh
   fi
+  
+  if echo $OC_COMPONENTS | grep -q DASHBOARD
+  then
+    echo "Installing Dashboard..."
+    source $OC_SCRIPTDIR/components/selfservice.sh
+  fi
 fi
 
 # stop if running
@@ -319,7 +311,7 @@ echo; echo
 echo "Installation of OpenConext is complete."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher csa welcome"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher csa welcome dashboard"
 HOSTS="$OC_DOMAIN" # the domain itself
 for comp in $COMPONENTS
 do
@@ -349,4 +341,8 @@ echo "Where IP_ADDRESS is an IP address of this system that is reachable from th
 
 echo
 echo "Next step: go to this URL with your browser: http://$OC_DOMAIN/"
+echo
+
+echo
+echo "A complete log of this installation can be found in /var/log/openconext-vm.log"
 echo

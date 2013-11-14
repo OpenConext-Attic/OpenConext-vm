@@ -1,4 +1,10 @@
 #!/bin/sh
 $YUM -y install memcached
 
-chkconfig memcached on && service memcached restart
+chkconfig memcached on
+if service memcached status > /dev/null
+then
+  service memcached stop
+  sleep 5
+fi
+service memcached start

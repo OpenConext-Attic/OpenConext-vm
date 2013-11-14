@@ -40,8 +40,11 @@ keytool -import -file /etc/httpd/keys/openconext_ca.pem \
   -trustcacerts -alias "openconext cacert" \
   -keystore /etc/pki/java/cacerts -storepass changeit -noprompt
 
-service tomcat6 stop
-sleep 5
+if service tomcat6 status > /dev/null
+then
+  service tomcat6 stop
+  sleep 5
+fi
 if ps faxuww | egrep -a '^tomcat '
 then
   killall -q -9 -u tomcat  java

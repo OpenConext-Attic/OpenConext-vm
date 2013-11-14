@@ -61,4 +61,17 @@ else
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
     /etc/httpd/conf.d/cruncher.conf
     
+  echo "Will startup Tomcat to execute queries that can only be done after initial filling of database tables."
+  service tomcat6 start
+  echo "Waiting for Tomcat startup to finish..."
+  timeout 300 grep -q 'INFO: Server startup in' <(tail -n 0 -f /opt/tomcat/logs/catalina.out)
+  if [ $? -eq 0 ] # If timeout did not occur.
+  then
+    echo "enabling the cruncher for the VM environment"
+    service tomcat6 stop
+    echo "update aggregate_meta_data set active=0;" > mysql -u root --password=c0n3xt cruncher
+  else
+    echo "Did not see Tomcat start up within reasonable time. Could not perform queries that had to be executed after startup"
+  fi
+    
 fi
