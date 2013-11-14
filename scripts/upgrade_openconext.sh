@@ -18,7 +18,7 @@ $GITFETCH
 if [[ $(git status | grep -i "Your branch is behind") ]]
 then
   $GITPULL
-  bash upgrade.sh
+  bash $OC_SCRIPTDIR/upgrade.sh
 fi
 
 if [[ "$CURRENT_VERSION" == "$BRANCH_VERSION" && "$NEXT_VERSION" == "" ]]
@@ -28,7 +28,11 @@ else
   if [[ "$CURRENT_VERSION" == "$BRANCH_VERSION" && "$NEXT_VERSION" != "" ]]
   then
     git checkout $NEXT_VERSION;
-    bash do_upgrade.sh
+    if [[ $(git status | grep -i "Your branch is behind") ]]
+    then
+      $GITPULL
+    fi
+    bash $OC_SCRIPTDIR/do_upgrade.sh
   else
      echo "Cannot handle version $CURRENT_VERSION, I can only upgrade from version $BRANCH_VERSION to $NEXT_VERSION";
   fi

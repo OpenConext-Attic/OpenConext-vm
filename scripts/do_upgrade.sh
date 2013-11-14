@@ -19,16 +19,13 @@ then
 fi
 
 # get the new versions of the components
-source $OC_SCRIPTDIR/version.sh
+source $OC_SCRIPTDIR/versions.sh
 
 # Used by component scripts to distinguish between clean installs and upgrades
 UPGRADE=true
 
 # If tomcat is available we need to stop it before upgrades
-if rpm -qi tomcat6 > /dev/null
-then
-  service tomcat6 stop
-fi
+service tomcat6 status && service tomcat6 stop > /dev/null
 
 # Certificate / key data, needed by property replacements in upgrade of components.
 # These oneliners are copied from engineblock.sh and openconext_custom_certificates.sh
@@ -36,31 +33,49 @@ ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`
 OC_CERT=`sed -e '1d;$d' /etc/httpd/keys/openconext.pem | tr -d '\n'`
 OC_KEY=`sed -e '1d;$d' /etc/httpd/keys/openconext.key | tr -d '\n'`
 
-START_DIR=`pwd`
 
-ALL_NEXT_VERSIONS=`echo -n $ALL_ORDERED_VERSIONS | sed -e "s/^.*$CURRENT_VERSION//g"`
-for FIRST_NEXT_VERSION in $ALL_NEXT_VERSIONS
-do
-  echo "Running version update from $CURRENT_VERSION to $FIRST_NEXT_VERSION..."
-  # define versions of all components.
-  source $OC_SCRIPTDIR/versions/$FIRST_NEXT_VERSION
-  OC_VERSION=$FIRST_NEXT_VERSION
+if [ -d /opt/www/OpenConext-engineblock ]
+then
+  echo "Upgrading Engineblock..."
+  source $OC_SCRIPTDIR/components/engineblock.sh
+fi
 
-  # the actual upgrade script
-  source $OC_SCRIPTDIR/upgrades/${CURRENT_VERSION}_to_${FIRST_NEXT_VERSION}.sh
+if [ -d /opt/www/OpenConext-serviceregistry ]
+then
+  echo "Upgrading Service Registry..."
+  source $OC_SCRIPTDIR/components/serviceregistry.sh
+fi
 
-  # Reset working directory to starting directory
-  cd $START_DIR
-  CURRENT_VERSION=$FIRST_NEXT_VERSION
-  if [[ $CURRENT_VERSION == $VERSION_TO ]]
-  then
-    break
-  fi
-done
+if [ -d /opt/www/OpenConext-manage ]
+then
+  echo "Upgrading Manage..."
+  source $OC_SCRIPTDIR/components/manage.sh
+fi
+
+if [ -d /opt/www/OpenConext-api ]
+then
+  echo "Upgrading API..."
+  source $OC_SCRIPTDIR/components/api.sh
+fi
+
+if [ -d /opt/www/OpenConext-cruncher ]
+then
+  echo "Upgrading Cruncher..."
+  source $OC_SCRIPTDIR/components/cruncher.sh
+fi
+
+if [[ -d /opt/www/OpenConext-csa && -d /opt/www/OpenConext-cruncher ]]
+then
+  UPGRADE=false
+  echo "Installing dashboard..."
+  source $OC_SCRIPTDIR/components/selfservice.sh
+fi
 
 # starting tomcat again after all upgrade actions are performed
 if rpm -qi tomcat6 > /dev/null
 then
   service tomcat6 start
 fi
-echo "Version $VERSION_TO reached. Ready."
+
+setOpenConextVersion v61
+echo "Version v61 reached. Ready."
