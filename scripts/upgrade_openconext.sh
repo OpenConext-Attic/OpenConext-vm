@@ -18,7 +18,7 @@ $GITFETCH
 if [[ $(git status | grep -i "Your branch is behind") ]]
 then
   $GITPULL
-  bash $OC_SCRIPTDIR/upgrade.sh
+  bash $OC_SCRIPTDIR/upgrade_openconext.sh
 fi
 
 if [[ "$CURRENT_VERSION" == "$BRANCH_VERSION" && "$NEXT_VERSION" == "" ]]
