@@ -39,7 +39,7 @@ trap "echo \"caught signal, will exit installation script\"; exit" INT TERM
 
 # Output the given string to the predefined logging file descriptor (which in turn is redirected to stdout beforehand)
 function log() {
-  echo $1 $2 $3 >&3
+  echo $1 >&3
 }
 
 # Create a backup of the given file (complete path)
