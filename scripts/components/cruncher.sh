@@ -69,7 +69,7 @@ else
   then
     echo "enabling the cruncher for the VM environment"
     service tomcat6 stop
-    echo "update aggregate_meta_data set active=0;" > mysql -u root --password=c0n3xt cruncher
+    mysql -u root --password=c0n3xt cruncher -e "update aggregate_meta_data set active=0;"
   else
     echo "Did not see Tomcat start up within reasonable time. Could not perform queries that had to be executed after startup"
   fi
