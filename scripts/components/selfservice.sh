@@ -58,5 +58,11 @@ else
   cat $OC_BASEDIR/configs/httpd/conf.d/dashboard.conf  | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
     /etc/httpd/conf.d/dashboard.conf
+    
+  # make the admin user part of the dashboard_admin group
+  cd /opt/www/grouper-shell
+  bin/gsh -runarg 'addGroup("nl:surfnet:diensten","dashboard_admin","dashboard_admin")'
+  bin/gsh -runarg 'addMember("nl:surfnet:diensten:dashboard_admin","urn:collab:person:example.com:admin")'
+  cd -
 
 fi

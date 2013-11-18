@@ -89,9 +89,6 @@ addStem("nl:surfnet","diensten","diensten")
 
 EOS
   cd /opt/www/grouper-shell ; bin/gsh $GSH_SCRIPT ; cd -
-  
-  # make the admin user member of the dashboard_admin team, allowing it to log in to Dasboard 
-  mysql -u root --password=c0n3xt teams < $OC_BASEDIR/data/teams_dashboard_admin_team.sql
 
   install -d /usr/share/tomcat6/webapps/teams.$OC_DOMAIN
   chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
