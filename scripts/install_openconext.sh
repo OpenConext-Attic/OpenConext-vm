@@ -20,11 +20,13 @@ source $OC_SCRIPTDIR/common.sh
 DEFAULT_DOMAIN=demo.openconext.org
 
 # this is the default set of components in an install
-OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
+DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
+
 
 # Override defaults with variables from invoking shell.
 # To use this, call like this:
-# $ DOMAIN=mydomain.com bash install_openconext.sh
+# $ DOMAIN=mydomain.com OC_COMPONENTS="EB SR MANAGE" bash install_openconext.sh
+OC_COMPONENTS=$([ "x$OC_COMPONENTS" == "x" ] && echo "$DEFAULT_OC_COMPONENTS" || echo "$OC_COMPONENTS")
 OC_DOMAIN=$([ "x$DOMAIN" == "x" ] && echo "$DEFAULT_DOMAIN" || echo "$DOMAIN")
 
 
