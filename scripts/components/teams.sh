@@ -82,10 +82,9 @@ else
   GSH_SCRIPT=`mktemp`
 cat << EOS > $GSH_SCRIPT
 
-// Create Default stems
-addRootStem("nl","nl")
-addStem("nl","surfnet","surfnet")
-addStem("nl:surfnet","diensten","diensten")
+  // Create Default stems
+stems = getStems("nl:surfnet:diensten")
+if (stems.size() == 0) {  addRootStem("nl","nl"); addStem("nl","surfnet","surfnet");  addStem("nl:surfnet","diensten","diensten"); }
 
 EOS
   cd /opt/www/grouper-shell ; bin/gsh $GSH_SCRIPT ; cd -
