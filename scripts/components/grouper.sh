@@ -51,7 +51,7 @@ else
   -e "s~^groups.wheel.use.*~groups.wheel.use=true~"
   ln -s /opt/www/grouper.apiBinary-2.1.5 /opt/www/grouper-shell
 
-  // Mind the backslash in front: it bypasses the 'cp -i' alias that would prompt the user
+  # Mind the backslash in front: it bypasses the 'cp -i' alias that would prompt the user
   \cp -f /usr/share/tomcat6/conf/classpath_properties/sources.xml /opt/www/grouper-shell/conf/
 
   cd /opt/www/grouper-shell
