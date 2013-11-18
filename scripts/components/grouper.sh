@@ -49,7 +49,7 @@ else
   sed -i grouper.apiBinary-2.1.5/conf/grouper.properties \
   -e "s~^configuration.autocreate.system.groups.*~configuration.autocreate.system.groups=true~" \
   -e "s~^groups.wheel.use.*~groups.wheel.use=true~"
-  ln -s /opt/www/grouper.apiBinary-2.1.5 /opt/www/grouper-shell
+  [ -h /opt/www/grouper-shell ] || ln -s /opt/www/grouper.apiBinary-2.1.5 /opt/www/grouper-shell
 
   # Mind the backslash in front: it bypasses the 'cp -i' alias that would prompt the user
   \cp -f /usr/share/tomcat6/conf/classpath_properties/sources.xml /opt/www/grouper-shell/conf/

@@ -5,6 +5,9 @@
 #
 #
 
+# Setup an extra file descriptor, for console output
+exec 3>&1
+
 # Base directory where the scripts (and config etc) is stored.
 OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 OC_SCRIPTDIR=$OC_BASEDIR/scripts
@@ -111,6 +114,10 @@ then
   
 fi
 
+# Begin of output redirection
+{
+log "Logging all output to $LOGFILE"
+
 # Set the component versions as variables, for use in later scripts
 source $OC_SCRIPTDIR/versions.sh
 
@@ -160,91 +167,91 @@ for subscript in \
   openconext_custom_certificates.sh \
   openconext_static.sh
 do
-  echo "Running dependency script $subscript..."
+  log "Running dependency script $subscript..."
   source $OC_SCRIPTDIR/dependencies/$subscript
 done
 
 if [[ $DEP_MAVEN == "true" ]]
 then
-  echo "Installing Maven..."
+  log "Installing Maven..."
   source $OC_SCRIPTDIR/dependencies/maven_install.sh
 fi
 if [[ $DEP_TOMCAT == "true" ]]
 then
-  echo "Installing Tomcat..."
+  log "Installing Tomcat..."
   source $OC_SCRIPTDIR/dependencies/tomcat_install.sh
 fi
 
 if [[ $DEP_MEMCACHED == "true" ]]
 then
-  echo "Installing memcached..."
+  log "Installing memcached..."
   source $OC_SCRIPTDIR/dependencies/memcached_install.sh
 fi
 if [[ $DEP_PHP == "true" ]]
 then
-  echo "Installing PHP..."
+  log "Installing PHP..."
   source $OC_SCRIPTDIR/dependencies/php_install.sh
 fi
 if [[ $DEP_MYSQL == "true" ]]
 then
-  echo "Installing MySQL..."
+  log "Installing MySQL..."
   source $OC_SCRIPTDIR/dependencies/mysql_install.sh
 fi
 if [[ $DEP_LDAP == "true" ]]
 then
-  echo "Installing OpenLDAP..."
+  log "Installing OpenLDAP..."
   source $OC_SCRIPTDIR/dependencies/openldap_install.sh
   source $OC_SCRIPTDIR/dependencies/openconext_ldap.sh
 fi
 if [[ $DEP_SHIBBOLETH == "true" ]]
 then
-  echo "Installing Shibboleth..."
+  log "Installing Shibboleth..."
   source $OC_SCRIPTDIR/dependencies/shibboleth_install.sh
 fi
 
-echo "Done installing dependencies."
+log "Done installing dependencies."
 
 # Components
 
 if echo $OC_COMPONENTS | grep -q GROUPER
 then
-  echo "Installing Grouper..."
+  log "Installing Grouper..."
   source $OC_SCRIPTDIR/components/grouper.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q EB
 then
-  echo "Installing EngineBlock..."
+  log "Installing EngineBlock..."
   source $OC_SCRIPTDIR/components/engineblock.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q SR
 then
-  echo "Installing Service registry..."
+  log "Installing Service registry..."
   source $OC_SCRIPTDIR/components/serviceregistry.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q MANAGE
 then
-  echo "Installing Manage..."
+  log "Installing Manage..."
   source $OC_SCRIPTDIR/components/manage.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q MUJINA
 then
-  echo "Installing Mujina IDP/SP..."
+  log "Installing Mujina IDP/SP..."
   source $OC_SCRIPTDIR/components/mujina.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q API
 then
-  echo "Installing API..."
+  log "Installing API..."
   source $OC_SCRIPTDIR/components/api.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q TEAMS
 then
-  echo "Installing Teams..."
+  log "Installing Teams..."
   source $OC_SCRIPTDIR/components/teams.sh
 fi
 
@@ -252,25 +259,25 @@ if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" == "master" ]]
 then
   if echo $OC_COMPONENTS | grep -q APIS
   then
-    echo "Installing Apis..."
+    log "Installing Apis..."
     source $OC_SCRIPTDIR/components/apis.sh
   fi
 
   if echo $OC_COMPONENTS | grep -q CRUNCHER
   then
-    echo "Installing Cruncher..."
+    log "Installing Cruncher..."
     source $OC_SCRIPTDIR/components/cruncher.sh
   fi
   
   if echo $OC_COMPONENTS | grep -q CSA
   then
-    echo "Installing CSA..."
+    log "Installing CSA..."
     source $OC_SCRIPTDIR/components/csa.sh
   fi
   
   if echo $OC_COMPONENTS | grep -q DASHBOARD
   then
-    echo "Installing Dashboard..."
+    log "Installing Dashboard..."
     source $OC_SCRIPTDIR/components/selfservice.sh
   fi
 fi
@@ -296,7 +303,7 @@ fi
 # pacakges for testing with selenium
 if [[ $INSTALL_TESTS == "true" ]]
 then
-  echo "Installing tools for testing..."
+  log "Installing tools for testing..."
   source $OC_SCRIPTDIR/components/selenium.sh
 fi
 
@@ -307,8 +314,10 @@ openconext-version=$OC_VERSION
 openconext-domain=$OC_DOMAIN
 EOF
 
-echo; echo
-echo "Installation of OpenConext is complete."
+log "Installation of OpenConext is complete."
+
+# End of output redirection
+} > $LOGFILE 2>&1
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
 COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher csa welcome dashboard"
