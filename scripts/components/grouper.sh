@@ -6,7 +6,7 @@ then
   ## Only download if not exists yet. Optimization in case script is run successively.
   curl -O https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/${GROUPER_DIST_VERSION}/grouper-dist-${GROUPER_DIST_VERSION}-bin.tar.gz
 fi
-GROUPER_TMP_BASEDIR=`mktemp`
+GROUPER_TMP_BASEDIR=`mktemp -d`
 cd $GROUPER_TMP_BASEDIR
 tar zxf /tmp/grouper-dist-${GROUPER_DIST_VERSION}-bin.tar.gz
 
