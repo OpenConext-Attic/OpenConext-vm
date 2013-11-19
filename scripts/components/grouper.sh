@@ -104,7 +104,7 @@ EOS
 fi
 
 GROUPER_WS_WAR=/usr/share/tomcat6/wars/grouper-ws-$GROUPER_VERSION.war
-GROUPER_WAR=/usr/share/tomcat6/wars/grouper-$GROUPER_VERSION.war
+GROUPER_WAR=/usr/share/tomcat6/wars/grouper-ui-$GROUPER_VERSION.war
 
 echo "<Context path=\"/grouper-ws\" docBase=\"$GROUPER_WS_WAR\" debug=\"1\"></Context>" > \
   /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN/grouper-ws.xml
