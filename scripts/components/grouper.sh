@@ -1,12 +1,14 @@
 #!/bin/bash
 
 cd /tmp
-if [ ! -f grouper-dist-${GROUPER_VERSION}-bin.tar.gz ]
+if [ ! -f grouper-dist-${GROUPER_DIST_VERSION}-bin.tar.gz ]
 then
   ## Only download if not exists yet. Optimization in case script is run successively.
-  curl -O https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/${GROUPER_VERSION}/grouper-dist-${GROUPER_VERSION}-bin.tar.gz
+  curl -O https://build.surfconext.nl/repository/public/releases/org/surfnet/coin/grouper-dist/${GROUPER_DIST_VERSION}/grouper-dist-${GROUPER_DIST_VERSION}-bin.tar.gz
 fi
-tar zxf grouper-dist-*-bin.tar.gz
+GROUPER_TMP_BASEDIR=`mktemp`
+cd $GROUPER_TMP_BASEDIR
+tar zxf /tmp/grouper-dist-${GROUPER_DIST_VERSION}-bin.tar.gz
 
 # Delete
 rm -f /usr/share/tomcat6/wars/grouper-*.war
@@ -34,11 +36,11 @@ else
 
   echo "Downloading and installing Grouper Shell in /opt/www/grouper-shell..."
   cd /opt/www
-  curl -O http://www.internet2.edu/grouper/release/2.1.5/grouper.apiBinary-2.1.5.tar.gz
-  tar zxf grouper.apiBinary-2.1.5.tar.gz
+  curl -O http://www.internet2.edu/grouper/release/${GROUPER_VERSION}/grouper.apiBinary-${GROUPER_VERSION}.tar.gz
+  tar zxf grouper.apiBinary-${GROUPER_VERSION}.tar.gz
 
   # Substitute database parameters in hibernate configuration
-  sed -i grouper.apiBinary-2.1.5/conf/grouper.hibernate.properties \
+  sed -i grouper.apiBinary-${GROUPER_VERSION}/conf/grouper.hibernate.properties \
   -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://db.$OC_DOMAIN/teams~" \
   -e "s~^hibernate.connection.username.*~hibernate.connection.username=root~" \
   -e "s~^hibernate.connection.password.*~hibernate.connection.password=c0n3xt~"
@@ -46,10 +48,10 @@ else
   # Set properties in grouper props to
   # 1. autocreate the admin groups
   # 2. add a 'wheel' group (that is: etc:sysadmingroup) to enable users in that group to obtain admin privileges
-  sed -i grouper.apiBinary-2.1.5/conf/grouper.properties \
+  sed -i grouper.apiBinary-${GROUPER_VERSION}/conf/grouper.properties \
   -e "s~^configuration.autocreate.system.groups.*~configuration.autocreate.system.groups=true~" \
   -e "s~^groups.wheel.use.*~groups.wheel.use=true~"
-  [ -h /opt/www/grouper-shell ] || ln -s /opt/www/grouper.apiBinary-2.1.5 /opt/www/grouper-shell
+  [ -h /opt/www/grouper-shell ] || ln -s /opt/www/grouper.apiBinary-${GROUPER_VERSION} /opt/www/grouper-shell
 
   # Mind the backslash in front: it bypasses the 'cp -i' alias that would prompt the user
   \cp -f /usr/share/tomcat6/conf/classpath_properties/sources.xml /opt/www/grouper-shell/conf/
@@ -89,8 +91,6 @@ EOS
   # Change sourceId back to jdbc
     sed -i conf/sources.xml -e 's~<id>jdbc</id>~<id>jdbc</id>~'
 
-  cd /tmp
-
   install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
   install -d /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
   chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
@@ -103,10 +103,10 @@ EOS
   sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
 fi
 
-GROUPER_WS_WAR=`basename /usr/share/tomcat6/wars/grouper-ws-*.war`
-GROUPER_WAR=`basename /usr/share/tomcat6/wars/grouper-*.war`
+GROUPER_WS_WAR=/usr/share/tomcat6/wars/grouper-ws-$GROUPER_VERSION.war
+GROUPER_WAR=/usr/share/tomcat6/wars/grouper-$GROUPER_VERSION.war
 
-echo "<Context path=\"/grouper-ws\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WS_WAR\" debug=\"1\"></Context>" > \
+echo "<Context path=\"/grouper-ws\" docBase=\"$GROUPER_WS_WAR\" debug=\"1\"></Context>" > \
   /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN/grouper-ws.xml
-echo "<Context path=\"/grouper\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WAR\" debug=\"1\"></Context>" > \
+echo "<Context path=\"/grouper\" docBase=\"$GROUPER_WAR\" debug=\"1\"></Context>" > \
   /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN/grouper.xml
