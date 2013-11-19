@@ -68,8 +68,8 @@ else
   if [ $? -eq 0 ] # If timeout did not occur.
   then
     echo "enabling the cruncher for the VM environment"
-    service tomcat6 stop
     mysql -u root --password=c0n3xt cruncher -e "update aggregate_meta_data set active=0;"
+    service tomcat6 stop
   else
     echo "Did not see Tomcat start up within reasonable time. Could not perform queries that had to be executed after startup"
   fi
