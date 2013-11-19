@@ -64,9 +64,10 @@ else
 
   if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" == "master" ]]
   then
-    cd /opt/www/grouper-shell
-    bin/gsh -runarg 'addGroup("nl:surfnet:diensten","csa_admin","csa_admin")'
-    bin/gsh -runarg 'addMember("nl:surfnet:diensten:csa_admin","urn:collab:person:example.com:admin")'
+      cat << EOS | runGshScript "surfnet"
+addGroup("nl:surfnet:diensten","csa_admin","csa_admin");
+addMember("nl:surfnet:diensten:csa_admin","urn:collab:person:example.com:admin");
+EOS
     cd -
   fi
 

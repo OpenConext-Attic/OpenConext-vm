@@ -53,31 +53,26 @@ else
   -e "s~^groups.wheel.use.*~groups.wheel.use=true~"
   [ -h /opt/www/grouper-shell ] || ln -s /opt/www/grouper.apiBinary-${GROUPER_VERSION} /opt/www/grouper-shell
 
-  # Mind the backslash in front: it bypasses the 'cp -i' alias that would prompt the user
-  \cp -f /usr/share/tomcat6/conf/classpath_properties/sources.xml /opt/www/grouper-shell/conf/
+
 
   cd /opt/www/grouper-shell
   # Run the registry initialization script
   bin/gsh -registry -runscript -noprompt
 
   # Run the following with sourceId == 'surfnet', this is the ldap source from Engineblock
-  sed -i conf/sources.xml -e 's~<id>jdbc</id>~<id>surfnet</id>~'
 
-  GSH_SCRIPT=`mktemp`
-cat << EOS > $GSH_SCRIPT
+  cat << EOS | runGshScript "surfnet"
 // Provision the admin user @ mujina up front
 addSubject("urn:collab:person:example.com:admin","person","The admin user at Mujina IdP")
 
 // Make Mujina user 'admin' member of the wheel group 'etc:sysadmingroup'
 addMember("etc:sysadmingroup","urn:collab:person:example.com:admin");
 EOS
-  echo "The following GSH script might emit errors when run again on an existing database. Ignore on reinstalls"
-  bin/gsh $GSH_SCRIPT
+
 
   # Run the following with sourceId == 'applications', which is what Teams/Api expect
-  sed -i conf/sources.xml -e 's~<id>surfnet</id>~<id>applications</id>~'
-  GSH_SCRIPT=`mktemp`
-cat << EOS > $GSH_SCRIPT
+
+  cat << EOS | runGshScript "applications"
 // Basic users (applications) of the system
 addSubject("gadget", "person", "gadget")
 addMember("etc:sysadmingroup","gadget");
@@ -85,11 +80,6 @@ addMember("etc:sysadmingroup","gadget");
 addSubject("engine", "person", "engine")
 addMember("etc:sysadmingroup","engine");
 EOS
-  echo "The following GSH script might emit errors when run again on an existing database. Ignore on reinstalls"
-  bin/gsh $GSH_SCRIPT
-
-  # Change sourceId back to jdbc
-    sed -i conf/sources.xml -e 's~<id>jdbc</id>~<id>jdbc</id>~'
 
   install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
   install -d /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN

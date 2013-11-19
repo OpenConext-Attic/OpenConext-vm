@@ -39,6 +39,7 @@ trap "echo \"caught signal, will exit installation script\"; exit" INT TERM
 
 # Output the given string to the predefined logging file descriptor (which in turn is redirected to stdout beforehand)
 function log() {
+  echo "*** $1" >&1
   echo $1 >&3
 }
 
@@ -169,6 +170,24 @@ function explain_bring_your_own() {
   fi
 }
 
+# Run GSH script
+function runGshScript() {
+  GSH_DIR=/opt/www/grouper-shell
+  if grep -q "<id>jdbc</id>" $GSH_DIR/conf/sources.xml
+  then
+    # Set a replacement bookmark to be able to find the correct id in subsequent calls
+    sed -i $GSH_DIR/conf/sources.xml -e "s~<id>jdbc</id>~<\!-- REPLACEMENT_BOOKMARK --> <id>$1</id>~"
+  fi
+  # Replace with the actual desired value
+  sed -i $GSH_DIR/conf/sources.xml -e "s~REPLACEMENT_BOOKMARK.*<id>.*</id>~REPLACEMENT_BOOKMARK--><id>$1</id>~"
+  GSH_SCRIPT=`mktemp`
+  cat - > $GSH_SCRIPT # get stdin into script file
+  cd $GSH_DIR && bin/gsh $GSH_SCRIPT && cd -
+  rm -f $GSH_SCRIPT
+
+  # Replace back to default
+  sed -i $GSH_DIR/conf/sources.xml -e "s~REPLACEMENT_BOOKMARK.*<id>.*</id>~REPLACEMENT_BOOKMARK--><id>jdbc</id>~"
+}
 
 ### Logging
 if [ -f $LOGFILE ]
