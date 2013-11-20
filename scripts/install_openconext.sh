@@ -357,6 +357,3 @@ echo
 echo
 echo "A complete log of this installation can be found in /var/log/openconext-vm.log"
 echo
-
-# Close logging file descriptor
-exec 3>&-
