@@ -9,48 +9,21 @@ For more information regarding OpenConext, refer to the documentation at [http:/
 
 You can either:
 
-1.  Let Vagrant install and manage a new virtual machine for you (CentOS 6.4 basebox graciously provided by the
-[U.S. National Renewable Energy Laboratory Developer Network](http://developer.nrel.gov/)). This option is recommended if you just want to play around with OpenConext. 
-2.  Install OpenConext on your own server / VM. This option is recommended if you already have a target machine for OpenConext or if you can't / won't use / trust Vagrant or the provided basebox.
+1.  Install OpenConext on your own server / VM. This option is recommended if you already have a target machine for OpenConext.
+2.  Let Vagrant install and manage a new virtual machine for you. This option is recommended if you already use Vagrant.
 
-# Option 1. Letting Vagrant set up a new virtual machine.
-
-Prerequisites:
-* Recent version of [Vagrant](https://www.vagrantup.com)
-
-## 1.1. Make a new directory for all OpenConext code
-
-Example for OS X:
-```bash
-mkdir ~/Sites/OpenConext
-cd ~/Sites/OpenConext
-```
-
-## 1.2. Download the VM project there
-```bash
-curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v57 | tar zxv
-```
-
-## 1.3 Up, up and away!
-You should now have a directory called OpenConext-vm-v57, go there and run vagrant up.
-```bash
-cd OpenConext-vm-v57 && vagrant up
-```
-
-Vagrant will download the basebox, set it up with NFS and install OpenConext for you.
-
-# Option 2. I already have a machine I want to install OpenConext on.
+## Option 1. I already have a machine I want to install OpenConext on.
 Prerequisites:
 * a VM running CentOS 6 or RedHat EL 6 (other operating systems may work, but are not supported).
 
-## 2.1. Download installer
+### 1.1. Download installer
 From within the VM, download this repo:
 
 ```bash
 curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v57 | tar zx
 ```
 
-## 2.2. Run the installer
+### 1.2. Run the installer
 Run the install script:
 
 ```bash
@@ -63,6 +36,34 @@ If you want to install a specific version of the platform, install a subset of c
 ```bash
 bash OpenConext-vm-v57/scripts/install_openconext.sh -i
 ```
+
+## Option 2. Letting Vagrant set up a new virtual machine.
+
+Prerequisites:
+* Recent version of [Vagrant](https://www.vagrantup.com)
+
+### 2.1. Make a new directory for all OpenConext code
+
+Example for OS X:
+```bash
+mkdir ~/Sites/OpenConext
+cd ~/Sites/OpenConext
+```
+
+### 2.2. Download the VM project there
+```bash
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v57 | tar zxv
+```
+
+### 2.3 Up, up and away!
+You should now have a directory called OpenConext-vm-v57, go there and run vagrant up.
+```bash
+cd OpenConext-vm-v57 && vagrant up
+```
+
+Vagrant will download the basebox, set it up with NFS and install OpenConext for you.
+
+
 
 # Once installed...
 
@@ -101,7 +102,7 @@ where ``address`` is the ip address of your VM.
 If you want to query or update the database you will have to open up port 3306. Type in a VM shell:
 
 ```bash
-iptables -I INPUT -p tcp -m tcp  --dport 3306 -j ACCEPT
+iptables -I INPUT -p tcp -m tcp  --dport 3306 -j ACCEPT && service iptables save
 ```
 
 The MySQL root-password is ``c0n3xt``.
