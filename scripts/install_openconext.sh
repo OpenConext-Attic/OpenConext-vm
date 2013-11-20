@@ -360,4 +360,3 @@ echo
 
 # Close logging file descriptor
 exec 3>&-
-exit 0
