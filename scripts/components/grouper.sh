@@ -53,8 +53,6 @@ else
   -e "s~^groups.wheel.use.*~groups.wheel.use=true~"
   [ -h /opt/www/grouper-shell ] || ln -s /opt/www/grouper.apiBinary-${GROUPER_VERSION} /opt/www/grouper-shell
 
-
-
   cd /opt/www/grouper-shell
   # Run the registry initialization script
   bin/gsh -registry -runscript -noprompt

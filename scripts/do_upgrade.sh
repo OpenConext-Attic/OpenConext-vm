@@ -13,8 +13,8 @@ OC_DOMAIN=`grep openconext-domain= $NODE_PROPS | sed -e 's/.*=//g'`
 
 if [[ "$CURRENT_VERSION" == "" ]]
 then
-  log "Cannot determine current version of OpenConext. Cannot run an upgrade. Please upgrade your OpenConext instance manually."
-  log "Upgrades are supported from Release 45 onwards. Upgrades from/to 'master' are not supported."
+  echo "Cannot determine current version of OpenConext. Cannot run an upgrade. Please upgrade your OpenConext instance manually."
+  echo "Upgrades are supported from Release 45 onwards. Upgrades from/to 'master' are not supported."
   exit 1
 fi
 
@@ -34,11 +34,41 @@ OC_CERT=`sed -e '1d;$d' /etc/httpd/keys/openconext.pem | tr -d '\n'`
 OC_KEY=`sed -e '1d;$d' /etc/httpd/keys/openconext.key | tr -d '\n'`
 
 
+if [ -d /opt/www/OpenConext-engineblock ]
+then
+  echo "Upgrading Engineblock..."
+  source $OC_SCRIPTDIR/components/engineblock.sh
+fi
 
-## Put version specific upgrade commands below.
+if [ -d /opt/www/OpenConext-serviceregistry ]
+then
+  echo "Upgrading Service Registry..."
+  source $OC_SCRIPTDIR/components/serviceregistry.sh
+fi
 
+if [ -d /opt/www/OpenConext-manage ]
+then
+  echo "Upgrading Manage..."
+  source $OC_SCRIPTDIR/components/manage.sh
+fi
 
+if [ -d /opt/www/OpenConext-api ]
+then
+  echo "Upgrading API..."
+  source $OC_SCRIPTDIR/components/api.sh
+fi
 
-## And then something like this.
-# setOpenConextVersion v61
-# log "Version v61 reached. Ready."
+if [ -d /opt/www/OpenConext-cruncher ]
+then
+  echo "Upgrading Cruncher..."
+  source $OC_SCRIPTDIR/components/cruncher.sh
+fi
+
+# starting tomcat again after all upgrade actions are performed
+if rpm -qi tomcat6 > /dev/null
+then
+  service tomcat6 start
+fi
+
+setOpenConextVersion v61
+echo "Version v61 reached. Ready."

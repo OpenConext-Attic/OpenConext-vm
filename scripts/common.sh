@@ -3,8 +3,6 @@
 ### Constants
 NODE_PROPS=/etc/openconext/node.properties
 
-LOGFILE=/var/log/openconext-vm.log
-
 
 MVN_VERSION=3.0.5
 VERBOSE=false
@@ -26,7 +24,7 @@ set -e
 ROOT_UID=0   # Root has $UID 0.
 if [ $UID -ne ${ROOT_UID} ]
 then
-  echo "You must be root to run this install script, as it installs system packages and configures services."
+  echo "You must be root to run this install script, as it installs system packages and configures service."
   exit 1
 fi
 
@@ -36,11 +34,6 @@ trap "echo \"caught signal, will exit installation script\"; exit" INT TERM
 
 
 ### Functions
-
-# Output the given string to the predefined logging file descriptor (which in turn is redirected to stdout beforehand)
-function log() {
-  echo $1 >&3
-}
 
 # Create a backup of the given file (complete path)
 # Will suffix with the current date and a sequence number
@@ -189,8 +182,12 @@ function runGshScript() {
 }
 
 ### Logging
+
+LOGFILE=/var/log/openconext-vm.log
 if [ -f $LOGFILE ]
 then
   backupFile $LOGFILE
 fi
-
+exec > >(tee $LOGFILE)
+exec 2> >(tee -a $LOGFILE)
+echo "Logging all output to $LOGFILE"
