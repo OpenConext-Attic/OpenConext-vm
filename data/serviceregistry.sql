@@ -233,21 +233,21 @@ CREATE TABLE `janus__entity` (
 
 LOCK TABLES `janus__entity` WRITE;
 /*!40000 ALTER TABLE `janus__entity` DISABLE KEYS */;
-INSERT INTO `janus__entity` VALUES (1,'https://engine._OPENCONEXT_DOMAIN_/authentication/sp/metadata',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T10:38:18+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (2,'https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T10:38:32+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (3,'https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T10:39:39+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (4,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T11:09:48+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (6,'http://mock-idp',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:07:17+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (7,'http://mock-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:07:26+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (8,'https://openidp.feide.no',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-12T13:19:21+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (9,'https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,1,'2012-06-13T08:00:55+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (10,'https://grouper._OPENCONEXT_DOMAIN_/grouper/shibboleth',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-19T09:43:48+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (11,'https://teams._OPENCONEXT_DOMAIN_/shibboleth',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-25T16:34:29+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (12,'https://api._OPENCONEXT_DOMAIN_/',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-27T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (13,'https://apis._OPENCONEXT_DOMAIN_/',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-27T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (14,'https://apis._OPENCONEXT_DOMAIN_/client/client.html',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2012-06-27T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (15,'https://csa._OPENCONEXT_DOMAIN_/',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2013-09-07T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
-INSERT INTO `janus__entity` VALUES (16,'https://dashboard._OPENCONEXT_DOMAIN_/',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',0,3,'2013-09-07T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (1,'https://engine._OPENCONEXT_DOMAIN_/authentication/sp/metadata',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,1,'2012-06-12T10:38:18+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (2,'https://engine._OPENCONEXT_DOMAIN_/authentication/idp/metadata',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,1,'2012-06-12T10:38:32+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (3,'https://profile._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,1,'2012-06-12T10:39:39+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (4,'https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,1,'2012-06-12T11:09:48+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (6,'http://mock-idp',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,1,'2012-06-12T13:07:17+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (7,'http://mock-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,1,'2012-06-12T13:07:26+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (8,'https://openidp.feide.no',0,'prodaccepted','saml20-idp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,1,'2012-06-12T13:19:21+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (9,'https://serviceregistry._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/metadata.php/default-sp',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,1,'2012-06-13T08:00:55+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (10,'https://grouper._OPENCONEXT_DOMAIN_/grouper/shibboleth',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,3,'2012-06-19T09:43:48+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (11,'https://teams._OPENCONEXT_DOMAIN_/shibboleth',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,3,'2012-06-25T16:34:29+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (12,'https://api._OPENCONEXT_DOMAIN_/',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,3,'2012-06-27T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (13,'https://apis._OPENCONEXT_DOMAIN_/',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,3,'2012-06-27T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (14,'https://apis._OPENCONEXT_DOMAIN_/client/client.html',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,3,'2012-06-27T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (15,'https://csa._OPENCONEXT_DOMAIN_/',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,3,'2013-09-07T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
+INSERT INTO `janus__entity` VALUES (16,'https://dashboard._OPENCONEXT_DOMAIN_/',0,'prodaccepted','saml20-sp',NULL,NULL,NULL,NULL,'yes',NULL,NULL,3,'2013-09-07T13:22:35+02:00','172.18.5.1',NULL,'Entity created.','yes');
 /*!40000 ALTER TABLE `janus__entity` ENABLE KEYS */;
 UNLOCK TABLES;
 
