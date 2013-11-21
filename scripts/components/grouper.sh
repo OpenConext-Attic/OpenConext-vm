@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /tmp
+cd /opt/www
 if [ ! -f grouper-dist-${GROUPER_DIST_VERSION}-bin.tar.gz ]
 then
   ## Only download if not exists yet. Optimization in case script is run successively.
@@ -36,7 +36,10 @@ else
 
   echo "Downloading and installing Grouper Shell in /opt/www/grouper-shell..."
   cd /opt/www
-  curl -O http://www.internet2.edu/grouper/release/${GROUPER_VERSION}/grouper.apiBinary-${GROUPER_VERSION}.tar.gz
+  if [ ! -f grouper.apiBinary-${GROUPER_VERSION}.tar.gz ]
+  then
+    curl -O http://www.internet2.edu/grouper/release/${GROUPER_VERSION}/grouper.apiBinary-${GROUPER_VERSION}.tar.gz
+  fi
   tar zxf grouper.apiBinary-${GROUPER_VERSION}.tar.gz
 
   # Substitute database parameters in hibernate configuration
