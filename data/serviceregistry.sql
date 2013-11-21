@@ -52,6 +52,9 @@ INSERT INTO `db_changelog` VALUES (10,'default',1339486579,'patch-0010.sql','f83
 INSERT INTO `db_changelog` VALUES (11,'default',1340091386,'patch-0011.sql','2da0be49','');
 INSERT INTO `db_changelog` VALUES (12,'default',1340787309,'patch-0012.sql','3cf38d8c','');
 INSERT INTO `db_changelog` VALUES (13,'default',1340787309,'patch-0013.php','9d981bbf','Convert allowed / blocked entities from remoteentityid to remoteeid (see BACKLOG-505)');
+INSERT INTO `db_changelog` VALUES (14,'default',1350464425,'patch-0014.sql','64b09ad6','BACKLOG-675: Add manipulation field to entity');
+INSERT INTO `db_changelog` VALUES (15,'default',1351864089,'patch-0015.php','e023ac79','Added persistent, transient and unspecified to all entities as valid NameIDFormats');
+
 /*!40000 ALTER TABLE `db_changelog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,6 +214,7 @@ CREATE TABLE `janus__entity` (
   `metadata_cache_until` datetime DEFAULT NULL,
   `allowedall` char(3) NOT NULL DEFAULT 'yes',
   `arp` int(11) DEFAULT NULL,
+  `manipulation` mediumtext DEFAULT NULL,
   `user` int(11) DEFAULT NULL,
   `created` char(25) DEFAULT NULL,
   `ip` char(15) DEFAULT NULL,
@@ -417,6 +421,9 @@ INSERT INTO `janus__metadata` VALUES (3,0,'displayName:nl','OpenConext Profile',
 INSERT INTO `janus__metadata` VALUES (3,0,'displayName:en','OpenConext Profile','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (3,0,'redirect.sign','','2012-06-12T13:13:05+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (3,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (3,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (8,0,'certData','MIICizCCAfQCCQCY8tKaMc0BMjANBgkqhkiG9w0BAQUFADCBiTELMAkGA1UEBhMCTk8xEjAQBgNVBAgTCVRyb25kaGVpbTEQMA4GA1UEChMHVU5JTkVUVDEOMAwGA1UECxMFRmVpZGUxGTAXBgNVBAMTEG9wZW5pZHAuZmVpZGUubm8xKTAnBgkqhkiG9w0BCQEWGmFuZHJlYXMuc29sYmVyZ0B1bmluZXR0Lm5vMB4XDTA4MDUwODA5MjI0OFoXDTM1MDkyMzA5MjI0OFowgYkxCzAJBgNVBAYTAk5PMRIwEAYDVQQIEwlUcm9uZGhlaW0xEDAOBgNVBAoTB1VOSU5FVFQxDjAMBgNVBAsTBUZlaWRlMRkwFwYDVQQDExBvcGVuaWRwLmZlaWRlLm5vMSkwJwYJKoZIhvcNAQkBFhphbmRyZWFzLnNvbGJlcmdAdW5pbmV0dC5ubzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAt8jLoqI1VTlxAZ2axiDIThWcAOXdu8KkVUWaN/SooO9O0QQ7KRUjSGKN9JK65AFRDXQkWPAu4HlnO4noYlFSLnYyDxI66LCr71x4lgFJjqLeAvB/GqBqFfIZ3YK/NrhnUqFwZu63nLrZjcUZxNaPjOOSRSDaXpv1kb5k3jOiSGECAwEAATANBgkqhkiG9w0BAQUFAAOBgQBQYj4cAafWaYfjBU2zi1ElwStIaJ5nyp/s/8B8SAPK2T79McMyccP3wSW13LHkmM1jwKe3ACFXBvqGQN0IbcH49hu0FKhYFM/GPDJcIHFBsiyMBXChpye9vBaTNEBCtU3KjjyG0hRT2mAQ9h+bkPmOvlEo/aH0xR68Z9hw4PF13w==','2012-06-12T13:22:27+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (8,0,'coin:guest_qualifier','All','2012-06-12T13:22:27+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (8,0,'contacts:0:contactType','technical','2012-06-12T13:22:27+02:00','172.18.5.1');
@@ -469,6 +476,9 @@ INSERT INTO `janus__metadata` VALUES (9,0,'displayName:nl','OpenConext ServiceRe
 INSERT INTO `janus__metadata` VALUES (9,0,'displayName:en','OpenConext ServiceRegistry','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (9,0,'redirect.sign','','2012-06-13T08:02:29+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (9,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (9,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (4,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T09:04:30+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (4,0,'AssertionConsumerService:0:Location','https://manage._OPENCONEXT_DOMAIN_/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp','2012-06-13T09:04:30+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (4,0,'contacts:0:contactType','technical','2012-06-13T09:04:30+02:00','172.18.5.1');
@@ -494,6 +504,9 @@ INSERT INTO `janus__metadata` VALUES (4,0,'displayName:nl','OpenConext Manage','
 INSERT INTO `janus__metadata` VALUES (4,0,'displayName:en','OpenConext Manage','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (4,0,'redirect.sign','','2012-06-13T09:04:30+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (4,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (4,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (7,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-13T11:06:09+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (7,0,'AssertionConsumerService:0:Location','https://mujina-sp._OPENCONEXT_DOMAIN_/AssertionConsumerService','2012-06-13T11:06:09+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (7,0,'contacts:0:contactType','technical','2012-06-13T11:06:09+02:00','172.18.5.1');
@@ -519,6 +532,9 @@ INSERT INTO `janus__metadata` VALUES (7,0,'displayName:nl','OpenConext Mujina SP
 INSERT INTO `janus__metadata` VALUES (7,0,'displayName:en','OpenConext Mujina SP','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (7,0,'redirect.sign','','2012-06-13T11:06:09+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (7,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (7,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (10,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-19T09:44:38+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (10,0,'AssertionConsumerService:0:Location','https://grouper._OPENCONEXT_DOMAIN_/grouper/Shibboleth.sso/SAML2/POST','2012-06-19T09:44:38+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (10,0,'contacts:0:emailAddress','','2012-06-19T09:44:38+02:00','172.18.5.1');
@@ -544,6 +560,9 @@ INSERT INTO `janus__metadata` VALUES (10,0,'contacts:0:contactType','technical',
 INSERT INTO `janus__metadata` VALUES (10,0,'contacts:1:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (10,0,'contacts:2:contactType','technical','2012-06-19T09:44:38+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (10,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (10,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (11,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-25T16:42:04+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (11,0,'AssertionConsumerService:0:Location','https://teams._OPENCONEXT_DOMAIN_/Shibboleth.sso/SAML2/POST','2012-06-25T16:42:04+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (11,0,'coin:gadgetbaseurl','https://teams._OPENCONEXT_DOMAIN_/.*','2012-06-25T16:42:04+02:00','172.18.5.1');
@@ -574,6 +593,9 @@ INSERT INTO `janus__metadata` VALUES (11,0,'url:nl','','2012-06-25T16:42:04+02:0
 INSERT INTO `janus__metadata` VALUES (11,0,'contacts:1:contactType','technical','2012-06-25T16:42:04+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (11,0,'contacts:2:contactType','technical','2012-06-25T16:42:04+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (11,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (11,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (6,0,'certData','MIICHzCCAYgCCQD7KMJ17XQa7TANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJOTDEQMA4GA1UECAwHVXRyZWNodDEQMA4GA1UEBwwHVXRyZWNodDEQMA4GA1UECgwHU3VyZm5ldDEPMA0GA1UECwwGQ29uZXh0MB4XDTEyMDMwODA4NTQyNFoXDTEzMDMwODA4NTQyNFowVDELMAkGA1UEBhMCTkwxEDAOBgNVBAgMB1V0cmVjaHQxEDAOBgNVBAcMB1V0cmVjaHQxEDAOBgNVBAoMB1N1cmZuZXQxDzANBgNVBAsMBkNvbmV4dDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2slVe459WUDL4RXxJf5h5t5oUbPkPlFZ9lQysSoS3fnFTdCgzA6FzQzGRDcfRj0HnWBdA1YH+LxBjNcBIJ/nBc7Ssu4e4rMO3MSAV5Ouo3MaGgHqVq6dCD47f52b98df6QTAA3C+7sHqOdiQ0UDCAK0C+qP5LtTcmB8QrJhKmV8CAwEAATANBgkqhkiG9w0BAQUFAAOBgQCvPhO0aSbqX7g7IkR79IFVdJ/P7uSlYFtJ9cMxec85cYLmWL1aVgF5ZFFJqC25blyPJu2GRcSxoVwB3ae8sPCECWwqRQA4AHKIjiW5NgrAGYR++ssTOQR8mcAucEBfNaNdlJoy8GdZIhHZNkGlyHfY8kWS3OWkGzhWSsuRCLl78A==','2012-06-27T11:14:12+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (6,0,'coin:guest_qualifier','None','2012-06-27T11:14:12+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (6,0,'contacts:0:contactType','technical','2012-06-27T11:14:12+02:00','172.18.5.1');
@@ -602,6 +624,9 @@ INSERT INTO `janus__metadata` VALUES (6,0,'displayName:en','OpenConext Mujina ID
 INSERT INTO `janus__metadata` VALUES (6,0,'SingleSignOnService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-27T11:14:12+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (6,0,'SingleSignOnService:0:Location','https://mujina-idp._OPENCONEXT_DOMAIN_/SingleSignOnService','2012-06-27T11:14:12+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (6,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (6,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (12,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (12,0,'AssertionConsumerService:0:Location','https://api._OPENCONEXT_DOMAIN_/v1/assertionConsumer','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (12,0,'contacts:0:emailAddress','','2012-06-27T13:24:02+02:00','172.18.5.1');
@@ -631,7 +656,9 @@ INSERT INTO `janus__metadata` VALUES (12,0,'contacts:2:contactType','technical',
 INSERT INTO `janus__metadata` VALUES (12,0,'coin:no_consent_required','1','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (12,0,'certData','_OPENCONEXT_CERT_','2012-06-12T12:51:28+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (12,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
-
+INSERT INTO `janus__metadata` VALUES (12,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (12,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (13,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (13,0,'AssertionConsumerService:0:Location','https://apis._OPENCONEXT_DOMAIN_/oauth2/authorize','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (13,0,'contacts:0:emailAddress','','2012-06-27T13:24:02+02:00','172.18.5.1');
@@ -661,6 +688,9 @@ INSERT INTO `janus__metadata` VALUES (13,0,'contacts:2:contactType','technical',
 INSERT INTO `janus__metadata` VALUES (13,0,'coin:no_consent_required','1','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (13,0,'certData','_OPENCONEXT_CERT_','2012-06-12T12:51:28+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (13,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (13,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (13,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (13,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (13,0,'coin:gadgetbaseurl','https://apis._OPENCONEXT_DOMAIN_','2012-06-25T16:42:04+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (13,0,'coin:oauth:secret','secret','2012-06-25T16:42:04+02:00','172.18.5.1');
 
@@ -692,6 +722,9 @@ INSERT INTO `janus__metadata` VALUES (14,0,'contacts:1:contactType','technical',
 INSERT INTO `janus__metadata` VALUES (14,0,'contacts:2:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (14,0,'coin:no_consent_required','1','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (14,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (14,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (14,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (14,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 
 INSERT INTO `janus__metadata` VALUES (15,0,'AssertionConsumerService:0:Binding','urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (15,0,'AssertionConsumerService:0:Location','https://csa._OPENCONEXT_DOMAIN_/AssertionConsumerService','2012-06-27T13:24:02+02:00','172.18.5.1');
@@ -722,6 +755,9 @@ INSERT INTO `janus__metadata` VALUES (15,0,'contacts:2:contactType','technical',
 INSERT INTO `janus__metadata` VALUES (15,0,'coin:no_consent_required','1','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (15,0,'certData','_OPENCONEXT_CERT_','2012-06-12T12:51:28+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (15,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (15,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (15,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (15,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (15,0,'coin:gadgetbaseurl','https://csa._OPENCONEXT_DOMAIN_','2012-06-25T16:42:04+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (15,0,'coin:oauth:secret','secret','2012-06-25T16:42:04+02:00','172.18.5.1');
 
@@ -753,6 +789,9 @@ INSERT INTO `janus__metadata` VALUES (16,0,'contacts:1:contactType','technical',
 INSERT INTO `janus__metadata` VALUES (16,0,'contacts:2:contactType','technical','2012-06-27T13:24:02+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (16,0,'certData','_OPENCONEXT_CERT_','2012-06-12T12:51:28+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (16,0,'NameIDFormat','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (16,0,'NameIDFormats:0','urn:oasis:names:tc:SAML:2.0:nameid-format:unspecified','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (16,0,'NameIDFormats:1','urn:oasis:names:tc:SAML:2.0:nameid-format:transient','2012-11-28T17:27:02+01:00','192.168.56.1');
+INSERT INTO `janus__metadata` VALUES (16,0,'NameIDFormats:2','urn:oasis:names:tc:SAML:2.0:nameid-format:persistent','2012-11-28T17:27:02+01:00','192.168.56.1');
 INSERT INTO `janus__metadata` VALUES (16,0,'coin:gadgetbaseurl','https://dashboard._OPENCONEXT_DOMAIN_','2012-06-25T16:42:04+02:00','172.18.5.1');
 INSERT INTO `janus__metadata` VALUES (16,0,'coin:oauth:secret','secret','2012-06-25T16:42:04+02:00','172.18.5.1');
 
