@@ -15,10 +15,24 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+---
+--- Remove all new tables that are created by the doctrine migration
+---
+DROP TABLE IF EXISTS `doctrine_migration_versions`;
+DROP TABLE IF EXISTS `janus__allowedConnection`;
+DROP TABLE IF EXISTS `janus__blockedConnection`;
+DROP TABLE IF EXISTS `janus__disableConsent`;
+DROP TABLE IF EXISTS `janus__hasConnection`;
+DROP TABLE IF EXISTS `janus__message`;
+DROP TABLE IF EXISTS `janus__metadata`;
+DROP TABLE IF EXISTS `janus__subscription`;
+DROP TABLE IF EXISTS `janus__userData`;
+DROP TABLE IF EXISTS `janus__connectionRevision`;
+DROP TABLE IF EXISTS `janus__connection`;
+
 --
 -- Table structure for table `db_changelog`
 --
-
 DROP TABLE IF EXISTS `db_changelog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
