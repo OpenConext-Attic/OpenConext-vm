@@ -3,7 +3,7 @@
 if [ ! -d /opt/www/OpenConext-csa ]
 then
   cd /opt/www
-  $GITCLONE git://github.com/OpenConext/OpenConext-csa.git
+  $GITCLONE https://github.com/OpenConext/OpenConext-csa.git
 fi
 
 cd /opt/www/OpenConext-csa

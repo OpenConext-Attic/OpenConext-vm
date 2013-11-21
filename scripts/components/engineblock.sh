@@ -5,7 +5,7 @@
 #######################
 if [ ! -h /opt/www/engineblock ]
 then
-    $GITCLONE git://github.com/OpenConext/OpenConext-engineblock.git /opt/www/OpenConext-engineblock
+    $GITCLONE https://github.com/OpenConext/OpenConext-engineblock.git /opt/www/OpenConext-engineblock
     ln -sf /opt/www/OpenConext-engineblock /opt/www/engineblock
 fi
 cd /opt/www/engineblock

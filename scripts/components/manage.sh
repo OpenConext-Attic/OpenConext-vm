@@ -3,7 +3,7 @@
 if [ ! -h /opt/www/manage ]
 then
     cd /opt/www/
-    $GITCLONE git://github.com/OpenConext/OpenConext-manage.git
+    $GITCLONE https://github.com/OpenConext/OpenConext-manage.git
     ln -s OpenConext-manage manage
 fi
 

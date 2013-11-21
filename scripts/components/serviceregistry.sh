@@ -6,7 +6,7 @@
 if [ ! -h /opt/www/serviceregistry ]
 then
     cd /opt/www/
-    $GITCLONE git://github.com/OpenConext/OpenConext-serviceregistry.git
+    $GITCLONE https://github.com/OpenConext/OpenConext-serviceregistry.git
     ln -s OpenConext-serviceregistry serviceregistry
 fi
 cd /opt/www/serviceregistry
