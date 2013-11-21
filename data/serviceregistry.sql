@@ -15,9 +15,9 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
----
---- Remove all new tables that are created by the doctrine migration
----
+--
+-- Remove all new tables that are created by the doctrine migration
+--
 DROP TABLE IF EXISTS `doctrine_migration_versions`;
 DROP TABLE IF EXISTS `janus__allowedConnection`;
 DROP TABLE IF EXISTS `janus__blockedConnection`;
