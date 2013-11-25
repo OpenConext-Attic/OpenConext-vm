@@ -8,7 +8,7 @@ then
 fi
 GROUPER_TMP_BASEDIR=`mktemp -d`
 cd $GROUPER_TMP_BASEDIR
-tar zxf /tmp/grouper-dist-${GROUPER_DIST_VERSION}-bin.tar.gz
+tar zxf /opt/www/grouper-dist-${GROUPER_DIST_VERSION}-bin.tar.gz
 
 # Delete
 rm -f /usr/share/tomcat6/wars/grouper-*.war
