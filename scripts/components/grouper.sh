@@ -32,8 +32,8 @@ install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
 install -d /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
 chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/grouper.$OC_DOMAIN
 
-GROUPER_WS_WAR=`basename /usr/share/tomcat6/wars/grouper-ws-*.war`
-GROUPER_WAR=`basename /usr/share/tomcat6/wars/grouper-*.war`
+GROUPER_WS_WAR=/usr/share/tomcat6/wars/grouper-ws-${GROUPER_VERSION}.war
+GROUPER_WAR=/usr/share/tomcat6/wars/grouper-${GROUPER_VERSION}.war
 
 echo "<Context path=\"/grouper-ws\" docBase=\"/usr/share/tomcat6/wars/$GROUPER_WS_WAR\" debug=\"1\"></Context>" > \
   /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN/grouper-ws.xml
