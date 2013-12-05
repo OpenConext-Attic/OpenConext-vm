@@ -32,7 +32,7 @@ echo "Stopping Tomcat..."
 service tomcat6 stop
 
 echo "Downloading Grouper components from Internet2 to perform data migration..."
-
+cd /opt/www
 curl -O http://www.internet2.edu/grouper/release/1.6.3/grouper.apiBinary-1.6.3.tar.gz
 curl -O http://www.internet2.edu/grouper/release/2.1.5/grouper.apiBinary-2.1.5.tar.gz
 tar -zxf grouper.apiBinary-1.6.3.tar.gz
@@ -90,14 +90,15 @@ echo
 echo The following command might emit a few messages like these, but you can ignore them safely:
 echo ==\> Error: unable to evaluate command....
 echo ==\> caused by: edu.internet2.middleware.grouper.exception.MemberNotFoundException:
-cd grouper.apiBinary-2.1.5 && bin/gsh $GROUPER_SCRIPT
+cd grouper.apiBinary-2.1.5 && bin/gsh $GROUPER_SCRIPT && cd -
+
+# Install the 2.1.5 version of grouper shell in /opt/www
+ln -s /opt/www/grouper.apiBinary-2.1.5 /opt/www/grouper-shell
+# cleanup
+rm -Rf /opt/www/grouper.apiBinary-1.6.3.tar.gz /opt/www/grouper.apiBinary-1.6.3 /opt/www/grouper.apiBinary-2.1.5.tar.gz
 
 echo Running MySQLcheck...
 mysqlcheck -a teams -uroot -pc0n3xt
-
-# Install the 2.1.5 version of grouper shell in /opt/www
-mv grouper.apiBinary-2.1.5 /opt/www
-ln -s /opt/www/grouper.apiBinary-2.1.5 /opt/www/grouper-shell
 
 # actually deploy wars and fix property files
 source $OC_SCRIPTDIR/components/grouper.sh
