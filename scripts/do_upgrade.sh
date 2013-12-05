@@ -24,51 +24,84 @@ source $OC_SCRIPTDIR/versions.sh
 # Used by component scripts to distinguish between clean installs and upgrades
 UPGRADE=true
 
-# If tomcat is available we need to stop it before upgrades
-service tomcat6 status 2> /dev/null && service tomcat6 stop > /dev/null
 
-# Certificate / key data, needed by property replacements in upgrade of components.
-# These oneliners are copied from engineblock.sh and openconext_custom_certificates.sh
-ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`
-OC_CERT=`sed -e '1d;$d' /etc/httpd/keys/openconext.pem | tr -d '\n'`
-OC_KEY=`sed -e '1d;$d' /etc/httpd/keys/openconext.key | tr -d '\n'`
+# SURFnet internal: see https://wiki.surfnet.nl/pages/viewpage.action?pageId=34996862 which is the official grouper-upgrade-manual for production.
 
+echo "Upgrading Grouper..."
+echo "Stopping Tomcat..."
+service tomcat6 stop
 
-if [ -d /opt/www/OpenConext-engineblock ]
+echo "Downloading Grouper components from Internet2 to perform data migration..."
+
+curl -O http://www.internet2.edu/grouper/release/1.6.3/grouper.apiBinary-1.6.3.tar.gz
+curl -O http://www.internet2.edu/grouper/release/2.1.5/grouper.apiBinary-2.1.5.tar.gz
+tar -zxf grouper.apiBinary-1.6.3.tar.gz
+tar -zxf grouper.apiBinary-2.1.5.tar.gz
+
+sed -i grouper.apiBinary-1.6.3/conf/grouper.hibernate.properties \
+  -e "s~^hibernate.dialect.*~hibernate.dialect=org.hibernate.dialect.MySQL5Dialect~" \
+  -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://db.$OC_DOMAIN/teams~" \
+  -e "s~^hibernate.connection.username.*~hibernate.connection.username=root~" \
+  -e "s~^hibernate.connection.password.*~hibernate.connection.password=c0n3xt~" \
+  -e "s~^hibernate.connection.driver_class.*~hibernate.connection.driver_class=com.mysql.jdbc.Driver~"
+
+sed -i grouper.apiBinary-2.1.5/conf/grouper.hibernate.properties \
+  -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://db.$OC_DOMAIN/teams~" \
+  -e "s~^hibernate.connection.username.*~hibernate.connection.username=root~" \
+  -e "s~^hibernate.connection.password.*~hibernate.connection.password=c0n3xt~"
+
+# Test run of GSH
+echo "Running GSH just to test..."
+cd grouper.apiBinary-1.6.3
+if bin/gsh.sh -runarg quit 2>&1 | grep -qE "Grouper error|Exception"
 then
-  echo "Upgrading Engineblock..."
-  source $OC_SCRIPTDIR/components/engineblock.sh
+  echo "Error while running GSH. Cannot fix this. Will run again with full output, please analyze yourself. Will stop script afterwards."
+  echo "--- Grouper GSH output: ---"
+  bin/gsh.sh -runarg quit
+  echo "--- End of Grouper GSH output ---"
+  cd -
+  echo exit 1
 fi
+cd -
 
-if [ -d /opt/www/OpenConext-serviceregistry ]
-then
-  echo "Upgrading Service Registry..."
-  source $OC_SCRIPTDIR/components/serviceregistry.sh
-fi
+BACKUPFILE=teams-backup-`date +%Y%m%d.%s`
+echo "Creating database backup of Teams database, in file $BACKUPFILE"
+mysqldump -uroot -pc0n3xt teams > $BACKUPFILE
 
-if [ -d /opt/www/OpenConext-manage ]
-then
-  echo "Upgrading Manage..."
-  source $OC_SCRIPTDIR/components/manage.sh
-fi
+cd grouper.apiBinary-1.6.3
+bin/gsh.sh -runarg 'loaderRunOneJob("CHANGE_LOG_changeLogTempToChangeLog")'
+cd -
 
-if [ -d /opt/www/OpenConext-api ]
-then
-  echo "Upgrading API..."
-  source $OC_SCRIPTDIR/components/api.sh
-fi
+# Run DDL upgrade
+cd grouper.apiBinary-2.1.5 && bin/gsh -registry -check -noprompt -runscript && cd -
+# Run GSH 2.1.5 to get attributes created
+cd grouper.apiBinary-2.1.5 && bin/gsh -runarg quit && cd -
 
-if [ -d /opt/www/OpenConext-cruncher ]
-then
-  echo "Upgrading Cruncher..."
-  source $OC_SCRIPTDIR/components/cruncher.sh
-fi
+cd grouper.apiBinary-2.1.5 && bin/gsh -usdu -all && cd -
 
-# starting tomcat again after all upgrade actions are performed
-if rpm -qi tomcat6 > /dev/null
-then
-  service tomcat6 start
-fi
+GROUPER_SCRIPT=`mktemp`
+cat << EOS > $GROUPER_SCRIPT
 
-setOpenConextVersion v61
-echo "Version v61 reached. Ready."
+GrouperSession.startRootSession();
+for (String g : HibernateSession.byHqlStatic().createQuery("select uuid from Group").listSet(String.class)) { subj = SubjectFinder.findByIdAndSource(g, "g:gsa", true);      GrouperDAOFactory.getFactory().getMember().findBySubject(subj).updateMemberAttributes(subj, true); }
+
+EOS
+echo
+echo The following command might emit a few messages like these, but you can ignore them safely:
+echo ==\> Error: unable to evaluate command....
+echo ==\> caused by: edu.internet2.middleware.grouper.exception.MemberNotFoundException:
+cd grouper.apiBinary-2.1.5 && bin/gsh $GROUPER_SCRIPT
+
+echo Running MySQLcheck...
+mysqlcheck -a teams -uroot -pc0n3xt
+
+# Install the 2.1.5 version of grouper shell in /opt/www
+mv grouper.apiBinary-2.1.5 /opt/www
+ln -s /opt/www/grouper.apiBinary-2.1.5 /opt/www/grouper-shell
+
+# actually deploy wars and fix property files
+source $OC_SCRIPTDIR/components/grouper.sh
+
+
+setOpenConextVersion v62
+echo "Version v62 reached. Ready."
