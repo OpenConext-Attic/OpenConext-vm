@@ -9,7 +9,7 @@ source $OC_SCRIPTDIR/common.sh
 
 CURRENT_VERSION=$(grep openconext-version= $NODE_PROPS | sed -e 's/.*=//g');
 BRANCH_VERSION=$(git status | grep "# On branch" | awk '{print $4}');
-NEXT_VERSION="";
+NEXT_VERSION="v62";
 
 #this should handle outdated git repos
 $GITRESET
