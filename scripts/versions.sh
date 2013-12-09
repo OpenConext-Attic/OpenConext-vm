@@ -14,7 +14,7 @@ export CSA_VERSION=master
 export SELFSERVICE_VERSION=master
 
 # these are _not_ tag names
-export GROUPER_DIST_VERSION=3.9.0
+export GROUPER_DIST_VERSION=3.13.0
 export GROUPER_VERSION=2.1.5
 # the version of this install
 export OC_VERSION=master

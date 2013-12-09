@@ -62,7 +62,7 @@ else
 
   # Run the following with sourceId == 'surfnet', this is the ldap source from Engineblock
 
-  cat << EOS | runGshScript "surfnet"
+  cat << EOS | runGshScript "openconext-ldap"
 // Provision the admin user @ mujina up front
 addSubject("urn:collab:person:example.com:admin","person","The admin user at Mujina IdP")
 
