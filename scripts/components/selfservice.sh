@@ -60,7 +60,7 @@ else
     /etc/httpd/conf.d/dashboard.conf
     
   # make the admin user part of the dashboard_admin group
-  cat << EOS | runGshScript "surfnet"
+  cat << EOS | runGshScript "openconext-ldap"
 addGroup("nl:surfnet:diensten","dashboard_admin","dashboard_admin");
 addMember("nl:surfnet:diensten:dashboard_admin","urn:collab:person:example.com:admin");
 EOS

@@ -100,9 +100,15 @@ rm -Rf /opt/www/grouper.apiBinary-1.6.3.tar.gz /opt/www/grouper.apiBinary-1.6.3 
 echo Running MySQLcheck...
 mysqlcheck -a teams -uroot -pc0n3xt
 
+## BACKLOG-1359: rename ldap source, remove 'surfnet' part
+mysql -uroot -pc0n3xt teams -e "update grouper_members set subject_source = 'openconext-ldap' where subject_source = 'surfnet'"
+mysql -uroot -pc0n3xt teams -e "update grouper_pit_members set subject_source = 'openconext-ldap' where subject_source = 'surfnet'"
+
+
 # actually deploy wars and fix property files
 source $OC_SCRIPTDIR/components/grouper.sh
 
+service tomcat6 start
 
 setOpenConextVersion v62
 echo "Version v62 reached. Ready."

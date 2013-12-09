@@ -12,7 +12,7 @@ export CRUNCHER_VERSION=cruncher-parent-3.12.0
 export APIS_VERSION=apis-parent-1.3.4
 export CSA_VERSION=csa-parent-3.8.0
 export SELFSERVICE_VERSION=coin-selfservice-parent-3.12.0
-export GROUPER_DIST_VERSION=3.9.0
+export GROUPER_DIST_VERSION=3.13.0
 
 # these are _not_ tag names
 export GROUPER_VERSION=2.1.5

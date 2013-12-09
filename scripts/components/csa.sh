@@ -64,7 +64,7 @@ else
 
   if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" == "master" ]]
   then
-      cat << EOS | runGshScript "surfnet"
+      cat << EOS | runGshScript "openconext-ldap"
 addGroup("nl:surfnet:diensten","csa_admin","csa_admin");
 addMember("nl:surfnet:diensten:csa_admin","urn:collab:person:example.com:admin");
 EOS
