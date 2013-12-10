@@ -10,11 +10,7 @@ CATALINA_HOME=/usr/share/tomcat6
 
 ln -fs $CATALINA_HOME /opt/tomcat
 
-if [ ! -d $CATALINA_HOME/conf/classpath_properties ]
-then
-	install -d $CATALINA_HOME/conf/classpath_properties
-    cp $OC_BASEDIR/configs/tomcat6/conf/classpath_properties/* $CATALINA_HOME/conf/classpath_properties/
-fi
+install -d $CATALINA_HOME/conf/classpath_properties
 
 if [ ! -h $CATALINA_HOME/shared/lib/mysql-connector-java.jar ]
 then
