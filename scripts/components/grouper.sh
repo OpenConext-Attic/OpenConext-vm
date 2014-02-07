@@ -38,7 +38,7 @@ else
   cd /opt/www
   if [ ! -f grouper.apiBinary-${GROUPER_VERSION}.tar.gz ]
   then
-    curl -O http://www.internet2.edu/grouper/release/${GROUPER_VERSION}/grouper.apiBinary-${GROUPER_VERSION}.tar.gz
+    curl -O https://build.surfconext.nl/repository/public/third-party/edu/internet2/grouper/release/${GROUPER_VERSION}/grouper.apiBinary-${GROUPER_VERSION}.tar.gz
   fi
   tar zxf grouper.apiBinary-${GROUPER_VERSION}.tar.gz
 
