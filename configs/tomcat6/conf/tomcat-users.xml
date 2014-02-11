@@ -9,6 +9,4 @@
 
   <user username="GrouperSystem" password="Ah75DGe8Ef" roles="grouper_user"/> 
   <user username="engine" password="KJ75DFeg32a" roles="grouper_user"/> 
-  <user username="gadget" password="7453E1E58216" roles="grouper_user"/> 
-  <user username="surfmedia" password="CGMXM6NaRnxO" roles="grouper_user"/>
 </tomcat-users> 
