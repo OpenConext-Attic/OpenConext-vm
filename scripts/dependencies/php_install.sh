@@ -10,7 +10,8 @@ $YUM -y    install php \
                   php-mysql \
                   php-pecl-memcache \
                   php-soap \
-                  php-xml
+                  php-xml \
+                  php-mcrypt
 
 # Enable PHP short open tag for non-conforming PHP code
 sed -i 's/short_open_tag = Off/short_open_tag = On/g' /etc/php.ini
