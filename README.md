@@ -20,21 +20,21 @@ Prerequisites:
 From within the VM, download this repo:
 
 ```bash
-curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v57 | tar zx
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v62 | tar zx
 ```
 
 ### 1.2. Run the installer
 Run the install script:
 
 ```bash
-bash OpenConext-vm-v57/scripts/install_openconext.sh
+bash OpenConext-vm-v62/scripts/install_openconext.sh
 ```
 
 By default, the installer will run an 'unattended' setup, choosing sensible defaults.
 If you want to install a specific version of the platform, install a subset of components or change the default domain (demo.openconext.org), run the installer with a ````-i```` flag:
 
 ```bash
-bash OpenConext-vm-v57/scripts/install_openconext.sh -i
+bash OpenConext-vm-v62/scripts/install_openconext.sh -i
 ```
 
 ## Option 2. Letting Vagrant set up a new virtual machine.
@@ -52,13 +52,13 @@ cd ~/Sites/OpenConext
 
 ### 2.2. Download the VM project there
 ```bash
-curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v57 | tar zxv
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v62 | tar zxv
 ```
 
 ### 2.3 Up, up and away!
-You should now have a directory called OpenConext-vm-v57, go there and run vagrant up.
+You should now have a directory called OpenConext-vm-v62, go there and run vagrant up.
 ```bash
-cd OpenConext-vm-v57 && vagrant up
+cd OpenConext-vm-v62 && vagrant up
 ```
 
 Vagrant will download the basebox, set it up with NFS and install OpenConext for you.
