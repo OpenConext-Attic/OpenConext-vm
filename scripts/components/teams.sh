@@ -58,6 +58,12 @@ else
   cp /tmp/grouper.client.properties /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
   cp /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
 
+  # ToDo: Where to implement these?
+  # Apply credentials to file coin-teams.properties
+  sed -i "s/\[ENGINEBLOCK_DB_USER\]/$engineblock_db_user/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+  sed -i "s/\[ENGINEBLOCK_DB_PASS\]/$engineblock_db_pass/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+  sed -i "s/\[TEAMS_DB_USER\]/$teams_db_user/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+  sed -i "s/\[TEAMS_DB_PASS\]/$teams_db_pass/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
 
   if [[ "$OC_VERSION" < "v46" ]]
   then
@@ -75,8 +81,8 @@ else
   fi
 
   # Uses the same schema as Grouper right now. This same statement is issued by teams-script, but running twice won't do harm.
-  mysql -u root --password=c0n3xt -e "create database if not exists teams;"
-  mysql -u root --password=c0n3xt teams < $OC_BASEDIR/data/teams.sql
+  mysql -u root --password=$ROOT_DB_PASS -e "create database if not exists teams;"
+  mysql -u root --password=$ROOT_DB_PASS teams < $OC_BASEDIR/data/teams.sql
 
 
   GSH_SCRIPT=`mktemp`

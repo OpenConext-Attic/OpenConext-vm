@@ -6,8 +6,8 @@ chkconfig mysqld on
 
 # configure MySQL (WARNING: this is insecure!)
 
-if ! mysqladmin -u root --password=c0n3xt ping 2> /dev/null | grep -q "mysqld is alive"
+if ! mysqladmin -u root --password=$ROOT_DB_PASS ping 2> /dev/null | grep -q "mysqld is alive"
 then
-	mysqladmin -u root password 'c0n3xt'
+	mysqladmin -u root password $ROOT_DB_PASS
 fi
-echo "grant all privileges on *.* to 'root'@'%' identified by 'c0n3xt';" | mysql -u root --password=c0n3xt mysql
+echo "grant all privileges on *.* to 'root'@'%' identified by '$ROOT_DB_PASS';" | mysql -u root --password=$ROOT_DB_PASS mysql

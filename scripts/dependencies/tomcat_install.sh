@@ -25,6 +25,20 @@ cp -f $OC_BASEDIR/configs/tomcat6/conf/server.xml $CATALINA_HOME/conf/server.xml
 cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat6.conf $CATALINA_HOME/conf/tomcat6.conf
 cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat-users.xml $CATALINA_HOME/conf/tomcat-users.xml
 
+# Applying credentials from oc_config
+sed -i "s/GrouperSystem/$GROUPER_SYSTEM_USER/g" $CATALINA_HOME/conf/tomcat-users.xml
+sed -i "s/GrouperSystemPassword/$GROUPER_SYSTEM_PASS/g" $CATALINA_HOME/conf/tomcat-users.xml
+
+sed -i "s/engineUser/$GROUPER_ENGINE_USER/g" $CATALINA_HOME/conf/tomcat-users.xml
+sed -i "s/engineUserPassword/$GROUPER_ENGINE_PASS/g" $CATALINA_HOME/conf/tomcat-users.xml
+
+sed -i "s/unitTestUser/$GROUPER_UNIT_TEST_USER/g" $CATALINA_HOME/conf/tomcat-users.xml
+sed -i "s/unitTestUserPassword/$GROUPER_UNIT_TEST_PASS/g" $CATALINA_HOME/conf/tomcat-users.xml
+
+sed -i "s/apiUser/$GROUPER_API_USER/g" $CATALINA_HOME/conf/tomcat-users.xml
+sed -i "s/apiUserPassword/$GROUPER_API_PASS/g" $CATALINA_HOME/conf/tomcat-users.xml
+
+
 if keytool -list -alias 'openconext cacert' -keystore /etc/pki/java/cacerts \
     -storepass changeit -noprompt > /dev/null
 then

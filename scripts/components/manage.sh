@@ -12,8 +12,7 @@ $GITRESET # revert potential changes
 $GITFETCH
 $GITCHECKOUT ${MANAGE_VERSION}
 
-mysql -u root --password=c0n3xt -e "drop database if exists manage; create database manage default charset utf8 default collate utf8_unicode_ci;"
-
+mysql -u root --password=$ROOT_DB_PASS -e "drop database if exists manage; create database manage default charset utf8 default collate utf8_unicode_ci;"
 
 cat $OC_BASEDIR/configs/httpd/conf.d/manage.conf  | \
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
@@ -29,6 +28,14 @@ fi
 
 install -d /etc/surfconext/
 sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/manage.ini > /etc/surfconext/manage.ini
+
+# Apply credentials to file manage.ini
+sed -i "s/\[MANAGE_DB_USER\]/$MANAGE_DB_USER/g" /etc/surfconext/manage.ini
+sed -i "s/\[MANAGE_DB_PASS\]/$MANAGE_DB_PASS/g" /etc/surfconext/manage.ini
+sed -i "s/\[ENGINEBLOCK_DB_USER\]/$ENGINEBLOCK_DB_USER/g" /etc/surfconext/manage.ini
+sed -i "s/\[ENGINEBLOCK_DB_PASS\]/$ENGINEBLOCK_DB_PASS/g" /etc/surfconext/manage.ini
+sed -i "s/\[SERVICEREGISTRY_DB_USER\]/$SERVICEREGISTRY_DB_USER/g" /etc/surfconext/manage.ini
+sed -i "s/\[SERVICEREGISTRY_DB_PASS\]/$SERVICEREGISTRY_DB_PASS/g" /etc/surfconext/manage.ini
 
 CRT_NO_HEADERS=`sed '1d;$d' /etc/surfconext/engineblock.crt` &&
 echo "auth.simplesamlphp.idp.cert = \"${CRT_NO_HEADERS}\"" >> /etc/surfconext/manage.ini

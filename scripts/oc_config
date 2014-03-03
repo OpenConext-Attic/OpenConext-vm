@@ -1,0 +1,130 @@
+#! /bin/bash
+##################################################################################################
+#                                                                                                #
+# Configuration and Credentials file for OpenConext                                              #
+#                                                                                                #
+##################################################################################################
+#    
+#
+# This file holds the default configuration and credentials.
+# Passwords are set with standard values in this script, this is not safe to use, change them 
+# either to values you configured previously, or run script XYZ 
+# to seed the values with random values
+#
+# Usernames may be changed, but only if it's not mentioned in the notes
+# Use strong passwords, generate them via shell with:
+# tr -c -d '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' </dev/urandom | dd bs=15 count=1 2>/dev/null;echo
+#
+# TODO: replace with script for password setting
+
+# The default domain will be used as the base domain for all components.
+# Components will be named XYZ.DEFAULT_DOMAIN, so e.g. engine.demo.openconext.org
+DEFAULT_DOMAIN=demo.openconext.org
+
+# This is the default set of components in an install
+# Available components are: EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD (v62, 2014-03-03)
+DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
+
+# When installing OpenConext a new CA is created. The passsword for the CA private key is set here
+CA_KEY_PASSWORD=mysecret
+
+
+##################################################################################################
+#                                                                                                #    
+# New MySQL database users and passwords                                                         #
+#                                                                                                #
+##################################################################################################
+#
+# This section defines username and passwords for various components that neerd the mysql database. 
+# For a decription of the various components see https://www.openconext.org
+
+# New MySQL root password
+ROOT_DB_PASS="rootpassw0rd"
+
+# New MySQL engine user and password
+ENGINE_DB_USER="engine2mysql"
+ENGINE_DB_PASS="enginepass"
+
+# New MySQL serviceregistry (JANUS) user and password
+serviceregistry_db_user="sr2mysql"
+serviceregistry_db_pass="srpass"
+
+# New MySQL manage user and password
+manage_db_user="manage2mysql"
+manage_db_pass="managepass"
+
+# New MySQL teams user and password
+teams_db_user="teams2mysql"
+teams_db_pass="teamspass"
+
+# New MySQL api user and password
+api_db_user="api2mysql"
+api_db_pass="apipass"
+
+##################################################################################################
+#                                                                                                #    
+# ServiceRegistry (JANUS)                                                                        #
+#                                                                                                #
+##################################################################################################
+#
+# This section sets the credentials for the simplesaml install that is the basis for ServiceRegistry (Janus)
+# 
+# This section also sets the credentials for the ServiceRegistry REST API clients
+# These users will be set in MySQL database 'serviceregistry.janus__user'
+
+# Serviceregistry (JANUS) local admin password
+# The adminpass is the localadmin login for JANUS (simplesamlphp)
+# Local admin login can only be used when authsource is set to 'auth' -> 'admin' and 'useridattr' -> 'user'
+# This can be done in /etc/surfconext/serviceregistry.module_janus.php and is already preconfigured
+JANUSADMIN_PASS="januspass"
+
+# This is a secret salt used by simpleSAMLphp (JANUS) when it needs to generate a secure hash of a value.
+# Use a strong secret salt, this can be a valid string of any length
+# A possible way to generate a random salt is by running the following command from a unix shell:
+# tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo
+JANUS_SECRETSALT="janussecret"
+
+# Serviceregistry (JANUS) API user for 'engineblock'
+# Warning: do not change the value of engineblock_janusapi_user, value has to be "engine" in current script!
+ENGINE_JANUSAPI_USER="engine"
+ENGINE_JANUSAPI_PASS="enginejanuspass"
+
+
+# Serviceregistry (JANUS) API user for 'api'
+# Warning: api user is at the moment also named 'engine' user because api user doesn't exist yet.
+api_janusapi_user="engine"
+api_janusapi_pass="enginejanuspass"
+
+##################################################################################################
+#                                                                                                #    
+# Grouper (client) users and passwords                                                                       #
+#                                                                                                #
+##################################################################################################
+#
+# Grouper is used by engine, api and teams to store group information
+# Client credentials are stored in tomcat's tomcat-users.xml file
+GROUPER_SYSTEM_USER="GrouperSystem"
+GROUPER_SYSTEM_PASS="Ah75DGe8Ef"
+
+GROUPER_ENGINE_USER="engine"
+GROUPER_ENGINE_PASS="KJ75DFeg32a"
+
+# TODO: NO API user credentials????
+GROUPER_API_USER="engine"
+GROUPER_API_PASS="KJ75DFeg32a"
+
+GROUPER_UNIT_TEST_USER="gadget"
+GROUPER_UNIT_TEST_PASS="7453E1E58216"
+
+
+##################################################################################################
+#                                                                                                #    
+# LDAP users and passwords                                                                       #
+#                                                                                                #
+##################################################################################################
+#
+# LDAP is used by engine, grouper and api to store user profile information
+
+LDAP_USER="ldap_root"
+LDAP_PASS="ldappass"
+

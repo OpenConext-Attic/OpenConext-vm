@@ -32,7 +32,7 @@ else
 
   # Initialize Grouper schema
   # Uses the same schema as Teams right now. This same statement is issued by teams-script, but running twice won't do harm.
-  mysql -u root --password=c0n3xt -e "create database if not exists teams;"
+  mysql -u root --password=$ROOT_DB_PASS -e "create database if not exists teams;"
 
   echo "Downloading and installing Grouper Shell in /opt/www/grouper-shell..."
   cd /opt/www
@@ -75,11 +75,14 @@ EOS
 
   cat << EOS | runGshScript "applications"
 // Basic users (applications) of the system
-addSubject("gadget", "person", "gadget")
-addMember("etc:sysadmingroup","gadget");
+addSubject("$GROUPER_UNIT_TEST_USER", "person", "$GROUPER_UNIT_TEST_USER")
+addMember("etc:sysadmingroup","$GROUPER_UNIT_TEST_USER");
 
-addSubject("engine", "person", "engine")
-addMember("etc:sysadmingroup","engine");
+addSubject("$GROUPER_ENGINE_USER", "person", "$GROUPER_ENGINE_USER")
+addMember("etc:sysadmingroup","$GROUPER_ENGINE_USER");
+
+addSubject("$GROUPER_API_USER", "person", "$GROUPER_ENGINE_USER")
+addMember("etc:sysadmingroup","$GROUPER_API_USER");
 EOS
 
   install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN

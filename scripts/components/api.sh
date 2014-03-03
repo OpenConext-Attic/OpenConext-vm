@@ -58,6 +58,16 @@ else
   cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-ehcache.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-ehcache.xml
   cp /tmp/coin-api.properties /usr/share/tomcat6/conf/classpath_properties/
 
+  # ToDo: How to set these values in api-properties?? as we have no handle
+  # Apply credentials to file coin-api.properties
+  sed -i "s/\[ENGINEBLOCK_DB_USER\]/$engineblock_db_user/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/\[ENGINEBLOCK_DB_PASS\]/$engineblock_db_pass/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/\[TEAMS_DB_USER\]/$teams_db_user/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/\[TEAMS_DB_PASS\]/$teams_db_pass/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/\[API_DB_USER\]/$api_db_user/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/\[API_DB_PASS\]/$api_db_pass/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/\[API_JANUSAPI_USER\]/$api_janusapi_user/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/\[API_JANUSAPI_PASS\]/$api_janusapi_pass/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
 
   install -d /usr/share/tomcat6/webapps/api.$OC_DOMAIN
   chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
@@ -65,7 +75,7 @@ else
   SERVERXMLLINE='<Host name="api.'$OC_DOMAIN'" appBase="webapps/api.'$OC_DOMAIN'"/>'
   sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
 
-  mysql -u root --password=c0n3xt -e "create database if not exists api default charset utf8 default collate utf8_unicode_ci;"
+  mysql -u root --password=$ROOT_DB_PASS -e "create database if not exists api default charset utf8 default collate utf8_unicode_ci;"
 
   cat $OC_BASEDIR/configs/httpd/conf.d/api.conf  | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \

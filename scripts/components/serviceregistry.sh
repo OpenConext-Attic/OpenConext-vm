@@ -38,6 +38,10 @@ then
   install -d  /etc/surfconext/serviceregistry-certs/
   cp /etc/surfconext/engineblock.crt /etc/surfconext/serviceregistry-certs/engineblock.crt
 
+  # Use oc_config settings for admin passwd and secret salt for ssp
+  sed -i "s/\'admin\'/$JANUSADMIN_PASS/g" /etc/surfconext/manage.ini
+  sed -i "s/defaultsecretsalt/$JANUS_SECRETSALT/g" /etc/surfconext/manage.ini
+
 fi
 
 ./bin/composer.phar install

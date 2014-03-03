@@ -14,10 +14,9 @@ source $OC_SCRIPTDIR/common.sh
 
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
-DEFAULT_DOMAIN=demo.openconext.org
+# Working on that now ;)
 
-# this is the default set of components in an install
-DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
+
 
 
 # Override defaults with variables from invoking shell.
@@ -72,7 +71,7 @@ then
   echo "Possible options are:"
   echo "1. Core Components (default) [EngineBlock, Service registry, Manage, API, Teams, Mujina IDP/SP]"
   echo "2. All Components [EngineBlock, Service registry, Manage, API, Teams, Mujina IDP/SP, Cruncher, Apis, CSA]"
-  echo "3. Minimal Components [EngineBlock, Service registry, Mujina IDP/SP]"
+  echo "3. Minimal Components for SAML proxy [EngineBlock, Service registry, Mujina IDP/SP]"
   echo "4. Mix and match (experts only)"
   echo
   echo -n "Component choice: [1]: "
@@ -158,9 +157,10 @@ for subscript in \
   hosts_install.sh \
   iptables.sh \
   openconext_infra_httpd.sh \
-  samba_install.sh \
+  # samba_install.sh \
   openconext_custom_certificates.sh \
-  openconext_static.sh
+  openconext_static.sh \
+  ntp_install.sh
 do
   echo "Running dependency script $subscript..."
   source $OC_SCRIPTDIR/dependencies/$subscript
@@ -241,12 +241,14 @@ fi
 if echo $OC_COMPONENTS | grep -q API
 then
   echo "Installing API..."
+  # ToDo: Fix setting config in properties
   source $OC_SCRIPTDIR/components/api.sh
 fi
 
 if echo $OC_COMPONENTS | grep -q TEAMS
 then
   echo "Installing Teams..."
+	# ToDo: Fix setting config in properties
   source $OC_SCRIPTDIR/components/teams.sh
 fi
 

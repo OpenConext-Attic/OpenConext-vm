@@ -26,5 +26,11 @@ sleep 2
 # Import needed entries
 ldapadd -x -D cn=admin,dc=surfconext,dc=nl -h localhost -w c0n3xt -f $OC_BASEDIR/configs/ldap/ldap-entries.ldif
 
+echo "Create a new LDAP passwd for slapd.conf based on co_config"
+slapd_pass=`slappasswd -n -s $LDAP_PASS`
+echo $slapd_pass
+sed -i "s/\[SLAPD_PASS\]/$slapd_pass/g" /etc/openldap/slapd.conf
+
+
 # restart ldap
 service slapd restart
