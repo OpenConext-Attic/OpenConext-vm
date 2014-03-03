@@ -27,14 +27,14 @@ curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v62 | tar zx
 Run the install script:
 
 ```bash
-bash OpenConext-vm-v62/scripts/install_openconext.sh
+bash OpenConext-vm-62/scripts/install_openconext.sh
 ```
 
 By default, the installer will run an 'unattended' setup, choosing sensible defaults.
 If you want to install a specific version of the platform, install a subset of components or change the default domain (demo.openconext.org), run the installer with a ````-i```` flag:
 
 ```bash
-bash OpenConext-vm-v62/scripts/install_openconext.sh -i
+bash OpenConext-vm-62/scripts/install_openconext.sh -i
 ```
 
 ## Option 2. Letting Vagrant set up a new virtual machine.
