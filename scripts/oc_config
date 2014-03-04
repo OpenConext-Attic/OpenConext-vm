@@ -28,8 +28,12 @@ DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 # When installing OpenConext a new CA is created. The passsword for the CA private key is set here
 CA_KEY_PASSWORD=mysecret
 
-# The Email adress for this installation to use as default mail adress
-ADMIN_EMAIL=nobody@example.org
+# The Admin name and email adress for this installation to use as default mail adress
+OC__ADMIN_NAME="OpenConext Administrator"
+OC__ADMIN_EMAIL=nobody@example.org
+
+# Default timezone
+OC__TIMEZONE = "Europe/Amsterdam"
 
 
 ##################################################################################################
