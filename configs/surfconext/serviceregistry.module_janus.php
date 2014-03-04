@@ -6,8 +6,8 @@
  * please see serviceregistry/config/module_janus.php
  */
 
-$config['admin.name']  = 'SURFconext admin';
-$config['admin.email'] = 'surfconext-admin@example.edu';
+$config['admin.name']  = '_OC__ADMIN_NAME_';
+$config['admin.email'] = '_OC__ADMIN_EMAIL_';
 
 /*
  * Auth source used to gain access to JANUS
@@ -23,8 +23,8 @@ $config['useridattr'] = 'urn:mace:dir:attribute-def:eduPersonTargetedID';
 
 $config['store'] = array(
     'dsn'       => 'mysql:host=localhost;dbname=serviceregistry',
-    'username'  => 'root',
-    'password'  => 'c0n3xt',
+    'username'  => '_SERVICEREGISTRY_DB_USER_',
+    'password'  => '_SERVICEREGISTRY_DB_PASS_',
     'prefix'    => 'janus__',
 );
 
