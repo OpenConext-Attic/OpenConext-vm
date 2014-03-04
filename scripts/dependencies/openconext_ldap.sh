@@ -29,7 +29,7 @@ ldapadd -x -D cn=admin,dc=surfconext,dc=nl -h localhost -w c0n3xt -f $OC_BASEDIR
 echo "Create a new LDAP passwd for slapd.conf based on co_config"
 slapd_pass=`slappasswd -n -s $OC_LDAP_PASS`
 echo $slapd_pass
-sed -i "s/_OC__SLAPD_PASS/$slapd_pass/g" /etc/openldap/slapd.conf
+sed -i "s/_OC__SLAPD_PASS_/$slapd_pass/g" /etc/openldap/slapd.conf
 
 
 # restart ldap
