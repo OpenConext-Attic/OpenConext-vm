@@ -23,6 +23,15 @@ cp -f tomcat/conf/classpath_properties/log4j.properties /usr/share/tomcat6/conf/
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/sources.xml
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
 
+# Apply credentials to file coin-teams.properties
+sed -i "s/_OC__ENGINEBLOCK_DB_USER_/$OC__ENGINEBLOCK_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+sed -i "s/_OC__ENGINEBLOCK_DB_PASS_/$OC__ENGINEBLOCK_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+
+# Apply credentials to file grouper.hibernate.properties
+sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
+sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
 
 if $UPGRADE
 then
@@ -75,14 +84,14 @@ EOS
 
   cat << EOS | runGshScript "applications"
 // Basic users (applications) of the system
-addSubject("$GROUPER_UNIT_TEST_USER", "person", "$GROUPER_UNIT_TEST_USER")
-addMember("etc:sysadmingroup","$GROUPER_UNIT_TEST_USER");
+addSubject("$OC__GROUPER_UNIT_TEST_USER", "person", "$OC__GROUPER_UNIT_TEST_USER")
+addMember("etc:sysadmingroup","$OC__GROUPER_UNIT_TEST_USER");
 
-addSubject("$GROUPER_ENGINE_USER", "person", "$GROUPER_ENGINE_USER")
-addMember("etc:sysadmingroup","$GROUPER_ENGINE_USER");
+addSubject("$OC__GROUPER_ENGINE_USER", "person", "$OC__GROUPER_ENGINE_USER")
+addMember("etc:sysadmingroup","$OC__GROUPER_ENGINE_USER");
 
-addSubject("$GROUPER_API_USER", "person", "$GROUPER_ENGINE_USER")
-addMember("etc:sysadmingroup","$GROUPER_API_USER");
+addSubject("$OC__GROUPER_API_USER", "person", "$OC__GROUPER_API_USER")
+addMember("etc:sysadmingroup","$OC__GROUPER_API_USER");
 EOS
 
   install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN
