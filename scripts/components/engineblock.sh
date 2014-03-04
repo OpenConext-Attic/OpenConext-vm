@@ -29,13 +29,13 @@ else
   mkdir -p /opt/www/attribute-manipulations
 
   # Create database
-  mysql -u root --password=$ROOT_DB_PASS -e "drop database if exists engineblock; create database engineblock default charset utf8 default collate utf8_unicode_ci;"
+  mysql -u root --password=$OC__ROOT_DB_PASS -e "drop database if exists engineblock; create database engineblock default charset utf8 default collate utf8_unicode_ci;"
   cat $OC_BASEDIR/data/engineblock.sql | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
-    mysql -u root --password=$ROOT_DB_PASS engineblock
+    mysql -u root --password=$OC__ROOT_DB_PASS engineblock
 
   # Set database creadentials for engine
-  mysql -uroot -p$ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON engineblock.* TO $ENGINE_DB_USER@localhost IDENTIFIED BY '$ENGINE_DB_PASS'"
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON engineblock.* TO $OC__ENGINE_DB_USER@localhost IDENTIFIED BY '$OC__ENGINE_DB_PASS'"
   echo "User for database 'engineblock' updated sucessfully"
 
 
@@ -50,12 +50,15 @@ else
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/engineblock.ini > /etc/surfconext/engineblock.ini
 
   # Apply db credentials to file engineblock.ini
-  sed -i "s/\[engineblock_db_user\]/$ENGINE_DB_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/\[engineblock_db_pass\]/$ENGINE_DB_PASS/g" /etc/surfconext/engineblock.ini
+  sed -i "s/_OC__ENGINEBLOCK_DB_USER_/$OC__ENGINE_DB_USER/g" /etc/surfconext/engineblock.ini
+  sed -i "s/_OC__ENGINEBLOCK_DB_PASS_/$OC__ENGINE_DB_PASS/g" /etc/surfconext/engineblock.ini
 
   # Apply janus api credentials to file engineblock.ini
-  sed -i "s/\[engine_janusapi_user\]/$ENGINE_JANUSAPI_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/\[engine_janusapi_pass\]/$ENGINE_JANUSAPI_PASS/g" /etc/surfconext/engineblock.ini
+  sed -i "s/_OC__ENGINE_JANUSAPI_USER_/$OC__ENGINE_JANUSAPI_USER/g" /etc/surfconext/engineblock.ini
+  sed -i "s/_OC__ENGINE_JANUSAPI_PASS_/$OC__ENGINE_JANUSAPI_PASS/g" /etc/surfconext/engineblock.ini
+
+  # Apply timezone to file engineblock.ini
+  sed -i "s/_OC__TIMEZONE_/$OC__TIMEZONE/g" /etc/surfconext/engineblock.ini
 
   # Edit the profile.sh file to set correct environment variable
   echo 'export ENGINEBLOCK_ENV="demo"' > /etc/profile.d/openconext.sh
@@ -87,11 +90,11 @@ else
   chmod o+w /var/log/surfconext/engineblock.log
 
     # Updating LDAP schema some more...
-  ldapmodify -x -D cn=admin,cn=config -h localhost -w $LDAP_PASS -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
-  ldapmodify -x -D cn=admin,cn=config -h localhost -w $LDAP_PASS -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
+  ldapmodify -x -D cn=admin,cn=config -h localhost -w $OC__LDAP_PASS -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
+  ldapmodify -x -D cn=admin,cn=config -h localhost -w $OC__LDAP_PASS -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
 
   # Apply LDAP credentials to file engineblock.ini
-  sed -i "s/\[engine_ldap_passwd\]/$LDAP_PASS/g" /etc/surfconext/engineblock.ini
+  sed -i "s/_OC__ENGINE_LDAP_PASSWD_/$OC__LDAP_PASS/g" /etc/surfconext/engineblock.ini
 
   # Update apache conf
   cat $OC_BASEDIR/configs/httpd/conf.d/engine.conf  | \
