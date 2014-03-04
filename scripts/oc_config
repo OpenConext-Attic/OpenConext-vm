@@ -46,27 +46,27 @@ OC__TIMEZONE = "Europe/Amsterdam"
 # For a decription of the various components see https://www.openconext.org
 
 # New MySQL root password
-ROOT_DB_PASS="rootpassw0rd"
+OC__ROOT_DB_PASS="rootpassw0rd"
 
 # New MySQL engine user and password
-ENGINE_DB_USER="engine2mysql"
-ENGINE_DB_PASS="enginepass"
+OC__ENGINE_DB_USER="engine2mysql"
+OC__ENGINE_DB_PASS="enginepass"
 
 # New MySQL serviceregistry (JANUS) user and password
-SERVICEREGISTRY_DB_USER="sr2mysql"
-SERVICEREGISTRY_DB_PASS="srpass"
+OC__SERVICEREGISTRY_DB_USER="sr2mysql"
+OC__SERVICEREGISTRY_DB_PASS="srpass"
 
 # New MySQL manage user and password
-MANAGE_DB_USER="manage2mysql"
-MANAGE_DB_PASS="managepass"
+OC__MANAGE_DB_USER="manage2mysql"
+OC__MANAGE_DB_PASS="managepass"
 
 # New MySQL teams user and password
-TEAMS_DB_USER="teams2mysql"
-TEAMS_DB_PASS="teamspass"
+OC__TEAMS_DB_USER="teams2mysql"
+OC__TEAMS_DB_PASS="teamspass"
 
 # New MySQL api user and password
-API_DB_USER="api2mysql"
-API_DB_PASS="apipass"
+OC__API_DB_USER="api2mysql"
+OC__API_DB_PASS="apipass"
 
 ##################################################################################################
 #                                                                                                #    
@@ -93,14 +93,14 @@ janus_secretsalt="janussecret"
 
 # Serviceregistry (JANUS) API user for 'engineblock'
 # Warning: do not change the value of engineblock_janusapi_user, value has to be "engine" in current script!
-ENGINE_JANUSAPI_USER="engine"
-ENGINE_JANUSAPI_PASS="enginejanuspass"
+OC__ENGINE_JANUSAPI_USER="engine"
+OC__ENGINE_JANUSAPI_PASS="enginejanuspass"
 
 
 # Serviceregistry (JANUS) API user for 'api'
 # Warning: api user is at the moment also named 'engine' user because api user doesn't exist yet.
-API_JANUSAPI_USER="engine"
-API_JANUSAPI_PASS="enginejanuspass"
+OC__API_JANUSAPI_USER="engine"
+OC__API_JANUSAPI_PASS="enginejanuspass"
 
 ##################################################################################################
 #                                                                                                #    
@@ -110,18 +110,18 @@ API_JANUSAPI_PASS="enginejanuspass"
 #
 # Grouper is used by engine, api and teams to store group information
 # Client credentials are stored in tomcat's tomcat-users.xml file
-GROUPER_SYSTEM_USER="GrouperSystem"
-GROUPER_SYSTEM_PASS="Ah75DGe8Ef"
+OC__GROUPER_SYSTEM_USER="GrouperSystem"
+OC__GROUPER_SYSTEM_PASS="Ah75DGe8Ef"
 
-GROUPER_ENGINE_USER="engine"
-GROUPER_ENGINE_PASS="KJ75DFeg32a"
+OC__GROUPER_ENGINE_USER="engine"
+OC__GROUPER_ENGINE_PASS="KJ75DFeg32a"
 
 # TODO: NO API user credentials????
-GROUPER_API_USER="engine"
-GROUPER_API_PASS="KJ75DFeg32a"
+OC__GROUPER_API_USER="engine"
+OC__GROUPER_API_PASS="KJ75DFeg32a"
 
-GROUPER_UNIT_TEST_USER="gadget"
-GROUPER_UNIT_TEST_PASS="7453E1E58216"
+OC__GROUPER_UNIT_TEST_USER="gadget"
+OC__GROUPER_UNIT_TEST_PASS="7453E1E58216"
 
 
 ##################################################################################################
@@ -132,6 +132,6 @@ GROUPER_UNIT_TEST_PASS="7453E1E58216"
 #
 # LDAP is used by engine, grouper and api to store user profile information
 
-LDAP_USER="ldap_root"
-LDAP_PASS="ldappass"
+OC__LDAP_USER="ldap_root"
+OC__LDAP_PASS="ldappass"
 
