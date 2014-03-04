@@ -46,20 +46,20 @@ ENGINE_DB_USER="engine2mysql"
 ENGINE_DB_PASS="enginepass"
 
 # New MySQL serviceregistry (JANUS) user and password
-serviceregistry_db_user="sr2mysql"
-serviceregistry_db_pass="srpass"
+SERVICEREGISTRY_DB_USER="sr2mysql"
+SERVICEREGISTRY_DB_PASS="srpass"
 
 # New MySQL manage user and password
-manage_db_user="manage2mysql"
-manage_db_pass="managepass"
+MANAGE_DB_USER="manage2mysql"
+MANAGE_DB_PASS="managepass"
 
 # New MySQL teams user and password
-teams_db_user="teams2mysql"
-teams_db_pass="teamspass"
+TEAMS_DB_USER="teams2mysql"
+TEAMS_DB_PASS="teamspass"
 
 # New MySQL api user and password
-api_db_user="api2mysql"
-api_db_pass="apipass"
+API_DB_USER="api2mysql"
+API_DB_PASS="apipass"
 
 ##################################################################################################
 #                                                                                                #    
@@ -76,13 +76,13 @@ api_db_pass="apipass"
 # The adminpass is the localadmin login for JANUS (simplesamlphp)
 # Local admin login can only be used when authsource is set to 'auth' -> 'admin' and 'useridattr' -> 'user'
 # This can be done in /etc/surfconext/serviceregistry.module_janus.php and is already preconfigured
-JANUSADMIN_PASS="januspass"
+janusadmin_pass="januspass"
 
 # This is a secret salt used by simpleSAMLphp (JANUS) when it needs to generate a secure hash of a value.
 # Use a strong secret salt, this can be a valid string of any length
 # A possible way to generate a random salt is by running the following command from a unix shell:
 # tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo
-JANUS_SECRETSALT="janussecret"
+janus_secretsalt="janussecret"
 
 # Serviceregistry (JANUS) API user for 'engineblock'
 # Warning: do not change the value of engineblock_janusapi_user, value has to be "engine" in current script!
@@ -92,8 +92,8 @@ ENGINE_JANUSAPI_PASS="enginejanuspass"
 
 # Serviceregistry (JANUS) API user for 'api'
 # Warning: api user is at the moment also named 'engine' user because api user doesn't exist yet.
-api_janusapi_user="engine"
-api_janusapi_pass="enginejanuspass"
+API_JANUSAPI_USER="engine"
+API_JANUSAPI_PASS="enginejanuspass"
 
 ##################################################################################################
 #                                                                                                #    
