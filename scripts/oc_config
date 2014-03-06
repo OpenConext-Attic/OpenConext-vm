@@ -7,8 +7,8 @@
 #    
 #
 # This file holds the default configuration and credentials.
-# Passwords are set with standard values in this script, this is not safe to use, change them 
-# either to values you configured previously, or run script XYZ 
+# Passwords are set with standard values in this script, THIS IS NOT SAFE!!!, 
+# change them either to values you configured previously, or run script XYZ 
 # to seed the values with random values
 #
 # Usernames may be changed, but only if it's not mentioned in the notes
@@ -22,7 +22,8 @@
 DEFAULT_DOMAIN=demo.openconext.org
 
 # This is the default set of components in an install
-# Available components are: EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD (v62, 2014-03-03)
+# Available components are: EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD 
+# (v62, 2014-03-03)
 DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 
 # When installing OpenConext a new CA is created. The passsword for the CA private key is set here
@@ -30,7 +31,7 @@ CA_KEY_PASSWORD=mysecret
 
 # The Admin name and email adress for this installation to use as default mail adress
 OC__ADMIN_NAME="OpenConext Administrator"
-OC__ADMIN_EMAIL=nobody@example.org
+OC__ADMIN_EMAIL="openconext@example.org"
 
 # Default timezone
 OC__TIMEZONE = "Europe/Amsterdam"
@@ -38,11 +39,11 @@ OC__TIMEZONE = "Europe/Amsterdam"
 
 ##################################################################################################
 #                                                                                                #    
-# New MySQL database users and passwords                                                         #
+# MySQL database users and passwords                                                             #
 #                                                                                                #
 ##################################################################################################
 #
-# This section defines username and passwords for various components that neerd the mysql database. 
+# This section defines username and passwords for various components that need the mysql database. 
 # For a decription of the various components see https://www.openconext.org
 
 # New MySQL root password
