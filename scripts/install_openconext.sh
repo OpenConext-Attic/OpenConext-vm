@@ -250,31 +250,28 @@ then
   source $OC_SCRIPTDIR/components/teams.sh
 fi
 
-if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" == "master" ]]
+if echo $OC_COMPONENTS | grep -q APIS
 then
-  if echo $OC_COMPONENTS | grep -q APIS
-  then
-    echo "Installing Apis..."
-    source $OC_SCRIPTDIR/components/apis.sh
-  fi
+  echo "Installing Apis..."
+  source $OC_SCRIPTDIR/components/apis.sh
+fi
 
-  if echo $OC_COMPONENTS | grep -q CRUNCHER
-  then
-    echo "Installing Cruncher..."
-    source $OC_SCRIPTDIR/components/cruncher.sh
-  fi
-  
-  if echo $OC_COMPONENTS | grep -q CSA
-  then
-    echo "Installing CSA..."
-    source $OC_SCRIPTDIR/components/csa.sh
-  fi
-  
-  if echo $OC_COMPONENTS | grep -q DASHBOARD
-  then
-    echo "Installing Dashboard..."
-    source $OC_SCRIPTDIR/components/selfservice.sh
-  fi
+if echo $OC_COMPONENTS | grep -q CRUNCHER
+then
+  echo "Installing Cruncher..."
+  source $OC_SCRIPTDIR/components/cruncher.sh
+fi
+
+if echo $OC_COMPONENTS | grep -q CSA
+then
+  echo "Installing CSA..."
+  source $OC_SCRIPTDIR/components/csa.sh
+fi
+
+if echo $OC_COMPONENTS | grep -q DASHBOARD
+then
+  echo "Installing Dashboard..."
+  source $OC_SCRIPTDIR/components/selfservice.sh
 fi
 
 # stop if running

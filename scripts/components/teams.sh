@@ -41,38 +41,14 @@ then
   rm -rf /usr/share/tomcat6/work/Catalina
   rm -rf /usr/share/tomcat6/webapps/*/*
 
-  if [[ "$OC_VERSION" == "v46" ]]
-  then
-    cp $TEAMS_DIST_BASEDIR/tomcat/conf/classpath_properties/teams-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/teams-logback.xml
-  fi
-
   backupFile /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
   perl $OC_SCRIPTDIR/tools/replaceProperties/replaceProperties.pl /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
 
 else
 
-  if [[ "$OC_VERSION" > "v45" || "$OC_VERSION" == "master" ]]
-  then
-    cp $TEAMS_DIST_BASEDIR/tomcat/conf/classpath_properties/teams-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/teams-logback.xml
-  fi
+  cp $TEAMS_DIST_BASEDIR/tomcat/conf/classpath_properties/teams-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/teams-logback.xml
   cp /tmp/grouper.client.properties /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
   cp /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
-
-
-  if [[ "$OC_VERSION" < "v46" ]]
-  then
-    sed -i \
-      -e "s~teamsURL=.*~teamsURL=https://teams.$OC_DOMAIN/teams~" \
-      /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
-  fi
-
-  if [[ "$OC_VERSION" < "v49" ]]
-  then
-  # This is fixed for new installations only; existing installations probably already have teams configured. We do not want to touch those.
-    sed -i \
-      -e "s/group-name-context=urn:collab:group:dev.surfteams.nl:/group-name-context=urn:collab:group:$OC_DOMAIN:/" \
-      /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
-  fi
 
   # Uses the same schema as Grouper right now. This same statement is issued by teams-script, but running twice won't do harm.
   mysql -u root --password=c0n3xt -e "create database if not exists teams;"

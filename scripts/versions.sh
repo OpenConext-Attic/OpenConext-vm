@@ -17,4 +17,4 @@ export SELFSERVICE_VERSION=develop
 export GROUPER_DIST_VERSION=3.13.0
 export GROUPER_VERSION=2.1.5
 # the version of this install
-#export OC_VERSION=develop
+export OC_VERSION=develop
