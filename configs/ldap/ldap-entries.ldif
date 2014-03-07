@@ -9,7 +9,7 @@ dn: cn=gadget,dc=surfconext,dc=nl
 objectClass: applicationProcess
 objectClass: top
 cn: gadget
- 
+
 dn: cn=engine,dc=surfconext,dc=nl
 objectClass: applicationProcess
 objectClass: simpleSecurityObject
