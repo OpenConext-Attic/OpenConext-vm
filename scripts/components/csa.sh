@@ -62,14 +62,9 @@ else
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
     /etc/httpd/conf.d/csa.conf
 
-  if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" == "master" ]]
-  then
       cat << EOS | runGshScript "openconext-ldap"
 addGroup("nl:surfnet:diensten","csa_admin","csa_admin");
 addMember("nl:surfnet:diensten:csa_admin","urn:collab:person:example.com:admin");
 EOS
     cd -
-  fi
-
-
 fi

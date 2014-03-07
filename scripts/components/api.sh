@@ -41,20 +41,12 @@ then
   rm -rf /usr/share/tomcat6/work/Catalina
   rm -rf /usr/share/tomcat6/webapps/*/*
 
-  if [[ "$OC_VERSION" == "v46" ]]
-  then
-    cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-logback.xml
-  fi
-
   backupFile /usr/share/tomcat6/conf/classpath_properties/coin-api.properties
   perl $OC_SCRIPTDIR/tools/replaceProperties/replaceProperties.pl /tmp/coin-api.properties /usr/share/tomcat6/conf/classpath_properties/coin-api.properties
 
 else
 
-  if [[ "$OC_VERSION" > "v45" || "$OC_VERSION" == "master" ]]
-  then
-    cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-logback.xml
-  fi
+  cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-logback.xml
   cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-ehcache.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-ehcache.xml
   cp /tmp/coin-api.properties /usr/share/tomcat6/conf/classpath_properties/
 
