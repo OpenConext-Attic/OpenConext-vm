@@ -15,8 +15,7 @@ source $OC_SCRIPTDIR/common.sh
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
 # Working on that now ;)
-
-
+source $OC_SCRIPTDIR/oc_config
 
 
 # Override defaults with variables from invoking shell.

@@ -84,13 +84,11 @@ OC__API_DB_PASS="apipass"
 # The adminpass is the localadmin login for JANUS (simplesamlphp)
 # Local admin login can only be used when authsource is set to 'auth' -> 'admin' and 'useridattr' -> 'user'
 # This can be done in /etc/surfconext/serviceregistry.module_janus.php and is already preconfigured
-janusadmin_pass="januspass"
+OC__JANUSADMIN_PASS="januspass"
 
 # This is a secret salt used by simpleSAMLphp (JANUS) when it needs to generate a secure hash of a value.
 # Use a strong secret salt, this can be a valid string of any length
-# A possible way to generate a random salt is by running the following command from a unix shell:
-# tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo
-janus_secretsalt="janussecret"
+OC__JANUS_SECRETSALT="janussecret"
 
 # Serviceregistry (JANUS) API user for 'engineblock'
 # Warning: do not change the value of engineblock_janusapi_user, value has to be "engine" in current script!
@@ -105,7 +103,7 @@ OC__API_JANUSAPI_PASS="enginejanuspass"
 
 ##################################################################################################
 #                                                                                                #    
-# Grouper (client) users and passwords                                                                       #
+# Grouper (client) users and passwords                                                           #
 #                                                                                                #
 ##################################################################################################
 #
@@ -135,4 +133,27 @@ OC__GROUPER_UNIT_TEST_PASS="7453E1E58216"
 
 OC__LDAP_USER="cn=ro,dc=surfconext,dc=nl"
 OC__LDAP_PASS="ldappass"
+
+
+##################################################################################################
+#                                                                                                #    
+# Software Install Locations                                                                     #
+#                                                                                                #
+##################################################################################################
+#
+# By default the installer uses the OpenConext Github repositories (http://github.com/openconext)
+# to install components. For deploying development versions of individual components, these may 
+# be pointed to other locations.
+# Do not change the locations unless YOU KNOW WHAT YOU ARE DOING. Errors will break the install!
+
+OC__API_REPO="https://github.com/OpenConext/OpenConext-api.git"
+OC__APIS_REPO="https://github.com/OpenConextApps/apis.git"
+OC__CRUNCHER_REPO="https://github.com/OpenConext/OpenConext-cruncher.git"
+OC__CSA_REPO="https://github.com/OpenConext/OpenConext-csa.git"
+OC__MANAGE_REPO="https://github.com/OpenConext/OpenConext-manage.git"
+OC__MUJINA_REPO="https://github.com/OpenConext/Mujina.git"
+OC__SELFSERVICE_REPO="https://github.com/OpenConext/OpenConext-selfservice.git"
+OC__SERVICEREGISTRY_REPO="https://github.com/OpenConext/OpenConext-serviceregistry.git"
+OC__SELFSERVICE_REPO="https://github.com/OpenConext/OpenConext-teams.git"
+
 
