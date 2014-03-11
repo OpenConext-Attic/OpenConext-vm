@@ -3,7 +3,7 @@
 if [ ! -d /opt/www/OpenConext-teams ]
 then
   cd /opt/www
-  $GITCLONE $OC__SELFSERVICE_REPO
+  $GITCLONE $OC__TEAMS_REPO
 fi
 
 cd /opt/www/OpenConext-teams

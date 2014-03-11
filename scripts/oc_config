@@ -152,6 +152,6 @@ OC__MANAGE_REPO="https://github.com/OpenConext/OpenConext-manage.git"
 OC__MUJINA_REPO="https://github.com/OpenConext/Mujina.git"
 OC__SELFSERVICE_REPO="https://github.com/OpenConext/OpenConext-selfservice.git"
 OC__SERVICEREGISTRY_REPO="https://github.com/OpenConext/OpenConext-serviceregistry.git"
-OC__SELFSERVICE_REPO="https://github.com/OpenConext/OpenConext-teams.git"
+OC__TEAMS_REPO="https://github.com/OpenConext/OpenConext-teams.git"
 
 
