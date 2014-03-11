@@ -23,17 +23,17 @@ DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 
 # By default the OpenConext VM will be set up with ssh (22) and https (443) open for all. 
 # If you do not want the setup to touch your firewall configuration, set SETUP_FIREWALL to FALSE
-SETUP_FIREWALL=TRUE
+SETUP_FIREWALL="TRUE"
 
 # When installing OpenConext a new CA is created. The passsword for the CA private key is set here
-CA_KEY_PASSWORD=mysecret
+CA_KEY_PASSWORD="mysecret"
 
 # The Admin name and email adress for this installation to use as default mail adress
 OC__ADMIN_NAME="OpenConext Administrator"
 OC__ADMIN_EMAIL="openconext@example.org"
 
 # Default timezone
-OC__TIMEZONE = "Europe/Amsterdam"
+OC__TIMEZONE="Europe/Amsterdam"
 
 
 ##################################################################################################
