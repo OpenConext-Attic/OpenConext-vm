@@ -8,14 +8,9 @@
 #
 # This file holds the default configuration and credentials.
 # Passwords are set with standard values in this script, THIS IS NOT SAFE!!!, 
-# change them either to values you configured previously, or run script XYZ 
+# change them either to values you configured previously, or run script 'oc_setpasswds.sh'
 # to seed the values with random values
 #
-# Usernames may be changed, but only if it's not mentioned in the notes
-# Use strong passwords, generate them via shell with:
-# tr -c -d '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' </dev/urandom | dd bs=15 count=1 2>/dev/null;echo
-#
-# TODO: replace with script for password setting
 
 # The default domain will be used as the base domain for all components.
 # Components will be named XYZ.DEFAULT_DOMAIN, so e.g. engine.demo.openconext.org
@@ -25,6 +20,10 @@ DEFAULT_DOMAIN=demo.openconext.org
 # Available components are: EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD 
 # (v62, 2014-03-03)
 DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
+
+# By default the OpenConext VM will be set up with ssh (22) and https (443) open for all. 
+# If you do not want the setup to touch your firewall configuration, set SETUP_FIREWALL to FALSE
+SETUP_FIREWALL=TRUE
 
 # When installing OpenConext a new CA is created. The passsword for the CA private key is set here
 CA_KEY_PASSWORD=mysecret
