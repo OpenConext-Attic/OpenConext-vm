@@ -156,7 +156,6 @@ for subscript in \
   hosts_install.sh \
   iptables.sh \
   openconext_infra_httpd.sh \
-  # samba_install.sh \
   openconext_custom_certificates.sh \
   openconext_static.sh \
   ntp_install.sh
