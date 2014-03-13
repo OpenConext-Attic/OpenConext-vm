@@ -1,5 +1,8 @@
 #!/bin/sh
 
+me=`basename $0`
+echo -e  "Running $me\n"
+
 # Remove existing schemas and entries
 service slapd stop
 rm -f /etc/openldap/schema/collab.schema
@@ -20,16 +23,17 @@ sleep 2
 rm -rf /etc/openldap/slapd.d/*
 sudo -u ldap /usr/sbin/slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d
 
-service slapd start
-sleep 2
-
-# Import needed entries
-ldapadd -x -D $OC__LDAPADMIN_USER -h localhost -w $OC__LDAPADMIN_PASS -f $OC_BASEDIR/configs/ldap/ldap-entries.ldif
 
 echo "Create a new LDAP passwd for slapd.conf based on co_config"
 slapd_pass=`slappasswd -n -s $OC_LDAP_PASS`
 echo $slapd_pass
 sed -i "s/_OC__SLAPD_PASS_/$slapd_pass/g" /etc/openldap/slapd.conf
+
+service slapd start
+sleep 2
+
+# Import needed entries
+ldapadd -x -D $OC__LDAPADMIN_USER -h localhost -w $OC__LDAPADMIN_PASS -f $OC_BASEDIR/configs/ldap/ldap-entries.ldif
 
 
 # restart ldap
