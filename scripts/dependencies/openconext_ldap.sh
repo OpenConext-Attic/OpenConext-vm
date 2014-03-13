@@ -16,17 +16,18 @@ cp $OC_BASEDIR/configs/ldap/nleduperson.schema    /etc/openldap/schema/
 cp $OC_BASEDIR/configs/ldap/collab.schema         /etc/openldap/schema/
 cp $OC_BASEDIR/configs/ldap/slapd.conf            /etc/openldap
 
+echo "Create a new LDAP passwd for slapd.conf based on co_config"
+slapd_pass=`slappasswd -n -s $OC__LDAPADMIN_PASS`
+echo $slapd_pass
+sed -i "s|_OC__SLAPD_PASS_|$slapd_pass|g" /etc/openldap/slapd.conf
+
+
 #remove the old config and generate a new one from the slapd.conf file
 service slapd start
 service slapd stop
 sleep 2
 rm -rf /etc/openldap/slapd.d/*
 sudo -u ldap /usr/sbin/slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d
-
-echo "Create a new LDAP passwd for slapd.conf based on co_config"
-slapd_pass=`slappasswd -n -s $OC__LDAP_PASS`
-echo $slapd_pass
-sed -i "s|_OC__SLAPD_PASS_|$slapd_pass|g" /etc/openldap/slapd.conf
 
 service slapd start
 sleep 2
