@@ -23,7 +23,6 @@ sleep 2
 rm -rf /etc/openldap/slapd.d/*
 sudo -u ldap /usr/sbin/slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d
 
-
 echo "Create a new LDAP passwd for slapd.conf based on co_config"
 slapd_pass=`slappasswd -n -s $OC__LDAP_PASS`
 echo $slapd_pass
