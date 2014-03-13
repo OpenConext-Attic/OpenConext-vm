@@ -32,7 +32,7 @@ sed -i "s|_OC__SLAPD_PASS_|$slapd_pass|g" /etc/openldap/slapd.conf
 service slapd start
 sleep 2
 
-# Import needed entries
+echo "Importing needed OpenConext entries"
 ldapadd -x -D $OC__LDAPADMIN_USER -h localhost -w $OC__LDAPADMIN_PASS -f $OC_BASEDIR/configs/ldap/ldap-entries.ldif
 
 
