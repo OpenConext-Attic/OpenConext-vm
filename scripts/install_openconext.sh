@@ -10,20 +10,17 @@ OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 OC_SCRIPTDIR=$OC_BASEDIR/scripts
 source $OC_SCRIPTDIR/common.sh
 
-
-
 # Defaults
 # TODO: Read from cached file, in case installation script is run again later on.
 # Working on that now ;)
 source $OC_SCRIPTDIR/oc_config
-
 
 # Override defaults with variables from invoking shell.
 # To use this, call like this:
 # $ DOMAIN=mydomain.com OC_COMPONENTS="EB SR MANAGE" bash install_openconext.sh
 OC_COMPONENTS=$([ "x$OC_COMPONENTS" == "x" ] && echo "$DEFAULT_OC_COMPONENTS" || echo "$OC_COMPONENTS")
 OC_DOMAIN=$([ "x$DOMAIN" == "x" ] && echo "$DEFAULT_DOMAIN" || echo "$DOMAIN")
-
+OC_CERT="1" # Use install default
 
 if [ $VERBOSE == "true" ]
 then
@@ -106,9 +103,13 @@ then
   echo
   echo "1. Generate a new set, based on the chosen base domain ($OC_DOMAIN)"
   echo "2. Bring your own certificates, (including trust chain)"
-
+  echo -n "Certificate choice: [1]: "
   read CERTCHOICE
   
+  if [ "$CERTCHOICE" != "" ]
+    then
+      CERTCHOICE=$OC_CERT
+  fi
 fi
 
 # Set the component versions as variables, for use in later scripts
