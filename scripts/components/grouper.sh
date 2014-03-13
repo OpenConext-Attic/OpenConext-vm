@@ -23,12 +23,6 @@ cp -f tomcat/conf/classpath_properties/log4j.properties /usr/share/tomcat6/conf/
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/sources.xml
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
 
-# Apply credentials to file coin-teams.properties
-sed -i "s/_OC__ENGINEBLOCK_DB_USER_/$OC__ENGINEBLOCK_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
-sed -i "s/_OC__ENGINEBLOCK_DB_PASS_/$OC__ENGINEBLOCK_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
-sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
-sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
-
 # Apply credentials to file grouper.hibernate.properties
 sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
 sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
