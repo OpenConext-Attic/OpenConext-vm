@@ -27,7 +27,21 @@ then
     sed \
       -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" \
       -e "s~_OPENCONEXT_CERT_~$OC_CERT~" | \
-    mysql -u root --password=$ROOT_DB_PASS serviceregistry
+    mysql -u root --password=$OC__ROOT_DB_PASS serviceregistry
+
+  # Create serviceregistry user/pass
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON serviceregistry.* TO $OC__SERVICEREGISTRY_DB_USER@localhost IDENTIFIED BY '$OC__SERVICEREGISTRY_DB_PASS'"
+  echo "User for database 'serviceregistry' updated sucessfully"
+
+  # Modify JANUS API access user for 'engine'
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "UPDATE serviceregistry.janus__user SET secret='$OC__ENGINE_JANUSAPI_PASS' WHERE userid='$OC__ENGINE_JANUSAPI_USER'"
+  echo "User for JANUS API access from 'engine' updated sucessfully"
+
+  # Modify JANUS API access user for 'api' ('api' is OpenConext API)
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "UPDATE serviceregistry.janus__user SET secret='$OC__API_JANUSAPI_PASS' WHERE userid='$OC__API_JANUSAPI_USER'"
+  echo "User for JANUS API access from 'api' updated sucessfully"
+
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
 
   if [ -f /etc/surfconext/serviceregistry.config.php ]
   then

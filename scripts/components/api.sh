@@ -82,6 +82,11 @@ else
 
   mysql -u root --password=$OC__ROOT_DB_PASS -e "create database if not exists api default charset utf8 default collate utf8_unicode_ci;"
 
+  # Create api user/pass
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON api.* TO $OC__API_DB_USER@localhost IDENTIFIED BY '$OC__API_DB_PASS'"
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
+  echo "User for database 'api' updated sucessfully"
+
   cat $OC_BASEDIR/configs/httpd/conf.d/api.conf  | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
     /etc/httpd/conf.d/api.conf

@@ -80,9 +80,13 @@ else
   fi
 
   # Uses the same schema as Grouper right now. This same statement is issued by teams-script, but running twice won't do harm.
-  mysql -u root --password=$ROOT_DB_PASS -e "create database if not exists teams;"
-  mysql -u root --password=$ROOT_DB_PASS teams < $OC_BASEDIR/data/teams.sql
+  mysql -u root --password=$OC__ROOT_DB_PASS -e "create database if not exists teams;"
+  mysql -u root --password=$OC__ROOT_DB_PASS teams < $OC_BASEDIR/data/teams.sql
 
+  # Create teams user/pass
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON teams.* TO $OC__TEAMS_DB_USER@localhost IDENTIFIED BY '$OC__TEAMS_DB_PASS'"
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
+  echo "User for database 'teams' updated sucessfully"
 
   GSH_SCRIPT=`mktemp`
 cat << EOS > $GSH_SCRIPT
