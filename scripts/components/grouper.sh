@@ -48,7 +48,7 @@ else
 
   # Substitute database parameters in hibernate configuration
   sed -i grouper.apiBinary-${GROUPER_VERSION}/conf/grouper.hibernate.properties \
-  -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://db.$OC_DOMAIN/teams~" \
+  -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://localhost/teams~" \
   -e "s~^hibernate.connection.username.*~hibernate.connection.username=$OC__TEAMS_DB_USER~" \
   -e "s~^hibernate.connection.password.*~hibernate.connection.password=$OC__TEAMS_DB_USER~"
 
