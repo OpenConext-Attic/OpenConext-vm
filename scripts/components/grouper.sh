@@ -24,8 +24,9 @@ sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_pro
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
 
 # Apply credentials to file grouper.hibernate.properties
-sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
-sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
+# Not in use, is replaced lateron in this script
+#sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
+#sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
 
 if $UPGRADE
 then
@@ -48,8 +49,8 @@ else
   # Substitute database parameters in hibernate configuration
   sed -i grouper.apiBinary-${GROUPER_VERSION}/conf/grouper.hibernate.properties \
   -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://db.$OC_DOMAIN/teams~" \
-  -e "s~^hibernate.connection.username.*~hibernate.connection.username=root~" \
-  -e "s~^hibernate.connection.password.*~hibernate.connection.password=c0n3xt~"
+  -e "s~^hibernate.connection.username.*~hibernate.connection.username=$OC__TEAMS_DB_USER~" \
+  -e "s~^hibernate.connection.password.*~hibernate.connection.password=$OC__TEAMS_DB_USER~"
 
   # Set properties in grouper props to
   # 1. autocreate the admin groups
