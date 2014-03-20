@@ -36,7 +36,7 @@ else
 
   # Initialize Grouper schema
   # Uses the same schema as Teams right now. This same statement is issued by teams-script, but running twice won't do harm.
-  mysql -u root --password=$ROOT_DB_PASS -e "create database if not exists teams;"
+  mysql -u root --password=$OC__ROOT_DB_PASS -e "create database if not exists teams;"
 
   # Create teams user/pass
   mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON teams.* TO $OC__TEAMS_DB_USER@localhost IDENTIFIED BY '$OC__TEAMS_DB_PASS'"
