@@ -38,6 +38,11 @@ else
   # Uses the same schema as Teams right now. This same statement is issued by teams-script, but running twice won't do harm.
   mysql -u root --password=$ROOT_DB_PASS -e "create database if not exists teams;"
 
+  # Create teams user/pass
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON teams.* TO $OC__TEAMS_DB_USER@localhost IDENTIFIED BY '$OC__TEAMS_DB_PASS'"
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
+  echo "User for database 'teams' updated sucessfully"
+
   echo "Downloading and installing Grouper Shell in /opt/www/grouper-shell..."
   cd /opt/www
   if [ ! -f grouper.apiBinary-${GROUPER_VERSION}.tar.gz ]
