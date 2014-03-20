@@ -8,6 +8,7 @@ chkconfig mysqld on
 
 if ! mysqladmin -u root --password=$OC__ROOT_DB_PASS ping 2> /dev/null | grep -q "mysqld is alive"
 then
+	echo -e "\n\nSetting new MySQL Root password \n\n"
 	mysqladmin -u root password $OC__ROOT_DB_PASS
 fi
 echo "grant all privileges on *.* to 'root'@'%' identified by '$OC__ROOT_DB_PASS';" | mysql -u root --password=$OC__ROOT_DB_PASS mysql
