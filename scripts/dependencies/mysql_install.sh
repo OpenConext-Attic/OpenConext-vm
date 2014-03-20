@@ -9,7 +9,8 @@ echo -e "\n\nSetting new MySQL Root password \n\n"
 mysqladmin -u root password $OC__ROOT_DB_PASS
 #echo "grant all privileges on *.* to 'root'@'localhost' identified by '$OC__ROOT_DB_PASS';" | mysql -u root --password=$OC__ROOT_DB_PASS mysql
 
-if ! mysqladmin -u root --password=$OC__ROOT_DB_PASS ping 2> /dev/null | grep -q "mysqld is alive"
+success=`mysqladmin -uroot -p$OC__ROOT_DB_PASS ping | grep -c "mysqld is alive"`
+if [ $success ]
 then
         echo -e "\n\nSetting new MySQL Root password OK\n\n"     
 else
