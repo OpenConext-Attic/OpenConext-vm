@@ -52,9 +52,6 @@ else
     exit
   fi
 
-
-  echo "User for database 'teams' updated sucessfully"
-
   echo "Downloading and installing Grouper Shell in /opt/www/grouper-shell..."
   cd /opt/www
   if [ ! -f grouper.apiBinary-${GROUPER_VERSION}.tar.gz ]
@@ -67,7 +64,7 @@ else
   sed -i grouper.apiBinary-${GROUPER_VERSION}/conf/grouper.hibernate.properties \
   -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://localhost/teams~" \
   -e "s~^hibernate.connection.username.*~hibernate.connection.username=$OC__TEAMS_DB_USER~" \
-  -e "s~^hibernate.connection.password.*~hibernate.connection.password=$OC__TEAMS_DB_USER~"
+  -e "s~^hibernate.connection.password.*~hibernate.connection.password=$OC__TEAMS_DB_PASS~"
 
   # Set properties in grouper props to
   # 1. autocreate the admin groups
