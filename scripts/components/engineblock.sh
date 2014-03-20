@@ -36,6 +36,14 @@ else
 
   # Set database creadentials for engine
   mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON engineblock.* TO $OC__ENGINE_DB_USER@localhost IDENTIFIED BY '$OC__ENGINE_DB_PASS'"
+  success=`mysqladmin -u$OC__ENGINE_DB_USER -p$OC__ENGINE_DB_PASS ping | grep -c "mysqld is alive"`
+  if [ $success ]
+  then
+    echo -e "\nValidating new MySQL Engine password: SUCCESS!\n"     
+  else
+    echo -e "\nValidating new MySQL Engine password: FAILED\n"
+    exit
+  fi
   echo "User for database 'engineblock' updated sucessfully"
 
 
@@ -49,9 +57,9 @@ else
   install -d /etc/surfconext/
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/engineblock.ini > /etc/surfconext/engineblock.ini
 
-  # Apply db credentials to file engineblock.ini
-  sed -i "s/_OC__ENGINEBLOCK_DB_USER_/$OC__ENGINE_DB_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/_OC__ENGINEBLOCK_DB_PASS_/$OC__ENGINE_DB_PASS/g" /etc/surfconext/engineblock.ini
+  echo "Apply db credentials to file engineblock.ini"
+  sed -i "s/_OC__ENGINE_DB_USER_/$OC__ENGINE_DB_USER/g" /etc/surfconext/engineblock.ini
+  sed -i "s/_OC__ENGINE_DB_PASS_/$OC__ENGINE_DB_PASS/g" /etc/surfconext/engineblock.ini
 
   # Apply janus api credentials to file engineblock.ini
   sed -i "s/_OC__ENGINE_JANUSAPI_USER_/$OC__ENGINE_JANUSAPI_USER/g" /etc/surfconext/engineblock.ini
