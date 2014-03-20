@@ -42,6 +42,17 @@ else
   # Create teams user/pass
   mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON teams.* TO $OC__TEAMS_DB_USER@localhost IDENTIFIED BY '$OC__TEAMS_DB_PASS'"
   mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
+
+  success=`mysqladmin -u$OC__TEAMS_DB_USER -p$OC__TEAMS_DB_PASS ping | grep -c "mysqld is alive"`
+  if [ $success ]
+  then
+    echo -e "\nValidating new MySQL Teams password: SUCCESS!\n"     
+  else
+    echo -e "\nValidating new MySQL Teams password: FAILED\n"
+    exit
+  fi
+
+
   echo "User for database 'teams' updated sucessfully"
 
   echo "Downloading and installing Grouper Shell in /opt/www/grouper-shell..."
