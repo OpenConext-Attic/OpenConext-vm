@@ -12,8 +12,8 @@ mysqladmin -u root password $OC__ROOT_DB_PASS
 success=`mysqladmin -uroot -p$OC__ROOT_DB_PASS ping | grep -c "mysqld is alive"`
 if [ $success ]
 then
-        echo -e "\n\nSetting new MySQL Root password OK\n\n"     
+        echo -e "\nValidating new MySQL Root password: SUCCESS!\n"     
 else
-	echo -e "\n\nSetting new MySQL Root password FAILED\n\n"
+	echo -e "\nValidating new MySQL Root password: FAILED\n"
 	exit
 fi
