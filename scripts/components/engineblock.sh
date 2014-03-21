@@ -66,7 +66,7 @@ else
   sed -i "s/_OC__ENGINE_JANUSAPI_PASS_/$OC__ENGINE_JANUSAPI_PASS/g" /etc/surfconext/engineblock.ini
 
   # Apply timezone to file engineblock.ini
-  sed -i "s/_OC__TIMEZONE_/$OC__TIMEZONE/g" /etc/surfconext/engineblock.ini
+  sed -i "s|_OC__TIMEZONE_|$OC__TIMEZONE|g" /etc/surfconext/engineblock.ini
 
   # Edit the profile.sh file to set correct environment variable
   echo 'export ENGINEBLOCK_ENV="demo"' > /etc/profile.d/openconext.sh
