@@ -19,10 +19,6 @@ if ! $UPGRADE
 then
   mysql -u root --password=$OC__ROOT_DB_PASS -e "create database if not exists serviceregistry default charset utf8 default collate utf8_unicode_ci;"
 
-  # Apply database credentials to file serviceregistry.module_janus.php
-  sed -i "s/_OC__SERVICEREGISTRY_DB_USER_/$OC__SERVICEREGISTRY_DB_USER/g" /etc/surfconext/serviceregistry.module_janus.php
-  sed -i "s/_OC__SERVICEREGISTRY_DB_PASS_/$OC__SERVICEREGISTRY_DB_PASS/g" /etc/surfconext/serviceregistry.module_janus.php
-
   cat $OC_BASEDIR/data/serviceregistry.sql | \
     sed \
       -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" \
@@ -67,6 +63,11 @@ then
   sed -i "s/_OC__ADMIN_EMAIL_/$OC__ADMIN_EMAIL/g" /etc/surfconext/serviceregistry.module_janus.php
   sed -i "s/_OC__ADMIN_NAME_/$OC__ADMIN_NAME/g" /etc/surfconext/serviceregistry.config.php
   sed -i "s/_OC__ADMIN_EMAIL_/$OC__ADMIN_EMAIL/g" /etc/surfconext/serviceregistry.config.php
+
+  # Apply database credentials to file serviceregistry.module_janus.php
+  sed -i "s/_OC__SERVICEREGISTRY_DB_USER_/$OC__SERVICEREGISTRY_DB_USER/g" /etc/surfconext/serviceregistry.module_janus.php
+  sed -i "s/_OC__SERVICEREGISTRY_DB_PASS_/$OC__SERVICEREGISTRY_DB_PASS/g" /etc/surfconext/serviceregistry.module_janus.php
+
 
 fi
 
