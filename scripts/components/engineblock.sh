@@ -80,7 +80,7 @@ else
   fi
   # Generate Self Signed Certificate for EngineBlock and add it to the configuration
   cd /tmp &&
-    openssl req -subj '/CN=Engine/OU=Services/O=OpenConext/C=ORG/' -newkey rsa:2048 -new -x509 -days 3652 -nodes -out example.org.crt -keyout example.org.pem > /dev/null
+    openssl req -subj '/CN=Engine/OU=Services/O=OpenConext/C=NL/' -newkey rsa:2048 -new -x509 -days 3652 -nodes -out example.org.crt -keyout example.org.pem > /dev/null
   EB_CRT=`cat example.org.crt` &&
   EB_KEY=`cat example.org.pem` &&
   EB_CRT_NO_HEADERS=`sed '1d;$d' example.org.crt` &&
