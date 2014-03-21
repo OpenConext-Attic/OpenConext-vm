@@ -57,7 +57,7 @@ then
   sed -i "s/_OC__JANUS_SECRETSALT_/$OC__JANUS_SECRETSALT/g" /etc/surfconext/serviceregistry.config.php
 
   # Use oc_config settings for timezone ssp
-  sed -i "s/_OC__TIMEZONE_/$OC__TIMEZONE/g" /etc/surfconext/serviceregistry.config.php
+  sed -i "s|_OC__TIMEZONE_|$OC__TIMEZONE|g" /etc/surfconext/serviceregistry.config.php
 
   # Set name admin email
   sed -i "s/_OC__ADMIN_EMAIL_/$OC__ADMIN_EMAIL/g" /etc/surfconext/serviceregistry.module_janus.php
