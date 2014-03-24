@@ -35,9 +35,10 @@ UPGRADE=false
 
 # Some displaying functions
 function echoHeader {
+  NOW=$(date +"%T")
   echo -e "\n"
   echo -e "###########################################################"
-  echo -e "# $1"
+  echo -e "$NOW - $1"
   echo -e "###########################################################"
   echo -e "\n"
 }
