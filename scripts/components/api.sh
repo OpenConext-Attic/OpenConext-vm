@@ -85,7 +85,15 @@ else
   # Create api user/pass
   mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON api.* TO $OC__API_DB_USER@localhost IDENTIFIED BY '$OC__API_DB_PASS'"
   mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
-  echo "User for database 'api' updated sucessfully"
+
+  success=`mysqladmin -u$OC__API_DB_USER -p$OC__API_DB_PASS ping | grep -c "mysqld is alive"`
+  if [ $success ]
+  then
+    echo -e "\nValidating new MySQL API password: SUCCESS!\n"     
+  else
+    echo -e "\nValidating new MySQL API password: FAILED\n"
+    exit
+  fi
 
   cat $OC_BASEDIR/configs/httpd/conf.d/api.conf  | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
