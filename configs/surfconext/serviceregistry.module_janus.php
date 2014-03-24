@@ -23,8 +23,8 @@ $config['useridattr'] = 'urn:mace:dir:attribute-def:eduPersonTargetedID';
 
 $config['store'] = array(
     'dsn'       => 'mysql:host=localhost;dbname=serviceregistry',
-    'username'  => '_SERVICEREGISTRY_DB_USER_',
-    'password'  => '_SERVICEREGISTRY_DB_PASS_',
+    'username'  => '_OC__SERVICEREGISTRY_DB_USER_',
+    'password'  => '_OC__SERVICEREGISTRY_DB_PASS_',
     'prefix'    => 'janus__',
 );
 
