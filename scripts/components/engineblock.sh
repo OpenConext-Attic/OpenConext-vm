@@ -44,8 +44,6 @@ else
     echo -e "\nValidating new MySQL Engine password: FAILED\n"
     exit
   fi
-  echo "User for database 'engineblock' updated sucessfully"
-
 
   #############################################
   # Modify the EngineBlock configuration file #
