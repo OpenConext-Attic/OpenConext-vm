@@ -34,18 +34,10 @@ fi
 UPGRADE=false
 
 # Some displaying functions
-function echoBegin {
+function echoHeader {
   echo -e "\n"
   echo -e "###########################################################"
-  echo -e "# Installing $1..."
-  echo -e "###########################################################"
-  echo -e "\n"
-}
-
-function echoEnd {
-  echo -e "\n"
-  echo -e "###########################################################"
-  echo -e "# Done Installing $1..."
+  echo -e "# $1"
   echo -e "###########################################################"
   echo -e "\n"
 }
@@ -182,133 +174,138 @@ for subscript in \
   openconext_static.sh \
   ntp_install.sh
 do
-  echo "Running dependency script $subscript..."
+  echoHeader "Running dependency script $subscript..."
   source $OC_SCRIPTDIR/dependencies/$subscript
 done
 
 if [[ $DEP_MAVEN == "true" ]]
 then
-  echoBegin "Maven"
+  echoHeader "Installing Maven..."
   source $OC_SCRIPTDIR/dependencies/maven_install.sh
-  echoEnd "Maven"
+  echoHeader "Installing Maven done"
 fi
 if [[ $DEP_TOMCAT == "true" ]]
 then
-  echo -e "\n"
-  echo -e "###########################################################"
-  echo -e "# Installing Tomcat...                                    #"
-  echo -e "###########################################################"
-  echo -e "\n"
-
+  echoHeader "Installing Tomcat..."
   source $OC_SCRIPTDIR/dependencies/tomcat_install.sh
-
-  echo -e "\n"
-  echo -e "###########################################################"
-  echo -e "# Done Installing Tomcat...                               #"
-  echo -e "###########################################################"
-  echo -e "\n"
-
+  echoHeader "Installing Tomcat Done"
 fi
 
 if [[ $DEP_MEMCACHED == "true" ]]
 then
-  echo "Installing memcached..."
+  echoHeader "Installing Memcached..."
   source $OC_SCRIPTDIR/dependencies/memcached_install.sh
+  echoHeader "Installing Memcached Done"
 fi
 if [[ $DEP_PHP == "true" ]]
 then
-  echo "Installing PHP..."
+  echoHeader "Installing PHP..."
   source $OC_SCRIPTDIR/dependencies/php_install.sh
+  echoHeader "Installing PHP Done"
 fi
 if [[ $DEP_MYSQL == "true" ]]
 then
-  echo "Installing MySQL..."
+  echoHeader "Installing MySQL..."
   source $OC_SCRIPTDIR/dependencies/mysql_install.sh
+  echoHeader "Installing MySQL Done"
 fi
 if [[ $DEP_LDAP == "true" ]]
 then
-  echo "Installing OpenLDAP..."
+  echoHeader "Installing OpenLDAP..."
   source $OC_SCRIPTDIR/dependencies/openldap_install.sh
   source $OC_SCRIPTDIR/dependencies/openconext_ldap.sh
+  echoHeader "Installing OpenLDAP Done"
 fi
 if [[ $DEP_SHIBBOLETH == "true" ]]
 then
-  echo "Installing Shibboleth..."
+  echoHeader "Installing Shibboleth..."
   source $OC_SCRIPTDIR/dependencies/shibboleth_install.sh
+  echoHeader "Installing Shibboleth Done"
 fi
 
-echo "Done installing dependencies."
+echoHeader "Done installing dependencies."
 
 # Components
-
+echoHeader "Installing OpenConext Components..."
 if echo $OC_COMPONENTS | grep -q GROUPER
 then
-  echo "Installing Grouper..."
+  echoHeader "Installing Grouper..."
   source $OC_SCRIPTDIR/components/grouper.sh
+  echoHeader "Installing Grouper Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q EB
 then
-  echo "Installing EngineBlock..."
+  echoHeader "Installing EngineBlock..."
   source $OC_SCRIPTDIR/components/engineblock.sh
+  echoHeader "Installing EngineBlock Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q SR
 then
-  echo "Installing Service registry..."
+  echoHeader "Installing Service registry..."
   source $OC_SCRIPTDIR/components/serviceregistry.sh
+  echoHeader "Installing Service registry Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q MANAGE
 then
-  echo "Installing Manage..."
+  echoHeader "Installing Manage..."
   source $OC_SCRIPTDIR/components/manage.sh
+  echoHeader "Installing Manage Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q MUJINA
 then
-  echo "Installing Mujina IDP/SP..."
+  echoHeader "Installing Mujina IDP/SP..."
   source $OC_SCRIPTDIR/components/mujina.sh
+  echoHeader "Installing Mujina IDP/SP Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q API
 then
-  echo "Installing API..."
+  echoHeader "Installing API..."
   # ToDo: Fix setting config in properties
   source $OC_SCRIPTDIR/components/api.sh
+  echoHeader "Installing API Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q TEAMS
 then
-  echo "Installing Teams..."
+  echoHeader "Installing Teams..."
 	# ToDo: Fix setting config in properties
   source $OC_SCRIPTDIR/components/teams.sh
+  echoHeader "Installing Teams Done"
 fi
 
 if [[ "$OC_VERSION" > "v51" || "$OC_VERSION" == "master" ]]
 then
   if echo $OC_COMPONENTS | grep -q APIS
   then
-    echo "Installing Apis..."
+    echoHeader "Installing Apis..."
     source $OC_SCRIPTDIR/components/apis.sh
+    echoHeader "Installing Apis Done"
   fi
 
   if echo $OC_COMPONENTS | grep -q CRUNCHER
   then
     echo "Installing Cruncher..."
     source $OC_SCRIPTDIR/components/cruncher.sh
+    echo "Installing Cruncher Done"
   fi
   
   if echo $OC_COMPONENTS | grep -q CSA
   then
-    echo "Installing CSA..."
+    echoHeader "Installing CSA..."
     source $OC_SCRIPTDIR/components/csa.sh
+    echoHeader "Installing CSA Done"
   fi
   
   if echo $OC_COMPONENTS | grep -q DASHBOARD
   then
-    echo "Installing Dashboard..."
+    echoHeader "Installing Dashboard..."
     source $OC_SCRIPTDIR/components/selfservice.sh
+    echoHeader "Installing Dashboard Done"
   fi
 fi
 
@@ -333,8 +330,9 @@ fi
 # pacakges for testing with selenium
 if [[ $INSTALL_TESTS == "true" ]]
 then
-  echo "Installing tools for testing..."
+  echoHeader "Installing tools for testing..."
   source $OC_SCRIPTDIR/components/selenium.sh
+  echoHeader "Installing tools for testing..."
 fi
 
 echo "Installing node properties file for OpenConext (useful for future upgrades): $NODE_PROPS"
@@ -345,7 +343,7 @@ openconext-domain=$OC_DOMAIN
 EOF
 
 echo; echo
-echo "Installation of OpenConext is complete."
+echoHeader "Installation of OpenConext is complete."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
 COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher csa welcome dashboard"
