@@ -21,6 +21,6 @@ sed -i 's/display_errors = Off/display_errors = On/g' /etc/php.ini
 
 # Set default timezone 
 echo "Setting default timezone for PHP to $OC__TIMEZONE"
-sed -i 's/;date.timezone =/date.timezone = $OC__TIMEZONE/g' /etc/php.ini
+sed -i "s/;date.timezone =/date.timezone = $OC__TIMEZONE/g" /etc/php.ini
 
 # httpd php.conf is handled by RPM
