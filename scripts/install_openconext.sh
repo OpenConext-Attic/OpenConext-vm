@@ -33,6 +33,27 @@ fi
 
 UPGRADE=false
 
+# Some displaying functions
+function echoBegin {
+  echo -e "\n"
+  echo -e "###########################################################"
+  echo -e "# Installing $1..."
+  echo -e "###########################################################"
+  echo -e "\n"
+}
+
+function echoEnd {
+  echo -e "\n"
+  echo -e "###########################################################"
+  echo -e "# Done Installing $1..."
+  echo -e "###########################################################"
+  echo -e "\n"
+}
+
+
+
+
+
 # interactive run?
 INTERACTIVE=false
 if [ $# -gt 0 -a "$1" == "-i" ]
@@ -167,13 +188,26 @@ done
 
 if [[ $DEP_MAVEN == "true" ]]
 then
-  echo "Installing Maven..."
+  echoBegin "Maven"
   source $OC_SCRIPTDIR/dependencies/maven_install.sh
+  echoEnd "Maven"
 fi
 if [[ $DEP_TOMCAT == "true" ]]
 then
-  echo "Installing Tomcat..."
+  echo -e "\n"
+  echo -e "###########################################################"
+  echo -e "# Installing Tomcat...                                    #"
+  echo -e "###########################################################"
+  echo -e "\n"
+
   source $OC_SCRIPTDIR/dependencies/tomcat_install.sh
+
+  echo -e "\n"
+  echo -e "###########################################################"
+  echo -e "# Done Installing Tomcat...                               #"
+  echo -e "###########################################################"
+  echo -e "\n"
+
 fi
 
 if [[ $DEP_MEMCACHED == "true" ]]
