@@ -21,6 +21,10 @@ DEFAULT_DOMAIN=demo.openconext.org
 # (v62, 2014-03-03)
 DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 
+# By default the OpenConext VM will try to update the OS to teh latest version of available software 
+# If you do not want the setup to touch configuration, set UPDATE_OS to FALSE
+UPDATE_OS="TRUE"
+
 # By default the OpenConext VM will be set up with ssh (22) and https (443) open for all. 
 # If you do not want the setup to touch your firewall configuration, set SETUP_FIREWALL to FALSE
 SETUP_FIREWALL="TRUE"
