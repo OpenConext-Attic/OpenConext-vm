@@ -13,5 +13,6 @@ else
 fi
 
 if [[$UPDATE_OS == "TRUE"]]
+then
 $YUM -y update
 fi
