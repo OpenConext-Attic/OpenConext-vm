@@ -75,5 +75,10 @@ fi
 # Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
 restorecon -r vendor
 
+# ToDo: database migration currently fails as the JANUS migrate script is not executable.
+# https://github.com/OpenConext/OpenConext-serviceregistry/issues/17
+# Below a temporary fix
+chmod a+x /opt/www/serviceregistry/vendor/janus-ssp/janus/bin/migrate.sh
+
 # Perform database migration
 ./bin/migrate
