@@ -65,16 +65,11 @@ function setOpenConextVersion() {
 function generate_new_certs() {
 
 # The CA key/cert were generated using this command:
-# openssl req -new -x509 -days 3650 \
-# -extensions v3_ca -passout pass:mysecret -keyout $TMP_DIR/ca.key \
-# -subj "/O=OpenConext CA" \
-# -out $TMP_DIR/ca.crt
 
-
-  if [ -f $CA_DIR/serial.txt ]
-  then
-    echo "reusing ca in $CA_DIR"
-  else
+#  if [ -f $CA_DIR/serial.txt ]
+#  then
+#    echo "reusing ca in $CA_DIR"
+#  else
     # Index and serial files
     echo -n "" > $CA_DIR/ca_index.txt
     echo -n "00" > $CA_DIR/serial.txt
@@ -103,8 +98,17 @@ function generate_new_certs() {
     emailAddress           = optional
 " > $CA_DIR/ca-config.cfg
 
-  fi
+#  fi
 
+  # Create new CA
+  openssl req -new \
+  -x509 \
+  -days 3650 \
+  -extensions v3_ca 
+  -passout pass:$CA_KEY_PASSWORD \
+  -keyout $TMP_DIR/ca.key \
+  -subj "/O=OpenConext CA" \
+  -out $TMP_DIR/ca.crt
   
   # Input for cert request
   SUBJECT_CSR="
