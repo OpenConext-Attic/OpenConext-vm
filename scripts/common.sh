@@ -97,6 +97,13 @@ function generate_new_certs() {
     commonName             = supplied
     emailAddress           = optional
 
+  [ req ]
+    default_bits            = 4096
+    default_md              = sha256
+    default_keyfile         = $CA_DIR/privkey.pem
+    distinguished_name      = req_distinguished_name
+    x509_extensions = v3_ca # The extentions to add to the self signed cert
+
   [ v3_req ]
   # Extensions to add to a certificate request
   basicConstraints = CA:FALSE
@@ -121,7 +128,7 @@ function generate_new_certs() {
   openssl req -new \
   -x509 \
   -days 3650 \
-  -extensions v3_ca 
+  -extensions v3_ca \
   -config $CA_DIR/ca-config.cfg \
   -passout pass:$CA_KEY_PASSWORD \
   -keyout $TMP_DIR/ca.key \
@@ -137,6 +144,7 @@ commonName=*.$OC_DOMAIN
   # Generate CSR, generating a private key on the fly
   openssl req -new \
   -nodes \
+  -config $CA_DIR/ca-config.cfg \
   -out $CA_DIR/server.csr \
   -keyout $CA_DIR/server.key \
   -batch \
