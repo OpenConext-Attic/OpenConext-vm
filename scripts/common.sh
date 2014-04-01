@@ -81,7 +81,7 @@ function generate_new_certs() {
   [ OpenConext ]
     database = $CA_DIR/ca_index.txt
     serial = $CA_DIR/serial.txt
-    default_md     = sha1
+    default_md     = sha256
     policy         = policy_any            # default policy
     email_in_dn    = no                    # Don't add the email into cert DN
     name_opt       = ca_default            # Subject name display option
@@ -96,6 +96,23 @@ function generate_new_certs() {
     organizationalUnitName = optional
     commonName             = supplied
     emailAddress           = optional
+
+  [ v3_req ]
+  # Extensions to add to a certificate request
+  basicConstraints = CA:FALSE
+  keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+
+  [ v3_ca ]
+  # Extensions for a typical CA
+  # PKIX recommendation.
+  subjectKeyIdentifier=hash
+  authorityKeyIdentifier=keyid:always,issuer:always
+
+  # This is what PKIX recommends but some broken software chokes on critical
+  # extensions.
+  #basicConstraints = critical,CA:true
+  # So we do this instead.
+  basicConstraints = CA:true
 " > $CA_DIR/ca-config.cfg
 
 #  fi
@@ -105,6 +122,7 @@ function generate_new_certs() {
   -x509 \
   -days 3650 \
   -extensions v3_ca 
+  -config $CA_DIR/ca-config.cfg \
   -passout pass:$CA_KEY_PASSWORD \
   -keyout $TMP_DIR/ca.key \
   -subj "/O=OpenConext CA" \
