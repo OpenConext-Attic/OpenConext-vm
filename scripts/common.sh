@@ -104,6 +104,31 @@ function generate_new_certs() {
     distinguished_name      = req_distinguished_name
     x509_extensions = v3_ca # The extentions to add to the self signed cert
 
+  [ req_distinguished_name ]              
+    countryName                     = Country Name (2 letter code)
+    countryName_default             = ORG
+    countryName_min                 = 2
+    countryName_max                 = 3
+
+    stateOrProvinceName             = State or Province Name (full name)
+    stateOrProvinceName_default     = Utrecht
+
+    localityName                    = Locality Name (eg, city)
+    localityName_default            = Utrecht
+
+    0.organizationName              = Organization Name (eg, company)
+    0.organizationName_default      = OpenConext
+
+    organizationalUnitName          = Organizational Unit Name (eg, section)
+    organizationalUnitName_default  = OpenConext Virtual Machine
+
+    commonName                      = Common Name (eg, YOUR name)
+    commonName_default              = demo.openconext.org
+    commonName_max                  = 64
+
+    #emailAddress                    = Email Address
+    #emailAddress_max                = 40
+
   [ v3_req ]
   # Extensions to add to a certificate request
   basicConstraints = CA:FALSE
