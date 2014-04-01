@@ -43,10 +43,6 @@ function echoHeader {
   echo -e "\n"
 }
 
-
-
-
-
 # interactive run?
 INTERACTIVE=false
 if [ $# -gt 0 -a "$1" == "-i" ]
