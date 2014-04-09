@@ -38,11 +38,26 @@ then
   install -d  /etc/surfconext/serviceregistry-certs/
   cp /etc/surfconext/engineblock.crt /etc/surfconext/serviceregistry-certs/engineblock.crt
 
+  # Create cache directories for ServiceRegistry
+  echo "creating cache and log directories for SR"
+  mkdir -p /tmp/janus/cache
+  chown -R apache:apache /tmp/janus
+  mkdir -p /var/log/janus
+  chown -R apache:apache /var/log/janus
+
+  # selinux magic
+  echo "allowing SR to write to cache and log directory"
+  checkmodule -M -m -o $OC_BASEDIR/configs/selinux/ServiceRegistry.mod $OC_BASEDIR/configs/selinux/ServiceRegistry.te
+  semodule_package -o $OC_BASEDIR/configs/selinux/ServiceRegistry.pp -m $OC_BASEDIR/configs/selinux/ServiceRegistry.mod
+  semodule -i $OC_BASEDIR/configs/selinux/ServiceRegistry.pp
+
 fi
 
 ./bin/composer.phar install
-# Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
-restorecon -r vendor
 
 # Perform database migration
 ./bin/migrate
+
+#sometimes the permission are reset, because migrate runs as root
+chown -R apache:apache /tmp/janus
+chown -R apache:apache /var/log/janus

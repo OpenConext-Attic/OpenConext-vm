@@ -1,0 +1,15 @@
+module ServiceRegistry 1.0;
+
+require {
+	type httpd_t;
+	type user_tmp_t;
+	type var_log_t;
+	class file { read create unlink write open setattr rename };
+	class dir { write add_name remove_name unlink create search getattr };
+}
+
+#============= httpd_t ==============
+allow httpd_t user_tmp_t:dir *;
+allow httpd_t user_tmp_t:file *;
+allow httpd_t var_log_t:dir *;
+allow httpd_t var_log_t:file *;
