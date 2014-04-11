@@ -12,6 +12,7 @@ else
   echo "RHEL epel repository already installed"
 fi
 
-
-$YUM -y install git subversion policycoreutils-python sudo unzip
-
+if [[$UPDATE_OS == "TRUE"]]
+then
+$YUM -y update
+fi

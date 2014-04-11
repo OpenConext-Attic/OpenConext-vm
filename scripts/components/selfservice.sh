@@ -3,7 +3,7 @@
 if [ ! -d /opt/www/OpenConext-selfservice ]
 then
   cd /opt/www
-  $GITCLONE https://github.com/OpenConext/OpenConext-selfservice.git
+  $GITCLONE $OC__SELFSERVICE_REPO
 fi
 
 cd /opt/www/OpenConext-selfservice

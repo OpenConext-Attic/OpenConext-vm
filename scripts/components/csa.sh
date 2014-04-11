@@ -3,7 +3,7 @@
 if [ ! -d /opt/www/OpenConext-csa ]
 then
   cd /opt/www
-  $GITCLONE https://github.com/OpenConext/OpenConext-csa.git
+  $GITCLONE $OC__CSA_REPO
 fi
 
 cd /opt/www/OpenConext-csa
@@ -67,4 +67,5 @@ addGroup("nl:surfnet:diensten","csa_admin","csa_admin");
 addMember("nl:surfnet:diensten:csa_admin","urn:collab:person:example.com:admin");
 EOS
     cd -
+
 fi

@@ -65,16 +65,11 @@ function setOpenConextVersion() {
 function generate_new_certs() {
 
 # The CA key/cert were generated using this command:
-# openssl req -new -x509 -days 3650 \
-# -extensions v3_ca -passout pass:mysecret -keyout $TMP_DIR/ca.key \
-# -subj "/O=OpenConext CA" \
-# -out $TMP_DIR/ca.crt
 
-
-  if [ -f $CA_DIR/serial.txt ]
-  then
-    echo "reusing ca in $CA_DIR"
-  else
+#  if [ -f $CA_DIR/serial.txt ]
+#  then
+#    echo "reusing ca in $CA_DIR"
+#  else
     # Index and serial files
     echo -n "" > $CA_DIR/ca_index.txt
     echo -n "00" > $CA_DIR/serial.txt
@@ -86,7 +81,7 @@ function generate_new_certs() {
   [ OpenConext ]
     database = $CA_DIR/ca_index.txt
     serial = $CA_DIR/serial.txt
-    default_md     = sha1
+    default_md     = sha256
     policy         = policy_any            # default policy
     email_in_dn    = no                    # Don't add the email into cert DN
     name_opt       = ca_default            # Subject name display option
@@ -101,10 +96,69 @@ function generate_new_certs() {
     organizationalUnitName = optional
     commonName             = supplied
     emailAddress           = optional
+
+  [ req ]
+    default_bits            = 4096
+    default_md              = sha256
+    default_keyfile         = $CA_DIR/privkey.pem
+    distinguished_name      = req_distinguished_name
+    x509_extensions = v3_ca # The extentions to add to the self signed cert
+
+  [ req_distinguished_name ]              
+    countryName                     = Country Name (2 letter code)
+    countryName_default             = ORG
+    countryName_min                 = 2
+    countryName_max                 = 3
+
+    stateOrProvinceName             = State or Province Name (full name)
+    stateOrProvinceName_default     = Utrecht
+
+    localityName                    = Locality Name (eg, city)
+    localityName_default            = Utrecht
+
+    0.organizationName              = Organization Name (eg, company)
+    0.organizationName_default      = OpenConext
+
+    organizationalUnitName          = Organizational Unit Name (eg, section)
+    organizationalUnitName_default  = OpenConext Virtual Machine
+
+    commonName                      = Common Name (eg, YOUR name)
+    commonName_default              = demo.openconext.org
+    commonName_max                  = 64
+
+    #emailAddress                    = Email Address
+    #emailAddress_max                = 40
+
+  [ v3_req ]
+  # Extensions to add to a certificate request
+  basicConstraints = CA:FALSE
+  keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+
+  [ v3_ca ]
+  # Extensions for a typical CA
+  # PKIX recommendation.
+  subjectKeyIdentifier=hash
+  authorityKeyIdentifier=keyid:always,issuer:always
+
+  # This is what PKIX recommends but some broken software chokes on critical
+  # extensions.
+  #basicConstraints = critical,CA:true
+  # So we do this instead.
+  basicConstraints = CA:true
 " > $CA_DIR/ca-config.cfg
 
-  fi
+#  fi
 
+  # Create new CA
+  openssl req -new \
+  -x509 \
+  -days 3650 \
+  -extensions v3_ca \
+  -config $CA_DIR/ca-config.cfg \
+  -passout pass:$CA_KEY_PASSWORD \
+  -keyout $TMP_DIR/ca.key \
+  -subj "/O=OpenConext CA" \
+  -out $TMP_DIR/ca.crt
   
   # Input for cert request
   SUBJECT_CSR="
@@ -115,6 +169,7 @@ commonName=*.$OC_DOMAIN
   # Generate CSR, generating a private key on the fly
   openssl req -new \
   -nodes \
+  -config $CA_DIR/ca-config.cfg \
   -out $CA_DIR/server.csr \
   -keyout $CA_DIR/server.key \
   -batch \

@@ -3,7 +3,7 @@
 if [ ! -d /opt/www/apis ]
 then
   cd /opt/www
-  $GITCLONE https://github.com/OpenConextApps/apis.git
+  $GITCLONE $OC__APIS_REPO
 fi
 
 cd /opt/www/apis
@@ -65,7 +65,7 @@ else
   SERVERXMLLINE='<Host name="apis.'$OC_DOMAIN'" appBase="webapps/apis.'$OC_DOMAIN'"/>'
   sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
 
-  mysql -u root --password=c0n3xt -e "create database if not exists apis default charset utf8 default collate utf8_unicode_ci;"
+  mysql -u root --password=$ROOT_DB_PASS -e "create database if not exists apis default charset utf8 default collate utf8_unicode_ci;"
 
   cat $OC_BASEDIR/configs/httpd/conf.d/apis.conf  | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
@@ -81,7 +81,7 @@ else
     cat $OC_BASEDIR/data/apis.sql | \
     sed \
       -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
-    mysql -u root --password=c0n3xt apis
+    mysql -u root --password=$ROOT_DB_PASS apis
 
     service tomcat6 stop
   else

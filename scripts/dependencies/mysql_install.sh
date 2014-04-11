@@ -4,10 +4,16 @@ $YUM -y install mysql mysql-server mysql-connector-java
 service mysqld restart
 chkconfig mysqld on
 
-# configure MySQL (WARNING: this is insecure!)
+# configure MySQL
+echo -e "\n\nSetting new MySQL Root password \n\n"
+mysqladmin -u root password $OC__ROOT_DB_PASS
+#echo "grant all privileges on *.* to 'root'@'localhost' identified by '$OC__ROOT_DB_PASS';" | mysql -u root --password=$OC__ROOT_DB_PASS mysql
 
-if ! mysqladmin -u root --password=c0n3xt ping 2> /dev/null | grep -q "mysqld is alive"
+success=`mysqladmin -uroot -p$OC__ROOT_DB_PASS ping | grep -c "mysqld is alive"`
+if [ $success ]
 then
-	mysqladmin -u root password 'c0n3xt'
+        echo -e "\nValidating new MySQL Root password: SUCCESS!\n"     
+else
+	echo -e "\nValidating new MySQL Root password: FAILED\n"
+	exit
 fi
-echo "grant all privileges on *.* to 'root'@'%' identified by 'c0n3xt';" | mysql -u root --password=c0n3xt mysql

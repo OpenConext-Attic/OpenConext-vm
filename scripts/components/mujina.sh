@@ -3,7 +3,7 @@
 if [ ! -d /opt/www/Mujina ]
 then
   cd /opt/www
-  $GITCLONE https://github.com/OpenConext/Mujina.git
+  $GITCLONE $OC__MUJINA_REPO
 fi
 
 cd /opt/www/Mujina
