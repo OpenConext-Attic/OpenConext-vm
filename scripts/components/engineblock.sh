@@ -44,7 +44,7 @@ else
 
   #############################################
   # Modify the EngineBlock configuration file #
-  #############################################LOCK
+  #############################################
   if [ -f /etc/surfconext/engineblock.ini ]
   then
     backupFile /etc/surfconext/engineblock.ini

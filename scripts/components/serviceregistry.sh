@@ -85,12 +85,6 @@ fi
 
 ./bin/composer.phar install
 
-# ToDo: database migration currently fails as the JANUS migrate script is not executable.
-# https://github.com/OpenConext/OpenConext-serviceregistry/issues/17
-# Below a temporary fix
-chmod a+x /opt/www/serviceregistry/vendor/janus-ssp/janus/bin/migrate.sh
-chmod a+x /opt/www/serviceregistry/vendor/janus-ssp/janus/app/console
-
 # Perform database migration
 ./bin/migrate
 

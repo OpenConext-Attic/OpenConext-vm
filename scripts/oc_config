@@ -89,13 +89,13 @@ OC__JANUS_SECRETSALT="janussecret"
 # Serviceregistry (JANUS) API user for 'engineblock'
 # Warning: do not change the value of engineblock_janusapi_user, value has to be "engine" in current script!
 OC__ENGINE_JANUSAPI_USER="engine"
-OC__ENGINE_JANUSAPI_PASS="enginejanuspass"
+OC__ENGINE_JANUSAPI_PASS="engineblock"
 
 
 # Serviceregistry (JANUS) API user for 'api'
 # Warning: api user is at the moment also named 'engine' user because api user doesn't exist yet.
 OC__API_JANUSAPI_USER="engine"
-OC__API_JANUSAPI_PASS="enginejanuspass"
+OC__API_JANUSAPI_PASS="engineblock"
 
 ##################################################################################################
 #                                                                                                #    
@@ -112,7 +112,7 @@ OC__GROUPER_ENGINE_USER="engine"
 OC__GROUPER_ENGINE_PASS="KJ75DFeg32a"
 
 OC__GROUPER_API_USER="api"
-OC__GROUPER_API_PASS="KJ75DFeg32a"
+OC__GROUPER_API_PASS="apiPassword"
 
 OC__GROUPER_UNIT_TEST_USER="gadget"
 OC__GROUPER_UNIT_TEST_PASS="7453E1E58216"

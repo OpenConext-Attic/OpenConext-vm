@@ -15,6 +15,9 @@ if [ -f /etc/openconext/oc_config ]
 then
     echo "using the configuration provided in /etc/openconext";
 else
+    echo "###########"
+    echo "#   NOTE  #"
+    echo "###########"
     echo "no configuration found in /etc/openconext using (INSECURE) defaults!";
     echo "the template in the install script dir can be filled using oc_setpasswds.sh";
     install -d /etc/openconext
