@@ -171,7 +171,6 @@ done
 
 # Global dependencies, infra-related
 for subscript in \
-  update_os.sh \
   base_packages.sh \
   hosts_install.sh \
   iptables.sh \

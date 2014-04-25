@@ -34,7 +34,7 @@ else
   # Set database creadentials for engine
   mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON engineblock.* TO $OC__ENGINE_DB_USER@localhost IDENTIFIED BY '$OC__ENGINE_DB_PASS'"
   success=`mysqladmin -u$OC__ENGINE_DB_USER -p$OC__ENGINE_DB_PASS ping | grep -c "mysqld is alive"`
-  if [ $success ]
+  if [[ $success == '1' ]]
   then
     echo -e "\nValidating new MySQL Engine password: SUCCESS!\n"     
   else

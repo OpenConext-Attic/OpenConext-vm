@@ -79,7 +79,7 @@ else
   mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
 
   success=`mysqladmin -u$OC__API_DB_USER -p$OC__API_DB_PASS ping | grep -c "mysqld is alive"`
-  if [ $success ]
+  if [[ $success == '1' ]]
   then
     echo -e "\nValidating new MySQL API password: SUCCESS!\n"     
   else

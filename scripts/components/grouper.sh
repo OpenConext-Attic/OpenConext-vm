@@ -44,7 +44,7 @@ else
   mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
 
   success=`mysqladmin -u$OC__TEAMS_DB_USER -p$OC__TEAMS_DB_PASS ping | grep -c "mysqld is alive"`
-  if [ $success ]
+  if [[ $success == '1' ]]
   then
     echo -e "\nValidating new MySQL Teams password: SUCCESS!\n"     
   else

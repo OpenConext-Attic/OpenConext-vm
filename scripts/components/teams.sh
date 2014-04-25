@@ -71,7 +71,7 @@ else
       /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
   fi
 
-  # Uses the same schema as Grouper right now. This same statement is issued by teams-script, but running twice won't do harm.
+  # Uses the same schema as Grouper right now. This same statement is issued by grouper-script, but running twice won't do harm.
   mysql -u root --password=$OC__ROOT_DB_PASS -e "create database if not exists teams;"
   mysql -u root --password=$OC__ROOT_DB_PASS teams < $OC_BASEDIR/data/teams.sql
 
@@ -80,7 +80,7 @@ else
   mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
 
   success=`mysqladmin -u$OC__TEAMS_DB_USER -p$OC__TEAMS_DB_PASS ping | grep -c "mysqld is alive"`
-  if [ $success ]
+  if [[ $success == '1' ]]
   then
     echo -e "\nValidating new MySQL Teams password: SUCCESS!\n"     
   else

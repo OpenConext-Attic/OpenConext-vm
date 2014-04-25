@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[$SETUP_FIREWALL == "TRUE"]]
+if [[ $SETUP_FIREWALL ]]
 then
 
 echo "Will change firewall rules to a restrictive set that only allows SSH, HTTP and HTTPS"
