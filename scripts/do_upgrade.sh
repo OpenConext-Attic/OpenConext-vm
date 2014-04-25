@@ -8,8 +8,8 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 
 source $OC_SCRIPTDIR/common.sh
 
-CURRENT_VERSION=`grep openconext-version= $NODE_PROPS | sed -e 's/.*=//g'`
-OC_DOMAIN=`grep openconext-domain= $NODE_PROPS | sed -e 's/.*=//g'`
+CURRENT_VERSION=`grep OC_VERSION= $NODE_PROPS | sed -e 's/.*=//g'`
+OC_DOMAIN=`grep DOMAIN= $NODE_PROPS | sed -e 's/.*=//g'`
 
 if [[ "$CURRENT_VERSION" == "" ]]
 then

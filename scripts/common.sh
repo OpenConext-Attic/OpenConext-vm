@@ -1,8 +1,16 @@
 #!/bin/bash
 
 ### Constants
-NODE_PROPS=/etc/openconext/node.properties
+NODE_PROPS=/etc/openconext/oc_config
 
+# The default domain will be used as the base domain for all components.
+# Components will be named XYZ.DEFAULT_DOMAIN, so e.g. engine.demo.openconext.org
+DEFAULT_DOMAIN=demo.openconext.org
+
+# This is the default set of components in an install
+# Available components are: EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD
+# (v62, 2014-03-03)
+DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 
 MVN_VERSION=3.0.5
 VERBOSE=false
@@ -58,18 +66,16 @@ function setOpenConextVersion() {
   # OpenConext VMs older than r47 do not have a node.properties
   if [ -f $NODE_PROPS ]
   then
-    sed -i $NODE_PROPS -e "s/openconext-version=.*/openconext-version=$NEW_VERSION/"
+    sed -i $NODE_PROPS -e "s/OC_VERSION=.*/OC_VERSION=$NEW_VERSION/"
   fi
 }
 
 function generate_new_certs() {
 
-# The CA key/cert were generated using this command:
-
-#  if [ -f $CA_DIR/serial.txt ]
-#  then
-#    echo "reusing ca in $CA_DIR"
-#  else
+  if [ -f $CA_DIR/serial.txt ]
+  then
+    echo "reusing ca in $CA_DIR"
+  else
     # Index and serial files
     echo -n "" > $CA_DIR/ca_index.txt
     echo -n "00" > $CA_DIR/serial.txt
@@ -100,7 +106,7 @@ function generate_new_certs() {
   [ req ]
     default_bits            = 4096
     default_md              = sha256
-    default_keyfile         = $CA_DIR/privkey.pem
+    default_keyfile         = $CA_DIR/ca.key
     distinguished_name      = req_distinguished_name
     x509_extensions = v3_ca # The extentions to add to the self signed cert
 
@@ -156,11 +162,15 @@ function generate_new_certs() {
   -extensions v3_ca \
   -config $CA_DIR/ca-config.cfg \
   -passout pass:$CA_KEY_PASSWORD \
-  -keyout $TMP_DIR/ca.key \
+  -keyout $CA_DIR/ca.key \
   -subj "/O=OpenConext CA" \
-  -out $TMP_DIR/ca.crt
-  
+  -out $CA_DIR/ca.crt
+
+  fi
+
   # Input for cert request
+  echo "create new star certificate for OpenConext";
+
   SUBJECT_CSR="
 O=OpenConext
 commonName=*.$OC_DOMAIN
@@ -180,8 +190,8 @@ commonName=*.$OC_DOMAIN
   -name OpenConext \
   -notext \
   -config $CA_DIR/ca-config.cfg \
-  -cert $OC_BASEDIR/certs/openconext_ca.pem \
-  -keyfile $OC_BASEDIR/certs/openconext_ca.key \
+  -cert $CA_DIR/ca.crt \
+  -keyfile $CA_DIR/ca.key \
   -passin pass:$CA_KEY_PASSWORD \
   -in $CA_DIR/server.csr \
   -days 1825 \
@@ -193,7 +203,7 @@ commonName=*.$OC_DOMAIN
   cp $CA_DIR/server.crt $KEY_DIR/openconext.pem
   cp $CA_DIR/server.key $KEY_DIR/openconext.key
 
-  cp $OC_BASEDIR/certs/openconext_ca.pem $KEY_DIR/openconext_ca.pem
+  cp $CA_DIR/ca.crt $KEY_DIR/openconext_ca.pem
 }
 
 function explain_bring_your_own() {

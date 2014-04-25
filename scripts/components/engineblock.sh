@@ -60,6 +60,10 @@ else
   sed -i "s/_OC__ENGINE_JANUSAPI_USER_/$OC__ENGINE_JANUSAPI_USER/g" /etc/surfconext/engineblock.ini
   sed -i "s/_OC__ENGINE_JANUSAPI_PASS_/$OC__ENGINE_JANUSAPI_PASS/g" /etc/surfconext/engineblock.ini
 
+  # Apply ldap credentials to file engineblock.ini
+  sed -i "s/_OC__LDAP_ENGINE_USER_/$OC__LDAP_ENGINE_USER/g" /etc/surfconext/engineblock.ini
+  sed -i "s/_OC__LDAP_ENGINE_PASS_/$OC__LDAP_ENGINE_PASS/g" /etc/surfconext/engineblock.ini
+
   # Apply timezone to file engineblock.ini
   sed -i "s|_OC__TIMEZONE_|$OC__TIMEZONE|g" /etc/surfconext/engineblock.ini
 

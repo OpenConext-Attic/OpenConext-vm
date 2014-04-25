@@ -11,9 +11,17 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 source $OC_SCRIPTDIR/common.sh
 
 # Defaults
-# TODO: Read from cached file, in case installation script is run again later on.
-# Working on that now ;)
-source $OC_SCRIPTDIR/oc_config
+if [ -f /etc/openconext/oc_config ]
+then
+    echo "using the configuration provided in /etc/openconext";
+else
+    echo "no configuration found in /etc/openconext using (INSECURE) defaults!";
+    echo "the template in the install script dir can be filled using oc_setpasswds.sh";
+    install -d /etc/openconext
+    cp $OC_SCRIPTDIR/oc_config /etc/openconext/.
+fi
+
+source /etc/openconext/oc_config
 
 # Override defaults with variables from invoking shell.
 # To use this, call like this:
@@ -285,9 +293,9 @@ fi
 
 if echo $OC_COMPONENTS | grep -q CRUNCHER
 then
-  echo "Installing Cruncher..."
+  echoHeader "Installing Cruncher..."
   source $OC_SCRIPTDIR/components/cruncher.sh
-  echo "Installing Cruncher Done"
+  echoHeader "Installing Cruncher Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q CSA
@@ -330,13 +338,6 @@ then
   source $OC_SCRIPTDIR/components/selenium.sh
   echoHeader "Installing tools for testing..."
 fi
-
-echo "Installing node properties file for OpenConext (useful for future upgrades): $NODE_PROPS"
-install -d /etc/openconext
-cat > $NODE_PROPS <<EOF
-openconext-version=$OC_VERSION
-openconext-domain=$OC_DOMAIN
-EOF
 
 echo; echo
 echoHeader "Installation of OpenConext is complete."

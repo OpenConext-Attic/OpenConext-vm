@@ -10,20 +10,13 @@
 # Passwords are set with standard values in this script, THIS IS NOT SAFE!!!, 
 # change them either to values you configured previously, or run script 'oc_setpasswds.sh'
 # to seed the values with random values
-#
 
-# The default domain will be used as the base domain for all components.
-# Components will be named XYZ.DEFAULT_DOMAIN, so e.g. engine.demo.openconext.org
-DEFAULT_DOMAIN=demo.openconext.org
-
-# This is the default set of components in an install
-# Available components are: EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD 
-# (v62, 2014-03-03)
-DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
+OC_VERSION=
+DOMAIN="demo.openconext.org"
 
 # By default the OpenConext VM will try to update the OS to teh latest version of available software 
 # If you do not want the setup to touch configuration, set UPDATE_OS to FALSE
-UPDATE_OS="TRUE"
+UPDATE_OS="FALSE"
 
 # By default the OpenConext VM will be set up with ssh (22) and https (443) open for all. 
 # If you do not want the setup to touch your firewall configuration, set SETUP_FIREWALL to FALSE
@@ -50,7 +43,7 @@ OC__TIMEZONE="Europe/Amsterdam"
 # For a decription of the various components see https://www.openconext.org
 
 # New MySQL root password
-OC__ROOT_DB_PASS="rootpassw0rd"
+OC__ROOT_DB_PASS="c0n3xt"
 
 # New MySQL engine user and password
 OC__ENGINE_DB_USER="engine2mysql"
@@ -138,6 +131,9 @@ OC__LDAPADMIN_PASS="ldappass"
 
 OC__LDAP_USER="cn=ro,dc=surfconext,dc=nl"
 OC__LDAP_PASS="ldappass"
+
+OC__LDAP_ENGINE_USER="cn=engine,dc=surfconext,dc=nl"
+OC__LDAP_ENGINE_PASS="jf7RH4Hj20De"
 
 
 ##################################################################################################

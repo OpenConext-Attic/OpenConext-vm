@@ -7,7 +7,7 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 #import commons variables and functions
 source $OC_SCRIPTDIR/common.sh
 
-CURRENT_VERSION=$(grep openconext-version= $NODE_PROPS | sed -e 's/.*=//g');
+CURRENT_VERSION=$(grep OC_VERSION= $NODE_PROPS | sed -e 's/.*=//g');
 BRANCH_VERSION=$(git status | grep "# On branch" | awk '{print $4}');
 NEXT_VERSION="";
 

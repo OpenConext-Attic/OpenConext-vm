@@ -20,13 +20,9 @@ mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
 echo "User for database 'manage' updated sucessfully"
 
 
-
 cat $OC_BASEDIR/configs/httpd/conf.d/manage.conf  | \
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
   /etc/httpd/conf.d/manage.conf
-cat $OC_BASEDIR/configs/httpd/conf.d/vomanage.conf  | \
-  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
-  /etc/httpd/conf.d/vomanage.conf
 
 if [ -f /etc/surfconext/manage.ini ]
 then
