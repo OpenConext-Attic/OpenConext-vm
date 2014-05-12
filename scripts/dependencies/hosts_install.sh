@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # configure some OpenConext DNS entries on this machine
 
 # Arbitrary loopback address.

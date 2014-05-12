@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "Installing packages for Tomcat. This may take several minutes. (depending on available bandwidth)"
 # Install java-1.7.0-openjdk to overrule the default gcj, which is horribly broken for us.

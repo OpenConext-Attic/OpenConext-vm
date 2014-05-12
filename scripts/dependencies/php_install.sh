@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 $YUM -y    install php \
                   php-pecl-apc \
                   php-cli \

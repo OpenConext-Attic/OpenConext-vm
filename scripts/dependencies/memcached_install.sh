@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 $YUM -y install memcached
 
 chkconfig memcached on

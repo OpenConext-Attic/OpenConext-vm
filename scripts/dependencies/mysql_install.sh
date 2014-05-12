@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ `rpm -qi mysql-server | grep 'not installed'` ]]
 then

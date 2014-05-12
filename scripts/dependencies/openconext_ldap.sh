@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 me=`basename $0`
 echo -e  "Running $me\n"

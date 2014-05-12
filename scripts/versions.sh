@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # these versions are tag names
 export ENGINEBLOCK_VERSION=develop

@@ -1,4 +1,4 @@
-#/bin/bash 
+#!/bin/bash
 # oc_setpasswds.sh updates all paswword fields in oc_config with ramdom, strong values
 # the following methode is used for generating passwords
 # tr -c -d '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' </dev/urandom | dd bs=20 count=1 2>/dev/null;echo
@@ -33,8 +33,3 @@ echo -e "Setting CA_KEY_PASSWORD = \""$ca_key"\""
 salt=`tr -cd '[:alnum:]' < /dev/urandom | fold -w40 | head -n1`
 `sed -i "/OC__JANUS_SECRETSALT/c\OC__JANUS_SECRETSALT=\"$salt\"" $config_file`
 echo -e "Setting OC__JANUS_SECRETSALT = \""$salt"\""
-
-
-
-
-
