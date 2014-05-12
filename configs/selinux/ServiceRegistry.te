@@ -5,7 +5,7 @@ require {
 	type user_tmp_t;
 	type var_log_t;
 	class file { read create unlink write open setattr rename };
-	class dir { write add_name remove_name unlink create search getattr };
+	class dir { read write open rmdir add_name remove_name unlink create search getattr };
 }
 
 #============= httpd_t ==============

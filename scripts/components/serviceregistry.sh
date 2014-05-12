@@ -83,7 +83,7 @@ then
 
 fi
 
-./bin/composer.phar install
+./bin/composer.phar --prefer-dist --no-interaction install
 
 # Perform database migration
 ./bin/migrate
