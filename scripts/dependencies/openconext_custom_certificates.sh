@@ -9,8 +9,8 @@ CA_KEY_PASSWORD=mysecret
 
 echo "handling certificates for the domain $OC_DOMAIN."
 
-rm -rf /etc/httpd/keys/* &&
-install -d /etc/httpd/keys &&
+rm -rf $KEY_DIR/* &&
+install -d $KEY_DIR &&
 mkdir -p $CA_DIR
   
 case "$CERTCHOICE" in
