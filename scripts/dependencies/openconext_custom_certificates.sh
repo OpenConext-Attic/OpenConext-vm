@@ -9,13 +9,14 @@ mkdir -p $CA_DIR
 
 echo "handling certificates for the domain $OC_DOMAIN."
 
-rm -rf /etc/httpd/keys/* &&
-install -d /etc/httpd/keys &&
+rm -rf $KEY_DIR/* &&
+install -d $KEY_DIR &&
 mkdir -p $CA_DIR
   
 case "$CERTCHOICE" in
   "1" ) generate_new_certs ;;
   "2" ) explain_bring_your_own ;;
+  "existing" ) ;;
   * )  generate_new_certs ;;
 esac
 
