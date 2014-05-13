@@ -12,7 +12,7 @@ else
   echo "RHEL repository already installed"
 fi
 
-$YUM -y install git subversion policycoreutils-python ntp sudo unzip
+$YUM -y install git subversion policycoreutils-python ntp sudo unzip wget
 
 # Sync clock with ntp server (vm's tend to have their clock lag behind)
 chkconfig --level 235 ntpd on
