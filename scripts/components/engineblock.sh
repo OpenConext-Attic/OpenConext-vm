@@ -22,9 +22,6 @@ then
   source /etc/profile.d/openconext.sh
     
 else
-  # Directory for potential attribute-manipulations
-  mkdir -p /opt/www/attribute-manipulations
-
   # Create database
   mysql -u root --password=c0n3xt -e "drop database if exists engineblock; create database engineblock default charset utf8 default collate utf8_unicode_ci;"
   cat $OC_BASEDIR/data/engineblock.sql | \
