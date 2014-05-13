@@ -9,15 +9,16 @@ CA_KEY_PASSWORD=mysecret
 
 echo "handling certificates for the domain $OC_DOMAIN."
 
-rm -rf $KEY_DIR/* &&
-install -d $KEY_DIR &&
-mkdir -p $CA_DIR
-echo "You picked cert strategy $CERTCHOICE"
+if [ ! "$CERTCHOICE" == "existing" ]; then
+    rm -rf $KEY_DIR/* &&
+    install -d $KEY_DIR &&
+    mkdir -p $CA_DIR
+fi
 
 case "$CERTCHOICE" in
   "1" ) generate_new_certs ;;
   "2" ) explain_bring_your_own ;;
-  "existing" ) ;;
+  "existing" ) echo "Using existing keys in $KEY_DIR";;
   * )  generate_new_certs ;;
 esac
 
