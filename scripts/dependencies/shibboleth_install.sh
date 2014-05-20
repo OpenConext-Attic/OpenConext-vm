@@ -12,7 +12,7 @@ else
 
   # Hack for 20th of May when suddenly half the OpenSuse mirrors don't have Shibboleth any more?
   # Uninett has a vested interest in Shibboleth so they should always have it.
-  cat baseurl=http://ftp.uninett.no/pub/linux/opensuse/repositories/security:/shibboleth/RHEL_6/
+  echo "baseurl=http://ftp.uninett.no/pub/linux/opensuse/repositories/security:/shibboleth/RHEL_6/" >> $REPO_FILE
 
   $YUM -y clean all
   $YUM -y install shibboleth
