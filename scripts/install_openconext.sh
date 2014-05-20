@@ -10,22 +10,28 @@ OC_BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 OC_SCRIPTDIR=$OC_BASEDIR/scripts
 source $OC_SCRIPTDIR/common.sh
 
-
-
 # Defaults
-# TODO: Read from cached file, in case installation script is run again later on.
-DEFAULT_DOMAIN=demo.openconext.org
+if [ -f /etc/openconext/oc_config ]
+then
+    echo "using the configuration provided in /etc/openconext";
+else
+    echo "###########"
+    echo "#   NOTE  #"
+    echo "###########"
+    echo "no configuration found in /etc/openconext using (INSECURE) defaults!";
+    echo "the template in the install script dir can be filled using oc_setpasswds.sh";
+    install -d /etc/openconext
+    cp $OC_SCRIPTDIR/oc_config /etc/openconext/.
+fi
 
-# this is the default set of components in an install
-DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
-
+source /etc/openconext/oc_config
 
 # Override defaults with variables from invoking shell.
 # To use this, call like this:
 # $ DOMAIN=mydomain.com OC_COMPONENTS="EB SR MANAGE" bash install_openconext.sh
 OC_COMPONENTS=$([ "x$OC_COMPONENTS" == "x" ] && echo "$DEFAULT_OC_COMPONENTS" || echo "$OC_COMPONENTS")
 OC_DOMAIN=$([ "x$DOMAIN" == "x" ] && echo "$DEFAULT_DOMAIN" || echo "$DOMAIN")
-
+OC_CERT="1" # Use install default
 
 if [ $VERBOSE == "true" ]
 then
@@ -37,6 +43,16 @@ then
 fi
 
 UPGRADE=false
+
+# Some displaying functions
+function echoHeader {
+  NOW=$(date +"%T")
+  echo -e "\n"
+  echo -e "#############################################################################"
+  echo -e "# $1 ($NOW)"
+  echo -e "#############################################################################"
+  echo -e "\n"
+}
 
 # interactive run?
 INTERACTIVE=false
@@ -72,7 +88,7 @@ then
   echo "Possible options are:"
   echo "1. Core Components (default) [EngineBlock, Service registry, Manage, API, Teams, Mujina IDP/SP]"
   echo "2. All Components [EngineBlock, Service registry, Manage, API, Teams, Mujina IDP/SP, Cruncher, Apis, CSA]"
-  echo "3. Minimal Components [EngineBlock, Service registry, Mujina IDP/SP]"
+  echo "3. Minimal Components for SAML proxy [EngineBlock, Service registry, Mujina IDP/SP]"
   echo "4. Mix and match (experts only)"
   echo
   echo -n "Component choice: [1]: "
@@ -108,9 +124,13 @@ then
   echo
   echo "1. Generate a new set, based on the chosen base domain ($OC_DOMAIN)"
   echo "2. Bring your own certificates, (including trust chain)"
-
+  echo -n "Certificate choice: [1]: "
   read CERTCHOICE
   
+  if [ "$CERTCHOICE" != "" ]
+    then
+      CERTCHOICE=$OC_CERT
+  fi
 fi
 
 # Set the component versions as variables, for use in later scripts
@@ -158,121 +178,142 @@ for subscript in \
   hosts_install.sh \
   iptables.sh \
   openconext_infra_httpd.sh \
-  samba_install.sh \
   openconext_custom_certificates.sh \
-  openconext_static.sh
+  openconext_static.sh \
+  ntp_install.sh
 do
-  echo "Running dependency script $subscript..."
+  echoHeader "Running dependency script $subscript..."
   source $OC_SCRIPTDIR/dependencies/$subscript
 done
 
 if [[ $DEP_MAVEN == "true" ]]
 then
-  echo "Installing Maven..."
+  echoHeader "Installing Maven..."
   source $OC_SCRIPTDIR/dependencies/maven_install.sh
+  echoHeader "Installing Maven done"
 fi
 if [[ $DEP_TOMCAT == "true" ]]
 then
-  echo "Installing Tomcat..."
+  echoHeader "Installing Tomcat..."
   source $OC_SCRIPTDIR/dependencies/tomcat_install.sh
+  echoHeader "Installing Tomcat Done"
 fi
 
 if [[ $DEP_MEMCACHED == "true" ]]
 then
-  echo "Installing memcached..."
+  echoHeader "Installing Memcached..."
   source $OC_SCRIPTDIR/dependencies/memcached_install.sh
+  echoHeader "Installing Memcached Done"
 fi
 if [[ $DEP_PHP == "true" ]]
 then
-  echo "Installing PHP..."
+  echoHeader "Installing PHP..."
   source $OC_SCRIPTDIR/dependencies/php_install.sh
+  echoHeader "Installing PHP Done"
 fi
 if [[ $DEP_MYSQL == "true" ]]
 then
-  echo "Installing MySQL..."
+  echoHeader "Installing MySQL..."
   source $OC_SCRIPTDIR/dependencies/mysql_install.sh
+  echoHeader "Installing MySQL Done"
 fi
 if [[ $DEP_LDAP == "true" ]]
 then
-  echo "Installing OpenLDAP..."
+  echoHeader "Installing OpenLDAP..."
   source $OC_SCRIPTDIR/dependencies/openldap_install.sh
   source $OC_SCRIPTDIR/dependencies/openconext_ldap.sh
+  echoHeader "Installing OpenLDAP Done"
 fi
 if [[ $DEP_SHIBBOLETH == "true" ]]
 then
-  echo "Installing Shibboleth..."
+  echoHeader "Installing Shibboleth..."
   source $OC_SCRIPTDIR/dependencies/shibboleth_install.sh
+  echoHeader "Installing Shibboleth Done"
 fi
 
-echo "Done installing dependencies."
+echoHeader "Done installing dependencies."
 
 # Components
-
+echoHeader "Installing OpenConext Components..."
 if echo $OC_COMPONENTS | grep -q GROUPER
 then
-  echo "Installing Grouper..."
+  echoHeader "Installing Grouper..."
   source $OC_SCRIPTDIR/components/grouper.sh
+  echoHeader "Installing Grouper Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q EB
 then
-  echo "Installing EngineBlock..."
+  echoHeader "Installing EngineBlock..."
   source $OC_SCRIPTDIR/components/engineblock.sh
+  echoHeader "Installing EngineBlock Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q SR
 then
-  echo "Installing Service registry..."
+  echoHeader "Installing Service registry..."
   source $OC_SCRIPTDIR/components/serviceregistry.sh
+  echoHeader "Installing Service registry Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q MANAGE
 then
-  echo "Installing Manage..."
+  echoHeader "Installing Manage..."
   source $OC_SCRIPTDIR/components/manage.sh
+  echoHeader "Installing Manage Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q MUJINA
 then
-  echo "Installing Mujina IDP/SP..."
+  echoHeader "Installing Mujina IDP/SP..."
   source $OC_SCRIPTDIR/components/mujina.sh
+  echoHeader "Installing Mujina IDP/SP Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q API
 then
-  echo "Installing API..."
+  echoHeader "Installing API..."
+  # ToDo: Fix setting config in properties
   source $OC_SCRIPTDIR/components/api.sh
+  echoHeader "Installing API Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q TEAMS
 then
-  echo "Installing Teams..."
+  echoHeader "Installing Teams..."
+	# ToDo: Fix setting config in properties
   source $OC_SCRIPTDIR/components/teams.sh
+  echoHeader "Installing Teams Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q APIS
 then
-  echo "Installing Apis..."
+  echoHeader "Installing Apis..."
   source $OC_SCRIPTDIR/components/apis.sh
+  echoHeader "Installing Apis Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q CRUNCHER
 then
-  echo "Installing Cruncher..."
+  echoHeader "Installing Cruncher..."
   source $OC_SCRIPTDIR/components/cruncher.sh
+  echoHeader "Installing Cruncher Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q CSA
 then
-  echo "Installing CSA..."
+  echoHeader "Installing CSA..."
   source $OC_SCRIPTDIR/components/csa.sh
+  echoHeader "Installing CSA Done"
 fi
 
 if echo $OC_COMPONENTS | grep -q DASHBOARD
 then
-  echo "Installing Dashboard..."
+  echoHeader "Installing Dashboard..."
   source $OC_SCRIPTDIR/components/selfservice.sh
+  echoHeader "Installing Dashboard Done"
 fi
+
 
 # stop if running
 if service httpd status > /dev/null
@@ -295,19 +336,13 @@ fi
 # pacakges for testing with selenium
 if [[ $INSTALL_TESTS == "true" ]]
 then
-  echo "Installing tools for testing..."
+  echoHeader "Installing tools for testing..."
   source $OC_SCRIPTDIR/components/selenium.sh
+  echoHeader "Installing tools for testing..."
 fi
 
-echo "Installing node properties file for OpenConext (useful for future upgrades): $NODE_PROPS"
-install -d /etc/openconext
-cat > $NODE_PROPS <<EOF
-openconext-version=$OC_VERSION
-openconext-domain=$OC_DOMAIN
-EOF
-
 echo; echo
-echo "Installation of OpenConext is complete."
+echoHeader "Installation of OpenConext is complete."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
 COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher csa welcome dashboard"

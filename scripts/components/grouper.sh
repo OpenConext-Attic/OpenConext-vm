@@ -23,6 +23,10 @@ cp -f tomcat/conf/classpath_properties/log4j.properties /usr/share/tomcat6/conf/
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/sources.xml
 sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_properties/grouper.hibernate.properties
 
+# Apply credentials to file grouper.hibernate.properties
+# Not in use, is replaced lateron in this script
+#sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
+#sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
 
 if $UPGRADE
 then
@@ -32,7 +36,21 @@ else
 
   # Initialize Grouper schema
   # Uses the same schema as Teams right now. This same statement is issued by teams-script, but running twice won't do harm.
-  mysql -u root --password=c0n3xt -e "create database if not exists teams;"
+  echo "Creating database 'teams'"  
+  mysql -u root --password=$OC__ROOT_DB_PASS -e "create database if not exists teams;"
+
+  # Create teams user/pass
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON teams.* TO $OC__TEAMS_DB_USER@localhost IDENTIFIED BY '$OC__TEAMS_DB_PASS'"
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
+
+  success=`mysqladmin -u$OC__TEAMS_DB_USER -p$OC__TEAMS_DB_PASS ping | grep -c "mysqld is alive"`
+  if [[ $success == '1' ]]
+  then
+    echo -e "\nValidating new MySQL Teams password: SUCCESS!\n"     
+  else
+    echo -e "\nValidating new MySQL Teams password: FAILED\n"
+    exit
+  fi
 
   echo "Downloading and installing Grouper Shell in /opt/www/grouper-shell..."
   cd /opt/www
@@ -44,9 +62,9 @@ else
 
   # Substitute database parameters in hibernate configuration
   sed -i grouper.apiBinary-${GROUPER_VERSION}/conf/grouper.hibernate.properties \
-  -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://db.$OC_DOMAIN/teams~" \
-  -e "s~^hibernate.connection.username.*~hibernate.connection.username=root~" \
-  -e "s~^hibernate.connection.password.*~hibernate.connection.password=c0n3xt~"
+  -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://localhost/teams~" \
+  -e "s~^hibernate.connection.username.*~hibernate.connection.username=$OC__TEAMS_DB_USER~" \
+  -e "s~^hibernate.connection.password.*~hibernate.connection.password=$OC__TEAMS_DB_PASS~"
 
   # Set properties in grouper props to
   # 1. autocreate the admin groups
@@ -75,11 +93,14 @@ EOS
 
   cat << EOS | runGshScript "applications"
 // Basic users (applications) of the system
-addSubject("gadget", "person", "gadget")
-addMember("etc:sysadmingroup","gadget");
+addSubject("$OC__GROUPER_UNIT_TEST_USER", "person", "$OC__GROUPER_UNIT_TEST_USER")
+addMember("etc:sysadmingroup","$OC__GROUPER_UNIT_TEST_USER");
 
-addSubject("engine", "person", "engine")
-addMember("etc:sysadmingroup","engine");
+addSubject("$OC__GROUPER_ENGINE_USER", "person", "$OC__GROUPER_ENGINE_USER")
+addMember("etc:sysadmingroup","$OC__GROUPER_ENGINE_USER");
+
+addSubject("$OC__GROUPER_API_USER", "person", "$OC__GROUPER_API_USER")
+addMember("etc:sysadmingroup","$OC__GROUPER_API_USER");
 EOS
 
   install -d /usr/share/tomcat6/conf/Catalina/grouper.$OC_DOMAIN

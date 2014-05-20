@@ -1,11 +1,11 @@
 #!/bin/bash
 
+# CA_KEY_PASSWORD is set in oc_config
+
 KEY_DIR=/etc/httpd/keys
 
 CA_DIR=/opt/www/openconext-ca
 mkdir -p $CA_DIR
-
-CA_KEY_PASSWORD=mysecret
 
 echo "handling certificates for the domain $OC_DOMAIN."
 

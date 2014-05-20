@@ -3,7 +3,7 @@
 if [ ! -d /opt/www/OpenConext-cruncher ]
 then
   cd /opt/www
-  $GITCLONE https://github.com/OpenConext/OpenConext-cruncher.git
+  $GITCLONE $OC__CRUNCHER_REPO
 fi
 
 cd /opt/www/OpenConext-cruncher

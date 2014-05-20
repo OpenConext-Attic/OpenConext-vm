@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 $YUM -y    install php \
                   php-pecl-apc \
                   php-cli \
@@ -13,12 +13,15 @@ $YUM -y    install php \
                   php-xml \
                   php-mcrypt
 
+# ToDo: anything against installing Suhosin?
+
 # Enable PHP short open tag for non-conforming PHP code
 sed -i 's/short_open_tag = Off/short_open_tag = On/g' /etc/php.ini
 sed -i 's/display_errors = Off/display_errors = On/g' /etc/php.ini
 
-# Note that if you do anything in PHP with dates or times then PHP needs to know the timezone it should use.
-# Here we default to Amsterdam (because that is where development happens).
-sed -i 's/;date.timezone =/date.timezone = Europe\/Amsterdam/g' /etc/php.ini
+# Set default timezone
+echo "Setting default timezone for PHP to $OC__TIMEZONE"
+sed -i /etc/php.ini -e "s~^date.timezone =.*~date.timezone = $OC__TIMEZONE~"
+
 
 # httpd php.conf is handled by RPM

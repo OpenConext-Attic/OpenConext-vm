@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ##########################
 # Install Static content #
 ##########################
@@ -16,3 +16,5 @@ fi
 cat $OC_BASEDIR/configs/httpd/conf.d/static.conf  | \
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" > \
   /etc/httpd/conf.d/static.conf
+
+echo "Created vhost static for storing common html and javascript libratries in use for OpenConext"

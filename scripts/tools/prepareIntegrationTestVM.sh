@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #
 # This script can be used to prepare a clean (CentOS) VM for VM usage.
 # It is NOT required to run before regular VM installs,it only pre-installs

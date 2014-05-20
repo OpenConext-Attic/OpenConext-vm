@@ -1,7 +1,9 @@
 #!/bin/bash
 
-echo "Will change firewall rules to a restrictive set that only allows SSH, HTTP and HTTPS"
+if [[ $SETUP_FIREWALL ]]
+then
 
+echo "Will change firewall rules to a restrictive set that only allows SSH, HTTP and HTTPS"
 cat > /etc/sysconfig/iptables-openconext <<EOF
 *filter
 :INPUT ACCEPT [0:0]
@@ -16,8 +18,6 @@ cat > /etc/sysconfig/iptables-openconext <<EOF
 -A INPUT -j REJECT --reject-with icmp-host-prohibited
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
-
-
 EOF
 
 # ipv4
@@ -26,7 +26,6 @@ then
   cp /etc/sysconfig/iptables /etc/sysconfig/iptables-before-openconext-install
 fi
 mv /etc/sysconfig/iptables-openconext /etc/sysconfig/iptables
-
 
 cat > /etc/sysconfig/ip6tables-openconext <<EOF2
 *filter
@@ -50,5 +49,8 @@ then
   cp /etc/sysconfig/ip6tables /etc/sysconfig/ip6tables-before-openconext-install
 fi
 mv /etc/sysconfig/ip6tables-openconext /etc/sysconfig/ip6tables
+	service iptables restart
 
-service iptables restart
+else
+	echo "Leaving firewall rules untouched. You will need to set the firewall to allows SSH, HTTP and HTTPS manually"	
+fi

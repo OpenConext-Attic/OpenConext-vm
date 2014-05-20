@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "Installing packages for Tomcat. This may take several minutes. (depending on available bandwidth)"
 # Install java-1.7.0-openjdk to overrule the default gcj, which is horribly broken for us.
@@ -24,6 +24,20 @@ cp -f $OC_BASEDIR/configs/tomcat6/conf/catalina.properties $CATALINA_HOME/conf/c
 cp -f $OC_BASEDIR/configs/tomcat6/conf/server.xml $CATALINA_HOME/conf/server.xml
 cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat6.conf $CATALINA_HOME/conf/tomcat6.conf
 cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat-users.xml $CATALINA_HOME/conf/tomcat-users.xml
+
+# Applying credentials from oc_config
+sed -i "s/GrouperSystem/$OC__GROUPER_SYSTEM_USER/g" $CATALINA_HOME/conf/tomcat-users.xml
+sed -i "s/GrouperSystemPassword/$OC__GROUPER_SYSTEM_PASS/g" $CATALINA_HOME/conf/tomcat-users.xml
+
+sed -i "s/engineUserPassword/$OC__GROUPER_ENGINE_PASS/g" $CATALINA_HOME/conf/tomcat-users.xml
+sed -i "s/engineUser/$OC__GROUPER_ENGINE_USER/g" $CATALINA_HOME/conf/tomcat-users.xml
+
+sed -i "s/unitTestUserPassword/$OC__GROUPER_UNIT_TEST_PASS/g" $CATALINA_HOME/conf/tomcat-users.xml
+sed -i "s/unitTestUser/$OC__GROUPER_UNIT_TEST_USER/g" $CATALINA_HOME/conf/tomcat-users.xml
+
+sed -i "s/apiUserPassword/$OC__GROUPER_API_PASS/g" $CATALINA_HOME/conf/tomcat-users.xml
+sed -i "s/apiUser/$OC__GROUPER_API_USER/g" $CATALINA_HOME/conf/tomcat-users.xml
+
 
 if keytool -list -alias 'openconext cacert' -keystore /etc/pki/java/cacerts \
     -storepass changeit -noprompt > /dev/null

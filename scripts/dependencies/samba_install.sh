@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if $YUM list installed | grep -q 'samba\.'
 then

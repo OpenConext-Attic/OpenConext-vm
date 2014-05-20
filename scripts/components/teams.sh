@@ -3,7 +3,7 @@
 if [ ! -d /opt/www/OpenConext-teams ]
 then
   cd /opt/www
-  $GITCLONE https://github.com/OpenConext/OpenConext-teams.git
+  $GITCLONE $OC__TEAMS_REPO
 fi
 
 cd /opt/www/OpenConext-teams
@@ -50,10 +50,43 @@ else
   cp /tmp/grouper.client.properties /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
   cp /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
 
-  # Uses the same schema as Grouper right now. This same statement is issued by teams-script, but running twice won't do harm.
-  mysql -u root --password=c0n3xt -e "create database if not exists teams;"
-  mysql -u root --password=c0n3xt teams < $OC_BASEDIR/data/teams.sql
+  # Apply credentials to file coin-teams.properties
+  sed -i "s/_OC__ENGINE_DB_USER_/$OC__ENGINE_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+  sed -i "s/_OC__ENGINE_DB_PASS_/$OC__ENGINE_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+  sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+  sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
 
+  if [[ "$OC_VERSION" < "v46" ]]
+  then
+    sed -i \
+      -e "s~teamsURL=.*~teamsURL=https://teams.$OC_DOMAIN/teams~" \
+      /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
+  fi
+
+  if [[ "$OC_VERSION" < "v49" ]]
+  then
+  # This is fixed for new installations only; existing installations probably already have teams configured. We do not want to touch those.
+    sed -i \
+      -e "s/group-name-context=urn:collab:group:dev.surfteams.nl:/group-name-context=urn:collab:group:$OC_DOMAIN:/" \
+      /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
+  fi
+
+  # Uses the same schema as Grouper right now. This same statement is issued by grouper-script, but running twice won't do harm.
+  mysql -u root --password=$OC__ROOT_DB_PASS -e "create database if not exists teams;"
+  mysql -u root --password=$OC__ROOT_DB_PASS teams < $OC_BASEDIR/data/teams.sql
+
+  # Create teams user/pass 
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON teams.* TO $OC__TEAMS_DB_USER@localhost IDENTIFIED BY '$OC__TEAMS_DB_PASS'"
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
+
+  success=`mysqladmin -u$OC__TEAMS_DB_USER -p$OC__TEAMS_DB_PASS ping | grep -c "mysqld is alive"`
+  if [[ $success == '1' ]]
+  then
+    echo -e "\nValidating new MySQL Teams password: SUCCESS!\n"     
+  else
+    echo -e "\nValidating new MySQL Teams password: FAILED\n"
+    exit
+  fi
 
   GSH_SCRIPT=`mktemp`
 cat << EOS > $GSH_SCRIPT

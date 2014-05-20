@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "Installing httpd if not present. Will enable in runlevel 2,3,5."
 $YUM -y install httpd mod_ssl &&

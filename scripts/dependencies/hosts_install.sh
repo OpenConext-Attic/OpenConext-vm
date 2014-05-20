@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # configure some OpenConext DNS entries on this machine
 
 # Arbitrary loopback address.
@@ -13,6 +13,7 @@ else
 fi
 
 # Build one huge line for all the components
+# ToDo: adapt this list based on teh components choosen
 COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp teams api cruncher apis csa welcome"
 for comp in $COMPONENTS
 do

@@ -3,7 +3,7 @@
 if [ ! -d /opt/www/OpenConext-api ]
 then
   cd /opt/www
-  $GITCLONE https://github.com/OpenConext/OpenConext-api.git
+  $GITCLONE $OC__API_REPO
 fi
 
 cd /opt/www/OpenConext-api
@@ -50,6 +50,21 @@ else
   cp $API_DIST_BASEDIR/tomcat/conf/classpath_properties/api-ehcache.xml.vm /usr/share/tomcat6/conf/classpath_properties/api-ehcache.xml
   cp /tmp/coin-api.properties /usr/share/tomcat6/conf/classpath_properties/
 
+  # Apply db credentials to file coin-api.properties
+  sed -i "s/_OC__ENGINE_DB_USER_/$OC__ENGINE_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/_OC__ENGINE_DB_PASS_/$OC__ENGINE_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/_OC__API_DB_USER_/$OC__API_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/_OC__API_DB_PASS_/$OC__API_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+
+  # Apply ldap credentials to file coin-api.properties
+  sed -i "s/_OC__LDAP_USER_/$OC__LDAP_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/_OC__LDAP_PASS_/$OC__LDAP_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+
+  # Apply Serviceregistry (Janus) API credentials to file coin-api.properties
+  sed -i "s/_OC__API_JANUSAPI_USER_/$OC__API_JANUSAPI_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/_OC__API_JANUSAPI_PASS_/$OC__API_JANUSAPI_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
 
   install -d /usr/share/tomcat6/webapps/api.$OC_DOMAIN
   chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
@@ -57,7 +72,20 @@ else
   SERVERXMLLINE='<Host name="api.'$OC_DOMAIN'" appBase="webapps/api.'$OC_DOMAIN'"/>'
   sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
 
-  mysql -u root --password=c0n3xt -e "create database if not exists api default charset utf8 default collate utf8_unicode_ci;"
+  mysql -u root --password=$OC__ROOT_DB_PASS -e "create database if not exists api default charset utf8 default collate utf8_unicode_ci;"
+
+  # Create api user/pass
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON api.* TO $OC__API_DB_USER@localhost IDENTIFIED BY '$OC__API_DB_PASS'"
+  mysql -uroot -p$OC__ROOT_DB_PASS -e "FLUSH PRIVILEGES"
+
+  success=`mysqladmin -u$OC__API_DB_USER -p$OC__API_DB_PASS ping | grep -c "mysqld is alive"`
+  if [[ $success == '1' ]]
+  then
+    echo -e "\nValidating new MySQL API password: SUCCESS!\n"     
+  else
+    echo -e "\nValidating new MySQL API password: FAILED\n"
+    exit
+  fi
 
   cat $OC_BASEDIR/configs/httpd/conf.d/api.conf  | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \

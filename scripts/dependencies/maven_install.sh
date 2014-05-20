@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Install java-1.7.0-openjdk to overrule the default gcj, which is horribly broken for us.
 $YUM -y install java-1.7.0-openjdk java-1.7.0-openjdk-devel
