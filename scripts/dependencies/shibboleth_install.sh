@@ -11,7 +11,7 @@ else
   curl -s -o $REPO_FILE http://download.opensuse.org/repositories/security://shibboleth/RHEL_6/security:shibboleth.repo
 
   $YUM -y clean all
-  $YUM -y install shibboleth
+  $YUM -y install shibboleth || true
 
   # Hack for 20th of May when suddenly half the OpenSuse mirrors don't have Shibboleth any more?
   # Uninett has a vested interest in Shibboleth so they should always have it.
