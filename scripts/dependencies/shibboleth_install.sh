@@ -10,12 +10,14 @@ else
   # install non-CentOS packages
   curl -s -o $REPO_FILE http://download.opensuse.org/repositories/security://shibboleth/RHEL_6/security:shibboleth.repo
 
+  $YUM -y clean all
+  $YUM -y install shibboleth
+
   # Hack for 20th of May when suddenly half the OpenSuse mirrors don't have Shibboleth any more?
   # Uninett has a vested interest in Shibboleth so they should always have it.
   echo "baseurl=http://ftp.uninett.no/pub/linux/opensuse/repositories/security:/shibboleth/RHEL_6/" >> $REPO_FILE
-
-  $YUM -y clean all
   $YUM -y install shibboleth
+
   # Cleanup
   rm -vf $REPO_FILE
 fi
