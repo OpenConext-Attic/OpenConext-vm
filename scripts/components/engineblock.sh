@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# ansible-playbook -i tools/ansible/inventory/demo.openconext.org tools/ansible/provision-engine.yml
+
 #######################
 # Install EngineBlock #
 #######################
@@ -94,8 +96,8 @@ else
   chmod o+w /var/log/surfconext/engineblock.log
 
     # Updating LDAP schema some more...
-  ldapmodify -x -D cn=admin,cn=config -h localhost -w $OC__LDAP_PASS -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
-  ldapmodify -x -D cn=admin,cn=config -h localhost -w $OC__LDAP_PASS -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
+  ldapmodify -x -D cn=admin,cn=config -h localhost -w "$OC__LDAP_PASS" -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
+  ldapmodify -x -D cn=admin,cn=config -h localhost -w "$OC__LDAP_PASS" -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
 
   # Apply LDAP credentials to file engineblock.ini
   sed -i "s/_OC__ENGINE_LDAP_PASSWD_/$OC__LDAP_PASS/g" /etc/surfconext/engineblock.ini
