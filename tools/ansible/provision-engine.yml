@@ -1,44 +1,87 @@
---
-- name: Provision the OpenConext VM for EngineBlock
+---
+- name: Provision EngineBlock
   hosts: engine
   remote_user: "{{ remote_user }}"
 
   vars:
+    temp_dir: "/tmp"
+    logging_dir: "/var/log/openconext"
+    releases_dir: "/opt/openconext"
+    release_dir: "{{ releases_dir }}/OpenConext-engineblock-{{ version }}"
+    builds_dir: "{{ releases_dir }}/builds"
+    build_path: "{{ builds_dir }}/OpenConext-engineblock-{{ version }}.tar.gz"
+    current_release_symlink: "/opt/www/engineblock"
+    download_url: "https://github.com/OpenConext/OpenConext-engineblock/releases/download/{{ version }}/OpenConext-engineblock-{{ version }}.tar.gz"
 
-
-  tasks:
+  pre_tasks:
   - name: Make sure a database exists
     mysql_db:
       state:          present
-      name:           {{ engine_db_name }}
-      login_host:     {{ engine_db_host }}
-      login_port:     {{ engine_db_port}}
-      login_user:     {{ admin_db_user }}
-      login_password: {{ admin_db_password}}
+      name:           "{{ engine_db_name }}"
+      login_host:     "{{ engine_db_host }}"
+      login_port:     "{{ engine_db_port}}"
+      login_user:     "{{ admin_db_user }}"
+      login_password: "{{ admin_db_password}}"
       encoding:       utf8
       collation:      utf8_unicode_ci
 
   - name: Make sure a user exists
     mysql_user:
       state:          present
-      name:           {{ engine_db_user }}
-      password:       {{ engine_db_password }}
-      priv:           {{ engine_db_name }}.*:ALL
-      login_host:     {{ engine_db_host }}
-      login_port:     {{ engine_db_port}}
-      login_user:     {{ admin_db_user }}
-      login_password: {{ admin_db_password}}
+      name:           "{{ engine_db_user }}"
+      password:       "{{ engine_db_password }}"
+      priv:           "{{ engine_db_name }}.*:ALL"
+      login_host:     "{{ engine_db_host }}"
+      login_port:     "{{ engine_db_port}}"
+      login_user:     "{{ admin_db_user }}"
+      login_password: "{{ admin_db_password}}"
 
-  - name: Make sure LDAP database exists
+#  - name: Make sure LDAP database exists
 
-  - name: INSTALL EngineBlock using Ansible
-    include: {{ }}
+  - name: Ensure the directories exists
+    file: path={{ item }} state=directory
+    with_items:
+    - "{{ releases_dir }}"
+    - "{{ builds_dir }}"
+
+  - name: Get the current release
+    get_url: dest="{{ build_path }}" url={{ download_url }}
+
+  - name: Unarchive it
+    unarchive: dest={{ releases_dir }} src={{ build_path }} copy=no
+
+  - name: Install default application settings
+    copy:
+      src: "{{ release_dir }}/etc/openconext/engineblock.ini"
+      dest: /etc/openconext/engineblock.ini
+      force: no
+
+  - name: Install User Profile with Environment variable.
+    copy:
+      src: "{{ release_dir }}/etc/profile.d/openconext-engineblock.sh"
+      dest: /etc/profile.d/openconext-engineblock.sh
+      force: no
+
+  - name: "Legacy: Remove obsolete, too generic, profile.d/openconext.sh"
+    file: path=/etc/profile.d/openconext.sh state=absent
+
+  #- name: Install fresh signing keys if they don't already exist
+
+  - name: Install logging directory
+    file: path={{ logging_dir }} state=directory
+
+  - name: "Legacy: Install SURFconext logging directory"
+    file: path=/var/log/surfconext src={{ logging_dir }} state=link
+
+  - name: "Legacy: Migrate the configuration file"
+    command: "{{ release_dir }}/bin/migrate_etc.php"
 
   - name: Set all configuration values for EngineBlock
     ini_file:
       dest:     /etc/openconext/engineblock.ini
       section:  demo
       option:   password
-      value:    {{ engine_db_password }}
+      value:    "{{ engine_db_password }}"
 
-  - name: SETUP EngineBlock using Ansible
+  #- name: SETUP EngineBlock using Ansible
+  #  include: "{{ installer_path }}/tools/ansible/setup.yml"

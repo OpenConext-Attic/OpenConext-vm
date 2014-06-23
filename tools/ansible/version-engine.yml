@@ -1,0 +1,5 @@
+---
+- name: Get the version of OpenConext Engine
+  hosts: engine
+  remote_user: "{{ remote_user }}"
+
