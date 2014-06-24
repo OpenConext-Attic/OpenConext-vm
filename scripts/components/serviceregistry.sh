@@ -40,10 +40,12 @@ then
 
   # Create cache directories for ServiceRegistry
   echo "creating cache and log directories for SR"
-  mkdir -p /tmp/janus/cache
+  mkdir -p /tmp/janus/snapshots
   chown -R apache:apache /tmp/janus
-  mkdir -p /var/log/janus
-  chown -R apache:apache /var/log/janus
+  mkdir -p /var/cache/janus-ssp/janus
+  chown -R apache:apache /var/cache/janus-ssp
+  mkdir -p /var/log/janus-ssp/janus
+  chown -R apache:apache /var/log/janus-ssp
 
   # selinux magic
   echo "allowing SR to write to cache and log directory"
@@ -60,4 +62,4 @@ fi
 
 #sometimes the permission are reset, because migrate runs as root
 chown -R apache:apache /tmp/janus
-chown -R apache:apache /var/log/janus
+chown -R apache:apache /var/log/janus-ssp
