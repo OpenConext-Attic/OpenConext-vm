@@ -6,8 +6,8 @@
  * please see serviceregistry/config/module_janus.php
  */
 
-$config['admin.name']  = '_OC__ADMIN_NAME_';
-$config['admin.email'] = '_OC__ADMIN_EMAIL_';
+$config['admin.name']  = '__OC__ADMIN_NAME__';
+$config['admin.email'] = '__OC__ADMIN_EMAIL__';
 
 /*
  * Auth source used to gain access to JANUS
@@ -23,8 +23,8 @@ $config['useridattr'] = 'urn:mace:dir:attribute-def:eduPersonTargetedID';
 
 $config['store'] = array(
     'dsn'       => 'mysql:host=localhost;dbname=serviceregistry',
-    'username'  => '_OC__SERVICEREGISTRY_DB_USER_',
-    'password'  => '_OC__SERVICEREGISTRY_DB_PASS_',
+    'username'  => '__OC__SERVICEREGISTRY_DB_USER__',
+    'password'  => '__OC__SERVICEREGISTRY_DB_PASS__',
     'prefix'    => 'janus__',
 );
 

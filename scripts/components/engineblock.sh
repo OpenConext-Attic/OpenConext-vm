@@ -50,19 +50,19 @@ else
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/engineblock.ini > /etc/surfconext/engineblock.ini
 
   echo "Apply db credentials to file engineblock.ini"
-  sed -i "s/_OC__ENGINE_DB_USER_/$OC__ENGINE_DB_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/_OC__ENGINE_DB_PASS_/$OC__ENGINE_DB_PASS/g" /etc/surfconext/engineblock.ini
+  sed -i "s/__OC__ENGINE_DB_USER__/$OC__ENGINE_DB_USER/g" /etc/surfconext/engineblock.ini
+  sed -i "s/__OC__ENGINE_DB_PASS__/$OC__ENGINE_DB_PASS/g" /etc/surfconext/engineblock.ini
 
   # Apply janus api credentials to file engineblock.ini
-  sed -i "s/_OC__ENGINE_JANUSAPI_USER_/$OC__ENGINE_JANUSAPI_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/_OC__ENGINE_JANUSAPI_PASS_/$OC__ENGINE_JANUSAPI_PASS/g" /etc/surfconext/engineblock.ini
+  sed -i "s/__OC__ENGINE_JANUSAPI_USER__/$OC__ENGINE_JANUSAPI_USER/g" /etc/surfconext/engineblock.ini
+  sed -i "s/__OC__ENGINE_JANUSAPI_PASS__/$OC__ENGINE_JANUSAPI_PASS/g" /etc/surfconext/engineblock.ini
 
   # Apply ldap credentials to file engineblock.ini
-  sed -i "s/_OC__LDAP_ENGINE_USER_/$OC__LDAP_ENGINE_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/_OC__LDAP_ENGINE_PASS_/$OC__LDAP_ENGINE_PASS/g" /etc/surfconext/engineblock.ini
+  sed -i "s/__OC__LDAP_ENGINE_USER__/$OC__LDAP_ENGINE_USER/g" /etc/surfconext/engineblock.ini
+  sed -i "s/__OC__LDAP_ENGINE_PASS__/$OC__LDAP_ENGINE_PASS/g" /etc/surfconext/engineblock.ini
 
   # Apply timezone to file engineblock.ini
-  sed -i "s|_OC__TIMEZONE_|$OC__TIMEZONE|g" /etc/surfconext/engineblock.ini
+  sed -i "s|__OC__TIMEZONE__|$OC__TIMEZONE|g" /etc/surfconext/engineblock.ini
 
   # Edit the profile.sh file to set correct environment variable
   echo 'export ENGINEBLOCK_ENV="demo"' > /etc/profile.d/openconext.sh
@@ -98,7 +98,7 @@ else
   ldapmodify -x -D cn=admin,cn=config -h localhost -w $OC__LDAP_PASS -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
 
   # Apply LDAP credentials to file engineblock.ini
-  sed -i "s/_OC__ENGINE_LDAP_PASSWD_/$OC__LDAP_PASS/g" /etc/surfconext/engineblock.ini
+  sed -i "s/__OC__ENGINE_LDAP_PASSWD__/$OC__LDAP_PASS/g" /etc/surfconext/engineblock.ini
 
   # Update apache conf
   cat $OC_BASEDIR/configs/httpd/conf.d/engine.conf  | \

@@ -51,20 +51,20 @@ else
   cp /tmp/coin-api.properties /usr/share/tomcat6/conf/classpath_properties/
 
   # Apply db credentials to file coin-api.properties
-  sed -i "s/_OC__ENGINE_DB_USER_/$OC__ENGINE_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
-  sed -i "s/_OC__ENGINE_DB_PASS_/$OC__ENGINE_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
-  sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
-  sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
-  sed -i "s/_OC__API_DB_USER_/$OC__API_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
-  sed -i "s/_OC__API_DB_PASS_/$OC__API_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/__OC__ENGINE_DB_USER__/$OC__ENGINE_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/__OC__ENGINE_DB_PASS__/$OC__ENGINE_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/__OC__TEAMS_DB_USER__/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/__OC__TEAMS_DB_PASS__/$OC__TEAMS_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/__OC__API_DB_USER__/$OC__API_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/__OC__API_DB_PASS__/$OC__API_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
 
   # Apply ldap credentials to file coin-api.properties
-  sed -i "s/_OC__LDAP_USER_/$OC__LDAP_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
-  sed -i "s/_OC__LDAP_PASS_/$OC__LDAP_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/__OC__LDAP_USER__/$OC__LDAP_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/__OC__LDAP_PASS__/$OC__LDAP_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
 
   # Apply Serviceregistry (Janus) API credentials to file coin-api.properties
-  sed -i "s/_OC__API_JANUSAPI_USER_/$OC__API_JANUSAPI_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
-  sed -i "s/_OC__API_JANUSAPI_PASS_/$OC__API_JANUSAPI_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/__OC__API_JANUSAPI_USER__/$OC__API_JANUSAPI_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/__OC__API_JANUSAPI_PASS__/$OC__API_JANUSAPI_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
 
   install -d /usr/share/tomcat6/webapps/api.$OC_DOMAIN
   chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/

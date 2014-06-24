@@ -13,14 +13,14 @@
  *
  * See this page for a list of valid timezones: http://php.net/manual/en/timezones.php
  */
-$config['timezone'] = '_OC__TIMEZONE_';
+$config['timezone'] = '__OC__TIMEZONE__';
 
 /**
  * This password must be kept secret, and modified from the default value 123.
  * This password will give access to the installation page of simpleSAMLphp with
  * metadata listing and diagnostics pages.
  */
-$config['auth.adminpassword'] = '_OC__JANUSADMIN_PASS_';
+$config['auth.adminpassword'] = '__OC__JANUSADMIN_PASS__';
 
 /**
  * This is a secret salt used by simpleSAMLphp when it needs to generate a secure hash
@@ -30,15 +30,15 @@ $config['auth.adminpassword'] = '_OC__JANUSADMIN_PASS_';
  * A possible way to generate a random salt is by running the following command from a unix shell:
  * tr -c -d '0123456789abcdefghijklmnopqrstuvwxyz' </dev/urandom | dd bs=32 count=1 2>/dev/null;echo
  */
-$config['secretsalt'] = '_OC__JANUS_SECRETSALT_';
+$config['secretsalt'] = '__OC__JANUS_SECRETSALT__';
 
 /*
  * Some information about the technical persons running this installation.
  * The email address will be used as the recipient address for error reports, and
  * also as the technical contact in generated metadata.
  */
-$config['technicalcontact_name']  = '_OC__ADMIN_NAME_';
-$config['technicalcontact_email'] = '_OC__ADMIN_EMAIL_';
+$config['technicalcontact_name']  = '__OC__ADMIN_NAME__';
+$config['technicalcontact_email'] = '__OC__ADMIN_EMAIL__';
 
 /*
  * If you enable this option, simpleSAMLphp will log all sent and received messages

@@ -25,8 +25,8 @@ sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" /usr/share/tomcat6/conf/classpath_pro
 
 # Apply credentials to file grouper.hibernate.properties
 # Not in use, is replaced lateron in this script
-#sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
-#sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
+#sed -i "s/__OC__TEAMS_DB_USER__/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
+#sed -i "s/__OC__TEAMS_DB_PASS__/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/grouper.hibernate.properties
 
 if $UPGRADE
 then
