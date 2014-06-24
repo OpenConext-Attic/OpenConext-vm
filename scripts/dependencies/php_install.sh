@@ -21,4 +21,8 @@ sed -i 's/display_errors = Off/display_errors = On/g' /etc/php.ini
 # Here we default to Amsterdam (because that is where development happens).
 sed -i 's/;date.timezone =/date.timezone = Europe\/Amsterdam/g' /etc/php.ini
 
+# Because we have more than 64MB of code we need to increase the shared memory size for APC.
+# Otherwise we will get the PHP Warning: include(): Unable to allocate memory for pool.
+sed -i 's/apc.shm_size=64M/apc.shm_size=128M/g' /etc/php.d/apc.ini
+
 # httpd php.conf is handled by RPM
