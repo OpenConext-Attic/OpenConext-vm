@@ -29,8 +29,8 @@ then
   then
     backupFile /etc/surfconext/serviceregistry.config.php
   fi
+
   cp $OC_BASEDIR/configs/surfconext/serviceregistry*.* /etc/surfconext/
-  ln -sf /etc/surfconext/serviceregistry.module_janus.parameters.yml parameters.yml
   sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" /etc/surfconext/serviceregistry*.php
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" $OC_BASEDIR/configs/httpd/conf.d/serviceregistry.conf > \
     /etc/httpd/conf.d/serviceregistry.conf
@@ -56,6 +56,8 @@ then
 
 fi
 
+./bin/composer.phar --prefer-dist --no-interaction install
+ln -sf /etc/surfconext/serviceregistry.module_janus.parameters.yml /opt/www/serviceregistry/simplesamlphp/modules/janus/app/config/parameters.yml
 ./bin/composer.phar --prefer-dist --no-interaction install
 
 # Perform database migration
