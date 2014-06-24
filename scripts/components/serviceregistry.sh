@@ -43,7 +43,8 @@ then
   then
     backupFile /etc/surfconext/serviceregistry.config.php
   fi
-  cp $OC_BASEDIR/configs/surfconext/serviceregistry*.php /etc/surfconext/
+  cp $OC_BASEDIR/configs/surfconext/serviceregistry* /etc/surfconext/
+  ln -sf /etc/surfconext/serviceregistry.module_janus.parameters.yml parameters.yml
   sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" /etc/surfconext/serviceregistry*.php
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" $OC_BASEDIR/configs/httpd/conf.d/serviceregistry.conf > \
     /etc/httpd/conf.d/serviceregistry.conf
@@ -54,10 +55,12 @@ then
 
   # Create cache directories for ServiceRegistry
   echo "creating cache and log directories for SR"
-  mkdir -p /tmp/janus/cache
+  mkdir -p /tmp/janus/snapshots
   chown -R apache:apache /tmp/janus
-  mkdir -p /var/log/janus
-  chown -R apache:apache /var/log/janus
+  mkdir -p /var/cache/janus-ssp/janus
+  chown -R apache:apache /var/cache/janus-ssp
+  mkdir -p /var/log/janus-ssp/janus
+  chown -R apache:apache /var/log/janus-ssp
 
   # selinux magic
   echo "allowing SR to write to cache and log directory"
@@ -90,4 +93,4 @@ fi
 
 #sometimes the permission are reset, because migrate runs as root
 chown -R apache:apache /tmp/janus
-chown -R apache:apache /var/log/janus
+chown -R apache:apache /var/log/janus-ssp
