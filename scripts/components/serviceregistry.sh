@@ -68,11 +68,11 @@ then
   semodule_package -o $OC_BASEDIR/configs/selinux/ServiceRegistry.pp -m $OC_BASEDIR/configs/selinux/ServiceRegistry.mod
   semodule -i $OC_BASEDIR/configs/selinux/ServiceRegistry.pp
 
-  # Use oc_config settings for admin passwd and secret salt for ssp
+  # Use oc_config.sh settings for admin passwd and secret salt for ssp
   sed -i "s/__OC__JANUSADMIN_PASS__/$OC__JANUSADMIN_PASS/g" /etc/surfconext/serviceregistry.config.php
   sed -i "s/__OC__JANUS_SECRETSALT__/$OC__JANUS_SECRETSALT/g" /etc/surfconext/serviceregistry.config.php
 
-  # Use oc_config settings for timezone ssp
+  # Use oc_config.sh settings for timezone ssp
   sed -i "s|__OC__TIMEZONE__|$OC__TIMEZONE|g" /etc/surfconext/serviceregistry.config.php
 
   # Set name admin email

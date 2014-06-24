@@ -25,7 +25,7 @@ cp -f $OC_BASEDIR/configs/tomcat6/conf/server.xml $CATALINA_HOME/conf/server.xml
 cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat6.conf $CATALINA_HOME/conf/tomcat6.conf
 cp -f $OC_BASEDIR/configs/tomcat6/conf/tomcat-users.xml $CATALINA_HOME/conf/tomcat-users.xml
 
-# Applying credentials from oc_config
+# Applying credentials from oc_config.sh
 sed -i "s/GrouperSystem/$OC__GROUPER_SYSTEM_USER/g" $CATALINA_HOME/conf/tomcat-users.xml
 sed -i "s/GrouperSystemPassword/$OC__GROUPER_SYSTEM_PASS/g" $CATALINA_HOME/conf/tomcat-users.xml
 

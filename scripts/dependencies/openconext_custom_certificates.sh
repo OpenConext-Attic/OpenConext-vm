@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# CA_KEY_PASSWORD is set in oc_config
+# CA_KEY_PASSWORD is set in oc_config.sh
 
 KEY_DIR=/etc/httpd/keys
 

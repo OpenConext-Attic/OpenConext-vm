@@ -11,7 +11,7 @@ OC_SCRIPTDIR=$OC_BASEDIR/scripts
 source $OC_SCRIPTDIR/common.sh
 
 # Defaults
-if [ -f /etc/openconext/oc_config ]
+if [ -f /etc/openconext/oc_config.sh ]
 then
     echo "using the configuration provided in /etc/openconext";
 else
@@ -24,7 +24,7 @@ else
     cp $OC_SCRIPTDIR/oc_config /etc/openconext/.
 fi
 
-source /etc/openconext/oc_config
+source /etc/openconext/oc_config.sh
 
 # Override defaults with variables from invoking shell.
 # To use this, call like this:
