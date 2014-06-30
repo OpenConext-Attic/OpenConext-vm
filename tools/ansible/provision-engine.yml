@@ -12,8 +12,36 @@
     build_path: "{{ builds_dir }}/OpenConext-engineblock-{{ version }}.tar.gz"
     current_release_symlink: "/opt/www/engineblock"
     download_url: "https://github.com/OpenConext/OpenConext-engineblock/releases/download/{{ version }}/OpenConext-engineblock-{{ version }}.tar.gz"
+    config:
+      auth.simplesamlphp.idp.certificate : /etc/surfconext/engineblock.20140617.pem
+      auth.simplesamlphp.idp.location : "https://engine.demo.openconext.org/authentication/idp/single-sign-on"
+      auth.simplesamlphp.idp.entityid : "https://engine.demo.openconext.org/authentication/idp/metadata"
+      cookie.lang.domain : "demo.openconext.org"
+      cookie.lang.expiry : "60*60*24*60"
+      database.master1.user : "{{ engine_db_user }}"
+      database.master1.dsn : "mysql:host:localhost;dbname:engineblock"
+      database.master1.password : "enginepass"
+      database.masters[] : "master1"
+      database.slaves[] : "master1"
+      dynamicassets : true
+      email.sendwelcomemail : 0
+      encryption.keys.20140414.privatefile : "/etc/surfconext/engineblock.key.20140414.pem"
+      encryption.keys.20140414.publicfile : /etc/surfconext/engineblock.20140414.pem
+      encryption.keys.20140617.publicfile : /etc/surfconext/engineblock.20140617.pem
+      encryption.keys.20140617.privatefile : /etc/surfconext/engineblock.20140617.key
+      ldap.accountdomainname : "surfconext.nl"
+      ldap.basedn : "dc:surfconext,dc:nl"
+      ldap.host : "ldap.demo.openconext.org"
+      ldap.usessl : 0
+      ldap.username : "cn:engine,dc:surfconext,dc:nl"
+      ldap.password : "jf7RH4Hj20De"
+      logs.file.writername : "Stream"
+      logs.file.writerparams.stream : "/var/log/surfconext/engineblock.log"
+      serviceregistry.user : "engine"
+      serviceregistry.location : "https://serviceregistry.demo.openconext.org/simplesaml/module.php/janus/services/rest/"
+      serviceregistry.user_secret : "engineblock"
 
-  pre_tasks:
+  tasks:
   - name: Make sure a database exists
     mysql_db:
       state:          present
@@ -24,6 +52,7 @@
       login_password: "{{ admin_db_password}}"
       encoding:       utf8
       collation:      utf8_unicode_ci
+    register: engine_db_install
 
   - name: Make sure a user exists
     mysql_user:
@@ -36,6 +65,21 @@
       login_user:     "{{ admin_db_user }}"
       login_password: "{{ admin_db_password}}"
 
+  - name: Write out SQL file with proper domain
+    template: src=data/engineblock.sql.j2 dest=/tmp/domain.engineblock.sql
+    when: engine_db_installed.changed
+
+  - name: Install initial Database schema when a new database was created
+    mysql_db:
+      name:           "{{ engine_db_name }}"
+      login_host:     "{{ engine_db_host }}"
+      login_port:     "{{ engine_db_port}}"
+      login_user:     "{{ engine_db_user }}"
+      login_password: "{{ engine_db_password}}"
+      state: import
+      target: /tmp/domain.engineblock.sql
+    when: engine_db_install.changed
+
 #  - name: Make sure LDAP database exists
 
   - name: Ensure the directories exists
@@ -44,44 +88,50 @@
     - "{{ releases_dir }}"
     - "{{ builds_dir }}"
 
-  - name: Get the current release
-    get_url: dest="{{ build_path }}" url={{ download_url }}
+  - name: Install Engine from Build (only when version starts with a number)
+    include: install-engine.yml
+    when: version | match("^[0-9]")
 
-  - name: Unarchive it
-    unarchive: dest={{ releases_dir }} src={{ build_path }} copy=no
+  - name: Install Engine from source (only when version does not start with a number)
+    include: install-engine-src.yml
+    when: version | match("^[^0-9]")
 
-  - name: Install default application settings
-    copy:
-      src: "{{ release_dir }}/etc/openconext/engineblock.ini"
-      dest: /etc/openconext/engineblock.ini
-      force: no
-
-  - name: Install User Profile with Environment variable.
-    copy:
-      src: "{{ release_dir }}/etc/profile.d/openconext-engineblock.sh"
-      dest: /etc/profile.d/openconext-engineblock.sh
-      force: no
-
-  - name: "Legacy: Remove obsolete, too generic, profile.d/openconext.sh"
-    file: path=/etc/profile.d/openconext.sh state=absent
-
-  #- name: Install fresh signing keys if they don't already exist
-
-  - name: Install logging directory
-    file: path={{ logging_dir }} state=directory
-
-  - name: "Legacy: Install SURFconext logging directory"
-    file: path=/var/log/surfconext src={{ logging_dir }} state=link
-
-  - name: "Legacy: Migrate the configuration file"
-    command: "{{ release_dir }}/bin/migrate_etc.php"
-
-  - name: Set all configuration values for EngineBlock
+  - name: Set configuration
     ini_file:
-      dest:     /etc/openconext/engineblock.ini
-      section:  demo
-      option:   password
-      value:    "{{ engine_db_password }}"
+      dest: /etc/openconext/engineblock.ini
+      section: "[{{ version }}]"
+      option: "{{ item.key }}"
+      value: "{{ item.value }}"
+    with_dict: config
 
-  #- name: SETUP EngineBlock using Ansible
-  #  include: "{{ installer_path }}/tools/ansible/setup.yml"
+  - name: Detect certificates
+    stat: path=/etc/openconext/engineblock/engineblock.*(
+    register:
+
+  - name:
+    command: openssl req -subj '/CN=Engine/OU=Services/O=OpenConext/C=NL/' -newkey rsa:2048 -new -x509 -days 3652 -nodes -out example.org.crt -keyout example.org.pem
+    args:
+      chdir: /tmp
+
+  - name:
+
+
+      cd /tmp &&
+
+      EB_CRT=`cat example.org.crt` &&
+      EB_KEY=`cat example.org.pem` &&
+      EB_CRT_NO_HEADERS=`sed '1d;$d' example.org.crt` &&
+      echo "" >> /etc/surfconext/engineblock.ini &&
+      echo "encryption.key.public = \"${EB_CRT}\"" >> /etc/surfconext/engineblock.ini &&
+      echo "encryption.key.private = \"${EB_KEY}\"" >> /etc/surfconext/engineblock.ini &&
+      echo "auth.simplesamlphp.idp.cert       = \"${EB_CRT_NO_HEADERS}\"" >> /etc/surfconext/engineblock.ini
+      cp example.org.crt /etc/surfconext/engineblock.crt &&
+      rm example.org.crt example.org.pem
+
+  - name: Run EngineBlock migrations
+    command: ./bin/migrate
+    args:
+      chdir: "{{ release_dir }}"
+
+  - name: Activate new EngineBlock
+    file: src={{ release_dir }} dest={{ current_release_symlink }} state=link

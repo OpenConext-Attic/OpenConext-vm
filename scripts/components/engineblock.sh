@@ -1,76 +1,31 @@
 #!/bin/bash
 
-# ansible-playbook -i tools/ansible/inventory/demo.openconext.org tools/ansible/provision-engine.yml
+# Make sure Ansible is installed
+yum install -y ansible &&
 
-#######################
-# Install EngineBlock #
-#######################
-if [ ! -h /opt/www/engineblock ]
-then
-    $GITCLONE https://github.com/OpenConext/OpenConext-engineblock.git /opt/www/OpenConext-engineblock
-    ln -sf /opt/www/OpenConext-engineblock /opt/www/engineblock
-fi
-cd /opt/www/engineblock
-$GITRESET # revert potential changes
-$GITFETCH
-$GITCHECKOUT ${ENGINEBLOCK_VERSION}
+# Run Ansible playbook
+ansible-playbook -i tools/ansible/inventory/demo.openconext.org tools/ansible/provision-engine.yml \
+  -e "version=$ENGINEBLOCK_VERSION" \
+  -e "engine_db_name=engineblock" \
+  -e "engine_db_host=localhost" \
+  -e "engine_db_port=3306" \
+  -e "engine_db_user=$OC__ENGINE_DB_USER" \
+  -e "engine_db_password=$OC__ENGINE_DB_PASS" \
+  -e "admin_db_user=root" \
+  -e "admin_db_password=$OC__ROOT_DB_PASS" \
+  -e "serviceregistry_url=https://serviceregistry.$OC_DOMAIN"
+  -e "serviceregistry_user=$OC__ENGINE_JANUSAPI_USER"
+  -e "serviceregistry_pass=$OC__ENGINE_JANUSAPI_PASS"
+  -e "engine_ldap_binddn=cn:engine,dc:surfconext,dc:nl"
+  -e "engine_ldap_password=$OC__LDAP_PASS"
 
-./bin/composer.phar --prefer-dist --no-interaction install
-# Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
-restorecon -r vendor
+
 
 if $UPGRADE
 then
   source /etc/profile.d/openconext.sh
     
 else
-  # Create database
-  mysql -u root --password=$OC__ROOT_DB_PASS -e "drop database if exists engineblock; create database engineblock default charset utf8 default collate utf8_unicode_ci;"
-  cat $OC_BASEDIR/data/engineblock.sql | \
-    sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
-    mysql -u root --password=$OC__ROOT_DB_PASS engineblock
-
-  # Set database creadentials for engine
-  mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON engineblock.* TO $OC__ENGINE_DB_USER@localhost IDENTIFIED BY '$OC__ENGINE_DB_PASS'"
-  success=`mysqladmin -u$OC__ENGINE_DB_USER -p$OC__ENGINE_DB_PASS ping | grep -c "mysqld is alive"`
-  if [[ $success == '1' ]]
-  then
-    echo -e "\nValidating new MySQL Engine password: SUCCESS!\n"     
-  else
-    echo -e "\nValidating new MySQL Engine password: FAILED\n"
-    exit
-  fi
-
-  #############################################
-  # Modify the EngineBlock configuration file #
-  #############################################
-  if [ -f /etc/surfconext/engineblock.ini ]
-  then
-    backupFile /etc/surfconext/engineblock.ini
-  fi
-  install -d /etc/surfconext/
-  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/engineblock.ini > /etc/surfconext/engineblock.ini
-
-  echo "Apply db credentials to file engineblock.ini"
-  sed -i "s/__OC__ENGINE_DB_USER__/$OC__ENGINE_DB_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/__OC__ENGINE_DB_PASS__/$OC__ENGINE_DB_PASS/g" /etc/surfconext/engineblock.ini
-
-  # Apply janus api credentials to file engineblock.ini
-  sed -i "s/__OC__ENGINE_JANUSAPI_USER__/$OC__ENGINE_JANUSAPI_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/__OC__ENGINE_JANUSAPI_PASS__/$OC__ENGINE_JANUSAPI_PASS/g" /etc/surfconext/engineblock.ini
-
-  # Apply ldap credentials to file engineblock.ini
-  sed -i "s/__OC__LDAP_ENGINE_USER__/$OC__LDAP_ENGINE_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/__OC__LDAP_ENGINE_PASS__/$OC__LDAP_ENGINE_PASS/g" /etc/surfconext/engineblock.ini
-
-  # Apply timezone to file engineblock.ini
-  sed -i "s|__OC__TIMEZONE__|$OC__TIMEZONE|g" /etc/surfconext/engineblock.ini
-
-  # Edit the profile.sh file to set correct environment variable
-  echo 'export ENGINEBLOCK_ENV="demo"' > /etc/profile.d/openconext.sh
-
-  chmod +x /etc/profile.d/openconext.sh
-  source /etc/profile.d/openconext.sh
 
   if [ -f /etc/surfconext/engineblock.crt ]
   then
@@ -88,12 +43,6 @@ else
   echo "auth.simplesamlphp.idp.cert       = \"${EB_CRT_NO_HEADERS}\"" >> /etc/surfconext/engineblock.ini
   cp example.org.crt /etc/surfconext/engineblock.crt &&
   rm example.org.crt example.org.pem
-
-  install -d /var/log/surfconext
-  # TODO: is this chmod really neccessary?
-  chmod o+w /var/log/surfconext
-  touch /var/log/surfconext/engineblock.log
-  chmod o+w /var/log/surfconext/engineblock.log
 
     # Updating LDAP schema some more...
   ldapmodify -x -D cn=admin,cn=config -h localhost -w "$OC__LDAP_PASS" -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
