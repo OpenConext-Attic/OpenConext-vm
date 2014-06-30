@@ -43,8 +43,8 @@ then
   then
     backupFile /etc/surfconext/serviceregistry.config.php
   fi
-  cp $OC_BASEDIR/configs/surfconext/serviceregistry* /etc/surfconext/
-  ln -sf /etc/surfconext/serviceregistry.module_janus.parameters.yml parameters.yml
+
+  cp $OC_BASEDIR/configs/surfconext/serviceregistry*.* /etc/surfconext/
   sed -i "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" /etc/surfconext/serviceregistry*.php
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" $OC_BASEDIR/configs/httpd/conf.d/serviceregistry.conf > \
     /etc/httpd/conf.d/serviceregistry.conf
@@ -68,24 +68,26 @@ then
   semodule_package -o $OC_BASEDIR/configs/selinux/ServiceRegistry.pp -m $OC_BASEDIR/configs/selinux/ServiceRegistry.mod
   semodule -i $OC_BASEDIR/configs/selinux/ServiceRegistry.pp
 
-  # Use oc_config settings for admin passwd and secret salt for ssp
-  sed -i "s/_OC__JANUSADMIN_PASS_/$OC__JANUSADMIN_PASS/g" /etc/surfconext/serviceregistry.config.php
-  sed -i "s/_OC__JANUS_SECRETSALT_/$OC__JANUS_SECRETSALT/g" /etc/surfconext/serviceregistry.config.php
+  # Use oc_config.sh settings for admin passwd and secret salt for ssp
+  sed -i "s/__OC__JANUSADMIN_PASS__/$OC__JANUSADMIN_PASS/g" /etc/surfconext/serviceregistry.config.php
+  sed -i "s/__OC__JANUS_SECRETSALT__/$OC__JANUS_SECRETSALT/g" /etc/surfconext/serviceregistry.config.php
 
-  # Use oc_config settings for timezone ssp
-  sed -i "s|_OC__TIMEZONE_|$OC__TIMEZONE|g" /etc/surfconext/serviceregistry.config.php
+  # Use oc_config.sh settings for timezone ssp
+  sed -i "s|__OC__TIMEZONE__|$OC__TIMEZONE|g" /etc/surfconext/serviceregistry.config.php
 
   # Set name admin email
-  sed -i "s/_OC__ADMIN_EMAIL_/$OC__ADMIN_EMAIL/g" /etc/surfconext/serviceregistry.module_janus.php
-  sed -i "s/_OC__ADMIN_NAME_/$OC__ADMIN_NAME/g" /etc/surfconext/serviceregistry.config.php
-  sed -i "s/_OC__ADMIN_EMAIL_/$OC__ADMIN_EMAIL/g" /etc/surfconext/serviceregistry.config.php
+  sed -i "s/__OC__ADMIN_EMAIL__/$OC__ADMIN_EMAIL/g" /etc/surfconext/serviceregistry.module_janus.php
+  sed -i "s/__OC__ADMIN_NAME__/$OC__ADMIN_NAME/g" /etc/surfconext/serviceregistry.config.php
+  sed -i "s/__OC__ADMIN_EMAIL__/$OC__ADMIN_EMAIL/g" /etc/surfconext/serviceregistry.config.php
 
   # Apply database credentials to file serviceregistry.module_janus.php
-  sed -i "s/_OC__SERVICEREGISTRY_DB_USER_/$OC__SERVICEREGISTRY_DB_USER/g" /etc/surfconext/serviceregistry.module_janus.php
-  sed -i "s/_OC__SERVICEREGISTRY_DB_PASS_/$OC__SERVICEREGISTRY_DB_PASS/g" /etc/surfconext/serviceregistry.module_janus.php
+  sed -i "s/__OC__SERVICEREGISTRY_DB_USER__/$OC__SERVICEREGISTRY_DB_USER/g" /etc/surfconext/serviceregistry.module_janus.php
+  sed -i "s/__OC__SERVICEREGISTRY_DB_PASS__/$OC__SERVICEREGISTRY_DB_PASS/g" /etc/surfconext/serviceregistry.module_janus.php
 
 fi
 
+./bin/composer.phar --prefer-dist --no-interaction install
+ln -sf /etc/surfconext/serviceregistry.module_janus.parameters.yml /opt/www/serviceregistry/simplesamlphp/modules/janus/app/config/parameters.yml
 ./bin/composer.phar --prefer-dist --no-interaction install
 
 # Perform database migration
@@ -93,4 +95,5 @@ fi
 
 #sometimes the permission are reset, because migrate runs as root
 chown -R apache:apache /tmp/janus
+chown -R apache:apache /var/cache/janus-ssp
 chown -R apache:apache /var/log/janus-ssp

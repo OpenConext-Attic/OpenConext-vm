@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### Constants
-NODE_PROPS=/etc/openconext/oc_config
+NODE_PROPS=/etc/openconext/oc_config.sh
 
 # The default domain will be used as the base domain for all components.
 # Components will be named XYZ.DEFAULT_DOMAIN, so e.g. engine.demo.openconext.org

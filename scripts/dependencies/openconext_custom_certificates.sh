@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# CA_KEY_PASSWORD is set in oc_config
+# CA_KEY_PASSWORD is set in oc_config.sh
 
 KEY_DIR=/etc/httpd/keys
 
@@ -10,9 +10,8 @@ mkdir -p $CA_DIR
 echo "handling certificates for the domain $OC_DOMAIN."
 
 if [ ! "$CERTCHOICE" == "existing" ]; then
-    rm -rf $KEY_DIR/* &&
     install -d $KEY_DIR &&
-    mkdir -p $CA_DIR
+    rm -rf $KEY_DIR/*
 fi
 
 case "$CERTCHOICE" in

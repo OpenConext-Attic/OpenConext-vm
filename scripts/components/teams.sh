@@ -51,10 +51,10 @@ else
   cp /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
 
   # Apply credentials to file coin-teams.properties
-  sed -i "s/_OC__ENGINE_DB_USER_/$OC__ENGINE_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
-  sed -i "s/_OC__ENGINE_DB_PASS_/$OC__ENGINE_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
-  sed -i "s/_OC__TEAMS_DB_USER_/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
-  sed -i "s/_OC__TEAMS_DB_PASS_/$OC__TEAMS_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+  sed -i "s/__OC__ENGINE_DB_USER__/$OC__ENGINE_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+  sed -i "s/__OC__ENGINE_DB_PASS__/$OC__ENGINE_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+  sed -i "s/__OC__TEAMS_DB_USER__/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+  sed -i "s/__OC__TEAMS_DB_PASS__/$OC__TEAMS_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
 
   if [[ "$OC_VERSION" < "v46" ]]
   then
