@@ -65,7 +65,7 @@
 
   - name: Write out SQL file with proper domain
     template: src=data/engineblock.sql.j2 dest=/tmp/domain.engineblock.sql
-    when: engine_db_installed.changed
+    when: engine_db_install.changed
 
   - name: Install initial Database schema when a new database was created
     mysql_db:
