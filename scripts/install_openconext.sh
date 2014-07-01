@@ -21,7 +21,7 @@ else
     echo "no configuration found in /etc/openconext using (INSECURE) defaults!";
     echo "the template in the install script dir can be filled using oc_setpasswds.sh";
     install -d /etc/openconext
-    cp $OC_SCRIPTDIR/oc_config /etc/openconext/.
+    cp $OC_SCRIPTDIR/oc_config.sh /etc/openconext/.
 fi
 
 source /etc/openconext/oc_config.sh
