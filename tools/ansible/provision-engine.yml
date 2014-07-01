@@ -45,9 +45,9 @@
       state:          present
       name:           "{{ engine_db_name }}"
       login_host:     "{{ engine_db_host }}"
-      login_port:     "{{ engine_db_port}}"
+      login_port:     "{{ engine_db_port }}"
       login_user:     "{{ admin_db_user }}"
-      login_password: "{{ admin_db_password}}"
+      login_password: "{{ admin_db_password }}"
       encoding:       utf8
       collation:      utf8_unicode_ci
     register: engine_db_install
@@ -121,8 +121,8 @@
   - name: Update LDAP
     command: ldapmodify -x -D "{{ admin_ldap_binddn }}" -h localhost -w "{{ admin_ldap password }}" -f {{ item }}
     with_items:
-      - /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
-      - /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
+      - "{{ release_dir }}/ldap/changes/addDeprovisionWarningSentAttributes.ldif"
+      - "{{ release_dir }}/ldap/changes/addCollabPersonUUID.ldif"
     ignore_errors: true
 
   - name: Run EngineBlock migrations
