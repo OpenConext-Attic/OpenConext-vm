@@ -94,8 +94,14 @@
     include: install-engine-src.yml
     when: version | match("^[^0-9]")
 
+  - name: Migrate the configuration file
+    command: "{{ release_dir }}/bin/migrate_etc.php"
+
+  - name: Install migrated configuration file
+    command: install -b /etc/surfconext/engineblock.ini.new /etc/surfconext/engineblock.ini
+
   - name: Detect default certificates.
-    stat: path=/etc/openconext/engineblock.default.pem.key
+    stat: path=/etc/openconext/engineblock.key
     register: default_cert
 
   - name: Generate new default certificate if none was found.
@@ -107,7 +113,7 @@
   - name: Set configuration
     ini_file:
       dest: /etc/openconext/engineblock.ini
-      section: "[{{ version }}]"
+      section: "local"
       option: "{{ item.key }}"
       value: "{{ item.value }}"
     with_dict: config

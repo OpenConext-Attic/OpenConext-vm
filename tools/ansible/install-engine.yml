@@ -23,6 +23,3 @@
 
   - name: "BUILD - Legacy: Install symlink from /var/log/surfconext to /var/log/openconext"
     file: path=/var/log/surfconext src={{ logging_dir }} state=link
-
-  - name: "BUILD - Migrate the configuration file"
-    command: "{{ release_dir }}/bin/migrate_etc.php"
