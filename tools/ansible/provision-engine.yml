@@ -15,7 +15,7 @@
     config:
       auth.simplesamlphp.idp.certificate : /etc/surfconext/engineblock.default.pem
       auth.simplesamlphp.idp.location : "https://engine.demo.openconext.org/authentication/idp/single-sign-on"
-      auth.simplesamlphp.idp.entityid : "https://engine.demo.openconext.org/authentication/idp/metadata"
+      auth.simplesamlphp.idp.entityId : "https://engine.demo.openconext.org/authentication/idp/metadata"
       cookie.lang.domain : "demo.openconext.org"
       cookie.lang.expiry : "60*60*24*60"
       database.master1.user : "{{ engine_db_user }}"
@@ -23,21 +23,21 @@
       database.master1.password : "{{ engine_db_password }}"
       database.masters[] : "master1"
       database.slaves[] : "master1"
-      dynamicassets : true
-      email.sendwelcomemail : 0
+      dynamicAssets : true
+      email.sendWelcomeMail : 0
       encryption.keys.default.privateFile : /etc/surfconext/engineblock.key
       encryption.keys.default.publicFile : /etc/surfconext/engineblock.crt
-      ldap.accountdomainname : "surfconext.nl"
-      ldap.basedn : "dc:surfconext,dc:nl"
+      ldap.accountDomainName : "surfconext.nl"
+      ldap.baseDn : "dc:surfconext,dc:nl"
       ldap.host : "ldap.demo.openconext.org"
-      ldap.usessl : 0
-      ldap.username : "{{ engine_ldap_binddn }}"
+      ldap.useSsl : 0
+      ldap.userName : "{{ engine_ldap_binddn }}"
       ldap.password : "{{ engine_ldap_password }}"
       logs.file.writername : "Stream"
       logs.file.writerparams.stream : "/var/log/surfconext/engineblock.log"
-      serviceregistry.location : "https://serviceregistry.demo.openconext.org/simplesaml/module.php/janus/services/rest/"
-      serviceregistry.user : "engine"
-      serviceregistry.user_secret : "engineblock"
+      serviceRegistry.location : "https://serviceregistry.demo.openconext.org/simplesaml/module.php/janus/services/rest/"
+      serviceRegistry.user : "engine"
+      serviceRegistry.user_secret : "engineblock"
 
   tasks:
   - name: Make sure a database exists
