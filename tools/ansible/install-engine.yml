@@ -14,8 +14,6 @@
   - name: "BUILD - Legacy: Remove obsolete profile.d/openconext.sh"
     file: path=/etc/profile.d/openconext.sh state=absent
 
-  #- name: Install fresh signing keys if they don't already exist
-
   - name: "BUILD - Legacy: Move /var/log/surfconext to /var/log/openconext"
     command: mv /var/log/surfconext {{ logging_dir }}
     ignore_errors: yes
