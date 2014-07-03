@@ -6,8 +6,11 @@ $YUM -y install mysql mysql-server mysql-connector-java
 service mysqld restart
 chkconfig mysqld on
 
-# Root PW already set?
+# Root PW already set? Ignore any errors on this one.
+set +e
 success=`mysqladmin -uroot -p$OC__ROOT_DB_PASS ping | grep -c "mysqld is alive"`
+set -e
+
 if [[ $success != '1' ]]
 then
     # If not then try to connect without a password and set it
