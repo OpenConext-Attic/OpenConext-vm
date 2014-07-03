@@ -14,7 +14,7 @@ export CSA_VERSION=develop
 export SELFSERVICE_VERSION=develop
 
 # these are _not_ tag names
-export GROUPER_DIST_VERSION=3.13.0
+export GROUPER_DIST_VERSION=4.0.0
 export GROUPER_VERSION=2.1.5
 
 # the version of this install
