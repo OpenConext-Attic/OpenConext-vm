@@ -4,7 +4,7 @@
 yum install -y ansible &&
 
 # Run Ansible playbook
-ansible-playbook -i tools/ansible/inventory/demo.openconext.org tools/ansible/provision-engine.yml \
+ansible-playbook -i tools/ansible/inventory/demo.openconext.org.ini tools/ansible/provision-engine.yml \
   -e "version=$ENGINEBLOCK_VERSION" \
   -e "domain=$OC_DOMAIN" \
   -e "engine_db_name=engineblock" \
