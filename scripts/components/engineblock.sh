@@ -23,7 +23,4 @@ ansible-playbook \
   -e "serviceregistry_secret=$OC__ENGINE_JANUSAPI_PASS" \
   $OC_BASEDIR/tools/ansible/provision-engine.yml
 
-EB_CRT=`cat /etc/openconext/engineblock.default.pem.crt` &&
-EB_KEY=`cat /etc/openconext/engineblock.default.pem.key` &&
-EB_CRT_NO_HEADERS=`sed '1d;$d' /etc/openconext/engineblock.default.pem.crt` &&
 ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`
