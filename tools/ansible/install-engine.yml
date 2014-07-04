@@ -1,6 +1,6 @@
 ---
   - name: "BUILD - Get the current release"
-    get_url: dest="{{ build_path }}" url={{ download_url }}
+    get_url: dest="{{ eb_build_path }}" url={{ download_url }}
 
   - name: "BUILD - Unarchive it"
     unarchive: dest={{ releases_dir }} src={{ build_path }} copy=no

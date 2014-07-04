@@ -4,15 +4,20 @@
   remote_user: "{{ remote_user }}"
 
   vars:
+    # General vars, note that these should be moved to a parent playbook in future versions
+    # Note that ordering matters here!
     temp_dir: "/tmp"
     logging_dir: "/var/log/openconext"
     releases_dir: "/opt/openconext"
     release_dir: "{{ releases_dir }}/OpenConext-engineblock-{{ version }}"
     builds_dir: "{{ releases_dir }}/builds"
-    build_path: "{{ builds_dir }}/OpenConext-engineblock-{{ version }}.tar.gz"
-    current_release_symlink: "/opt/www/engineblock"
-    download_url: "https://github.com/OpenConext/OpenConext-engineblock/releases/download/{{ version }}/OpenConext-engineblock-{{ version }}.tar.gz"
-    config:
+
+    # Engine specific variables
+    eb_build_path: "{{ builds_dir }}/OpenConext-engineblock-{{ version }}.tar.gz"
+    eb_download_url: "https://github.com/OpenConext/OpenConext-engineblock/releases/download/{{ version }}/OpenConext-engineblock-{{ version }}.tar.gz"
+    eb_current_release_symlink: "/opt/www/engineblock"
+
+    eb_config:
       auth.simplesamlphp.idp.certificate : /etc/surfconext/engineblock.default.pem
       auth.simplesamlphp.idp.location : "https://engine.demo.openconext.org/authentication/idp/single-sign-on"
       auth.simplesamlphp.idp.entityId : "https://engine.demo.openconext.org/authentication/idp/metadata"
@@ -116,7 +121,7 @@
       section: "local"
       option: "{{ item.key }}"
       value: "{{ item.value }}"
-    with_dict: config
+    with_dict: eb_config
 
   - name: Update LDAP
     command: ldapmodify -x -D "{{ admin_ldap_binddn }}" -h localhost -w "{{ admin_ldap password }}" -f {{ item }}
@@ -131,4 +136,4 @@
       chdir: "{{ release_dir }}"
 
   - name: Activate new EngineBlock
-    file: src={{ release_dir }} dest={{ current_release_symlink }} state=link
+    file: src={{ release_dir }} dest={{ eb_current_release_symlink }} state=link
