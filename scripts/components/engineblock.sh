@@ -5,6 +5,7 @@ yum install -y ansible MySQL-python &&
 
 # Run Ansible playbook
 ansible-playbook \
+  -v \
   -i $OC_BASEDIR/tools/ansible/inventory/demo.openconext.org.ini \
   -e "openconext_domain=$OC_DOMAIN" \
   -e "engine_version=$ENGINEBLOCK_VERSION" \
