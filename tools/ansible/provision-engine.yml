@@ -9,19 +9,19 @@
     temp_dir: "/tmp"
     logging_dir: "/var/log/openconext"
     releases_dir: "/opt/openconext"
-    release_dir: "{{ releases_dir }}/OpenConext-engineblock-{{ version }}"
     builds_dir: "{{ releases_dir }}/builds"
 
     # Engine specific variables
-    eb_build_path: "{{ builds_dir }}/OpenConext-engineblock-{{ version }}.tar.gz"
-    eb_download_url: "https://github.com/OpenConext/OpenConext-engineblock/releases/download/{{ version }}/OpenConext-engineblock-{{ version }}.tar.gz"
-    eb_current_release_symlink: "/opt/www/engineblock"
+    engine_release_dir: "{{ releases_dir }}/OpenConext-engineblock-{{ engine_version }}"
+    engine_build_path: "{{ builds_dir }}/OpenConext-engineblock-{{ engine_version }}.tar.gz"
+    engine_download_url: "https://github.com/OpenConext/OpenConext-engineblock/releases/download/{{ engine_version }}/OpenConext-engineblock-{{ engine_version }}.tar.gz"
+    engine_current_release_symlink: "/opt/www/engineblock"
 
-    eb_config:
+    engine_config:
       auth.simplesamlphp.idp.certificate : /etc/surfconext/engineblock.default.pem
-      auth.simplesamlphp.idp.location : "https://engine.demo.openconext.org/authentication/idp/single-sign-on"
-      auth.simplesamlphp.idp.entityId : "https://engine.demo.openconext.org/authentication/idp/metadata"
-      cookie.lang.domain : "demo.openconext.org"
+      auth.simplesamlphp.idp.location : "https://engine.{{ openconext_domain }}/authentication/idp/single-sign-on"
+      auth.simplesamlphp.idp.entityId : "https://engine.{{ openconext_domain }}/authentication/idp/metadata"
+      cookie.lang.domain : "{{ openconext_domain }}"
       cookie.lang.expiry : "60*60*24*60"
       database.master1.user : "{{ engine_db_user }}"
       database.master1.dsn : "mysql:host:{{ engine_db_host }};dbname:{{ engine_db_name }}"
@@ -34,15 +34,15 @@
       encryption.keys.default.publicFile : /etc/surfconext/engineblock.crt
       ldap.accountDomainName : "surfconext.nl"
       ldap.baseDn : "dc:surfconext,dc:nl"
-      ldap.host : "ldap.demo.openconext.org"
+      ldap.host : "ldap.{{ openconext_domain }}"
       ldap.useSsl : 0
       ldap.userName : "{{ engine_ldap_binddn }}"
       ldap.password : "{{ engine_ldap_password }}"
       logs.file.writername : "Stream"
       logs.file.writerparams.stream : "/var/log/surfconext/engineblock.log"
-      serviceRegistry.location : "https://serviceregistry.demo.openconext.org/simplesaml/module.php/janus/services/rest/"
-      serviceRegistry.user : "engine"
-      serviceRegistry.user_secret : "engineblock"
+      serviceRegistry.location : "{{ serviceregistry_url }}"
+      serviceRegistry.user : "{{ serviceregistry_user }}"
+      serviceRegistry.user_secret : "{{ serviceregistry_secret }}"
 
   tasks:
   - name: Make sure a database exists
@@ -51,8 +51,8 @@
       name:           "{{ engine_db_name }}"
       login_host:     "{{ engine_db_host }}"
       login_port:     "{{ engine_db_port }}"
-      login_user:     "{{ admin_db_user }}"
-      login_password: "{{ admin_db_password }}"
+      login_user:     "{{ db_admin_user }}"
+      login_password: "{{ db_admin_password }}"
       encoding:       utf8
       collation:      utf8_unicode_ci
     register: engine_db_install
@@ -65,8 +65,8 @@
       priv:           "{{ engine_db_name }}.*:ALL"
       login_host:     "{{ engine_db_host }}"
       login_port:     "{{ engine_db_port}}"
-      login_user:     "{{ admin_db_user }}"
-      login_password: "{{ admin_db_password}}"
+      login_user:     "{{ db_admin_user }}"
+      login_password: "{{ db_admin_password}}"
 
   - name: Write out SQL file with proper domain
     template: src=../../data/engineblock.sql.j2 dest=/tmp/domain.engineblock.sql
@@ -93,14 +93,14 @@
 
   - name: Install Engine from Build (only when version starts with a number)
     include: install-engine.yml
-    when: version | match("^[0-9]")
+    when: engine_version | match("^[0-9]")
 
   - name: Install Engine from source (only when version does not start with a number)
     include: install-engine-src.yml
-    when: version | match("^[^0-9]")
+    when: engine_version | match("^[^0-9]")
 
   - name: Migrate the configuration file
-    command: "{{ release_dir }}/bin/migrate_etc.php"
+    command: "{{ engine_release_dir }}/bin/migrate_etc.php"
 
   - name: Install migrated configuration file
     command: install -b /etc/surfconext/engineblock.ini.new /etc/surfconext/engineblock.ini
@@ -121,19 +121,19 @@
       section: "local"
       option: "{{ item.key }}"
       value: "{{ item.value }}"
-    with_dict: eb_config
+    with_dict: engine_config
 
   - name: Update LDAP
     command: ldapmodify -x -D "{{ admin_ldap_binddn }}" -h localhost -w "{{ admin_ldap password }}" -f {{ item }}
     with_items:
-      - "{{ release_dir }}/ldap/changes/addDeprovisionWarningSentAttributes.ldif"
-      - "{{ release_dir }}/ldap/changes/addCollabPersonUUID.ldif"
+      - "{{ engine_release_dir }}/ldap/changes/addDeprovisionWarningSentAttributes.ldif"
+      - "{{ engine_release_dir }}/ldap/changes/addCollabPersonUUID.ldif"
     ignore_errors: true
 
   - name: Run EngineBlock migrations
     command: ./bin/migrate
     args:
-      chdir: "{{ release_dir }}"
+      chdir: "{{ engine_release_dir }}"
 
   - name: Activate new EngineBlock
-    file: src={{ release_dir }} dest={{ eb_current_release_symlink }} state=link
+    file: src={{ engine_release_dir }} dest={{ engine_current_release_symlink }} state=link

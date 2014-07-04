@@ -6,20 +6,20 @@ yum install -y ansible MySQL-python &&
 # Run Ansible playbook
 ansible-playbook \
   -i $OC_BASEDIR/tools/ansible/inventory/demo.openconext.org.ini \
-  -e "version=$ENGINEBLOCK_VERSION" \
-  -e "domain=$OC_DOMAIN" \
+  -e "openconext_domain=$OC_DOMAIN" \
+  -e "engine_version=$ENGINEBLOCK_VERSION" \
   -e "engine_db_name=engineblock" \
   -e "engine_db_host=localhost" \
   -e "engine_db_port=3306" \
   -e "engine_db_user=$OC__ENGINE_DB_USER" \
   -e "engine_db_password=$OC__ENGINE_DB_PASS" \
-  -e "admin_db_user=root" \
-  -e "admin_db_password=$OC__ROOT_DB_PASS" \
-  -e "serviceregistry_url=https://serviceregistry.$OC_DOMAIN" \
-  -e "serviceregistry_user=$OC__ENGINE_JANUSAPI_USER" \
-  -e "serviceregistry_pass=$OC__ENGINE_JANUSAPI_PASS" \
   -e "engine_ldap_binddn=cn:engine,dc:surfconext,dc:nl" \
   -e "engine_ldap_password=$OC__LDAP_PASS" \
+  -e "db_admin_user=root" \
+  -e "db_admin_password=$OC__ROOT_DB_PASS" \
+  -e "serviceregistry_url=https://serviceregistry.$OC_DOMAIN/simplesaml/module.php/janus/services/rest/" \
+  -e "serviceregistry_user=$OC__ENGINE_JANUSAPI_USER" \
+  -e "serviceregistry_secret=$OC__ENGINE_JANUSAPI_PASS" \
   $OC_BASEDIR/tools/ansible/provision-engine.yml
 
 EB_CRT=`cat /etc/openconext/engineblock.default.pem.crt` &&
