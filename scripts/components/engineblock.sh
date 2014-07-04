@@ -21,6 +21,6 @@ ansible-playbook \
   -e "serviceregistry_url=https://serviceregistry.$OC_DOMAIN/simplesaml/module.php/janus/services/rest/" \
   -e "serviceregistry_user=$OC__ENGINE_JANUSAPI_USER" \
   -e "serviceregistry_secret=$OC__ENGINE_JANUSAPI_PASS" \
-  $OC_BASEDIR/tools/ansible/provision-engine.yml
+  $OC_BASEDIR/tools/ansible/provision/engine.yml
 
 ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`

@@ -10,6 +10,7 @@
     logging_dir: "/var/log/openconext"
     releases_dir: "/opt/openconext"
     builds_dir: "{{ releases_dir }}/builds"
+    configs_dir: "/etc/openconext"
 
     # Engine specific variables
     engine_version_dir: "{{ engine_version | replace('/', '-') }}"
@@ -46,6 +47,18 @@
       serviceRegistry.user_secret : "{{ serviceregistry_secret }}"
 
   tasks:
+
+# Provision the environment
+  - name: Legacy 4.2.0
+    include: legacy/engine/4.2.0.yml
+
+  - name: Ensure the directories exists
+    file: path={{ item }} state=directory
+    with_items:
+    - "{{ releases_dir }}"
+    - "{{ builds_dir }}"
+    - "{{ configs_dir }}"
+
   - name: Make sure a database exists
     mysql_db:
       state:          present
@@ -69,8 +82,29 @@
       login_user:     "{{ db_admin_user }}"
       login_password: "{{ db_admin_password}}"
 
+#  - name: Make sure LDAP database exists
+
+# Install the software
+  - name: Install EngineBlock
+    include: ../roles/openconext-engine/install.yml
+
+# Configure the software
+  - name: Set configuration
+    ini_file:
+      dest: /etc/openconext/engineblock.ini
+      section: "local"
+      option: "{{ item.key }}"
+      value: "{{ item.value }}"
+    with_dict: engine_config
+
+# Activate the software
+  - name: Setup and Activate the new EngineBlock version
+    include: ../roles/openconext-engine/activate.yml
+
+  # @TODO: separate DDL from data
+# Provision demo data
   - name: Write out SQL file with proper domain
-    template: src=../../data/engineblock.sql.j2 dest=/tmp/domain.engineblock.sql
+    template: src=../../../data/engineblock.sql.j2 dest=/tmp/domain.engineblock.sql
     when: engine_db_install.changed
 
   - name: Install initial Database schema when a new database was created
@@ -83,58 +117,3 @@
       state: import
       target: /tmp/domain.engineblock.sql
     when: engine_db_install.changed
-
-#  - name: Make sure LDAP database exists
-
-  - name: Ensure the directories exists
-    file: path={{ item }} state=directory
-    with_items:
-    - "{{ releases_dir }}"
-    - "{{ builds_dir }}"
-
-  - name: Install Engine from Build (only when version starts with a number)
-    include: install-engine.yml
-    when: engine_version | match("^[0-9]")
-
-  - name: Install Engine from source (only when version does not start with a number)
-    include: install-engine-src.yml
-    when: engine_version | match("^[^0-9]")
-
-  - name: Migrate the configuration file
-    command: "{{ engine_release_dir }}/bin/migrate_etc.php"
-
-  - name: Install migrated configuration file
-    command: install -b /etc/surfconext/engineblock.ini.new /etc/surfconext/engineblock.ini
-
-  - name: Detect default certificates.
-    stat: path=/etc/openconext/engineblock.key
-    register: default_cert
-
-  - name: Generate new default certificate if none was found.
-    command: openssl req -subj '/CN=Engine/OU=Services/O=OpenConext/C=NL/' -newkey rsa:2048 -new -x509 -days 3652 -nodes -out engineblock.crt -keyout engineblock.key
-    args:
-      chdir: /etc/openconext
-    when: default_cert.stat.exists == false
-
-  - name: Set configuration
-    ini_file:
-      dest: /etc/openconext/engineblock.ini
-      section: "local"
-      option: "{{ item.key }}"
-      value: "{{ item.value }}"
-    with_dict: engine_config
-
-  - name: Update LDAP
-    command: ldapmodify -x -D "{{ admin_ldap_binddn }}" -h localhost -w "{{ admin_ldap password }}" -f {{ item }}
-    with_items:
-      - "{{ engine_release_dir }}/ldap/changes/addDeprovisionWarningSentAttributes.ldif"
-      - "{{ engine_release_dir }}/ldap/changes/addCollabPersonUUID.ldif"
-    ignore_errors: true
-
-  - name: Run EngineBlock migrations
-    command: ./bin/migrate
-    args:
-      chdir: "{{ engine_release_dir }}"
-
-  - name: Activate new EngineBlock
-    file: src={{ engine_release_dir }} dest={{ engine_current_release_symlink }} state=link
