@@ -4,7 +4,8 @@
 yum install -y ansible &&
 
 # Run Ansible playbook
-ansible-playbook -i tools/ansible/inventory/demo.openconext.org.ini tools/ansible/provision-engine.yml \
+ansible-playbook \
+  -i $OC_BASEDIR/tools/ansible/inventory/demo.openconext.org.ini \
   -e "version=$ENGINEBLOCK_VERSION" \
   -e "domain=$OC_DOMAIN" \
   -e "engine_db_name=engineblock" \
@@ -18,7 +19,8 @@ ansible-playbook -i tools/ansible/inventory/demo.openconext.org.ini tools/ansibl
   -e "serviceregistry_user=$OC__ENGINE_JANUSAPI_USER" \
   -e "serviceregistry_pass=$OC__ENGINE_JANUSAPI_PASS" \
   -e "engine_ldap_binddn=cn:engine,dc:surfconext,dc:nl" \
-  -e "engine_ldap_password=$OC__LDAP_PASS"
+  -e "engine_ldap_password=$OC__LDAP_PASS" \
+  $OC_BASEDIR/tools/ansible/provision-engine.yml
 
 EB_CRT=`cat /etc/openconext/engineblock.default.pem.crt` &&
 EB_KEY=`cat /etc/openconext/engineblock.default.pem.key` &&
