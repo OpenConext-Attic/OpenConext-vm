@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Make sure Ansible is installed
-yum install -y ansible &&
+yum install -y ansible MySQL-python &&
 
 # Run Ansible playbook
 ansible-playbook \
