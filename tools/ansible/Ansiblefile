@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+role "openconext-engineblock",
+  git: "git@github.com:OpenConext/OpenConext-engineblock.git",
+  ref: "feature/ansible",
+  path: "./tools/ansible-role-openconext-engineblock"
+
+role "openconext-api",
+  git: "git@github.com:OpenConext/OpenConext-api.git",
+  ref: "feature/ansible",
+  path: "./coin-api-dist/src/main/resources/ansible-openconext-api"
+
+role "ansible-xml",
+  github: "relaxnow/ansible-xml"

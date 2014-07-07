@@ -1,0 +1,91 @@
+---
+- name: Provision EngineBlock
+  hosts: engineblock
+  remote_user: "{{ remote_user }}"
+
+  vars:
+    temp_dir: "/tmp"
+    logging_dir: "/var/log/openconext"
+    releases_dir: "/opt/openconext"
+    builds_dir: "{{ releases_dir }}/builds"
+    configs_dir: "/etc/openconext"
+
+    # Engine specific variables
+    enbine_git_url: "https://github.com/OpenConext/OpenConext-engineblock.git"
+    engine_version_dir: "{{ engine_version | replace('/', '-') }}"
+    engine_release_dir: "{{ releases_dir }}/OpenConext-engineblock-{{ engine_version_dir }}"
+    engine_build_path: "{{ builds_dir }}/OpenConext-engineblock-{{ engine_version_dir }}.tar.gz"
+    engine_download_url: "https://github.com/OpenConext/OpenConext-engineblock/releases/download/{{ engine_version }}/OpenConext-engineblock-{{ engine_version_dir }}.tar.gz"
+    engine_current_release_symlink: "/opt/www/engineblock"
+
+    engine_config:
+      auth.simplesamlphp.idp.certificate : /etc/surfconext/engineblock.default.pem
+      auth.simplesamlphp.idp.location : "https://engine.{{ openconext_domain }}/authentication/idp/single-sign-on"
+      auth.simplesamlphp.idp.entityId : "https://engine.{{ openconext_domain }}/authentication/idp/metadata"
+      cookie.lang.domain : "{{ openconext_domain }}"
+      cookie.lang.expiry : "60*60*24*60"
+      database.master1.user : "{{ engine_db_user }}"
+      database.master1.dsn : "mysql:host:{{ engine_db_host }};dbname:{{ engine_db_name }}"
+      database.master1.password : "{{ engine_db_password }}"
+      database.masters[] : "master1"
+      database.slaves[] : "master1"
+      dynamicAssets : true
+      email.sendWelcomeMail : 0
+      encryption.keys.default.privateFile : /etc/surfconext/engineblock.key
+      encryption.keys.default.publicFile : /etc/surfconext/engineblock.crt
+      ldap.accountDomainName : "surfconext.nl"
+      ldap.baseDn : "dc:surfconext,dc:nl"
+      ldap.host : "ldap.{{ openconext_domain }}"
+      ldap.useSsl : 0
+      ldap.userName : "{{ engine_ldap_binddn }}"
+      ldap.password : "{{ engine_ldap_password }}"
+      logs.file.writername : "Stream"
+      logs.file.writerparams.stream : "/var/log/surfconext/engineblock.log"
+      serviceRegistry.location : "{{ serviceregistry_url }}"
+      serviceRegistry.user : "{{ serviceregistry_user }}"
+      serviceRegistry.user_secret : "{{ serviceregistry_secret }}"
+
+  pre_tasks:
+    - name: Make sure a database exists
+      mysql_db:
+        state:          present
+        name:           "{{ engine_db_name }}"
+        login_host:     "{{ engine_db_host }}"
+        login_port:     "{{ engine_db_port }}"
+        login_user:     "{{ db_admin_user }}"
+        login_password: "{{ db_admin_password }}"
+        encoding:       utf8
+        collation:      utf8_unicode_ci
+      register: engine_db_install
+
+    - name: Make sure a user exists
+      mysql_user:
+        state:          present
+        name:           "{{ engine_db_user }}"
+        password:       "{{ engine_db_password }}"
+        priv:           "{{ engine_db_name }}.*:ALL"
+        login_host:     "{{ engine_db_host }}"
+        login_port:     "{{ engine_db_port}}"
+        login_user:     "{{ db_admin_user }}"
+        login_password: "{{ db_admin_password}}"
+
+    #TODO:  - name: Make sure LDAP database exists
+
+  roles:
+    - { role: openconext-engineblock }
+
+  post_tasks:
+    - name: Fill out variables in demo data.
+      template: src=../../../data/engineblock.sql.j2 dest=/tmp/domain.engineblock.sql
+      when: engine_db_install.changed
+
+    - name: Provision EngineBlock demo data.
+      mysql_db:
+        name:           "{{ engine_db_name }}"
+        login_host:     "{{ engine_db_host }}"
+        login_port:     "{{ engine_db_port}}"
+        login_user:     "{{ engine_db_user }}"
+        login_password: "{{ engine_db_password}}"
+        state: import
+        target: /tmp/domain.engineblock.sql
+      when: engine_db_install.changed
