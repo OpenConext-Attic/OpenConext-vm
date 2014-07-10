@@ -11,7 +11,13 @@
     args:
       chdir: "{{ api_release_dir }}"
 
+  - name: SRC - Find built dists
+    shell: ls {{ api_release_dir }}/coin-api-dist/target/coin-api-dist-*-bin.tar.gz
+    register: dist
+    failed_when: "dist.stdout_lines|length != 1"
+    changed_when: False
+
   - name: SRC - Copy build to build directory
     copy:
-      src: "{{ api_release_dir }}/coin-api-dist/target/coin-api-dist-{{ api_version }}-SNAPSHOT-bin.tar.gz"
+      src: "{{ dist.stdout }}"
       dest: "{{ api_build_path }}"
