@@ -2,7 +2,7 @@ GIT
   remote: git@github.com:OpenConext/OpenConext-api.git
   path: ./coin-api-dist/src/main/resources/ansible-openconext-api
   ref: feature/ansible
-  sha: 152c0cea72ffc226951c3c331fbf8139065f7147
+  sha: 94a02518064744220ef0f6747cdabf3441b9acf7
   specs:
     openconext-api (4.2.0)
 
