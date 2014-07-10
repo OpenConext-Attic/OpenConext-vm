@@ -53,10 +53,9 @@
 
   post_tasks:
     - name: Set vhost for API in Apache proxy
-      template: src=files/etc/httpd/conf.d/api.conf dest=/etc/httpd/conf.d/api.conf
+      template:
+          src: files/etc/httpd/conf.d/api.conf
+          dest: /etc/httpd/conf.d/api.conf
 
     - name: Restart Apache
       service: name=httpd state=restarted
-      cat $OC_BASEDIR/configs/httpd/conf.d/api.conf  | \
-        sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
-        /etc/httpd/conf.d/api.conf
