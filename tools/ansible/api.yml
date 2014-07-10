@@ -19,6 +19,9 @@
     tomcat_wars_path: "{{ tomcat_path }}/wars"
     tomcat_work_path: "{{ tomcat_path }}/work/Catalina/api.{{ openconext_domain }}"
     tomcat_webapps_path: "{{ tomcat_path }}/webapps/api.{{ openconext_domain }}"
+    tomcat_classpath_path: "{{ tomcat_path }}/conf/classpath_properties"
+    api_logging_policy: minimal
+
 
 
   pre_tasks:

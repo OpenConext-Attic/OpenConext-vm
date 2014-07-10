@@ -2,7 +2,7 @@ GIT
   remote: git@github.com:OpenConext/OpenConext-api.git
   path: ./coin-api-dist/src/main/resources/ansible-openconext-api
   ref: feature/ansible
-  sha: 4592c979da590f5f0ddf8432bd526347c9e36c5e
+  sha: 152c0cea72ffc226951c3c331fbf8139065f7147
   specs:
     openconext-api (4.2.0)
 
@@ -17,9 +17,9 @@ GIT
 GIT
   remote: https://github.com/relaxnow/ansible-xml
   ref: master
-  sha: fbf776c8d71b1d6c941de636a7071925ff8177b3
+  sha: 39daccd3e7aca5ede9265c46fea46d8a42256469
   specs:
-    ansible-xml (0.1.0)
+    ansible-xml (0.3.0)
 
 DEPENDENCIES
   ansible-xml (>= 0)
