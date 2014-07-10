@@ -12,4 +12,6 @@
       chdir: "{{ api_release_dir }}"
 
   - name: SRC - Copy build to build directory
-    copy: src="coin-api-dist/target/coin-api-dist-{{ api_version }}-bin.tar.gz" dest={{ api_build_path }}
+    copy:
+      src: "{{ api_release_dir }}/coin-api-dist/target/coin-api-dist-{{ api_version }}-SNAPSHOT-bin.tar.gz"
+      dest: "{{ api_build_path }}"
