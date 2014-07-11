@@ -42,9 +42,9 @@
       ldap.password : "{{ engine_ldap_password }}"
       logs.file.writername : "Stream"
       logs.file.writerparams.stream : "/var/log/surfconext/engineblock.log"
-      serviceRegistry.location : "{{ serviceregistry_url }}"
-      serviceRegistry.user : "{{ serviceregistry_user }}"
-      serviceRegistry.user_secret : "{{ serviceregistry_secret }}"
+      serviceRegistry.location : "{{ engine_janus_url }}"
+      serviceRegistry.user : "{{ engine_janus_user }}"
+      serviceRegistry.user_secret : "{{ engine_janus_secret }}"
 
   pre_tasks:
     - name: Make sure a database exists
@@ -77,7 +77,9 @@
 
   post_tasks:
     - name: Fill out variables in demo data.
-      template: src=../../../data/engineblock.sql.j2 dest=/tmp/domain.engineblock.sql
+      template:
+        src: templates/engineblock.sql.j2
+        dest: /tmp/domain.engineblock.sql
       when: engine_db_install.changed
 
     - name: Provision EngineBlock demo data.

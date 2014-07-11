@@ -23,9 +23,9 @@ sudo ansible-playbook \
   -e "engine_ldap_password=$OC__LDAP_PASS" \
   -e "db_admin_user=root" \
   -e "db_admin_password=$OC__ROOT_DB_PASS" \
-  -e "serviceregistry_url=https://serviceregistry.$OC_DOMAIN/simplesaml/module.php/janus/services/rest/" \
-  -e "serviceregistry_user=$OC__ENGINE_JANUSAPI_USER" \
-  -e "serviceregistry_secret=$OC__ENGINE_JANUSAPI_PASS" \
+  -e "engine_janus_url=https://serviceregistry.$OC_DOMAIN/simplesaml/module.php/janus/services/rest/" \
+  -e "engine_janus_user=$OC__ENGINE_JANUSAPI_USER" \
+  -e "engine_janus_secret=$OC__ENGINE_JANUSAPI_PASS" \
   $OC_BASEDIR/tools/ansible/engineblock.yml
 
 ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`
