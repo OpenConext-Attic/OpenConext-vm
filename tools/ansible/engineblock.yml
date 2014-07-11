@@ -17,6 +17,7 @@
     engine_build_path: "{{ builds_dir }}/OpenConext-engineblock-{{ engine_version_dir }}.tar.gz"
     engine_download_url: "https://github.com/OpenConext/OpenConext-engineblock/releases/download/{{ engine_version }}/OpenConext-engineblock-{{ engine_version_dir }}.tar.gz"
     engine_current_release_symlink: "/opt/www/engineblock"
+    engine_git_url: "https://github.com/OpenConext/OpenConext-engineblock.git"
 
     engine_config:
       auth.simplesamlphp.idp.certificate : /etc/surfconext/engineblock.default.pem
