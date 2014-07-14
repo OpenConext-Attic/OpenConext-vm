@@ -11,22 +11,23 @@
     configs_dir: "/etc/openconext"
 
     # Engine specific variables
-    enbine_git_url: "https://github.com/OpenConext/OpenConext-engineblock.git"
+    engine_git_url: "https://github.com/OpenConext/OpenConext-engineblock.git"
     engine_version_dir: "{{ engine_version | replace('/', '-') }}"
     engine_release_dir: "{{ releases_dir }}/OpenConext-engineblock-{{ engine_version_dir }}"
     engine_build_path: "{{ builds_dir }}/OpenConext-engineblock-{{ engine_version_dir }}.tar.gz"
     engine_download_url: "https://github.com/OpenConext/OpenConext-engineblock/releases/download/{{ engine_version }}/OpenConext-engineblock-{{ engine_version_dir }}.tar.gz"
     engine_current_release_symlink: "/opt/www/engineblock"
-    engine_git_url: "https://github.com/OpenConext/OpenConext-engineblock.git"
 
+    # Note that we actually use "\"{{ variable }}\"" to trick Ansible to put quotes around the values because
+    # values may contain a  ; (the sign for start of a comment in INI 'format').
     engine_config:
       auth.simplesamlphp.idp.certificate : /etc/surfconext/engineblock.default.pem
       auth.simplesamlphp.idp.location : "https://engine.{{ openconext_domain }}/authentication/idp/single-sign-on"
       auth.simplesamlphp.idp.entityId : "https://engine.{{ openconext_domain }}/authentication/idp/metadata"
       cookie.lang.domain : "{{ openconext_domain }}"
       cookie.lang.expiry : "60*60*24*60"
-      database.master1.user : "{{ engine_db_user }}"
-      database.master1.dsn : "mysql:host:{{ engine_db_host }};dbname:{{ engine_db_name }}"
+      database.master1.user : "\"{{ engine_db_user }}\""
+      database.master1.dsn : "\"mysql:host={{ engine_db_host }};dbname={{ engine_db_name }}\""
       database.master1.password : "{{ engine_db_password }}"
       database.masters[] : "master1"
       database.slaves[] : "master1"
@@ -35,16 +36,16 @@
       encryption.keys.default.privateFile : /etc/surfconext/engineblock.key
       encryption.keys.default.publicFile : /etc/surfconext/engineblock.crt
       ldap.accountDomainName : "surfconext.nl"
-      ldap.baseDn : "dc:surfconext,dc:nl"
+      ldap.baseDn : "\"dc=surfconext,dc=nl\""
       ldap.host : "ldap.{{ openconext_domain }}"
       ldap.useSsl : 0
-      ldap.userName : "{{ engine_ldap_binddn }}"
-      ldap.password : "{{ engine_ldap_password }}"
-      logs.file.writername : "Stream"
-      logs.file.writerparams.stream : "/var/log/surfconext/engineblock.log"
-      serviceRegistry.location : "{{ engine_janus_url }}"
-      serviceRegistry.user : "{{ engine_janus_user }}"
-      serviceRegistry.user_secret : "{{ engine_janus_secret }}"
+      ldap.userName : "\"{{ engine_ldap_binddn }}\""
+      ldap.password : "\"{{ engine_ldap_password }}\""
+      logs.file.writerName : "Stream"
+      logs.file.writerParams.stream : "/var/log/surfconext/engineblock.log"
+      serviceRegistry.location : "\"{{ engine_janus_url }}\""
+      serviceRegistry.user : "\"{{ engine_janus_user }}\""
+      serviceRegistry.user_secret : "\"{{ engine_janus_secret }}\""
 
   pre_tasks:
     - name: Make sure a database exists
