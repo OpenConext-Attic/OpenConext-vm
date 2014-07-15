@@ -23,8 +23,8 @@ sudo ansible-playbook \
   -e "engine_janus_url=https://serviceregistry.$OC_DOMAIN/simplesaml/module.php/janus/services/rest/" \
   -e "engine_janus_user=$OC__ENGINE_JANUSAPI_USER" \
   -e "engine_janus_secret=$OC__ENGINE_JANUSAPI_PASS" \
-  -e "engine_ldap_binddn=cn=engine,dc=surfconext,dc=nl" \
-  -e "engine_ldap_password=$OC__LDAP_PASS" \
+  -e "engine_ldap_bind_dn=$OC__LDAP_ENGINE_USER" \
+  -e "engine_ldap_password=$OC__LDAP_ENGINE_PASS" \
   -e "engine_version=$ENGINEBLOCK_VERSION" \
   -e "ldap_admin_bind_dn=$OC__LDAPADMIN_USER" \
   -e "ldap_admin_password=$OC__LDAPADMIN_PASS" \
