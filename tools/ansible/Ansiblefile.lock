@@ -2,7 +2,7 @@ GIT
   remote: git@github.com:OpenConext/OpenConext-api.git
   path: ./coin-api-dist/src/main/resources/ansible-openconext-api
   ref: feature/ansible
-  sha: 71768064bc0ab62483ea84bbc053892f7cb89b99
+  sha: 6a8d01c9e952d19cf114f6cf084ae4de75c14da7
   specs:
     openconext-api (4.2.0)
 
@@ -10,7 +10,7 @@ GIT
   remote: git@github.com:OpenConext/OpenConext-engineblock.git
   path: ./tools/ansible-role-openconext-engineblock
   ref: feature/ansible
-  sha: e0fccb5321aedc0a0ecc73bf9e5274e70cda85ab
+  sha: e9f162497cbf7f1e8c89625f0c852b6a926113ea
   specs:
     openconext-engineblock (4.2.0)
 
