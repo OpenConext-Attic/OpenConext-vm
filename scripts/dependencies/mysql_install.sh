@@ -6,10 +6,19 @@ $YUM -y install mysql mysql-server mysql-connector-java
 service mysqld restart
 chkconfig mysqld on
 
-# configure MySQL
-echo -e "\n\nSetting new MySQL Root password \n\n"
-mysqladmin -u root password $OC__ROOT_DB_PASS
+# Root PW already set? Ignore any errors on this one.
+set +e
+success=`mysqladmin -uroot -p$OC__ROOT_DB_PASS ping | grep -c "mysqld is alive"`
+set -e
 
+if [[ $success != '1' ]]
+then
+    # If not then try to connect without a password and set it
+    echo -e "\n\nSetting new MySQL Root password \n\n"
+    mysqladmin -u root password $OC__ROOT_DB_PASS
+fi
+
+# Test connection with proper root password.
 success=`mysqladmin -uroot -p$OC__ROOT_DB_PASS ping | grep -c "mysqld is alive"`
 if [[ $success == '1' ]]
 then
@@ -18,3 +27,7 @@ else
     echo -e "\nValidating MySQL Root password: FAILED\n"
     exit
 fi
+
+echo -e "Enabling root access on db.$OC_DOMAIN"
+echo "GRANT ALL ON *.* TO 'root'@'db.$OC_DOMAIN' IDENTIFIED BY '$OC__ROOT_DB_PASS' WITH GRANT OPTION;" \
+  | mysql -u root -p$OC__ROOT_DB_PASS

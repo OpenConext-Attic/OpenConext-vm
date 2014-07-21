@@ -1,119 +1,34 @@
 #!/bin/bash
 
-#######################
-# Install EngineBlock #
-#######################
-if [ ! -h /opt/www/engineblock ]
-then
-    $GITCLONE https://github.com/OpenConext/OpenConext-engineblock.git /opt/www/OpenConext-engineblock
-    ln -sf /opt/www/OpenConext-engineblock /opt/www/engineblock
-fi
-cd /opt/www/engineblock
-$GITRESET # revert potential changes
-$GITFETCH
-$GITCHECKOUT ${ENGINEBLOCK_VERSION}
+# Make sure Ansible is installed cleanly
+sudo yum erase -y ansible &&
+sudo yum install -y ansible MySQL-python patch &&
 
-./bin/composer.phar --prefer-dist --no-interaction install
-# Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
-restorecon -r vendor
+# Patch Ansible for: #8050: ini_file module still changes all option names to lower case.
+# -b = backup, -N = assume merged if failed, -u = Unified format, -p0 = 0 leading lines, -d chdir to dir before apply.
+sudo patch -b -N -u -p0 -d /usr/share/ansible/files < $OC_BASEDIR/patches/ansible/ansible/ini_file_keep_key_casing-issue_8050-ansible_1.6.2.diff &&
 
-if $UPGRADE
-then
-  source /etc/profile.d/openconext.sh
-    
-else
-  # Create database
-  mysql -u root --password=$OC__ROOT_DB_PASS -e "drop database if exists engineblock; create database engineblock default charset utf8 default collate utf8_unicode_ci;"
-  cat $OC_BASEDIR/data/engineblock.sql | \
-    sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" | \
-    mysql -u root --password=$OC__ROOT_DB_PASS engineblock
+# Run Ansible playbook
+echo "Provisioning EngineBlock with Ansible..." &&
+sudo ansible-playbook \
+  -v \
+  -i $OC_BASEDIR/tools/ansible/inventory/demo.openconext.org.ini \
+  -e "db_admin_user=root" \
+  -e "db_admin_password=$OC__ROOT_DB_PASS" \
+  -e "engine_db_name=engineblock" \
+  -e "engine_db_host=localhost" \
+  -e "engine_db_port=3306" \
+  -e "engine_db_user=$OC__ENGINE_DB_USER" \
+  -e "engine_db_password=$OC__ENGINE_DB_PASS" \
+  -e "engine_janus_url=https://serviceregistry.$OC_DOMAIN/simplesaml/module.php/janus/services/rest/" \
+  -e "engine_janus_user=$OC__ENGINE_JANUSAPI_USER" \
+  -e "engine_janus_secret=$OC__ENGINE_JANUSAPI_PASS" \
+  -e "engine_ldap_bind_dn=$OC__LDAP_ENGINE_USER" \
+  -e "engine_ldap_password=$OC__LDAP_ENGINE_PASS" \
+  -e "engine_version=$ENGINEBLOCK_VERSION" \
+  -e "ldap_admin_bind_dn=$OC__LDAPADMIN_USER" \
+  -e "ldap_admin_password=$OC__LDAPADMIN_PASS" \
+  -e "openconext_domain=$OC_DOMAIN" \
+  $OC_BASEDIR/tools/ansible/engineblock.yml
 
-  # Set database creadentials for engine
-  mysql -uroot -p$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON engineblock.* TO $OC__ENGINE_DB_USER@localhost IDENTIFIED BY '$OC__ENGINE_DB_PASS'"
-  success=`mysqladmin -u$OC__ENGINE_DB_USER -p$OC__ENGINE_DB_PASS ping | grep -c "mysqld is alive"`
-  if [[ $success == '1' ]]
-  then
-    echo -e "\nValidating new MySQL Engine password: SUCCESS!\n"     
-  else
-    echo -e "\nValidating new MySQL Engine password: FAILED\n"
-    exit
-  fi
-
-  #############################################
-  # Modify the EngineBlock configuration file #
-  #############################################
-  if [ -f /etc/surfconext/engineblock.ini ]
-  then
-    backupFile /etc/surfconext/engineblock.ini
-  fi
-  install -d /etc/surfconext/
-  sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/engineblock.ini > /etc/surfconext/engineblock.ini
-
-  echo "Apply db credentials to file engineblock.ini"
-  sed -i "s/__OC__ENGINE_DB_USER__/$OC__ENGINE_DB_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/__OC__ENGINE_DB_PASS__/$OC__ENGINE_DB_PASS/g" /etc/surfconext/engineblock.ini
-
-  # Apply janus api credentials to file engineblock.ini
-  sed -i "s/__OC__ENGINE_JANUSAPI_USER__/$OC__ENGINE_JANUSAPI_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/__OC__ENGINE_JANUSAPI_PASS__/$OC__ENGINE_JANUSAPI_PASS/g" /etc/surfconext/engineblock.ini
-
-  # Apply ldap credentials to file engineblock.ini
-  sed -i "s/__OC__LDAP_ENGINE_USER__/$OC__LDAP_ENGINE_USER/g" /etc/surfconext/engineblock.ini
-  sed -i "s/__OC__LDAP_ENGINE_PASS__/$OC__LDAP_ENGINE_PASS/g" /etc/surfconext/engineblock.ini
-
-  # Apply timezone to file engineblock.ini
-  sed -i "s|__OC__TIMEZONE__|$OC__TIMEZONE|g" /etc/surfconext/engineblock.ini
-
-  # Edit the profile.sh file to set correct environment variable
-  echo 'export ENGINEBLOCK_ENV="demo"' > /etc/profile.d/openconext.sh
-
-  chmod +x /etc/profile.d/openconext.sh
-  source /etc/profile.d/openconext.sh
-
-  if [ -f /etc/surfconext/engineblock.crt ]
-  then
-    backupFile /etc/surfconext/engineblock.crt
-  fi
-  # Generate Self Signed Certificate for EngineBlock and add it to the configuration
-  cd /tmp &&
-    openssl req -subj '/CN=Engine/OU=Services/O=OpenConext/C=NL/' -newkey rsa:2048 -new -x509 -days 3652 -nodes -out example.org.crt -keyout example.org.pem > /dev/null
-  EB_CRT=`cat example.org.crt` &&
-  EB_KEY=`cat example.org.pem` &&
-  EB_CRT_NO_HEADERS=`sed '1d;$d' example.org.crt` &&
-  echo "" >> /etc/surfconext/engineblock.ini &&
-  echo "encryption.key.public = \"${EB_CRT}\"" >> /etc/surfconext/engineblock.ini &&
-  echo "encryption.key.private = \"${EB_KEY}\"" >> /etc/surfconext/engineblock.ini &&
-  echo "auth.simplesamlphp.idp.cert       = \"${EB_CRT_NO_HEADERS}\"" >> /etc/surfconext/engineblock.ini
-  cp example.org.crt /etc/surfconext/engineblock.crt &&
-  rm example.org.crt example.org.pem
-
-  install -d /var/log/surfconext
-  # TODO: is this chmod really neccessary?
-  chmod o+w /var/log/surfconext
-  touch /var/log/surfconext/engineblock.log
-  chmod o+w /var/log/surfconext/engineblock.log
-
-    # Updating LDAP schema some more...
-  ldapmodify -x -D cn=admin,cn=config -h localhost -w $OC__LDAP_PASS -f /opt/www/engineblock/ldap/changes/addDeprovisionWarningSentAttributes.ldif
-  ldapmodify -x -D cn=admin,cn=config -h localhost -w $OC__LDAP_PASS -f /opt/www/engineblock/ldap/changes/addCollabPersonUUID.ldif
-
-  # Apply LDAP credentials to file engineblock.ini
-  sed -i "s/__OC__ENGINE_LDAP_PASSWD__/$OC__LDAP_PASS/g" /etc/surfconext/engineblock.ini
-
-  # Update apache conf
-  cat $OC_BASEDIR/configs/httpd/conf.d/engine.conf  | \
-    sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
-    /etc/httpd/conf.d/engine.conf
-  cat $OC_BASEDIR/configs/httpd/conf.d/engine-internal.conf  | \
-    sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
-    /etc/httpd/conf.d/engine-internal.conf
-  cat $OC_BASEDIR/configs/httpd/conf.d/profile.conf  | \
-    sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
-    /etc/httpd/conf.d/profile.conf
-
-  # Make public key available for other components
-  ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`
-fi
-
-cd /opt/www/engineblock/
-./bin/migrate
+ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`

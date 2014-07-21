@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  vars_files: [group_vars/all]
+  remote_user: root
+
+  roles:
+    - { role: ansible-xml }
+
+  tasks:
+      - include: test-add-children-elements.yml
+      - include: test-add-children-from-groupvars.yml
+      - include: test-add-children-with-attributes.yml
+      - include: test-count.yml
+      - include: test-mutually-exclusive-attributes.yml
+      # @todo removal of attributes is broken?
+#      - include: test-remove-attribute.yml
+      - include: test-remove-element.yml
+      - include: test-set-attribute-value.yml
+      - include: test-set-element-value.yml

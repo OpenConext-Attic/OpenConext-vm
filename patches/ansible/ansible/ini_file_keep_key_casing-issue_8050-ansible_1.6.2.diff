@@ -1,0 +1,28 @@
+--- ini_file	2014-05-23 21:16:25.000000000 +0000
++++ ini_file	2014-07-07 07:58:19.420050811 +0000
+@@ -95,6 +95,7 @@
+ 
+     changed = False
+     cp = ConfigParser.ConfigParser()
++    cp.optionxform = identity
+ 
+     try:
+         f = open(filename)
+@@ -151,6 +152,17 @@
+     return changed
+ 
+ # ==============================================================
++# identity
++
++def identity(arg):
++    """This function simply returns its argument. It serves as a
++    replacement for ConfigParser.optionxform, which by default
++    changes arguments to lower case. The identity function is a
++    better choice than str() or unicode(), because it is
++    encoding-agnostic."""
++    return arg
++
++# ==============================================================
+ # main
+ 
+ def main():

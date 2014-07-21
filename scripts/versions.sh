@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # these versions are tag names
-export ENGINEBLOCK_VERSION=develop
+export ENGINEBLOCK_VERSION=feature/ansible
 export API_VERSION=develop
 export MANAGE_VERSION=develop
 export SERVICEREGISTRY_VERSION=develop
