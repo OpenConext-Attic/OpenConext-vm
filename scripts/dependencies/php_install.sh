@@ -22,6 +22,7 @@ sed -i 's/display_errors = Off/display_errors = On/g' /etc/php.ini
 # Set default timezone
 echo "Setting default timezone for PHP to $OC__TIMEZONE"
 sed -i /etc/php.ini -e "s~^date.timezone =.*~date.timezone = $OC__TIMEZONE~"
+echo "date.timezone = $OC__TIMEZONE" > /etc/php.d/date.ini
 
 # Because we have more than 64MB of code we need to increase the shared memory size for APC.
 # Otherwise we will get the PHP Warning: include(): Unable to allocate memory for pool.
