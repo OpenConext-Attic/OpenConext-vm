@@ -14,7 +14,7 @@ fi
 
 # Build one huge line for all the components
 # ToDo: adapt this list based on teh components choosen
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp teams api cruncher apis csa welcome"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp teams api cruncher apis csa welcome db"
 for comp in $COMPONENTS
 do
   HOSTSLINE="$HOSTSLINE $comp.$OC_DOMAIN"
