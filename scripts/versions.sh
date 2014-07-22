@@ -11,7 +11,6 @@ export MUJINA_VERSION=develop
 export CRUNCHER_VERSION=develop
 export APIS_VERSION=develop
 export CSA_VERSION=develop
-export SELFSERVICE_VERSION=develop
 
 # these are _not_ tag names
 export GROUPER_DIST_VERSION=4.0.0

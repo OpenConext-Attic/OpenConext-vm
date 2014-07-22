@@ -95,11 +95,11 @@ then
   read COMPONENTCHOICE
   case "$COMPONENTCHOICE" in
     "1" | "" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER";;
-    "2" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD";;
+    "2" ) OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA";;
     "3" ) OC_COMPONENTS="EB SR MUJINA";;
     * )
         OC_COMPONENTS=""
-        for component in EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD
+        for component in EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA
         do
           echo Install $component? [Y/n]
           read answer
@@ -307,13 +307,6 @@ then
   echoHeader "Installing CSA Done"
 fi
 
-if echo $OC_COMPONENTS | grep -q DASHBOARD
-then
-  echoHeader "Installing Dashboard..."
-  source $OC_SCRIPTDIR/components/selfservice.sh
-  echoHeader "Installing Dashboard Done"
-fi
-
 
 # stop if running
 if service httpd status > /dev/null
@@ -345,7 +338,7 @@ echo; echo
 echoHeader "Installation of OpenConext is complete."
 
 # Line for use in the hosts-file of the VM-host and potential other systems.
-COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher csa welcome dashboard"
+COMPONENTS="db ldap grouper serviceregistry engine profile manage teams static mujina-sp mujina-idp api apis cruncher csa welcome"
 HOSTS="$OC_DOMAIN" # the domain itself
 for comp in $COMPONENTS
 do

@@ -8,7 +8,7 @@ NODE_PROPS=/etc/openconext/oc_config.sh
 DEFAULT_DOMAIN=demo.openconext.org
 
 # This is the default set of components in an install
-# Available components are: EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA DASHBOARD
+# Available components are: EB SR MANAGE API TEAMS MUJINA GROUPER APIS CRUNCHER CSA
 # (v62, 2014-03-03)
 DEFAULT_OC_COMPONENTS="EB SR MANAGE API TEAMS MUJINA GROUPER"
 
