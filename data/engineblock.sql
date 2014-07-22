@@ -444,7 +444,8 @@ INSERT INTO `service_provider_group_acl` VALUES (1,1,'https://engine._OPENCONEXT
 (5,1,'http://mock-sp',1,1),
 (6,1,'https://grouper._OPENCONEXT_DOMAIN_/grouper/shibboleth',1,1),
 (7,1,'https://teams._OPENCONEXT_DOMAIN_/shibboleth',1,1),
-(8,1,'https://csa._OPENCONEXT_DOMAIN_/',1,1);
+(8,1,'https://csa._OPENCONEXT_DOMAIN_/',1,1),
+(9,1,'https://dashboard._OPENCONEXT_DOMAIN_/',1,1);
 /*!40000 ALTER TABLE `service_provider_group_acl` ENABLE KEYS */;
 UNLOCK TABLES;
 

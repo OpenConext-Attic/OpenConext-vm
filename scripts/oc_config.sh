@@ -153,6 +153,7 @@ OC__CRUNCHER_REPO="https://github.com/OpenConext/OpenConext-cruncher.git"
 OC__CSA_REPO="https://github.com/OpenConext/OpenConext-csa.git"
 OC__MANAGE_REPO="https://github.com/OpenConext/OpenConext-manage.git"
 OC__MUJINA_REPO="https://github.com/OpenConext/Mujina.git"
+OC__SELFSERVICE_REPO="https://github.com/OpenConext/OpenConext-selfservice.git"
 OC__SERVICEREGISTRY_REPO="https://github.com/OpenConext/OpenConext-serviceregistry.git"
 OC__TEAMS_REPO="https://github.com/OpenConext/OpenConext-teams.git"
 
