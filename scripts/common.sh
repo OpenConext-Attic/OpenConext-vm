@@ -129,7 +129,7 @@ function generate_new_certs() {
     organizationalUnitName_default  = OpenConext Virtual Machine
 
     commonName                      = Common Name (eg, YOUR name)
-    commonName_default              = demo.openconext.org
+    commonName_default              = $OC_DOMAIN
     commonName_max                  = 64
 
     #emailAddress                    = Email Address
