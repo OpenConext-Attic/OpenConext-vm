@@ -49,6 +49,27 @@ then
   sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" $OC_BASEDIR/configs/httpd/conf.d/serviceregistry.conf > \
     /etc/httpd/conf.d/serviceregistry.conf
 
+  cat <<PARAMETERS > /etc/surfconext/serviceregistry.module_janus.parameters.yml
+  # This file is auto-generated during the composer install
+parameters:
+    admin_email: null
+    admin_name: admin
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: janus
+    security.authentication.manager.erase_credentials: false
+    database_driver: pdo_mysql
+    database_host: db.$OC_DOMAIN
+    database_port: 3306
+    database_name: serviceregistry
+    database_user: $OC__SERVICEREGISTRY_DB_USER
+    database_password: $OC__SERVICEREGISTRY_DB_PASS
+    database_prefix: janus__
+PARAMETERS
+
   # Install EngineBlock's certificate for ServiceRegistry
   install -d  /etc/surfconext/serviceregistry-certs/
   cp /etc/surfconext/engineblock.crt /etc/surfconext/serviceregistry-certs/engineblock.crt
