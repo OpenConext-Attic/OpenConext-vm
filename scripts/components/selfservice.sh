@@ -13,9 +13,9 @@ $GITCHECKOUT ${SELFSERVICE_VERSION}
 $MVN -DskipTests clean install
 
 # extract deployable artifact
-tar -zxf dashboard-dist/target/*-bin.tar.gz -C dashboard-dist/target
+tar -zxf coin-selfservice-war/target/*.tar.gz -C coin-selfservice-war/target
 
-DASHBOARD_DIST_BASEDIR=/opt/www/OpenConext-selfservice/dashboard-dist/target/dashboard-dist-*
+DASHBOARD_DIST_BASEDIR=/opt/www/OpenConext-selfservice/coin-selfservice-war/target/dashboard-dist-*
 
 # remove old deployed war
 rm -f /usr/share/tomcat6/wars/dashboard-*.war 2> /dev/null
