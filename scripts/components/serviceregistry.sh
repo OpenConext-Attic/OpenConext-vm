@@ -86,9 +86,10 @@ then
 
 fi
 
-./bin/composer.phar --prefer-dist --no-interaction install
+export COMPOSER_PROCESS_TIMEOUT=600
+./bin/composer.phar --prefer-source --no-interaction install
 ln -sf /etc/surfconext/serviceregistry.module_janus.parameters.yml /opt/www/serviceregistry/simplesamlphp/modules/janus/app/config/parameters.yml
-./bin/composer.phar --prefer-dist --no-interaction install
+./bin/composer.phar --prefer-source --no-interaction install
 
 # Perform database migration
 ./bin/migrate

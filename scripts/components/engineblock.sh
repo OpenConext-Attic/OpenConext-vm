@@ -13,7 +13,8 @@ $GITRESET # revert potential changes
 $GITFETCH
 $GITCHECKOUT ${ENGINEBLOCK_VERSION}
 
-./bin/composer.phar --prefer-dist --no-interaction install
+export COMPOSER_PROCESS_TIMEOUT=600
+./bin/composer.phar --prefer-source --no-interaction install
 # Restore SELinux labels, due to bug? in Composer (https://github.com/composer/composer/issues/1714)
 restorecon -r vendor
 
