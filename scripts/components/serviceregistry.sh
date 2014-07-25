@@ -62,7 +62,7 @@ parameters:
     secret: janus
     security.authentication.manager.erase_credentials: false
     database_driver: pdo_mysql
-    database_host: db.$OC_DOMAIN
+    database_host: localhost
     database_port: 3306
     database_name: serviceregistry
     database_user: $OC__SERVICEREGISTRY_DB_USER
