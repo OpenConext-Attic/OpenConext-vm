@@ -12,7 +12,7 @@ else
   echo "RHEL repository already installed"
 fi
 
-$YUM -y install git subversion policycoreutils-python sudo unzip
+$YUM -y install git subversion policycoreutils-python sudo unzip wget
 
 if [[ $UPDATE_OS ]]
 then
