@@ -81,76 +81,81 @@ function generate_new_certs() {
     echo -n "00" > $CA_DIR/serial.txt
 
     echo "
-  [ ca ]
-    default_ca      = OpenConext            # The default ca section
+[ ca ]
+default_ca      = OpenConext            # The default ca section
 
-  [ OpenConext ]
-    database = $CA_DIR/ca_index.txt
-    serial = $CA_DIR/serial.txt
-    default_md     = sha256
-    policy         = policy_any            # default policy
-    email_in_dn    = no                    # Don't add the email into cert DN
-    name_opt       = ca_default            # Subject name display option
-    cert_opt       = ca_default            # Certificate display option
-    copy_extensions = none                 # Don't copy extensions from request
-    unique_subject         = no            # Allow reuse of CN's in this CA
+[ OpenConext ]
+database = $CA_DIR/ca_index.txt
+serial = $CA_DIR/serial.txt
+default_md     = sha256
+policy         = policy_any            # default policy
+email_in_dn    = no                    # Don't add the email into cert DN
+name_opt       = ca_default            # Subject name display option
+cert_opt       = ca_default            # Certificate display option
+copy_extensions = none                 # Don't copy extensions from request
+unique_subject         = no            # Allow reuse of CN's in this CA
 
-  [ policy_any ]
-    countryName            = optional
-    stateOrProvinceName    = optional
-    organizationName       = optional
-    organizationalUnitName = optional
-    commonName             = supplied
-    emailAddress           = optional
+[ policy_any ]
+countryName            = optional
+stateOrProvinceName    = optional
+organizationName       = optional
+organizationalUnitName = optional
+commonName             = supplied
+emailAddress           = optional
 
-  [ req ]
-    default_bits            = 4096
-    default_md              = sha256
-    default_keyfile         = $CA_DIR/ca.key
-    distinguished_name      = req_distinguished_name
-    x509_extensions = v3_ca # The extentions to add to the self signed cert
+[ req ]
+default_bits            = 4096
+default_md              = sha256
+default_keyfile         = $CA_DIR/ca.key
+distinguished_name      = req_distinguished_name
+x509_extensions = v3_ca # The extentions to add to the self signed cert
 
-  [ req_distinguished_name ]              
-    countryName                     = Country Name (2 letter code)
-    countryName_default             = ORG
-    countryName_min                 = 2
-    countryName_max                 = 3
+[ req_distinguished_name ]
+countryName                     = Country Name (2 letter code)
+countryName_default             = ORG
+countryName_min                 = 2
+countryName_max                 = 3
 
-    stateOrProvinceName             = State or Province Name (full name)
-    stateOrProvinceName_default     = Utrecht
+stateOrProvinceName             = State or Province Name (full name)
+stateOrProvinceName_default     = Utrecht
 
-    localityName                    = Locality Name (eg, city)
-    localityName_default            = Utrecht
+localityName                    = Locality Name (eg, city)
+localityName_default            = Utrecht
 
-    0.organizationName              = Organization Name (eg, company)
-    0.organizationName_default      = OpenConext
+0.organizationName              = Organization Name (eg, company)
+0.organizationName_default      = OpenConext
 
-    organizationalUnitName          = Organizational Unit Name (eg, section)
-    organizationalUnitName_default  = OpenConext Virtual Machine
+organizationalUnitName          = Organizational Unit Name (eg, section)
+organizationalUnitName_default  = OpenConext Virtual Machine
 
-    commonName                      = Common Name (eg, YOUR name)
-    commonName_default              = $OC_DOMAIN
-    commonName_max                  = 64
+commonName                      = Common Name (eg, YOUR name)
+commonName_default              = $OC_DOMAIN
+commonName_max                  = 64
 
-    #emailAddress                    = Email Address
-    #emailAddress_max                = 40
+#emailAddress                    = Email Address
+#emailAddress_max                = 40
 
-  [ v3_req ]
-  # Extensions to add to a certificate request
-  basicConstraints = CA:FALSE
-  keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+[ v3_req ]
+# Extensions to add to a certificate request
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 
-  [ v3_ca ]
-  # Extensions for a typical CA
-  # PKIX recommendation.
-  subjectKeyIdentifier=hash
-  authorityKeyIdentifier=keyid:always,issuer:always
+[ v3_ca ]
+# Extensions for a typical CA
+# PKIX recommendation.
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer:always
 
-  # This is what PKIX recommends but some broken software chokes on critical
-  # extensions.
-  #basicConstraints = critical,CA:true
-  # So we do this instead.
-  basicConstraints = CA:true
+# This is what PKIX recommends but some broken software chokes on critical
+# extensions.
+#basicConstraints = critical,CA:true
+# So we do this instead.
+basicConstraints = CA:true
+
+# Key usage: this is typical for a CA certificate. However since it will
+# prevent it being used as an test self-signed certificate it is best
+# left out by default.
+keyUsage = cRLSign, keyCertSign
 " > $CA_DIR/ca-config.cfg
 
 #  fi
