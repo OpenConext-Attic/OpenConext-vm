@@ -130,7 +130,7 @@ OC__LDAPADMIN_USER="cn=admin,dc=surfconext,dc=nl"
 OC__LDAPADMIN_PASS="ldappass"
 
 OC__LDAP_USER="cn=ro,dc=surfconext,dc=nl"
-OC__LDAP_PASS="ldappass"
+OC__LDAP_PASS="ks97THqW2m3BN"
 
 OC__LDAP_ENGINE_USER="cn=engine,dc=surfconext,dc=nl"
 OC__LDAP_ENGINE_PASS="jf7RH4Hj20De"
