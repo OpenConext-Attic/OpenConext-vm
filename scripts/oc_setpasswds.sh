@@ -9,7 +9,8 @@ CONFIG_FILE=oc_config.sh
 `cp $CONFIG_FILE $CONFIG_FILE.bak`
 
 # Find generic passowrds (start with OC__, end with _PASS)
-pw_entries=`cat $CONFIG_FILE | grep "_PASS" | grep "OC__"`
+# @todo because the RO LDAP password is provisioned with a static LDIF that hasn't been made dynamic
+pw_entries=`cat $CONFIG_FILE | grep "_PASS" | grep "OC__" | grep -v "OC__LDAP_PASS"`
 
 for pw_entry in $pw_entries
 do
