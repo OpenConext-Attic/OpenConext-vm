@@ -3,6 +3,8 @@
 # the following methode is used for generating passwords
 # tr -c -d '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' </dev/urandom | dd bs=20 count=1 2>/dev/null;echo
 
+set -e
+
 CONFIG_FILE=oc_config.sh
 
 # create a backup of the config file
@@ -15,7 +17,7 @@ pw_entries=`cat $CONFIG_FILE | grep "_PASS" | grep "OC__" | grep -v "OC__LDAP_PA
 for pw_entry in $pw_entries
 do
   key=$(echo $pw_entry | cut -f1 -d=)
-  newvalue=`tr -cd '[:alnum:]' < /dev/urandom | fold -w20 | head -n1`
+  newvalue=`(tr -cd '[:alnum:]' < /dev/urandom | fold -w20 | head -n1)`
   newkeyvaluepair="$key=\"$newvalue\""
   
   echo -e "Setting "$key" = \""$newvalue"\""
