@@ -65,6 +65,10 @@ OC__TEAMS_DB_PASS="teamspass"
 OC__API_DB_USER="api2mysql"
 OC__API_DB_PASS="apipass"
 
+# New MyAQL apis user and password
+OC__APIS_DB_USER="apis2mysql"
+OC__APIS_DB_PASS="apipass"
+
 ##################################################################################################
 #                                                                                                #    
 # ServiceRegistry (JANUS)                                                                        #

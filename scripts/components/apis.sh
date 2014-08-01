@@ -68,7 +68,8 @@ else
   SERVERXMLLINE='<Host name="apis.'$OC_DOMAIN'" appBase="webapps/apis.'$OC_DOMAIN'"/>'
   sed -i "s#</Engine>#$SERVERXMLLINE\n</Engine>#" /usr/share/tomcat6/conf/server.xml
 
-  mysql -u root --password=$OC__ROOT_DB_PASS -e "create database if not exists apis default charset utf8 default collate utf8_unicode_ci;"
+  mysql -u root --password=$OC__ROOT_DB_PASS -e "CREATE DATABASE IF NOT EXISTS apis DEFAULT CHARSET utf8 DEFAULT COLLATE utf8_unicode_ci;"
+  mysql -u root --password=$OC__ROOT_DB_PASS -e "GRANT ALL PRIVILEGES ON apis.* TO $OC__APIS_DB_USER@localhost IDENTIFIED BY '$OC__APIS_DB_PASS'"
 
   cat $OC_BASEDIR/configs/httpd/conf.d/apis.conf  | \
     sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" > \
