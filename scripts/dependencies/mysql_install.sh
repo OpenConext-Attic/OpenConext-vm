@@ -34,3 +34,4 @@ fi
 # 2. MySQL Server should not have been configured with a 'bind_address'.
 # Though for a normal VM keeping it open for local use should be sufficient.
 echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'db.$OC_DOMAIN' identified by '$OC__ROOT_DB_PASS';" | mysql -u root --password=$OC__ROOT_DB_PASS mysql
+echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'$OC_DOMAIN' identified by '$OC__ROOT_DB_PASS';" | mysql -u root --password=$OC__ROOT_DB_PASS mysql
