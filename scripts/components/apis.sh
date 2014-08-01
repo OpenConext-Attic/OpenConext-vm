@@ -54,10 +54,13 @@ then
 
 else
 
+  # Apply db credentials to file apis.application.properties
+  sed -i "s/__OC__APIS_DB_USER__/$OC__APIS_DB_USER/g" /tmp/apis.application.properties
+  sed -i "s/__OC__APIS_DB_PASS__/$OC__APIS_DB_PASS/g" /tmp/apis.application.properties
+
   cp $APIS_DIST_BASEDIR/tomcat/conf/classpath_properties/apis-logback.xml.vm /usr/share/tomcat6/conf/classpath_properties/apis-logback.xml
   cp /tmp/apis.application.properties /usr/share/tomcat6/conf/classpath_properties/
   cp /tmp/surfconext.authn.properties /usr/share/tomcat6/conf/classpath_properties/
-
 
   install -d /usr/share/tomcat6/webapps/apis.$OC_DOMAIN
   chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
