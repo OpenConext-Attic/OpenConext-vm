@@ -1,25 +1,25 @@
-dn: dc=surfconext,dc=nl
+dn: __OC__LDAPADMIN_SUFFIX__
 objectClass: top
 objectClass: dcObject
 objectClass: organization
-dc: surfconext
-o: surfconext
+dc: __OC__LDAPADMIN_ORG__
+o: __OC__LDAPADMIN_ORG__
 
-dn: cn=gadget,dc=surfconext,dc=nl
+dn: cn=__OC__GROUPER_UNIT_TEST_USER__,__OC__LDAPADMIN_SUFFIX__
 objectClass: applicationProcess
 objectClass: top
-cn: gadget
+cn: __OC__GROUPER_UNIT_TEST_USER__
 
-dn: cn=engine,dc=surfconext,dc=nl
-objectClass: applicationProcess
-objectClass: simpleSecurityObject
-objectClass: top
-cn: engine
-userPassword: {SSHA}ujH3rPMNPN7gv0OjALIZZNzpsN/mUrpo
-
-dn: cn=ro,dc=surfconext,dc=nl
+dn: cn=__OC__LDAPUSER_ENGINE_CN__,__OC__LDAPADMIN_SUFFIX__
 objectClass: applicationProcess
 objectClass: simpleSecurityObject
 objectClass: top
-cn: ro
-userPassword: {SSHA}PcNUYFAyAWXQh22OXE4/MkJp1lVHzCia
+cn: __OC__LDAPUSER_ENGINE_CN__
+userPassword: __OC__LDAPUSER_ENGINE_PASS__
+
+dn: cn=__OC__LDAPUSER_CN__,__OC__LDAPADMIN_SUFFIX__
+objectClass: applicationProcess
+objectClass: simpleSecurityObject
+objectClass: top
+cn: __OC__LDAPUSER_CN__
+userPassword: __OC__LDAPUSER_PASS__

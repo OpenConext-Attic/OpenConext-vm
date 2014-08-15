@@ -129,6 +129,7 @@ OC__GROUPER_UNIT_TEST_PASS="7453E1E58216"
 ##################################################################################################
 #
 # LDAP is used by engine, grouper and api to store user profile information
+# The suffix (dc=surfconext,dc=nl) of these users must be equal 
 
 OC__LDAPADMIN_USER="cn=admin,dc=surfconext,dc=nl"
 OC__LDAPADMIN_PASS="ldappass"
