@@ -25,7 +25,13 @@ do
   `sed -i "/$key/c\$newkeyvaluepair" $CONFIG_FILE`
 done
 
-
+# set OC__API_JANUSAPI_PASS equal to OC__ENGINE_JANUSAPI_PASS
+pw_entry=`cat $CONFIG_FILE | grep "OC__ENGINE_JANUSAPI_PASS"`
+pw_value=$(echo $pw_entry | cut -f2 -d=)
+newkeyvaluepair="OC__API_JANUSAPI_PASS=\"$pw_value\""
+echo -e "Resetting "$key" = \""$newvalue"\""
+`sed -i "/OC__API_JANUSAPI_PASS/c\$newkeyvaluepair" $CONFIG_FILE`
+  
 # Now update some specific passwords and keys
 # CA private key
 ca_key=`tr -cd '[:alnum:]' < /dev/urandom | fold -w20 | head -n1`
