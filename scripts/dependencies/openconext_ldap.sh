@@ -23,6 +23,8 @@ oc_ldapadmin_suffix=`echo $OC__LDAPADMIN_USER | awk 'match($0,",") { print subst
 echo "set Admin user suffix: " $oc_ldapadmin_suffix
 sed -i "s|__OC__LDAPADMIN_SUFFIX__|$oc_ldapadmin_suffix|g" /etc/openldap/slapd.conf
 
+echo "Set Engine User"
+sed -i "s|__OC__LDAP_ENGINE_USER__|$OC__LDAP_ENGINE_USER|g" /etc/openldap/slapd.conf
 
 echo "Create a new LDAP passwds for slapd.conf based on co_config"
 slapd_pass=`slappasswd -n -s $OC__LDAP_PASS`
