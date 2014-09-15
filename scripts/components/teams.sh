@@ -50,11 +50,17 @@ else
   cp /tmp/grouper.client.properties /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
   cp /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
 
+  # apply grouperClient.webService.password to file grouper.client.properties
+  sed -i 's~^grouperClient.webService.password = .*~grouperClient.webService.password = $OC__GROUPER_ENGINE_PASS~g' /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
+
   # Apply credentials to file coin-teams.properties
   sed -i "s/__OC__ENGINE_DB_USER__/$OC__ENGINE_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
   sed -i "s/__OC__ENGINE_DB_PASS__/$OC__ENGINE_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
   sed -i "s/__OC__TEAMS_DB_USER__/$OC__TEAMS_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
   sed -i "s/__OC__TEAMS_DB_PASS__/$OC__TEAMS_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
+
+  # When the coin-teams.properties.vm still contains the default root password of the DB, change it to the oc_config value.
+  sed -i "s/c0n3xt/$OC__ROOT_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
 
   if [[ "$OC_VERSION" < "v46" ]]
   then
