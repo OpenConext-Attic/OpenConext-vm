@@ -63,8 +63,8 @@ else
   # Substitute database parameters in hibernate configuration
   sed -i grouper.apiBinary-${GROUPER_VERSION}/conf/grouper.hibernate.properties \
   -e "s~^hibernate.connection.url.*~hibernate.connection.url=jdbc:mysql://localhost/teams~" \
-  -e "s~^hibernate.connection.username.*~hibernate.connection.username=$OC__TEAMS_DB_USER~" \
-  -e "s~^hibernate.connection.password.*~hibernate.connection.password=$OC__TEAMS_DB_PASS~"
+  -e "s~^hibernate.connection.username.*~hibernate.connection.username=root~" \
+  -e "s~^hibernate.connection.password.*~hibernate.connection.password=$OC__ROOT_DB_PASS~"
 
   # Set properties in grouper props to
   # 1. autocreate the admin groups
