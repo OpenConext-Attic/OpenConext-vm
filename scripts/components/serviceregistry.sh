@@ -118,4 +118,4 @@ ln -sf /etc/surfconext/serviceregistry.module_janus.parameters.yml /opt/www/serv
 #sometimes the permission are reset, because migrate runs as root
 chown -R apache:apache /tmp/janus
 chown -R apache:apache /var/cache/janus-ssp
-chown -R apache:apache /var/log/janus-ssp
+chown -R apache:apache /var/log/janus
