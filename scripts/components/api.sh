@@ -26,7 +26,7 @@ cp $API_DIST_BASEDIR/tomcat/webapps/*.war /usr/share/tomcat6/wars
 install -d /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN
 cp $API_DIST_BASEDIR/tomcat/conf/context/*.xml /usr/share/tomcat6/conf/Catalina/api.$OC_DOMAIN/
 
-
+ENGINEBLOCK_CERT=`sed '1d;$d' /etc/surfconext/engineblock.crt | tr -d '\n'`
 
 sed \
   -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/" \
@@ -64,7 +64,12 @@ else
 
   # Apply Serviceregistry (Janus) API credentials to file coin-api.properties
   sed -i "s/__OC__API_JANUSAPI_USER__/$OC__API_JANUSAPI_USER/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
-  sed -i "s/__OC__API_JANUSAPI_PASS__/$OC__API_JANUSAPI_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  #sed -i "s/__OC__API_JANUSAPI_PASS__/$OC__API_JANUSAPI_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+  sed -i "s/janus\.secret=.*/janus.secret=$OC__API_JANUSAPI_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+
+  # When the coin-api.properties.vm still contains the default root password of the DB, change it to the oc_config value.
+  sed -i "s/c0n3xt/$OC__ROOT_DB_PASS/g" /opt/tomcat/conf/classpath_properties/coin-api.properties
+
 
   install -d /usr/share/tomcat6/webapps/api.$OC_DOMAIN
   chown -Rf tomcat:tomcat /usr/share/tomcat6/webapps/
