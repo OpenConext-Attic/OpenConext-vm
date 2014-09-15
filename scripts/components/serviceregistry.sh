@@ -80,8 +80,8 @@ PARAMETERS
   chown -R apache:apache /tmp/janus
   mkdir -p /var/cache/janus-ssp/janus
   chown -R apache:apache /var/cache/janus-ssp
-  mkdir -p /var/log/janus-ssp/janus
-  chown -R apache:apache /var/log/janus-ssp
+  mkdir -p /var/log/janus
+  chown -R apache:apache /var/log/janus
 
   # selinux magic
   echo "allowing SR to write to cache and log directory"
@@ -109,7 +109,7 @@ fi
 
 export COMPOSER_PROCESS_TIMEOUT=600
 ./bin/composer.phar --prefer-source --no-interaction install
-ln -sf /etc/surfconext/serviceregistry.module_janus.parameters.yml /opt/www/serviceregistry/simplesamlphp/modules/janus/app/config/parameters.yml
+ln -sf /etc/surfconext/serviceregistry.module_janus.parameters.yml /opt/www/serviceregistry/vendor/simplesamlphp/simplesamlphp/modules/janus/app/config/parameters.yml
 ./bin/composer.phar --prefer-source --no-interaction install
 
 # Perform database migration
