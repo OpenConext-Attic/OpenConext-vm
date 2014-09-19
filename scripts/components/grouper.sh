@@ -66,6 +66,9 @@ else
   -e "s~^hibernate.connection.username.*~hibernate.connection.username=root~" \
   -e "s~^hibernate.connection.password.*~hibernate.connection.password=$OC__ROOT_DB_PASS~"
 
+#Still  grouper.hibernate.properties:#hibernate.connection.password         = c0n3xt
+  sed -i "s~c0n3xt~$OC__ROOT_DB_PASS~g" grouper.apiBinary-${GROUPER_VERSION}/conf/grouper.hibernate.properties
+
   # Set properties in grouper props to
   # 1. autocreate the admin groups
   # 2. add a 'wheel' group (that is: etc:sysadmingroup) to enable users in that group to obtain admin privileges
