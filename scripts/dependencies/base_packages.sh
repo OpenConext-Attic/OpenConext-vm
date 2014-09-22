@@ -5,7 +5,7 @@
 if [[ `rpm -qi epel-release-6-8 | grep 'not installed'` ]]
 then
   echo "install additional RHEL repository"
-  curl -o /tmp/epel-release-6-8.noarch.rpm http://epel.mirror.net.in/epel/6/i386/epel-release-6-8.noarch.rpm
+  curl -o /tmp/epel-release-6-8.noarch.rpm http://ftp.nluug.nl/pub/os/Linux/distr/fedora-epel/6/x86_64/epel-release-6-8.noarch.rpm
   yum install -y /tmp/epel-release-6-8.noarch.rpm
   rm /tmp/epel-release-6-8.noarch.rpm
 else
