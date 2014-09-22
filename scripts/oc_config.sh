@@ -98,6 +98,7 @@ OC__ENGINE_JANUSAPI_PASS="engineblock"
 
 # Serviceregistry (JANUS) API user for 'api'
 # Warning: api user is at the moment also named 'engine' user because api user doesn't exist yet.
+# Warning: The password must be the same as OC__ENGINE_JANUSAPI_PASS, since it is for the same account
 OC__API_JANUSAPI_USER="engine"
 OC__API_JANUSAPI_PASS="engineblock"
 
@@ -129,6 +130,7 @@ OC__GROUPER_UNIT_TEST_PASS="7453E1E58216"
 ##################################################################################################
 #
 # LDAP is used by engine, grouper and api to store user profile information
+# The suffix (dc=surfconext,dc=nl) of these users must be equal 
 
 OC__LDAPADMIN_USER="cn=admin,dc=surfconext,dc=nl"
 OC__LDAPADMIN_PASS="ldappass"

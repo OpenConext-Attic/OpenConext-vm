@@ -62,6 +62,10 @@ else
   sed -i "s/__OC__LDAP_ENGINE_USER__/$OC__LDAP_ENGINE_USER/g" /etc/surfconext/engineblock.ini
   sed -i "s/__OC__LDAP_ENGINE_PASS__/$OC__LDAP_ENGINE_PASS/g" /etc/surfconext/engineblock.ini
 
+  # Apply baseDn to file engineblock.ini
+  oc_ldapadmin_suffix=`echo $OC__LDAPADMIN_USER | awk 'match($0,",") { print substr($0,RSTART+1) }'`
+  sed -i "s/__OC__LDAP_BASEDN__/$oc_ldapadmin_suffix/g" /etc/surfconext/engineblock.ini 
+  
   # Apply timezone to file engineblock.ini
   sed -i "s|__OC__TIMEZONE__|$OC__TIMEZONE|g" /etc/surfconext/engineblock.ini
 

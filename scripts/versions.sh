@@ -1,21 +1,21 @@
 #!/bin/bash
 
 # these versions are tag names
-export ENGINEBLOCK_VERSION=develop
-export API_VERSION=develop
-export MANAGE_VERSION=develop
-export SERVICEREGISTRY_VERSION=develop
-export STATIC_VERSION=develop
-export TEAMS_VERSION=develop
-export MUJINA_VERSION=develop
-export CRUNCHER_VERSION=develop
-export APIS_VERSION=develop
-export CSA_VERSION=develop
-export SELFSERVICE_VERSION=develop
+export ENGINEBLOCK_VERSION=4.1.5
+export API_VERSION=coin-api-parent-4.0.0
+export MANAGE_VERSION=4.0.0
+export SERVICEREGISTRY_VERSION=4.0.6
+export STATIC_VERSION=static-v2.12.2
+export TEAMS_VERSION=coin-teams-parent-4.0.0
+export MUJINA_VERSION=mujina-4.0.1
+export CRUNCHER_VERSION=cruncher-parent-3.12.0
+export APIS_VERSION=apis-parent-1.3.5
+export CSA_VERSION=csa-parent-4.0.3.1
+export SELFSERVICE_VERSION=coin-selfservice-parent-4.0.2
 
 # these are _not_ tag names
 export GROUPER_DIST_VERSION=4.0.0
 export GROUPER_VERSION=2.1.5
 
 # the version of this install
-export OC_VERSION=develop
+export OC_VERSION=v74.4

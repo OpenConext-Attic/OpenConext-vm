@@ -18,6 +18,11 @@ then
   ln -s /usr/share/java/mysql-connector-java.jar $CATALINA_HOME/shared/lib/mysql-connector-java.jar
 fi
 
+# Hack to get xml-apis-1.4.01.jar available for coin-api, since coin-api.war is missing this file
+# (See https://github.com/OpenConext/OpenConext-api/issues/12)
+ wget http://www.java2s.com/Code/JarDownload/xml/xml-apis-1.4.01.jar.zip -O /tmp/xml-apis-1.4.01.jar.zip
+ unzip /tmp/xml-apis-1.4.01.jar.zip -d $CATALINA_HOME/lib
+
 install -d $CATALINA_HOME/wars
 
 cp -f $OC_BASEDIR/configs/tomcat6/conf/catalina.properties $CATALINA_HOME/conf/catalina.properties

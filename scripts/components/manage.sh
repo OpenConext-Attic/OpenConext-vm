@@ -35,10 +35,14 @@ sed -e "s/_OPENCONEXT_DOMAIN_/$OC_DOMAIN/g" $OC_BASEDIR/configs/surfconext/manag
 # Apply credentials to file manage.ini
 sed -i "s/__OC__MANAGE_DB_USER__/$OC__MANAGE_DB_USER/g" /etc/surfconext/manage.ini
 sed -i "s/__OC__MANAGE_DB_PASS__/$OC__MANAGE_DB_PASS/g" /etc/surfconext/manage.ini
-sed -i "s/__OC__ENGINEBLOCK_DB_USER__/$OC__ENGINEBLOCK_DB_USER/g" /etc/surfconext/manage.ini
-sed -i "s/__OC__ENGINEBLOCK_DB_PASS__/$OC__ENGINEBLOCK_DB_PASS/g" /etc/surfconext/manage.ini
+sed -i "s/__OC__ENGINE_DB_USER__/$OC__ENGINE_DB_USER/g" /etc/surfconext/manage.ini
+sed -i "s/__OC__ENGINE_DB_PASS__/$OC__ENGINE_DB_PASS/g" /etc/surfconext/manage.ini
 sed -i "s/__OC__SERVICEREGISTRY_DB_USER__/$OC__SERVICEREGISTRY_DB_USER/g" /etc/surfconext/manage.ini
 sed -i "s/__OC__SERVICEREGISTRY_DB_PASS__/$OC__SERVICEREGISTRY_DB_PASS/g" /etc/surfconext/manage.ini
+
+
+# When manage.ini still contains the default root password of the DB, change it to the oc_config value.
+sed -i "s~c0n3xt~$OC__ROOT_DB_PASS~g" /etc/surfconext/manage.ini
 
 CRT_NO_HEADERS=`sed '1d;$d' /etc/surfconext/engineblock.crt` &&
 echo "auth.simplesamlphp.idp.cert = \"${CRT_NO_HEADERS}\"" >> /etc/surfconext/manage.ini
