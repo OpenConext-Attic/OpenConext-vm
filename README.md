@@ -20,21 +20,21 @@ Prerequisites:
 From within the VM, download this repo:
 
 ```bash
-curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v62 | tar zx
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v74.4 | tar zx
 ```
 
 ### 1.2. Run the installer
 Run the install script:
 
 ```bash
-bash OpenConext-vm-62/scripts/install_openconext.sh
+bash OpenConext-vm-74.4/scripts/install_openconext.sh
 ```
 
 By default, the installer will run an 'unattended' setup, choosing sensible defaults.
 If you want to install a specific version of the platform, install a subset of components or change the default domain (demo.openconext.org), run the installer with a ````-i```` flag:
 
 ```bash
-bash OpenConext-vm-62/scripts/install_openconext.sh -i
+bash OpenConext-vm-74.4/scripts/install_openconext.sh -i
 ```
 
 ## Option 2. Letting Vagrant set up a new virtual machine.
@@ -52,13 +52,13 @@ cd ~/Sites/OpenConext
 
 ### 2.2. Download the VM project there
 ```bash
-curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v62 | tar zxv
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v74.4 | tar zxv
 ```
 
 ### 2.3 Up, up and away!
 You should now have a directory called OpenConext-vm-v62, go there and run vagrant up.
 ```bash
-cd OpenConext-vm-v62 && vagrant up
+cd OpenConext-vm-v74.4 && vagrant up
 ```
 
 Vagrant will download the basebox, set it up with NFS and install OpenConext for you.
@@ -109,49 +109,6 @@ The MySQL root-password is ``c0n3xt``.
 
 # Upgrades
 
-From OpenConext release 45 onwards, upgrades are supported. Refer to the [available releases and release notes](https://wiki.surfnetlabs.nl/display/OpenConext/Releases).
+Please note that we unfortunately do not support upgrades from earlier versions of OpenConext.
 
-## 1. Get the latest version of the OpenConext VM installer
-
-For one time installations, getting a tarball from the Github repo suffices, as described above in the installation instructions.
-But to upgrade your OpenConext instance, it's better to have a clone of the repository.
-
-Run within the VM:
-
-```bash
-git clone https://github.com/OpenConext/OpenConext-vm
-```
-
-(or pull in the latest changes if you cloned before):
-
-```bash
-cd OpenConext-vm
-git pull
-```
-
-## 2. Run the upgrade installer
-*Note* upgrades rely on git branches, you need to have a git checkout of the repository before you start upgrading your OpenConext VM.
-
-From version v57 onwards every version in OpenConext is represented by a git branch with the same name (v57, v61 etc). In order to upgrade your v57 VM you first need to checkout the correct git branch:
-
-```bash
-git fetch
-git checkout v57
-```
-
-After this you can upgrade with the following command:
-
-```bash
-bash OpenConext-vm/scripts/upgrade_openconext.sh
-```
-
-The installer will ask which version you want to upgrade to.
-
-If you have an older version of OpenConext you should first check out the tag 'upgrade_v57' to upgrade to v57 of openconext and then use the branching
-structure of git to move your version forwards.
-
-```bash
-git checkout upgrade_v57
-bash OpenConext-vm/scripts/upgrade_openconext.sh
-```
-
+We are working on a new version of the VM that is Ansible based and should ensure better support for upgrades.
