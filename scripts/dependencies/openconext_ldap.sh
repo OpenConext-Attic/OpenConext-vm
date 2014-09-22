@@ -52,18 +52,6 @@ oc_ldapadmin_org=`echo $OC__LDAPADMIN_USER | awk -v RS=',' -v FS='=' '$1=="dc"{p
 echo "set organization (dc, o) in ldif: " $oc_ldapadmin_org
 sed -i "s|__OC__LDAPADMIN_ORG__|$oc_ldapadmin_org|g" $OC_BASEDIR/configs/ldap/ldap-entries.ldif
 
-
-#OC__LDAPADMIN_USER="cn=admin,dc=surfconext,dc=nl"
-#OC__LDAPADMIN_PASS="ldappass"
-
-#OC__LDAP_USER="cn=ro,dc=surfconext,dc=nl"
-#OC__LDAP_PASS="ks97THqW2m3BN"
-
-#OC__LDAP_ENGINE_USER="cn=engine,dc=surfconext,dc=nl"
-#OC__LDAP_ENGINE_PASS="jf7RH4Hj20De"
-
-
-
 echo "Set Grouper unit test user in LDAP:" $OC__GROUPER_UNIT_TEST_USER
 sed -i "s|__OC__GROUPER_UNIT_TEST_USER__|$OC__GROUPER_UNIT_TEST_USER|g" $OC_BASEDIR/configs/ldap/ldap-entries.ldif
 
