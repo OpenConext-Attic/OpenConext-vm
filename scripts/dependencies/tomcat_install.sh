@@ -19,6 +19,7 @@ then
 fi
 
 # Hack to get xml-apis-1.4.01.jar available for coin-api, since coin-api.war is missing this file
+# (See https://github.com/OpenConext/OpenConext-api/issues/12)
  wget http://www.java2s.com/Code/JarDownload/xml/xml-apis-1.4.01.jar.zip -O /tmp/xml-apis-1.4.01.jar.zip
  unzip /tmp/xml-apis-1.4.01.jar.zip -d $CATALINA_HOME/lib
 
