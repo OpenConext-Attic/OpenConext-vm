@@ -51,7 +51,7 @@ else
   cp /tmp/coin-teams.properties /usr/share/tomcat6/conf/classpath_properties/coin-teams.properties
 
   # apply grouperClient.webService.password to file grouper.client.properties
-  sed -i 's~^grouperClient.webService.password = .*~grouperClient.webService.password = $OC__GROUPER_ENGINE_PASS~g' /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
+  sed -i "s~^grouperClient.webService.password = .*~grouperClient.webService.password = $OC__GROUPER_ENGINE_PASS~g" /usr/share/tomcat6/conf/classpath_properties/grouper.client.properties
 
   # Apply credentials to file coin-teams.properties
   sed -i "s/__OC__ENGINE_DB_USER__/$OC__ENGINE_DB_USER/g" /opt/tomcat/conf/classpath_properties/coin-teams.properties
