@@ -23,7 +23,24 @@ From within the VM, download this repo:
 curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v74.4 | tar zx
 ```
 
-### 1.2. Run the installer
+### 1.2. Change the default VM settings
+Copy the oc_config.sh file:
+```bash
+install -d /etc/openconext
+cp OpenConext-vm-74.4/scripts/oc_config.sh /etc/openconext/.
+```
+
+The OpenConext VM has a script to change all the default passwords to new random passwords.
+```bash
+pushd /etc/openconext
+~/OpenConext-vm-74.4/scripts/oc_setpasswds.sh
+popd
+```
+
+
+Adapt the VM settings to you likings using the comments in the /etc/openconext/oc_config.sh file.
+ 
+### 1.3. Run the installer
 Run the install script:
 
 ```bash
