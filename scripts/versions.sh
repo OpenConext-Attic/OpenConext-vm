@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # these versions are tag names
-export ENGINEBLOCK_VERSION=4.1.5
+export ENGINEBLOCK_VERSION=4.1.6
 export API_VERSION=coin-api-parent-4.0.0
 export MANAGE_VERSION=4.0.0
 export SERVICEREGISTRY_VERSION=4.0.6
