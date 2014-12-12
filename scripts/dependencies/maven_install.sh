@@ -10,7 +10,7 @@ if $MVN -v >> /dev/null 2>&1
 then
   echo "Maven is already installed."
 else
-  MVN_URL=http://apache.cs.uu.nl/dist/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz
+  MVN_URL=http://apache.cs.uu.nl/maven/maven-3/${MVN_VERSION}/binaries/apache-maven-${MVN_VERSION}-bin.tar.gz
   MVN_LOCALTARBALL=`mktemp`
   MVN_INSTALLDIR=/opt
   MVN_HOME=$MVN_INSTALLDIR/apache-maven-${MVN_VERSION}
