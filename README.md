@@ -20,20 +20,20 @@ Prerequisites:
 From within the VM, download this repo:
 
 ```bash
-curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v75 | tar zx
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v75.1 | tar zx
 ```
 
 ### 1.2. Change the default VM settings
 Copy the oc_config.sh file:
 ```bash
 install -d /etc/openconext
-cp OpenConext-vm-75/scripts/oc_config.sh /etc/openconext/.
+cp OpenConext-vm-75.1/scripts/oc_config.sh /etc/openconext/.
 ```
 
 The OpenConext VM has a script to change all the default passwords to new random passwords.
 ```bash
 pushd /etc/openconext
-~/OpenConext-vm-75/scripts/oc_setpasswds.sh
+OpenConext-vm-75.1/scripts/oc_setpasswds.sh
 popd
 ```
 
@@ -44,14 +44,14 @@ Adapt the VM settings to you likings using the comments in the /etc/openconext/o
 Run the install script:
 
 ```bash
-bash OpenConext-vm-75/scripts/install_openconext.sh
+bash OpenConext-vm-75.1/scripts/install_openconext.sh
 ```
 
 By default, the installer will run an 'unattended' setup, choosing sensible defaults.
 If you want to install a specific version of the platform, install a subset of components or change the default domain (demo.openconext.org), run the installer with a ````-i```` flag:
 
 ```bash
-bash OpenConext-vm-75/scripts/install_openconext.sh -i
+bash OpenConext-vm-75.1/scripts/install_openconext.sh -i
 ```
 
 ## Option 2. Letting Vagrant set up a new virtual machine.
@@ -69,13 +69,13 @@ cd ~/Sites/OpenConext
 
 ### 2.2. Download the VM project there
 ```bash
-curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v75 | tar zxv
+curl https://codeload.github.com/OpenConext/OpenConext-vm/tar.gz/v75.1 | tar zxv
 ```
 
 ### 2.3 Up, up and away!
 You should now have a directory called OpenConext-vm-v75, go there and run vagrant up.
 ```bash
-cd OpenConext-vm-v75 && vagrant up
+cd OpenConext-vm-v75.1 && vagrant up
 ```
 
 Vagrant will download the basebox, set it up with NFS and install OpenConext for you.
