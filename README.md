@@ -1,3 +1,13 @@
+# Important note
+
+This repository is obsolete and is kept for reference only.
+
+To deploy OpenConext, please use the
+Ansible-based deploy scripts from
+https://github.com/OpenConext/OpenConext-deploy
+
+
+
 # OpenConext Virtual Machine
 
 These are the resources required to build an OpenConext Virtual Machine.
