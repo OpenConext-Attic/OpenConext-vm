@@ -1,6 +1,6 @@
 # Important note
 
-*This repository is obsolete and is kept for reference only.*
+<strong>*This repository is obsolete and is kept for reference only.*</strong>
 
 To deploy OpenConext, please use the
 Ansible-based deploy scripts from
