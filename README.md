@@ -1,6 +1,6 @@
 # Important note
 
-This repository is obsolete and is kept for reference only.
+<span style="color:red; font-size:2em;">This repository is obsolete and is kept for reference only.</span>
 
 To deploy OpenConext, please use the
 Ansible-based deploy scripts from
