@@ -1,4 +1,4 @@
-# Important note
+# Deprecated
 
 <strong>*This repository is obsolete and is kept for reference only.*</strong>
 
